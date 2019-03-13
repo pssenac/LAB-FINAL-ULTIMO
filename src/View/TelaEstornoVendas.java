@@ -6,7 +6,10 @@
 package View;
 
 import Controller.ModeloTabela;
+import Controller.vendaProdutosController;
 import Models.DAO;
+import Models.TabelaModelo2;
+import Models.Venda;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -21,7 +24,9 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
     String sql = "", tp = "", sql1 = "";
     double x = 0, z, vl, vl2, icms1, icms, iss1, iss2, ipi1, ipi2;
-    
+    ArrayList<Venda> vendas = new ArrayList<>();
+    ArrayList dadosVendas = new ArrayList();
+
     public TelaEstornoVendas() {
         initComponents();
     }
@@ -379,6 +384,11 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estornoVenda.png"))); // NOI18N
         jButton2.setText("Gerar Estorno");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel41.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel41.setText("Observação/Motivo :");
@@ -541,19 +551,25 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         preencherTabela(sql);
         lblestorno.setText(txtCodVenda.getText());
         tp = lbltipoPag.getText();
-        if(tp.equals("1")){
+        if (tp.equals("1")) {
             cbD.setSelected(true);
         }
-        if(tp.equals("2")){
+        if (tp.equals("2")) {
             cbCC.setSelected(true);
         }
-        if(tp.equals("3")){
+        if (tp.equals("3")) {
             cbCD.setSelected(true);
         }
-        preencherTabela2(sql);
-        
-        // preencherCampos(sql);
+
+       // preencherTabela2(dadosVendas);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+
+        JOptionPane.showMessageDialog(null, dadosVendas.get(2));
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // <editor-fold defaultstate="collapsed" desc="preencher tabela 1">
     public void preencherTabela(String SQL) {
@@ -564,9 +580,14 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         dao.executaSQL(SQL);
         try {
             dao.resultSet.first();
+            dadosVendas.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorVenda"),
+                dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial")});
 
             do {
-
+                dadosVendas.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorVenda"),
+                    dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial")});
+                
+                
                 dados.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorVenda"),
                     dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial"),
                     dao.resultSet.getString("desconto"), dao.resultSet.getString("tipoPagamento"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"),
@@ -636,61 +657,27 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jTable2.getColumnModel().getColumn(14).setResizable(false);
         jTable2.getColumnModel().getColumn(15).setPreferredWidth(50);
         jTable2.getColumnModel().getColumn(15).setResizable(false);
-        
 
         jTable2.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
         jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
     }
     //</editor-fold>
-    
-     // <editor-fold defaultstate="collapsed" desc="preencher tabela 2">
-    public void preencherTabela2(String SQL) {
-        DAO dao = new DAO();
-        ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Produto", "Descrição", "Valor Unitário", "QTD", "Desconto", "Valor",
-            "DescontoVenda", "TipoPagamento", "Icms", "Iss", "Ipi", "Data", "Observacao", "FKfuncionario", "codigoVenda", "codigoFuncionario"};
-        dao.executaSQL(SQL);
+//(String produto, String qtd, String desconto, String vlUnitario, String vlParcial, String icms, String iss, String ipi, String idLote)
+    // <editor-fold defaultstate="collapsed" desc="preencher tabela 2">
+    public void preencherTabela2(Object x) {
+        //Calcular valores
+        //calcular impostos
+        String[] colunas = new String[]{"Produto", "Quantidade", "Desconto", "Valor Unitário", "Valor", "icsm", "iss", "ipi", "idLote"};
         try {
-            dao.resultSet.first();
-
-            do {
-
-                dados.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorVenda"),
-                    dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial"),
-                    dao.resultSet.getString("desconto"), dao.resultSet.getString("tipoPagamento"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"),
-                    dao.resultSet.getString("ipi"), dao.resultSet.getString("dataVenda"), dao.resultSet.getString("observacao"),
-                    dao.resultSet.getString("FKfuncionario"), dao.resultSet.getString("codigoVenda"), dao.resultSet.getString("codigoFuncionario")});
-
-                x = Double.parseDouble(dao.resultSet.getString("valorParcial"));
-                z += x;
-                vl2 = Double.parseDouble(dao.resultSet.getString("desconto"));
-                vl = z - (z * vl2 / 100);
-                icms = Double.parseDouble(dao.resultSet.getString("icms"));
-                icms1 += icms;
-                iss1 = Double.parseDouble(dao.resultSet.getString("iss"));
-                iss2 += iss1;
-                ipi1 = Double.parseDouble(dao.resultSet.getString("ipi"));
-                ipi2 += ipi1;
-
-                lblValor.setText(Double.toString(z));
-                lblValorTotal.setText(Double.toString(vl));
-                lblIcms.setText(Double.toString(icms1));
-                lblIss.setText(Double.toString(iss2));
-                lblIpi.setText(Double.toString(ipi2));
-                lblDataVenda.setText(dao.resultSet.getString("dataVenda"));
-                lblDescontoGeral.setText(dao.resultSet.getString("desconto"));
-                lblCodfuncionario.setText(dao.resultSet.getString("codigoFuncionario"));
-                lblCodvenda.setText(dao.resultSet.getString("codigoVenda"));
-                lblFKfuncionario.setText(dao.resultSet.getString("FKfuncionario"));
-                lbltipoPag.setText(dao.resultSet.getString("tipoPagamento"));
-
-            } while (dao.resultSet.next());
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex + "Ñ DEU");
+            
+            x.toString();
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
         }
 
-        ModeloTabela model = new ModeloTabela(dados, colunas);
+        TabelaModelo2 model = new TabelaModelo2(dadosVendas, colunas);
         jTable29.setModel(model);
 
         jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
@@ -705,31 +692,17 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jTable29.getColumnModel().getColumn(4).setResizable(false);
         jTable29.getColumnModel().getColumn(5).setPreferredWidth(50);
         jTable29.getColumnModel().getColumn(5).setResizable(false);
-        jTable29.getColumnModel().getColumn(6).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
-        jTable29.getColumnModel().getColumn(6).setResizable(true);  // não permite alterar o tamanho da coluna
+        jTable29.getColumnModel().getColumn(6).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(6).setResizable(false);
         jTable29.getColumnModel().getColumn(7).setPreferredWidth(50);
         jTable29.getColumnModel().getColumn(7).setResizable(false);
         jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
         jTable29.getColumnModel().getColumn(8).setResizable(false);
-        jTable29.getColumnModel().getColumn(9).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(9).setResizable(false);
-        jTable29.getColumnModel().getColumn(10).setPreferredWidth(80);
-        jTable29.getColumnModel().getColumn(10).setResizable(false);
-        jTable29.getColumnModel().getColumn(11).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(11).setResizable(false);
-        jTable29.getColumnModel().getColumn(12).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
-        jTable29.getColumnModel().getColumn(12).setResizable(true);  // não permite alterar o tamanho da coluna
-        jTable29.getColumnModel().getColumn(13).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(13).setResizable(false);
-        jTable29.getColumnModel().getColumn(14).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(14).setResizable(false);
-        jTable29.getColumnModel().getColumn(15).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(15).setResizable(false);
-        
 
         jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
         jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+
     }
     //</editor-fold>
 
