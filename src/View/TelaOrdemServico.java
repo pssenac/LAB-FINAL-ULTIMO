@@ -1082,6 +1082,7 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
     //</editor-fold>
 
     
+    
     // <editor-fold defaultstate="collapsed" desc="Java - Do not Modify"> 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduto;
