@@ -75,6 +75,7 @@ public class DAO {
     }
 
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc=" EXECUTAR SQL "> 
     public void executaSQL(String sql) {
         try {
@@ -278,6 +279,7 @@ public class DAO {
     }
 
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR FORNECEDOR ">
     public void carregarTabela2() {
         String sql = "select * from fornecedor";
@@ -442,6 +444,7 @@ public class DAO {
     }
 
 //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR FUNCIONARIO E USUARIO">
     public String atualizarFuncionarioUsuario(int operacao) {
 
@@ -767,7 +770,8 @@ public class DAO {
         return nomeFor;
     }
 
-    //</editor-fold>   
+    //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR VENDAS ">
     public String PesquisaFuncionario(String CodVend) {
         String fk;
@@ -1028,6 +1032,7 @@ public class DAO {
         return men;
     }*/
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc=" METODO LOGAR USUARIO">
     public boolean LogarUsuario(String login, String Senha) {
         boolean autenticado = false;
@@ -1054,6 +1059,7 @@ public class DAO {
         return autenticado;
     }
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc=" METODO ORDEM DE SERVIÇO">
     public String AtualizarOrdemServico(int operacao) {
         men = "Operação realizada com sucesso!";
