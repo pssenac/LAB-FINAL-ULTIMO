@@ -5,15 +5,31 @@
  */
 package View;
 
+import Controller.ModeloTabela;
+import Controller.OrdemProdutosController;
+import Controller.vendaProdutosController;
+import Models.Cliente;
+import Models.DAO;
+import Models.TabelaModelo2;
+import Models.Venda;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+
 /**
  *
  * @author 03758479100
  */
 public class TelaOrdemServico extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form TelaOrdemServico
-     */
+    ArrayList dadosVendas = new ArrayList();
+    String tp, text, sql, a = "", b = "", c = "", d = "", e = "", f = "";
+    boolean txt, verificar;
+    ArrayList<Venda> vendas = new ArrayList<>();
+    
     public TelaOrdemServico() {
         initComponents();
     }
@@ -28,7 +44,7 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        lblIdOrdem = new javax.swing.JLabel();
+        lblCodOrdem = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblNomeCli = new javax.swing.JLabel();
@@ -46,7 +62,7 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         lblTelCli = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable29 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         txtPesquisaProduto = new javax.swing.JTextField();
@@ -78,9 +94,9 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         txtTroco = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         txtCartao = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        cbD = new javax.swing.JCheckBox();
+        cbCC = new javax.swing.JCheckBox();
+        cbCD = new javax.swing.JCheckBox();
         jLabel22 = new javax.swing.JLabel();
         txtCodVendedor = new javax.swing.JTextField();
         txtValorServico = new javax.swing.JTextField();
@@ -105,7 +121,7 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("Nº :");
 
-        lblIdOrdem.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblCodOrdem.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel2.setText("Nome do Cliente :");
@@ -154,18 +170,20 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
 
         lblTelCli.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable29.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jTable29.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable29MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable29);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -206,18 +224,25 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         btnPesquisaTipo.setMaximumSize(new java.awt.Dimension(30, 30));
         btnPesquisaTipo.setMinimumSize(new java.awt.Dimension(30, 30));
         btnPesquisaTipo.setPreferredSize(new java.awt.Dimension(30, 30));
+        btnPesquisaTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisaTipoActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable2);
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -235,8 +260,18 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         btnAddProduto.setMaximumSize(new java.awt.Dimension(50, 50));
         btnAddProduto.setMinimumSize(new java.awt.Dimension(50, 50));
         btnAddProduto.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnAddProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddProdutoActionPerformed(evt);
+            }
+        });
 
         btnCalcular.setText("Calcular");
+        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -331,6 +366,11 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         btnFinalizarOrdem.setMaximumSize(new java.awt.Dimension(50, 50));
         btnFinalizarOrdem.setMinimumSize(new java.awt.Dimension(50, 50));
         btnFinalizarOrdem.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnFinalizarOrdem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarOrdemActionPerformed(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Tipo de Pagamento:");
@@ -385,11 +425,11 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jCheckBox1.setText("Dinheiro");
+        cbD.setText("Dinheiro");
 
-        jCheckBox2.setText("Cartão de Crédito");
+        cbCC.setText("Cartão de Crédito");
 
-        jCheckBox3.setText("Cartão de Débito");
+        cbCD.setText("Cartão de Débito");
 
         jLabel22.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel22.setText("Código do Vendedor :");
@@ -462,6 +502,11 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         btnCancelar.setMaximumSize(new java.awt.Dimension(50, 50));
         btnCancelar.setMinimumSize(new java.awt.Dimension(50, 50));
         btnCancelar.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -495,7 +540,7 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(jLabel1)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(lblIdOrdem, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCodOrdem, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(201, 201, 201))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel3)
@@ -542,11 +587,11 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel18)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jCheckBox1)
+                                        .addComponent(cbD)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jCheckBox2)
+                                        .addComponent(cbCC)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jCheckBox3))
+                                        .addComponent(cbCD))
                                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel17)
@@ -571,7 +616,7 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
                                 .addGap(5, 5, 5)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1)
-                                    .addComponent(lblIdOrdem, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lblCodOrdem, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel6)
                                 .addComponent(txtDataSolicitacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -628,9 +673,9 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2)
-                            .addComponent(jCheckBox3))
+                            .addComponent(cbD)
+                            .addComponent(cbCC)
+                            .addComponent(cbCD))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -651,14 +696,391 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Botão Pesquisa CPF"> 
     private void btnPesquisaCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaCpfActionPerformed
-        // TODO add your handling code here:
+       OrdemProdutosController OP = new OrdemProdutosController();
+        Cliente cli = new Cliente();
+        lblNomeCli.setText(OP.pesquisarCliente(txtCpfCliente.getText()));
+        
     }//GEN-LAST:event_btnPesquisaCpfActionPerformed
     //</editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Botão Pesquisar por nome"> 
     private void btnPesquisaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaProdutoActionPerformed
-        // TODO add your handling code here:
+        sql = "select * from produtos inner join Lote on idprodutos = FKprodutos where nomeProduto like '%" + txtPesquisaProduto.getText() + "%'";
+
+        preencherTabela(sql);
     }//GEN-LAST:event_btnPesquisaProdutoActionPerformed
+   //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Botão pesquisa por tipo"> 
+    private void btnPesquisaTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPesquisaTipoActionPerformed
 //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Botão Calcular"> 
+    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
+        lblValorParcial.setText(calcular(b, txtQtd.getText(), txtDencontoProd.getText()));
+    }//GEN-LAST:event_btnCalcularActionPerformed
+//</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Botão adicionar carrinho"> 
+    private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
+        vendaProdutosController vd = new vendaProdutosController();
+        preencherTabela2(a, txtQtd.getText(), txtDencontoProd.getText(), b, lblValorParcial.getText(), c, d, e, f);
+        //vendas.add(vd.preencherCarrinho(a, txtQtd.getText(), txtDencontoProd.getText(), b, lblValorParcial.getText(), c, d, e));
+        Limpar1();
+    }//GEN-LAST:event_btnAddProdutoActionPerformed
+//</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Botão remover item"> 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+      /* 
+        if (!lbl1.getText().equals("") && !lbl2.getText().equals("") && !lbl3.getText().equals("") && !lbl4.getText().equals("")
+                && !lbl5.getText().equals("") && !lbl6.getText().equals("") && !lbl7.getText().equals("") && !lbl8.getText().equals("")) {
+            //remove do arraylist pessoas os dados da linha selecionada.
+            int x = vendas.size();
+            for (int i = 0; i < vendas.size(); i++) {
+                if (vendas.get(i).getA().equals(lbl1.getText())) {
+                    vendas.remove(i);
+                }
+            }
+
+            //esvazia o arraylist dadosPessoa e, conseguentemente, esvazia a jTable.
+            limparTabela2();
+            //preenche a jTable com os dados restantes do arraylist pessoas.
+            for (int i = 0; i < vendas.size(); i++) {
+                preencherTabela2(vendas.get(i).getA(), vendas.get(i).getB(), vendas.get(i).getC(), vendas.get(i).getD(), vendas.get(i).getE(),
+                        vendas.get(i).getF(), vendas.get(i).getG(), vendas.get(i).getH(), vendas.get(i).getJ());
+            }
+        }
+        */
+    }//GEN-LAST:event_btnCancelarActionPerformed
+//</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Botão Finalizar"> 
+    private void btnFinalizarOrdemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarOrdemActionPerformed
+        OrdemProdutosController opc = new OrdemProdutosController();
+        
+        VerificarCampos();
+
+        String A = txtDataEntrega.getText().substring(0, 2);
+        String B = txtDataEntrega.getText().substring(3, 5);
+        String C = txtDataEntrega.getText().substring(6, 10);
+        String Entrega = C + "-" + B + "-" + A;
+
+        String D = txtDataSolicitacao.getText().substring(0, 2);
+        String E = txtDataSolicitacao.getText().substring(3, 5);
+        String F = txtDataSolicitacao.getText().substring(6, 10);
+        String Solicitacao = F + "-" + E + "-" + D;
+
+        opc.salvarOrdemServico(cbServico.getName(), txtValorServico.getText(), Entrega, Solicitacao, cbPrioridade.getName(),
+                txtDescricao.getText(), tp, txtCodVendedor.getText(), lblIcms.getText(), lblIss.getText(), lblIpi.getText(), 
+                lblValorTotal.getText(), txtCpfCliente.getText(), lblCodOrdem.getText(), F, F, F, F);
+    }//GEN-LAST:event_btnFinalizarOrdemActionPerformed
+//</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="JTable2 evento"> 
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+       int linhaSelecionada = jTable2.getSelectedRow();
+        a = (jTable2.getValueAt(linhaSelecionada, 0).toString());
+        b = (jTable2.getValueAt(linhaSelecionada, 4).toString());
+        c = (jTable2.getValueAt(linhaSelecionada, 5).toString());
+        d = (jTable2.getValueAt(linhaSelecionada, 6).toString());
+        e = (jTable2.getValueAt(linhaSelecionada, 7).toString());
+        f = (jTable2.getValueAt(linhaSelecionada, 10).toString());
+    }//GEN-LAST:event_jTable2MouseClicked
+//</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="JTable2 evento"> 
+    private void jTable29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable29MouseClicked
+     /*
+        int linhaSelecionada = jTable29.getSelectedRow();
+        lbl1.setText(jTable29.getValueAt(linhaSelecionada, 0).toString());
+        lbl2.setText(jTable29.getValueAt(linhaSelecionada, 1).toString());
+        lbl3.setText(jTable29.getValueAt(linhaSelecionada, 2).toString());
+        lbl4.setText(jTable29.getValueAt(linhaSelecionada, 3).toString());
+        lbl5.setText(jTable29.getValueAt(linhaSelecionada, 4).toString());
+        lbl6.setText(jTable29.getValueAt(linhaSelecionada, 5).toString());
+        lbl7.setText(jTable29.getValueAt(linhaSelecionada, 6).toString());
+        lbl8.setText(jTable29.getValueAt(linhaSelecionada, 7).toString());
+        lbl9.setText(jTable29.getValueAt(linhaSelecionada, 8).toString());
+        */
+    }//GEN-LAST:event_jTable29MouseClicked
+//</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Tabela 1">
+    public void preencherTabela(String SQL) {
+        DAO dao = new DAO();
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"Produto", "Descição", "Tipo", "Data da Compra", "Valor de Venda", "icsm", "iss", "ipi", "Estoque", "situação", "idProduto", "idlote",};
+        dao.executaSQL(SQL);
+        try {
+            dao.resultSet.first();
+            do {
+                dados.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("tipoProduto"), dao.resultSet.getString("dataCompra"),
+                    dao.resultSet.getString("valorVenda"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"),
+                    dao.resultSet.getString("qtdEstoque"), dao.resultSet.getString("situacaoProduto"), dao.resultSet.getString("idprodutos"), dao.resultSet.getString("idLote")});
+            } while (dao.resultSet.next());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex + "Ñ DEU");
+        }
+
+        ModeloTabela model = new ModeloTabela(dados, colunas);
+        jTable2.setModel(model);
+
+        jTable2.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
+        jTable2.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
+        jTable2.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(1).setResizable(false);
+        jTable2.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(2).setResizable(false);
+        jTable2.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(3).setResizable(false);
+        jTable2.getColumnModel().getColumn(4).setPreferredWidth(80);
+        jTable2.getColumnModel().getColumn(4).setResizable(false);
+        jTable2.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(5).setResizable(false);
+        jTable2.getColumnModel().getColumn(6).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(6).setResizable(false);
+        jTable2.getColumnModel().getColumn(7).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(7).setResizable(false);
+
+        jTable2.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+        jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+        jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Tabela 2">
+    public void preencherTabela2(String produto, String qtd, String desconto, String vlUnitario, String vlParcial, String icms, String iss, String ipi, String idLote) {
+        //Calcular valores
+        //calcular impostos
+        String[] colunas = new String[]{"Produto", "Quantidade", "Desconto", "Valor Unitário", "Valor", "icsm", "iss", "ipi", "idLote"};
+        try {
+            dadosVendas.add(new Object[]{produto, qtd, desconto, vlUnitario, vlParcial, icms, iss, ipi, idLote});
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+
+        TabelaModelo2 model = new TabelaModelo2(dadosVendas, colunas);
+        jTable29.setModel(model);
+
+        jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
+        jTable29.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
+        jTable29.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(1).setResizable(false);
+        jTable29.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(2).setResizable(false);
+        jTable29.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(3).setResizable(false);
+        jTable29.getColumnModel().getColumn(4).setPreferredWidth(80);
+        jTable29.getColumnModel().getColumn(4).setResizable(false);
+        jTable29.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(5).setResizable(false);
+        jTable29.getColumnModel().getColumn(6).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(6).setResizable(false);
+        jTable29.getColumnModel().getColumn(7).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(7).setResizable(false);
+        jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(8).setResizable(false);
+
+        jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+        jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+        jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Calculo">
+    public String calcular(String vlUnitario, String qtd, String desconto) {
+        float q = Float.parseFloat(vlUnitario), w = Float.parseFloat(qtd), r = Float.parseFloat(desconto);
+
+        float t = q * w;
+        if ("".equals(desconto) || "0".equals(desconto)) {
+
+        } else {
+            t = t - (t * r / 100);
+        }
+        return Float.toString(t);
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="gerar codigo de Ordem de Serviço">
+    public String GerarCodigo() {
+        Random cod = new Random();
+        int num = 0;
+        do {
+            num = cod.nextInt(99999999);
+        } while (num < 10000000);
+        return Integer.toString(num);
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Tipo Pagamento">
+    public void tipoPagamento() {
+        if (cbD.isSelected()) {
+            tp = "1";
+            txtDinheiro.setEnabled(true);
+            txtTroco.setEnabled(true);
+            txtCartao.setEnabled(false);
+        } else {
+            tp = "0";
+            txtDinheiro.setEnabled(false);
+            txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+        if (cbCC.isSelected()) {
+            tp = "2";
+            txtDinheiro.setEnabled(false);
+            txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+        if (cbCD.isSelected()) {
+            tp = "3";
+            txtDinheiro.setEnabled(false);
+            txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+        if (cbD.isSelected() && cbCC.isSelected() || cbD.isSelected() && cbCD.isSelected()) {
+            tp = "1";
+            txtDinheiro.setEnabled(true);
+            txtTroco.setEnabled(true);
+            txtCartao.setEnabled(true);
+        }
+        if (cbD.isSelected() && cbCC.isSelected() && cbCD.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Opção inválida");
+            cbD.setSelected(false);
+            cbCC.setSelected(false);
+            cbCD.setSelected(false);
+            txtDinheiro.setEnabled(false);
+            txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Verificar Código">
+    public String VerificarCodigo() {
+        DAO dao = new DAO();
+        text = GerarCodigo();
+
+        try {
+            while (txt = false) {
+                dao.executaSQL("select * from vendas where codigoVenda = " + text);
+                txt = dao.resultSet.first();
+            }
+            lblCodOrdem.setText(text);
+            txt = false;
+            return text;
+        } catch (SQLException erro) {
+
+            return "";
+        }
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Limpar tabela 2">
+    public void limparTabela2() {
+        String[] colunas = new String[]{"Produto", "Descição", "Tipo", "Data da Compra", "Valor de Venda", "icsm", "iss", "ipi", "Estoque", "situação", "idLote"};
+        //esvazia o arraylist dadosPessoa.
+        dadosVendas.removeAll(dadosVendas);
+        //evazia a jTable, add dadosPessoa (sem dados).
+        ModeloTabela modelo = new ModeloTabela(dadosVendas, colunas);
+        jTable29.setModel(modelo); // recebe o modelo criado
+        jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);
+        jTable29.getColumnModel().getColumn(0).setResizable(false);
+        jTable29.getColumnModel().getColumn(1).setPreferredWidth(150);  // define o tamanho das colunas e se será redimensionado ou não
+        jTable29.getColumnModel().getColumn(1).setResizable(true);  // não permite alterar o tamanho da coluna 
+        jTable29.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(2).setResizable(false);
+        jTable29.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(3).setResizable(false);
+        jTable29.getColumnModel().getColumn(4).setPreferredWidth(80);
+        jTable29.getColumnModel().getColumn(4).setResizable(false);
+        jTable29.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(5).setResizable(false);
+        jTable29.getColumnModel().getColumn(6).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(6).setResizable(false);
+        jTable29.getColumnModel().getColumn(7).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(7).setResizable(false);
+        jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(8).setResizable(false);
+
+        jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+        jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+        jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="LimparTabela pesquisa">
+    public void LimparTabela() {
+
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"Produto", "Descição", "Tipo", "Data da Compra", "Valor de Venda", "icsm", "iss", "ipi", "Estoque", "situação", "idProdutos", "idLote"};
+
+        try {
+
+            dados.add(new Object[]{"", "", "", "", "", "", "", ""});
+            dados.removeAll(dados);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex + "Ñ DEU");
+        }
+
+        ModeloTabela model = new ModeloTabela(dados, colunas);
+        jTable2.setModel(model);
+
+        jTable2.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
+        jTable2.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
+        jTable2.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(1).setResizable(false);
+        jTable2.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(2).setResizable(false);
+        jTable2.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(3).setResizable(false);
+        jTable2.getColumnModel().getColumn(4).setPreferredWidth(80);
+        jTable2.getColumnModel().getColumn(4).setResizable(false);
+        jTable2.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(5).setResizable(false);
+        jTable2.getColumnModel().getColumn(6).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(6).setResizable(false);
+        jTable2.getColumnModel().getColumn(7).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(7).setResizable(false);
+
+        jTable2.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+        jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+        jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Limpar campo 1">
+    public void Limpar1() {
+        txtQtd.setText("");
+        txtDencontoProd.setText("");
+        lblValorParcial.setText("");
+
+        LimparTabela();
+
+    }
+
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Verificar Campos Vazios">
+    public boolean VerificarCampos() {
+        if (txtDataEntrega.getText().equals("")) {
+            verificar = true;
+        }
+        if (txtDataSolicitacao.getText().equals("")) {
+            verificar = true;
+        }
+        if (txtValorServico.getText().equals("")) {
+            verificar = true;
+        }
+        return verificar;
+    }
+    //</editor-fold>
+
     
     // <editor-fold defaultstate="collapsed" desc="Java - Do not Modify"> 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -669,11 +1091,11 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPesquisaCpf;
     private javax.swing.JButton btnPesquisaProduto;
     private javax.swing.JButton btnPesquisaTipo;
+    private javax.swing.JCheckBox cbCC;
+    private javax.swing.JCheckBox cbCD;
+    private javax.swing.JCheckBox cbD;
     private javax.swing.JComboBox<String> cbPrioridade;
     private javax.swing.JComboBox<String> cbServico;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -707,10 +1129,10 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable29;
+    private javax.swing.JLabel lblCodOrdem;
     private javax.swing.JLabel lblIcms;
-    private javax.swing.JLabel lblIdOrdem;
     private javax.swing.JLabel lblIpi;
     private javax.swing.JLabel lblIss;
     private javax.swing.JLabel lblNomeCli;
