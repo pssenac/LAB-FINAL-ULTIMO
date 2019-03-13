@@ -177,7 +177,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         if (cbOs.isSelected()) {
             cbLv.setSelected(false);
             cbLc.setSelected(false);
-            aux = 1;
+            aux = 2;
         }
 
     }//GEN-LAST:event_cbOsActionPerformed
@@ -186,7 +186,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         if (cbLv.isSelected()) {
             cbOs.setSelected(false);
             cbLc.setSelected(false);
-            aux = 2;
+            aux = 1;
         }
     }//GEN-LAST:event_cbLvActionPerformed
 
@@ -202,19 +202,30 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         switch (aux) {
             case 1:
 
-                if (txtData2.getText().equals("") || txtData2.getText().equals("  /  /    ")) {
-
+                LimparTabela();
+                
+                
+                
+               String frm = "  /  /    ";
+                
+                if (txtData2.getText().equals(frm) ) {
+                    
+                   
                     String A = txtData1.getText().substring(0, 2);
                     String B = txtData1.getText().substring(3, 5);
                     String C = txtData1.getText().substring(6, 10);
                     String data1 = C + "-" + B + "-" + A;
 
+                   
+                    
                     sql = "SELECT * FROM vendas inner join lotevendas on FKvendas = codVenda "
                             + "inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos "
                             + "where dataVenda = '" + data1 + "'";
                     preencherTabela1(sql);
+                    
+                    
 
-                } else {
+                } else if ( !txtData1.getText().equals(frm) && !frm.equals(txtData2.getText()) ){
 
                     String A = txtData1.getText().substring(0, 2);
                     String B = txtData1.getText().substring(3, 5);
@@ -225,10 +236,14 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
                     String E = txtData2.getText().substring(3, 5);
                     String F = txtData2.getText().substring(6, 10);
                     String data2 = F + "-" + E + "-" + D;
+                    
+                    
+                     
 
-                    String sql = "SELECT * FROM `lotevendas` INNER JOIN vendas on codVenda = FKvendas INNER JOIN lote on idLote = "
-                            + "FKlote INNER join produtos on idprodutos = FKprodutos BETWEEN dataVenda = '" + txtData1.getText() + "' and datavenda = '" + txtData2.getText() + "'";
-
+                     String sql ="SELECT * FROM `lotevendas` INNER JOIN vendas on codVenda = FKvendas INNER JOIN lote on idLote = "
+                             + "FKlote INNER join produtos on idprodutos = FKprodutos WHERE dataVenda BETWEEN '" + data1 + "' and '" + data2 + "'";
+                    
+                    
                     preencherTabela1(sql);
 
                 }
@@ -255,7 +270,14 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         try {
             dao.resultSet.first();
             do {
-                dados.add(new Object[]{dao.resultSet.getString("codVenda"), dao.resultSet.getString("dataVenda"), dao.resultSet.getString("nomeProduto"),
+                
+                    String A = dao.resultSet.getString("dataVenda").substring(0, 4);
+                    String B = dao.resultSet.getString("dataVenda").substring(5, 7);
+                    String C = dao.resultSet.getString("dataVenda").substring(8, 10);
+                    String dataC = C + "/" + B + "/" + A;
+                
+                
+                dados.add(new Object[]{dao.resultSet.getString("codVenda"), dataC, dao.resultSet.getString("nomeProduto"),
                     dao.resultSet.getString("qtd"), dao.resultSet.getString("valorParcial"), dao.resultSet.getString("codigoVenda")});
             } while (dao.resultSet.next());
         } catch (SQLException ex) {
@@ -267,15 +289,15 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
         jLista.getColumnModel().getColumn(0).setPreferredWidth(50);  // define o tamanho das colunas e se será redimensionado ou não
         jLista.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
-        jLista.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jLista.getColumnModel().getColumn(1).setPreferredWidth(150);
         jLista.getColumnModel().getColumn(1).setResizable(false);
-        jLista.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jLista.getColumnModel().getColumn(2).setPreferredWidth(350);
         jLista.getColumnModel().getColumn(2).setResizable(false);
-        jLista.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jLista.getColumnModel().getColumn(3).setPreferredWidth(150);
         jLista.getColumnModel().getColumn(3).setResizable(false);
-        jLista.getColumnModel().getColumn(4).setPreferredWidth(110);
+        jLista.getColumnModel().getColumn(4).setPreferredWidth(150);
         jLista.getColumnModel().getColumn(4).setResizable(false);
-        jLista.getColumnModel().getColumn(5).setPreferredWidth(-1);
+        jLista.getColumnModel().getColumn(5).setPreferredWidth(0);
         jLista.getColumnModel().getColumn(5).setResizable(false);
 
         jLista.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
@@ -409,6 +431,45 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         jLista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
     }
     //</editor-fold>
+    
+    
+    //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA LISTAR VENDAS">
+    public void LimparTabela() {
+        DAO dao = new DAO();
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"cod", "dataVenda", "nomeProduto", "qtd", "valorParcial", "coVenda"};
+   
+           
+                
+                dados.add(new Object[]{"", "", "", "", "", ""});
+                dados.removeAll(dados);
+                
+            
+       
+        
+
+        ModeloTabela model = new ModeloTabela(dados, colunas);
+        jLista.setModel(model);
+
+        jLista.getColumnModel().getColumn(0).setPreferredWidth(50);  // define o tamanho das colunas e se será redimensionado ou não
+        jLista.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
+        jLista.getColumnModel().getColumn(1).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(1).setResizable(false);
+        jLista.getColumnModel().getColumn(2).setPreferredWidth(350);
+        jLista.getColumnModel().getColumn(2).setResizable(false);
+        jLista.getColumnModel().getColumn(3).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(3).setResizable(false);
+        jLista.getColumnModel().getColumn(4).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(4).setResizable(false);
+        jLista.getColumnModel().getColumn(5).setPreferredWidth(0);
+        jLista.getColumnModel().getColumn(5).setResizable(false);
+
+        jLista.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+        jLista.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+        jLista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+    }
+    //</editor-fold>
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
