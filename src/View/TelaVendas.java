@@ -627,7 +627,9 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         vendaProdutosController vd = new vendaProdutosController();
 
         preencherTabela2(a, txtQtdVenda.getText(), txtDescontoVenda.getText(), b, lblValorParcial.getText(), c, d, e, f);
-
+        
+        
+        vendas.add(vd.preencherArray(a, txtQtdVenda.getText(), txtDescontoVenda.getText(), b, lblValorParcial.getText(), c, d, e, f));
         vendaProdutos.add(vd.preencherCarrinho(h, txtQtdVenda.getText(), txtDescontoVenda.getText(), lblValorParcial.getText()
                 , lbloCodVenda.getText()));
         Limpar1();
@@ -662,13 +664,14 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable29MouseClicked
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        if (!lbl1.getText().equals("") && !lbl2.getText().equals("") && !lbl3.getText().equals("") && !lbl4.getText().equals("")
-                && !lbl5.getText().equals("") && !lbl6.getText().equals("") && !lbl7.getText().equals("") && !lbl8.getText().equals("")) {
+        JOptionPane.showMessageDialog(null, vendas.get(0).getA());
+        if (!lbl1.getText().equals("")) {
             //remove do arraylist pessoas os dados da linha selecionada.
             int x = vendas.size();
             for (int i = 0; i < vendas.size(); i++) {
                 if (vendas.get(i).getA().equals(lbl1.getText())) {
                     vendas.remove(i);
+                    vendaProdutos.remove(i);
                 }
             }
 

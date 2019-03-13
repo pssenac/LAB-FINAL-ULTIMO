@@ -49,4 +49,20 @@ public class vendaProdutosController {
         return dao.vendaProdutos;
     }
 
+    public Venda preencherArray(String a, String b, String c, String d, String e, String f, String g, String h, String j) {
+
+        DAO dao = new DAO();
+        
+        dao.venda.setA(a);
+        dao.venda.setB(b);
+        dao.venda.setC(c);
+        dao.venda.setE(e);
+        dao.venda.setF(f);
+        dao.venda.setH(h);
+        dao.venda.setH(h);
+        dao.venda.setJ(j);
+        
+        return dao.venda;
+    }
+
 }
