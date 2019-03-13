@@ -664,7 +664,6 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable29MouseClicked
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        JOptionPane.showMessageDialog(null, vendas.get(0).getA());
         if (!lbl1.getText().equals("")) {
             //remove do arraylist pessoas os dados da linha selecionada.
             int x = vendas.size();
@@ -697,14 +696,13 @@ public class TelaVendas extends javax.swing.JInternalFrame {
 
         } else {
 
-            vndP.salvarVenda(txtDescontoVendaServico.getText(), tp, df.format(agr), "", "", "1", "1",
+            vndP.salvarVenda(txtDescontoVendaServico.getText(), tp, df.format(agr), "", "0", "1", "1",
                     "1", codvend, lbloCodVenda.getText(), txtCodigoVendedor.getText());
 
             for (int i = 0; i < vendaProdutos.size(); i++) {
                 vndP.salvarLoteVenda(vendaProdutos.get(i).getFkLoteVendas(), vendaProdutos.get(i).getQtd(),vendaProdutos.get(i).getDescontoItemVendProduto(),
                         vendaProdutos.get(i).getValorParcialVendProduto(), 
                          lbloCodVenda.getText());
-                JOptionPane.showMessageDialog(null, "ggg");
             }
         }
     }//GEN-LAST:event_btnFinalizarVendaActionPerformed
@@ -741,7 +739,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                     dao.resultSet.getString("qtdEstoque"), dao.resultSet.getString("situacaoProduto"), dao.resultSet.getString("idprodutos"), dao.resultSet.getString("idLote")});
             } while (dao.resultSet.next());
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex + "Ñ DEU");
+            JOptionPane.showMessageDialog(null, ex + "A tabela não foi capaz de retornar os dados");
         }
 
         ModeloTabela model = new ModeloTabela(dados, colunas);
