@@ -45,7 +45,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         preencherTabelaFuncionario(sqlTabela);
         preencherTabelaUsuario(sqlTabela2);
         habilitaCampos(false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false);
+                    false,false,false,false,false,false,false,false,false,false);
         
         habilitabotoes(true,true,false,false,false);
     }
@@ -652,7 +652,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
           vd = 1;
           
            habilitaCampos(true, true, true, true, true, true, true, true, true, 
-                   true, true, true, true, true, true, true, true, true );
+                   true, true, true, true, true, true, true, true, true,true );
            
            limparCampos();
     }//GEN-LAST:event_btnNovoFuncionarioActionPerformed
@@ -661,7 +661,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     //<editor-fold defaultstate="collapsed" desc=" BOTÃO ALTERAR ">
     private void btnAlterarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarFuncionarioActionPerformed
         habilitaCampos(true, true, true, true, true, true, true, true, true, 
-                   true, true, true, true, true, true, true, true, true );
+                   true, true, true, true, true, true, true, true, true,true );
         lblexistecep.setText("");
         lblexistecpf.setText("");
         lblexisteusuario.setText("");
@@ -722,7 +722,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                     txtCidadeFuncionario.getText(),txtEstadoFuncionario.getText(), txtUsuarioFuncionario.getText(), cbPerfilFuncionario.getSelectedIndex(),txtSenhaFuncionario.getText(),
                     txtConfirmacaoSenha.getText(),cbSituaçãoFuncionário.getSelectedIndex());
                     habilitaCampos(false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false);
+                    false,false,false,false,false,false,false,false,false,false);
         
                     habilitabotoes(true,false,false,false,false); 
                     JOptionPane.showMessageDialog(null, "CADASTRO REALIZADO");
@@ -747,7 +747,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                     txtCidadeFuncionario.getText(),txtEstadoFuncionario.getText(),txtUsuarioFuncionario.getText(), 
                     cbPerfilFuncionario.getSelectedIndex(),txtSenhaFuncionario.getText(), txtConfirmacaoSenha.getText(),cbSituaçãoFuncionário.getSelectedIndex());
                     habilitaCampos(false,false,false,false,false,false,false,false,false,
-                     false,false,false,false,false,false,false,false,false);
+                     false,false,false,false,false,false,false,false,false,false);
                         lblexistecep.setText("");
                         lblexistecpf.setText("");
                         lblexisteusuario.setText("");
@@ -843,7 +843,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         txtConfirmacaoSenha.setText(jFuncionario.getValueAt(linhaSelecionada, 18).toString());
         
         habilitaCampos(false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false);
+                    false,false,false,false,false,false,false,false,false,false);
          habilitabotoes(false,false,true,false,true);
          
     }//GEN-LAST:event_jFuncionarioMouseClicked
@@ -888,7 +888,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         txtEstadoFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 19).toString());
         
         habilitaCampos(false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false);
+                    false,false,false,false,false,false,false,false,false,false);
         
         habilitabotoes(false,false,true,false,true);
         
@@ -902,7 +902,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         
         habilitabotoes(true,false,false,false,false);
         habilitaCampos(false,false,false,false,false,false,false,false,false,
-                false,false,false,false,false,false,false,false,false);
+                false,false,false,false,false,false,false,false,false,false);
         
     }//GEN-LAST:event_btnCancelarFuncionarioActionPerformed
     //</editor-fold>
@@ -932,7 +932,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         public void habilitaCampos(boolean nomeFcn, boolean rgFcn, boolean cpfFcn, boolean dataNascFcn, 
                 boolean telFcn, boolean celFcn, boolean emailFcn, boolean cepFcn,boolean logradouroFcn,
                 boolean bairroFcn,boolean numeroFcn,boolean complementoFcn, boolean CidadeFcn,boolean estadoFcn,
-                boolean usuarioFcn,boolean SenhaFcn,boolean ConfirmSenhaFcn,boolean perfilFcn) {
+                boolean usuarioFcn,boolean SenhaFcn,boolean ConfirmSenhaFcn,boolean perfilFcn,boolean situacao) {
            
            // FUNCIONARIO 
            txtNomeFuncionario.setEnabled(nomeFcn);
@@ -957,6 +957,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
             txtSenhaFuncionario.setEnabled(SenhaFcn);
             txtConfirmacaoSenha.setEnabled(ConfirmSenhaFcn);
             cbPerfilFuncionario.setEnabled(perfilFcn);
+            cbSituaçãoFuncionário.setEnabled(situacao);
         }
         //</editor-fold>
          
@@ -1116,7 +1117,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         ArrayList dados = new ArrayList();
          String[] colunas = new String[]{"idFuncionario","nomeFuncionario","cpf","rg",
              "telefone","celular","email","dataNascimento","cep","bairro","logradouro",
-             "complemento","numero","cidade","estado","login","perfil","senha","confiSenha"};
+             "complemento","numero","cidade","estado","","","","",""};
          
         DAO.executaSQL(SQL);  
         
@@ -1124,13 +1125,13 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         try{
             DAO.resultSet.first();  
             do{    
-                dados.add(new Object[]{DAO.resultSet.getString("idfuncionario"),DAO.resultSet.getString("nomeFuncionario"),DAO.resultSet.getString("cpf"),
+                dados.add(new Object[]{DAO.resultSet.getString("idFuncionario"),DAO.resultSet.getString("nomeFuncionarios"),DAO.resultSet.getString("cpf"),
                 DAO.resultSet.getString("rg"), DAO.resultSet.getString("telefone"),DAO.resultSet.getString("celular"), 
                 DAO.resultSet.getString("email"),DAO.resultSet.getString("dataNascimento"),DAO.resultSet.getString("cep"),
                 DAO.resultSet.getString("Bairro"),DAO.resultSet.getString("logradouro"),DAO.resultSet.getString("complemento"),
                 DAO.resultSet.getString("numero"),DAO.resultSet.getString("cidade"),DAO.resultSet.getString("estado"), 
                 DAO.resultSet.getString("login"),DAO.resultSet.getString("perfil"),DAO.resultSet.getString("senha"), 
-                DAO.resultSet.getString("confiSenha")});
+                DAO.resultSet.getString("confiSenha"),DAO.resultSet.getString("situação")});
                     
             }while(DAO.resultSet.next());
         }catch(SQLException ex){}
@@ -1173,11 +1174,16 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         jFuncionario.getColumnModel().getColumn(15).setResizable(false);
         jFuncionario.getColumnModel().getColumn(16).setMinWidth(0);  
         jFuncionario.getColumnModel().getColumn(16).setMaxWidth(0);
+        jFuncionario.getColumnModel().getColumn(16).setResizable(false);
         jFuncionario.getColumnModel().getColumn(17).setMinWidth(0);  
         jFuncionario.getColumnModel().getColumn(17).setMaxWidth(0);
+        jFuncionario.getColumnModel().getColumn(17).setResizable(false);
         jFuncionario.getColumnModel().getColumn(18).setMinWidth(0);  
         jFuncionario.getColumnModel().getColumn(18).setMaxWidth(0);
-       
+        jFuncionario.getColumnModel().getColumn(18).setResizable(false);
+        jFuncionario.getColumnModel().getColumn(19).setMinWidth(0);  
+        jFuncionario.getColumnModel().getColumn(19).setMaxWidth(0);
+        jFuncionario.getColumnModel().getColumn(19).setResizable(false);
        
         
         
