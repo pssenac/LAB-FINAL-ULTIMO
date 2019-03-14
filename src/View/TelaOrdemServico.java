@@ -24,10 +24,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
-/**
- *
- * @author 03758479100
- */
 public class TelaOrdemServico extends javax.swing.JInternalFrame {
 
     ArrayList dadosVendas = new ArrayList();
@@ -37,6 +33,7 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
     ArrayList<OrdemProdutos> vendaProdutos = new ArrayList<>();
     double x = 0, z, vl, vl2, icms1, icms, iss1, iss2, ipi1, ipi2;
 
+    
     public TelaOrdemServico() {
         initComponents();
         VerificarCodigo();
@@ -135,6 +132,7 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         lbl4 = new javax.swing.JLabel();
         lbl5 = new javax.swing.JLabel();
         lbl9 = new javax.swing.JLabel();
+        lblFK = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("ORDEM DE SERVIÇO");
@@ -213,12 +211,12 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                 .addContainerGap())
@@ -542,6 +540,8 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
 
         lbl9.setText("jLabel24");
 
+        lblFK.setText("jLabel24");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -652,6 +652,8 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
                         .addComponent(lbl5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblFK)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -737,14 +739,15 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnFinalizarOrdem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl1)
                     .addComponent(lbl2)
                     .addComponent(lbl3)
                     .addComponent(lbl4)
                     .addComponent(lbl5)
-                    .addComponent(lbl9))
+                    .addComponent(lbl9)
+                    .addComponent(lblFK))
                 .addContainerGap())
         );
 
@@ -754,7 +757,6 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Botão Pesquisa CPF"> 
     private void btnPesquisaCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaCpfActionPerformed
         OrdemProdutosController OP = new OrdemProdutosController();
-        Cliente cli = new Cliente();
         lblNomeCli.setText(OP.pesquisarCliente(txtCpfCliente.getText()));
         lblTelCli.setText(OP.pesquisarCliente2(txtCpfCliente.getText()));
 
@@ -783,10 +785,13 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Botão adicionar carrinho"> 
     private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
-        OrdemProdutosController vd = new OrdemProdutosController();
+        OrdemProdutosController op = new OrdemProdutosController();
+        vendaProdutosController vp = new vendaProdutosController();
         preencherTabela2(a, txtQtd.getText(), txtDencontoProd.getText(), b, lblValorParcial.getText(), c, d, e, f);
-        vendaProdutos.add(vd.preencherCarrinho(h, txtQtd.getText(), txtDencontoProd.getText(), lblValorParcial.getText(),
-                 lblCodOrdem.getText()));
+        vendas.add(vp.preencherArray(a, txtQtd.getText(), txtDencontoProd.getText(), b, lblValorParcial.getText(), c, d, e, f));
+        vendaProdutos.add(op.preencherCarrinhoOrdem(h, txtQtd.getText(), txtDencontoProd.getText(), lblValorParcial.getText(),
+                lblCodOrdem.getText()));
+
         Limpar1();
     }//GEN-LAST:event_btnAddProdutoActionPerformed
 //</editor-fold>
@@ -818,9 +823,9 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
     private void btnFinalizarOrdemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarOrdemActionPerformed
         OrdemProdutosController opc = new OrdemProdutosController();
         DAO dao = new DAO();
-        String codvend = dao.PesquisaFuncionario(txtCodVendedor.getText());
+        String codvend = dao.buscarFuncionario(txtCodVendedor.getText());
         String idCli = dao.BuscarIdcli(txtCpfCliente.getText());
-        
+
         String A = txtDataEntrega.getText().substring(0, 2);
         String B = txtDataEntrega.getText().substring(3, 5);
         String C = txtDataEntrega.getText().substring(6, 10);
@@ -831,10 +836,10 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         String F = txtDataSolicitacao.getText().substring(6, 10);
         String Solicitacao = F + "-" + E + "-" + D;
 
-        
+        tipoPagamento();
+
         if (codvend.equals(null)) {
             JOptionPane.showMessageDialog(null, "insira um codigo valido");
-
         } else {
             opc.salvarOrdemServico(cbServico.getSelectedItem().toString(), txtValorServico.getText(), Entrega, Solicitacao, Integer.toString(cbPrioridade.getSelectedIndex()),
                     txtDescricao.getText(), tp, txtCodVendedor.getText(), lblIcms.getText(), lblIss.getText(), lblIpi.getText(),
@@ -842,16 +847,13 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
 
             for (int i = 0; i < vendaProdutos.size(); i++) {
                 opc.salvarLoteOrdem(vendaProdutos.get(i).getFKlote(), vendaProdutos.get(i).getQtd(), vendaProdutos.get(i).getDesconto(),
-                        vendaProdutos.get(i).getValorParcial(),
-                        lblCodOrdem.getText());
+                        vendaProdutos.get(i).getValorParcial(), lblCodOrdem.getText());
             }
         }
         GerarCodigo();
         VerificarCodigo();
-        dadosVendas.removeAll(dadosVendas);
-        vendaProdutos.removeAll(vendaProdutos);
-        vendas.removeAll(vendas);
-            
+
+
     }//GEN-LAST:event_btnFinalizarOrdemActionPerformed
 //</editor-fold>
 
@@ -865,6 +867,8 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         e = (jTable2.getValueAt(linhaSelecionada, 7).toString());
         f = (jTable2.getValueAt(linhaSelecionada, 10).toString());
         h = (jTable2.getValueAt(linhaSelecionada, 11).toString());
+
+
     }//GEN-LAST:event_jTable2MouseClicked
 //</editor-fold>
 
@@ -881,6 +885,7 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         //lbl7.setText(jTable29.getValueAt(linhaSelecionada, 6).toString());
         // lbl8.setText(jTable29.getValueAt(linhaSelecionada, 7).toString());
         lbl9.setText(jTable29.getValueAt(linhaSelecionada, 8).toString());
+        lblFK.setText(jTable29.getValueAt(linhaSelecionada, 10).toString());
 
     }//GEN-LAST:event_jTable29MouseClicked
 //</editor-fold>
@@ -899,7 +904,7 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
                     dao.resultSet.getString("qtdEstoque"), dao.resultSet.getString("situacaoProduto"), dao.resultSet.getString("idprodutos"), dao.resultSet.getString("idLote")});
             } while (dao.resultSet.next());
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex + "Ñ DEU");
+            JOptionPane.showMessageDialog(null, ex + "A tabela não pode retornar os dados");
         }
 
         ModeloTabela model = new ModeloTabela(dados, colunas);
@@ -935,23 +940,23 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         String[] colunas = new String[]{"Produto", "Quantidade", "Desconto", "Valor Unitário", "Valor", "icsm", "iss", "ipi", "idLote"};
         try {
             dadosVendas.add(new Object[]{produto, qtd, desconto, vlUnitario, vlParcial, icmsx, issx, ipix, idLote});
-            
+
             x = Double.parseDouble(vlParcial);
-                z += x;               
-                vl2 = Double.parseDouble(desconto);
-                // = z - (z * vl2 / 100);
-                icms = Double.parseDouble(icmsx);
-                icms1 += icms;
-                iss1 = Double.parseDouble(issx);
-                iss2 += iss1;
-                ipi1 = Double.parseDouble(ipix);
-                ipi2 += ipi1;
-                
-                lblIcms.setText(Double.toString(icms1));
-                lblIss.setText(Double.toString(iss2));
-                lblIpi.setText(Double.toString(ipi2));
-                lblValorTotal.setText(Double.toString(z));
-                
+            z += x;
+            vl2 = Double.parseDouble(desconto);
+            // = z - (z * vl2 / 100);
+            icms = Double.parseDouble(icmsx);
+            icms1 += icms;
+            iss1 = Double.parseDouble(issx);
+            iss2 += iss1;
+            ipi1 = Double.parseDouble(ipix);
+            ipi2 += ipi1;
+
+            lblIcms.setText(Double.toString(icms1));
+            lblIss.setText(Double.toString(iss2));
+            lblIpi.setText(Double.toString(ipi2));
+            lblValorTotal.setText(Double.toString(z));
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -1099,6 +1104,10 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         jTable29.getColumnModel().getColumn(7).setResizable(false);
         jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
         jTable29.getColumnModel().getColumn(8).setResizable(false);
+        jTable29.getColumnModel().getColumn(9).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(9).setResizable(false);
+        jTable29.getColumnModel().getColumn(10).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(10).setResizable(false);
 
         jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
@@ -1229,6 +1238,7 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbl5;
     private javax.swing.JLabel lbl9;
     private javax.swing.JLabel lblCodOrdem;
+    private javax.swing.JLabel lblFK;
     private javax.swing.JLabel lblIcms;
     private javax.swing.JLabel lblIpi;
     private javax.swing.JLabel lblIss;

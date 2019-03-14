@@ -287,6 +287,7 @@ public class DAO {
             ResultSet nome = statement.executeQuery();
             nome.next();
             aux = nome.getString("idcliente");
+            return aux;
 
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, erro);
@@ -1086,8 +1087,9 @@ public class DAO {
             switch (operacao) {
                 // Produto
                 case INCLUSAOORDEMSERVICO:
+                           
                    
-                        sql = "insert into ordemservico values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        sql = "insert into ordemservico values (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                         bd.getConnection();
                         statement = bd.connection.prepareStatement(sql);
                         statement.setString(1, ordemservico.getTipoServico());
@@ -1123,10 +1125,10 @@ public class DAO {
                     ResultSet fk = statement.executeQuery();
                     fk.next();
 
-                    sql = "insert into ordemlote values (?,?,?,?,?)";
+                    sql = "insert into ordemlote values (?,?,?,?,?,?)";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
-                    statement.setString(1, fk.getString("IdServico"));
+                    statement.setString(1, fk.getString("IdServico"));                    
                     statement.setString(2, ordemProdutos.getFKlote());
                     statement.setString(3, ordemProdutos.getQtd());
                     statement.setString(4, ordemProdutos.getDesconto());
@@ -1151,7 +1153,7 @@ public class DAO {
     public String PesquisaCliente(String cpf) {
         String aux = "";
         try {
-            sql = "select * from cliente where cpf= ?";
+            sql = "select * from cliente where cpf = ?";
             bd.getConnection();
             statement = bd.connection.prepareStatement(sql);            
             statement.setString(1, cpf);
