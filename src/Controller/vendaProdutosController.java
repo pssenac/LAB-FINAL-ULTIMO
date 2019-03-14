@@ -23,7 +23,7 @@ public class vendaProdutosController {
         dao.VendaCarrinho.setCodVenda(j);
         dao.VendaCarrinho.setCodFuncionário(k);
 
-        JOptionPane.showMessageDialog(null, dao.Atualizarvendas(DAO.INCLUSAOVENDA));
+       dao.Atualizarvendas(DAO.INCLUSAOVENDA);
     }
 
     public void salvarLoteVenda(String a2, String b, String c, String d, String e) {

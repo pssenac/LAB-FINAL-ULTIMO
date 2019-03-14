@@ -704,6 +704,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                         vendaProdutos.get(i).getValorParcialVendProduto(), 
                          lbloCodVenda.getText());
             }
+            JOptionPane.showMessageDialog(null, "Operação realizada com sucesso");
         }
     }//GEN-LAST:event_btnFinalizarVendaActionPerformed
 
