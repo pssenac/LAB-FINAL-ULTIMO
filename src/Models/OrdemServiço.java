@@ -8,7 +8,7 @@ public class OrdemServiço {
     
   private String idServico, tipoServico, valorServico, dataEntrega, dataSolitacao,
            prioridade, descricao, tipoPagamento, codigoFuncionario, icms, iss, ipi, 
-           valorTotal, cpfCliente, codigoOrdem, FKcliente, FKfuncionario, observacao, estorno;
+           valorTotal, cpfCliente, codigoOrdem, FKcliente, FKfuncionario, observacao, estorno, desconto;
 
     /**
      * @return the idServico
@@ -274,6 +274,20 @@ public class OrdemServiço {
      */
     public void setEstorno(String estorno) {
         this.estorno = estorno;
+    }
+
+    /**
+     * @return the desconto
+     */
+    public String getDesconto() {
+        return desconto;
+    }
+
+    /**
+     * @param desconto the desconto to set
+     */
+    public void setDesconto(String desconto) {
+        this.desconto = desconto;
     }
            
    
