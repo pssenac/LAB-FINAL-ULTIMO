@@ -180,5 +180,19 @@ public class VendaCarrinho {
         this.codFuncionário = codFuncionário;
     }
     
-   private String idVenda,desconto, tipoPagamento, dataVenda, observacao, estorno, icms , iss, ipi, FKfuncionario, codVenda, codFuncionário; 
+   private String idVenda,desconto, tipoPagamento, dataVenda, observacao, estorno, icms , iss, ipi, FKfuncionario, codVenda, codFuncionário, valorTotal; 
+
+    /**
+     * @return the valorTotal
+     */
+    public String getValorTotal() {
+        return valorTotal;
+    }
+
+    /**
+     * @param valorTotal the valorTotal to set
+     */
+    public void setValorTotal(String valorTotal) {
+        this.valorTotal = valorTotal;
+    }
 }

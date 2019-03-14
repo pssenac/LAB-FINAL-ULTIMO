@@ -96,7 +96,7 @@ public class DAO {
     public String buscarFuncionario(String cod) {
         String resultado = "";
         try {
-            sql = "select * from funcionario where codigoFuncionario = ?";
+            sql = "select * from funcionario where codigoFuncionarios = ?";
             bd.getConnection();
             statement = bd.connection.prepareStatement(sql);
             statement.setString(1, cod);
@@ -275,6 +275,24 @@ public class DAO {
             JOptionPane.showMessageDialog(null, ex);
         }
         return autenticado;
+    }
+    
+    public String BuscarIdcli(String cpf){
+        String aux = "";
+        try {
+            sql = "select * from cliente where cpf= ?";
+            bd.getConnection();
+            statement = bd.connection.prepareStatement(sql);            
+            statement.setString(1, cpf);
+            ResultSet nome = statement.executeQuery();
+            nome.next();
+            aux = nome.getString("idcliente");
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, erro);
+        }
+        return aux;
+              
     }
 
     //</editor-fold>
@@ -776,7 +794,7 @@ public class DAO {
         String fk;
         men = "Operação realizada com sucesso!";
         try {
-            String sql = "select * from funcionario where codigoFuncionario = ?";
+            String sql = "select * from funcionario where codigoFuncionarios = ?";
             bd.getConnection();
             statement = bd.connection.prepareStatement(sql);
             statement.setString(1, CodVend);
@@ -798,7 +816,7 @@ public class DAO {
             switch (operacao) {
                 // Produto
                 case INCLUSAOVENDA:
-                    sql = "insert into vendas values (null,?,?,?,?,?,?,?,?,?,?,?)";
+                    sql = "insert into vendas values (null,?,?,?,?,?,?,?,?,?,?,?,?)";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
                     statement.setString(1, VendaCarrinho.getDesconto());
@@ -812,6 +830,7 @@ public class DAO {
                     statement.setString(9, VendaCarrinho.getFKfuncionario());
                     statement.setString(10, VendaCarrinho.getCodVenda());
                     statement.setString(11, VendaCarrinho.getCodFuncionário());
+                    statement.setString(12, VendaCarrinho.getValorTotal());
                     statement.executeUpdate();
                     statement.close();
 
@@ -1066,24 +1085,8 @@ public class DAO {
             switch (operacao) {
                 // Produto
                 case INCLUSAOORDEMSERVICO:
-
-                    sql = "select idFuncionario from funcionario where codigoFuncionario = ?";
-                    bd.getConnection();
-                    statement = bd.connection.prepareStatement(sql);
-                    statement.setString(1, ordemservico.getCodigoFuncionario());
-                    resultSet = statement.executeQuery();
-                    String FKfun = resultSet.getString("idFuncionario");
-                    if (resultSet.first() == false) {
-                        JOptionPane.showMessageDialog(null, "Funcionário Inválido!");
-                    } else {
-                        sql = "select idcliente from cliente where cpf = ?";
-                        bd.getConnection();
-                        statement = bd.connection.prepareStatement(sql);
-                        statement.setString(1, ordemservico.getCpfCliente());
-                        resultSet = statement.executeQuery();
-                        String FKcli = resultSet.getString("idcliente");
-
-                        sql = "insert into ordemserviço values (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                   
+                        sql = "insert into ordemservico values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                         bd.getConnection();
                         statement = bd.connection.prepareStatement(sql);
                         statement.setString(1, ordemservico.getTipoServico());
@@ -1100,26 +1103,29 @@ public class DAO {
                         statement.setString(12, ordemservico.getValorTotal());
                         statement.setString(13, ordemservico.getCpfCliente());
                         statement.setString(14, ordemservico.getCodigoOrdem());
-                        statement.setString(15, FKcli);
-                        statement.setString(16, FKfun);
+                        statement.setString(15, ordemservico.getFKcliente());
+                        statement.setString(16, ordemservico.getFKfuncionario());
+                        statement.setString(17, ordemservico.getObservacao());
+                        statement.setString(18, ordemservico.getEstorno());
+                        statement.setString(19, ordemservico.getDesconto());                      
                         statement.executeUpdate();
                         statement.close();
-                    }
+                    
                     break;
 
                 // Inserção VendaProduto
                 case INCLUSAOORDEMPRODUTO:
 
-                    sql = "select * from ordemserviço";
+                    sql = "select * from ordemservico order by IdServico desc limit 1";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
-                    resultSet = statement.executeQuery();
-                    String fk = resultSet.getString("IdServico");
+                    ResultSet fk = statement.executeQuery();
+                    fk.next();
 
                     sql = "insert into ordemlote values (?,?,?,?,?)";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
-                    statement.setString(1, fk);
+                    statement.setString(1, fk.getString("IdServico"));
                     statement.setString(2, ordemProdutos.getFKlote());
                     statement.setString(3, ordemProdutos.getQtd());
                     statement.setString(4, ordemProdutos.getDesconto());
@@ -1149,7 +1155,7 @@ public class DAO {
             statement = bd.connection.prepareStatement(sql);            
             statement.setString(1, cpf);
             ResultSet nome = statement.executeQuery();
-            JOptionPane.showMessageDialog(null, nome);
+            nome.next();
             aux = nome.getString("nomeCliente");
 
         } catch (SQLException erro) {
@@ -1157,29 +1163,40 @@ public class DAO {
         }
         return aux;
     }
-
-    public boolean Pesquicpf(String cpf) {
-        boolean autenticado = false;
-
+    
+    public String PesquisaCliente2(String cpf) {
+        String aux = "";
         try {
-
-            String sql = "select * from cliente where cpf= ?";
+            sql = "select * from cliente where cpf= ?";
             bd.getConnection();
-            statement = bd.connection.prepareStatement(sql);
+            statement = bd.connection.prepareStatement(sql);            
             statement.setString(1, cpf);
-            ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
-                Acesso = rs.getString("nomeCliente");
-                autenticado = true;
-            } else {
-                rs.close();
-                return autenticado;
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            ResultSet nome = statement.executeQuery();
+            nome.next();
+            aux = nome.getString("telefone");
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, erro);
         }
-        return autenticado;
+        return aux;
     }
+    public String PesquisaCliente3(String cpf) {
+        String aux = "";
+        try {
+            sql = "select * from cliente where cpf= ?";
+            bd.getConnection();
+            statement = bd.connection.prepareStatement(sql);            
+            statement.setString(1, cpf);
+            ResultSet nome = statement.executeQuery();
+            nome.next();
+            aux = nome.getString("celular");
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, erro);
+        }
+        return aux;
+    }
+    
     //</editor-fold>
     
 }
