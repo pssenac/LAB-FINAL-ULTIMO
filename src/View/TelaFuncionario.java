@@ -21,6 +21,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     String sqlTabela=null;
     String sqlTabela2=null;
     public logFuncionarioController fc;
+    boolean a;
     
     
     int vd = 0;
@@ -694,80 +695,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
        
        switch (vd){
              case 1:
-              
-                if(txtNomeFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Nome.");
-                   txtNomeFuncionario.requestFocus();
-                    return;
-                } 
                  
-                if(txtCpfFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo CPF.");
-                   txtCpfFuncionario.requestFocus();
-                    return;
-                }  
-                
-                if(txtRgFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o RG.");
-                   txtRgFuncionario.requestFocus();
-                    return;
-                }  
-                 if(txtDataNasc.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Data de Nascimento.");
-                   txtDataNasc.requestFocus();
-                    return;
-                }  
-                
-                 if(txtCepFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Cep.");
-                   txtCepFuncionario.requestFocus();
-                    return;
-                }  
-                
-                 if(txtBairroFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Bairro.");
-                   txtBairroFuncionario.requestFocus();
-                    return;
-                }   
-                 
-                 if(txtLogradouroFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Logradouro.");
-                    txtLogradouroFuncionario.requestFocus();
-                    return;
-                }   
-                 
-                 
-                 if(txtNumeroFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Numero.");
-                   txtNumeroFuncionario.requestFocus();
-                    return;
-                }   
-                 
-                if(txtCidadeFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Cidade.");
-                    txtCidadeFuncionario.requestFocus();
-                    return;
-                }   
-                 
-                if(txtEstadoFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Estado.");
-                    txtEstadoFuncionario.requestFocus();
-                    return;
-                }    
-                 
-                 if(txtUsuarioFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Usuario.");
-                    txtUsuarioFuncionario.requestFocus();
-                    return;
-                }    
-                
-                  if(txtSenhaFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Senha.");
-                    txtSenhaFuncionario.requestFocus();
-                    return;
-                  }  
-                 
-                  
                 String sh =  txtSenhaFuncionario.getText();
                 String csh =  txtConfirmacaoSenha.getText();
                 
@@ -777,9 +705,16 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                     return;
                }   
                 
+                if (VerificarCamposVazios() == true) {
+                    JOptionPane.showMessageDialog(null, "Campos obrigatórios estão vazios!");
+                    a = false;
+                }
                 
-               if (cf != true  && cuser!=true){
+                
+               if (cf != true  && cuser!=true&& VerificarCamposVazios() != true){
                     logFuncionarioController lg = new logFuncionarioController();
+                    
+                    
                     lg.salvarFuncionario(txtNomeFuncionario.getText(),txtCpfFuncionario.getText(),
                     txtRgFuncionario.getText(), txtTelFuncionario.getText(),txtCelFuncionario.getText(),
                     txtEmailFuncionario.getText(),txtDataNasc.getText(),txtCepFuncionario.getText(),txtBairroFuncionario.getText(),
@@ -1025,7 +960,66 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         }
         //</editor-fold>
          
-   
+   //<editor-fold defaultstate="collapsed" desc=" MÉTODO CAMPOS VAZIOS ">
+    public boolean VerificarCamposVazios() {
+        if (txtNomeFuncionario.getText().equals("")) {
+            a = true;
+        }
+        if (txtCpfFuncionario.getText().equals("")) {
+            a = true;
+        }
+        if (txtRgFuncionario.getText().equals("")) {
+            a = true;
+        }
+        if (txtCelFuncionario.getText().equals("") && txtTelFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+         if (txtDataNasc.getText().equals("")) {
+            a = true;
+        }
+        
+        
+    
+        
+        if (txtCepFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+        if (txtLogradouroFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+        if (txtBairroFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+        if (txtEstadoFuncionario.getText().equals("")) {
+            a = true;
+        }
+        if (txtCidadeFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+     
+        if (txtNumeroFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+        if (txtUsuarioFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+        if (txtSenhaFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+        
+        
+        
+        return a;
+    }
+     //</editor-fold>
         
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR CAMPOS ">    
     public void atualizarCampos(){
