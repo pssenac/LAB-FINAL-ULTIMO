@@ -831,11 +831,12 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         String F = txtDataSolicitacao.getText().substring(6, 10);
         String Solicitacao = F + "-" + E + "-" + D;
 
+        
         if (codvend.equals(null)) {
             JOptionPane.showMessageDialog(null, "insira um codigo valido");
 
         } else {
-            opc.salvarOrdemServico(cbServico.getName(), txtValorServico.getText(), Entrega, Solicitacao, cbPrioridade.getName(),
+            opc.salvarOrdemServico(cbServico.getSelectedItem().toString(), txtValorServico.getText(), Entrega, Solicitacao, Integer.toString(cbPrioridade.getSelectedIndex()),
                     txtDescricao.getText(), tp, txtCodVendedor.getText(), lblIcms.getText(), lblIss.getText(), lblIpi.getText(),
                     lblValorTotal.getText(), txtCpfCliente.getText(), lblCodOrdem.getText(), idCli, codvend, "", "", txtDescontoGeral.getText());
 
@@ -936,9 +937,9 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
             dadosVendas.add(new Object[]{produto, qtd, desconto, vlUnitario, vlParcial, icmsx, issx, ipix, idLote});
             
             x = Double.parseDouble(vlParcial);
-                z += x;
+                z += x;               
                 vl2 = Double.parseDouble(desconto);
-                vl = z - (z * vl2 / 100);
+                // = z - (z * vl2 / 100);
                 icms = Double.parseDouble(icmsx);
                 icms1 += icms;
                 iss1 = Double.parseDouble(issx);
@@ -949,7 +950,8 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
                 lblIcms.setText(Double.toString(icms1));
                 lblIss.setText(Double.toString(iss2));
                 lblIpi.setText(Double.toString(ipi2));
-            
+                lblValorTotal.setText(Double.toString(z));
+                
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }

@@ -96,7 +96,7 @@ public class DAO {
     public String buscarFuncionario(String cod) {
         String resultado = "";
         try {
-            sql = "select * from funcionario where codigoFuncionario = ?";
+            sql = "select * from funcionario where codigoFuncionarios = ?";
             bd.getConnection();
             statement = bd.connection.prepareStatement(sql);
             statement.setString(1, cod);
@@ -795,7 +795,7 @@ public class DAO {
         String fk;
         men = "Operação realizada com sucesso!";
         try {
-            String sql = "select * from funcionario where codigoFuncionario = ?";
+            String sql = "select * from funcionario where codigoFuncionarios = ?";
             bd.getConnection();
             statement = bd.connection.prepareStatement(sql);
             statement.setString(1, CodVend);
@@ -817,7 +817,7 @@ public class DAO {
             switch (operacao) {
                 // Produto
                 case INCLUSAOVENDA:
-                    sql = "insert into vendas values (null,?,?,?,?,?,?,?,?,?,?,?)";
+                    sql = "insert into vendas values (null,?,?,?,?,?,?,?,?,?,?,?,?)";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
                     statement.setString(1, VendaCarrinho.getDesconto());
@@ -831,6 +831,7 @@ public class DAO {
                     statement.setString(9, VendaCarrinho.getFKfuncionario());
                     statement.setString(10, VendaCarrinho.getCodVenda());
                     statement.setString(11, VendaCarrinho.getCodFuncionário());
+                    statement.setString(12, VendaCarrinho.getValorTotal());
                     statement.executeUpdate();
                     statement.close();
 

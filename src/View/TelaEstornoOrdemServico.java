@@ -940,9 +940,9 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Botões"> 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        sql = "select * from ordemServiço inner join ordemlote on IdServico = FKordemServico "
+        sql = "select * from ordemServico inner join ordemlote on IdServico = FKordemServico "
                 + "inner join lote on FKlote = idLote "
-                + "inner join produtos on FKprodutos = idprodutos where codigoVenda = '" + txtCodOrdem.getText() + "'";
+                + "inner join produtos on FKprodutos = idprodutos where codigoOrdem = " + txtCodOrdem.getText() + "";
         preencherTabela(sql);
         lblEstorno.setText(txtCodOrdem.getText());
         tp = lblTipoPag.getText();
@@ -963,8 +963,8 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"Produto", "Descrição", "Valor Unitário", "QTD", "Desconto", "Valor",
             "DescontoOrdem", "TipoServico","Valor Serviço", "Data Solicitacao","Data Entrega", 
-            "Prioridade","Decrição","TipoPagamento", "Icms", "Iss", "Ipi","ValorTotal","CPFcli","CodigoOrdem",
-            "FKcliente","FKfuncionario", "Observacao","estorno", "codigoFuncionario"};
+            "Prioridade","Decrição","TipoPagamento", "codigoFuncionario", "Icms", "Iss", "Ipi","ValorTotal","CPFcli","CodigoOrdem",
+            "FKcliente","FKfuncionario", "Observacao","estorno"};
         dao.executaSQL(SQL);
         try {
             dao.resultSet.first();
@@ -976,13 +976,19 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                 
                 dados.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorVenda"),
                     dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial"),
-                    dao.resultSet.getString("desconto"), dao.resultSet.getString("tipoPagamento"), dao.resultSet.getString("codigoFuncionario"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"),
-                    dao.resultSet.getString("ipi"), dao.resultSet.getString("dataVenda"), dao.resultSet.getString("observacao"),
-                    dao.resultSet.getString("FKfuncionario"), dao.resultSet.getString("codigoVenda")});
+                    dao.resultSet.getString("desconto"), dao.resultSet.getString("tipoServico"),dao.resultSet.getString("valorServico"), 
+                    dao.resultSet.getString("dataSolitacao"), dao.resultSet.getString("dataEntrega"), dao.resultSet.getString("prioridade"),dao.resultSet.getString("descricao"),
+                    dao.resultSet.getString("tipoPagamento"), dao.resultSet.getString("codigoFuncionario"),dao.resultSet.getString("icms"), dao.resultSet.getString("iss"),                    
+                    dao.resultSet.getString("ipi"), dao.resultSet.getString("valorTotal"), dao.resultSet.getString("cpfCliente"),dao.resultSet.getString("codigoOrdem"),
+                    dao.resultSet.getString("FKfuncionario"),dao.resultSet.getString("observacao"),dao.resultSet.getString("estorno")});
 
                 x = Double.parseDouble(dao.resultSet.getString("valorParcial"));
                 z += x;
+                if(dao.resultSet.getString("desconto").equals(null)){
+                    vl2 = 0;
+                }else{
                 vl2 = Double.parseDouble(dao.resultSet.getString("desconto"));
+                }
                 vl = z - (z * vl2 / 100);
                 icms = Double.parseDouble(dao.resultSet.getString("icms"));
                 icms1 += icms;
@@ -996,11 +1002,11 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                 lblIcms.setText(Double.toString(icms1));
                 lblIss.setText(Double.toString(iss2));
                 lblIpi.setText(Double.toString(ipi2));
-                lblDataEntrega.setText(dao.resultSet.getString("dataVenda"));
-                lblDataSolicitacao.setText(dao.resultSet.getString("dataVenda"));
+                lblDataEntrega.setText(dao.resultSet.getString("dataEntrega"));
+                lblDataSolicitacao.setText(dao.resultSet.getString("dataSolitacao"));
                 lblDescontoGeral.setText(dao.resultSet.getString("desconto"));
                 lblCodVendedor.setText(dao.resultSet.getString("codigoFuncionario"));
-                txtCodOrdem.setText(dao.resultSet.getString("codigoVenda"));
+                txtCodOrdem.setText(dao.resultSet.getString("codigoOrdem"));
                 lblFKfuncionario.setText(dao.resultSet.getString("FKfuncionario"));
                 lblTipoPag.setText(dao.resultSet.getString("tipoPagamento"));
 
@@ -1044,6 +1050,25 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         jTable2.getColumnModel().getColumn(14).setResizable(false);
         jTable2.getColumnModel().getColumn(15).setPreferredWidth(50);
         jTable2.getColumnModel().getColumn(15).setResizable(false);
+        jTable2.getColumnModel().getColumn(16).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
+        jTable2.getColumnModel().getColumn(16).setResizable(true);  // não permite alterar o tamanho da coluna
+        jTable2.getColumnModel().getColumn(17).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(17).setResizable(false);
+        jTable2.getColumnModel().getColumn(18).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(18).setResizable(false);
+        jTable2.getColumnModel().getColumn(19).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(19).setResizable(false);
+        jTable2.getColumnModel().getColumn(20).setPreferredWidth(80);
+        jTable2.getColumnModel().getColumn(20).setResizable(false);
+        jTable2.getColumnModel().getColumn(21).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(21).setResizable(false);
+        jTable2.getColumnModel().getColumn(22).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
+        jTable2.getColumnModel().getColumn(22).setResizable(true);  // não permite alterar o tamanho da coluna
+        jTable2.getColumnModel().getColumn(23).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(23).setResizable(false);
+        jTable2.getColumnModel().getColumn(24).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(24).setResizable(false);
+        
 
         jTable2.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
