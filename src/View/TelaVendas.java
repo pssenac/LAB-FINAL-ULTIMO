@@ -39,7 +39,8 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     boolean txt;
     String text;
     ArrayList dadosVendas = new ArrayList();
-
+    double x = 0, z, vl, vl2, icms1, icms, iss1, iss2, ipi1, ipi2;
+    
     /**
      * Creates new form TelaOrdemServico
      */
@@ -627,11 +628,10 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         vendaProdutosController vd = new vendaProdutosController();
 
         preencherTabela2(a, txtQtdVenda.getText(), txtDescontoVenda.getText(), b, lblValorParcial.getText(), c, d, e, f);
-        
-        
+
         vendas.add(vd.preencherArray(a, txtQtdVenda.getText(), txtDescontoVenda.getText(), b, lblValorParcial.getText(), c, d, e, f));
-        vendaProdutos.add(vd.preencherCarrinho(h, txtQtdVenda.getText(), txtDescontoVenda.getText(), lblValorParcial.getText()
-                , lbloCodVenda.getText()));
+        vendaProdutos.add(vd.preencherCarrinho(h, txtQtdVenda.getText(), txtDescontoVenda.getText(), lblValorParcial.getText(),
+                 lbloCodVenda.getText()));
         Limpar1();
     }//GEN-LAST:event_btnAddProdutoActionPerformed
 
@@ -644,7 +644,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         e = (jTable2.getValueAt(linhaSelecionada, 7).toString());
         f = (jTable2.getValueAt(linhaSelecionada, 10).toString());
         h = (jTable2.getValueAt(linhaSelecionada, 11).toString());
-        
+
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed
@@ -659,7 +659,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         lbl2.setText(jTable29.getValueAt(linhaSelecionada, 1).toString());
         lbl3.setText(jTable29.getValueAt(linhaSelecionada, 2).toString());
         lbl4.setText(jTable29.getValueAt(linhaSelecionada, 3).toString());
-        lbl5.setText(jTable29.getValueAt(linhaSelecionada, 4).toString());       
+        lbl5.setText(jTable29.getValueAt(linhaSelecionada, 4).toString());
         lbl9.setText(jTable29.getValueAt(linhaSelecionada, 8).toString());
     }//GEN-LAST:event_jTable29MouseClicked
 
@@ -688,22 +688,22 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         vendaProdutosController vndP = new vendaProdutosController();
         DAO dao = new DAO();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Date agr = new Date();
-        tipoPagamento();
+        Date agr = new Date();       
         String codvend = dao.buscarFuncionario(txtCodigoVendedor.getText());
         if (codvend.equals(null)) {
             JOptionPane.showMessageDialog(null, "insira um codigo valido");
 
         } else {
-
-            vndP.salvarVenda(txtDescontoVendaServico.getText(), tp, df.format(agr), "", "0", "1", "1",
-                    "1", codvend, lbloCodVenda.getText(), txtCodigoVendedor.getText());
+            tipoPagamento();
+            vndP.salvarVenda(txtDescontoVendaServico.getText(), tp, df.format(agr), "", "0", lblIcms.getText(), lblIss.getText(),
+                    lblIpi.getText(), codvend, lbloCodVenda.getText(), txtCodigoVendedor.getText(), lblValorTotal.getText());
 
             for (int i = 0; i < vendaProdutos.size(); i++) {
-                vndP.salvarLoteVenda(vendaProdutos.get(i).getFkLoteVendas(), vendaProdutos.get(i).getQtd(),vendaProdutos.get(i).getDescontoItemVendProduto(),
-                        vendaProdutos.get(i).getValorParcialVendProduto(), 
-                         lbloCodVenda.getText());
+                vndP.salvarLoteVenda(vendaProdutos.get(i).getFkLoteVendas(), vendaProdutos.get(i).getQtd(), vendaProdutos.get(i).getDescontoItemVendProduto(),
+                        vendaProdutos.get(i).getValorParcialVendProduto(),
+                        lbloCodVenda.getText());
             }
+            JOptionPane.showMessageDialog(null, "Operação realizada com sucesso");
         }
     }//GEN-LAST:event_btnFinalizarVendaActionPerformed
 
@@ -767,13 +767,29 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
     }
 
-    public void preencherTabela2(String produto, String qtd, String desconto, String vlUnitario, String vlParcial, String icms, String iss, String ipi, String idLote) {
+    public void preencherTabela2(String produto, String qtd, String desconto, String vlUnitario, String vlParcial, String icmsx, String issx, String ipix, String idLote) {
         //Calcular valores
         //calcular impostos
         String[] colunas = new String[]{"Produto", "Quantidade", "Desconto", "Valor Unitário", "Valor", "icsm", "iss", "ipi", "idLote"};
         try {
-            dadosVendas.add(new Object[]{produto, qtd, desconto, vlUnitario, vlParcial, icms, iss, ipi, idLote});
+            dadosVendas.add(new Object[]{produto, qtd, desconto, vlUnitario, vlParcial, icmsx, issx, ipix, idLote});
 
+             x = Double.parseDouble(vlParcial);
+                z += x;
+                vl2 = Double.parseDouble(desconto);
+                //z = z - (z * vl2 / 100);
+                icms = Double.parseDouble(icmsx);
+                icms1 += icms;
+                iss1 = Double.parseDouble(issx);
+                iss2 += iss1;
+                ipi1 = Double.parseDouble(ipix);
+                ipi2 += ipi1;
+                
+                lblIcms.setText(Double.toString(icms1));
+                lblIss.setText(Double.toString(iss2));
+                lblIpi.setText(Double.toString(ipi2));
+                lblValorTotal.setText(Double.toString(z));
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -834,21 +850,42 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     public void tipoPagamento() {
         if (cbD.isSelected()) {
             tp = "1";
-            panelTipoPag.setEnabled(true);
+            txtDinheiro.setEnabled(true);
+            txtTroco.setEnabled(true);
+            txtCartao.setEnabled(false);
+        } else {
+            tp = "0";
+            txtDinheiro.setEnabled(false);
+            txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
         }
         if (cbCC.isSelected()) {
             tp = "2";
-
+            txtDinheiro.setEnabled(false);
+            txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
         }
         if (cbCD.isSelected()) {
             tp = "3";
-
+            txtDinheiro.setEnabled(false);
+            txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
         }
         if (cbD.isSelected() && cbCC.isSelected() || cbD.isSelected() && cbCD.isSelected()) {
             tp = "1";
-            panelTipoPag.setEnabled(true);
+            txtDinheiro.setEnabled(true);
+            txtTroco.setEnabled(true);
+            txtCartao.setEnabled(true);
         }
-
+        if (cbD.isSelected() && cbCC.isSelected() && cbCD.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Opção inválida");
+            cbD.setSelected(false);
+            cbCC.setSelected(false);
+            cbCD.setSelected(false);
+            txtDinheiro.setEnabled(false);
+            txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
     }
 
     //</editor-fold>
@@ -861,6 +898,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         try {
 
             dados.add(new Object[]{"", "", "", "", "", "", "", ""});
+            dados.removeAll(dados);
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex + "Ñ DEU");

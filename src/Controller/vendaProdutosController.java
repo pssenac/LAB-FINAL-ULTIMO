@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 public class vendaProdutosController {
 
-    public void salvarVenda(String a, String b, String c, String d, String e, String f, String g, String h, String i, String j, String k) {
+    public void salvarVenda(String a, String b, String c, String d, String e, String f, String g, String h, String i, String j, String k, String l) {
         DAO dao = new DAO();
 
         dao.VendaCarrinho.setDesconto(a);
@@ -22,8 +22,9 @@ public class vendaProdutosController {
         dao.VendaCarrinho.setFKfuncionario(i);
         dao.VendaCarrinho.setCodVenda(j);
         dao.VendaCarrinho.setCodFuncionário(k);
+        dao.VendaCarrinho.setValorTotal(l);
 
-        JOptionPane.showMessageDialog(null, dao.Atualizarvendas(DAO.INCLUSAOVENDA));
+       dao.Atualizarvendas(DAO.INCLUSAOVENDA);
     }
 
     public void salvarLoteVenda(String a2, String b, String c, String d, String e) {

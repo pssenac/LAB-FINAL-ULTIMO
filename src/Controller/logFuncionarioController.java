@@ -11,7 +11,7 @@ public class logFuncionarioController {
             String rgFuncionario,  String telFuncionario,  String celFuncionario,  String emailFuncionario,  
             String dataNascFuncionario,String cep, String bairro, String logradouro, 
             String complemento, String numero, String cidade, String estado,String loginUsuario, 
-            int perfilUsuario, String SenhaUsuario,String confirmacaoSenhaUsuario ){
+            int perfilUsuario, String SenhaUsuario,String confirmacaoSenhaUsuario,int situacao ){
         
         DAO dao = new DAO();
         dao.funcionario.setNomeFuncionario(nomeFuncionario);
@@ -43,7 +43,7 @@ public class logFuncionarioController {
         dao.usuario.setPerfilUsuario(perfilUsuario);
         dao.usuario.setSenhaUsuario(SenhaUsuario);
         dao.usuario.setConfirmacaoSenhaUsuario(confirmacaoSenhaUsuario);
-        
+         dao.usuario.setSituacao(situacao);
    
          String msgInclusao = dao.atualizarFuncionarioUsuario(DAO.INCLUSAOFUNCIONARIO);
         return msgInclusao;
@@ -53,7 +53,7 @@ public class logFuncionarioController {
             String rgFuncionario,  String telFuncionario,  String celFuncionario,  String emailFuncionario,  
             String dataNascFuncionario,String cep, String bairro, String logradouro, 
             String complemento, String numero, String cidade, String estado, 
-            String loginUsuario, int perfilUsuario, String SenhaUsuario, String confirmacaoSenhaUsuario ){
+            String loginUsuario, int perfilUsuario, String SenhaUsuario, String confirmacaoSenhaUsuario, int situacao ){
         DAO dao = new DAO();
         
        
@@ -89,7 +89,7 @@ public class logFuncionarioController {
         dao.usuario.setPerfilUsuario(perfilUsuario);
         dao.usuario.setSenhaUsuario(SenhaUsuario);
         dao.usuario.setConfirmacaoSenhaUsuario(confirmacaoSenhaUsuario);
-     
+        dao.usuario.setSituacao(situacao);
        
         String msgInclusao = dao.atualizarFuncionarioUsuario(DAO.ALTERACAOFUNCIONARIO);
         return msgInclusao;

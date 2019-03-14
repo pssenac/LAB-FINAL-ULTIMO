@@ -10,9 +10,15 @@ import Controller.ModeloTabela;
 import Models.DAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -22,9 +28,19 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
     int aux;
     String sql = "";
+    public DAO DAO;
+    public ClienteController cli;
 
     public ListasVendas_Compras_Ordem() {
         initComponents();
+
+        cli = new ClienteController();
+        if (!cli.logarBD()) {
+            JOptionPane.showMessageDialog(null, "Falha ao conectar, o sistema será fechado");
+            System.exit(0);
+        }
+
+        DAO = new DAO();
 
     }
 
@@ -63,6 +79,11 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jLista);
 
         BtnPDF.setText("PDF");
+        BtnPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPDFActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("Período :");
@@ -203,29 +224,23 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
             case 1:
 
                 LimparTabela();
-                
-                
-                
-               String frm = "  /  /    ";
-                
-                if (txtData2.getText().equals(frm) ) {
-                    
-                   
+                txtData2.grabFocus();
+
+                String frm = "  /  /    ";
+
+                if (txtData2.getText().equals(frm)) {
+
                     String A = txtData1.getText().substring(0, 2);
                     String B = txtData1.getText().substring(3, 5);
                     String C = txtData1.getText().substring(6, 10);
                     String data1 = C + "-" + B + "-" + A;
 
-                   
-                    
                     sql = "SELECT * FROM vendas inner join lotevendas on FKvendas = codVenda "
                             + "inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos "
                             + "where dataVenda = '" + data1 + "'";
                     preencherTabela1(sql);
-                    
-                    
 
-                } else if ( !txtData1.getText().equals(frm) && !frm.equals(txtData2.getText()) ){
+                } else if (!txtData1.getText().equals(frm) && !frm.equals(txtData2.getText())) {
 
                     String A = txtData1.getText().substring(0, 2);
                     String B = txtData1.getText().substring(3, 5);
@@ -236,14 +251,10 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
                     String E = txtData2.getText().substring(3, 5);
                     String F = txtData2.getText().substring(6, 10);
                     String data2 = F + "-" + E + "-" + D;
-                    
-                    
-                     
 
-                     String sql ="SELECT * FROM `lotevendas` INNER JOIN vendas on codVenda = FKvendas INNER JOIN lote on idLote = "
-                             + "FKlote INNER join produtos on idprodutos = FKprodutos WHERE dataVenda BETWEEN '" + data1 + "' and '" + data2 + "'";
-                    
-                    
+                    String sql = "SELECT * FROM `lotevendas` INNER JOIN vendas on codVenda = FKvendas INNER JOIN lote on idLote = "
+                            + "FKlote INNER join produtos on idprodutos = FKprodutos WHERE dataVenda BETWEEN '" + data1 + "' and '" + data2 + "'";
+
                     preencherTabela1(sql);
 
                 }
@@ -261,6 +272,53 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnPesquisListaActionPerformed
 
+    private void BtnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPDFActionPerformed
+        try {
+
+            String A = txtData1.getText().substring(0, 2);
+            String B = txtData1.getText().substring(3, 5);
+            String C = txtData1.getText().substring(6, 10);
+            String data1 = C + "-" + B + "-" + A;
+            String frm = "  /  /    ";
+
+            if (txtData2.getText().equals(frm)) {
+
+                DAO.executaSQL("select * from vendas inner join lotevendas on FKvendas = codVenda inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos WHERE dataVenda ='" + data1 + "'");
+                JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
+                JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/04513422165/Desktop/PJSENAC/LAB-FINAL-ULTIMO/src/Relatorios/relatoriosVendas.jasper", new HashMap(), relatResul);
+                JasperViewer jv = new JasperViewer(jpPrint,false);
+           
+                jv.setVisible(true);
+
+            } else if (!txtData1.getText().equals(frm) && !frm.equals(txtData2.getText())) {
+
+                String J = txtData1.getText().substring(0, 2);
+                String Q = txtData1.getText().substring(3, 5);
+                String P = txtData1.getText().substring(6, 10);
+                String dt1 = P + "-" + Q + "-" + J;
+
+                String D = txtData2.getText().substring(0, 2);
+                String E = txtData2.getText().substring(3, 5);
+                String F = txtData2.getText().substring(6, 10);
+                String data2 = F + "-" + E + "-" + D;
+
+                DAO.executaSQL("select * from vendas inner join lotevendas on FKvendas = codVenda inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos WHERE dataVenda BETWEEN '" + dt1 + "' and '" + data2 + "'");
+                JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
+                JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/04513422165/Desktop/PJSENAC/LAB-FINAL-ULTIMO/src/Relatorios/relatoriosVendas.jasper", new HashMap(), relatResul);
+                JasperViewer jv = new JasperViewer(jpPrint,false);
+               
+                jv.setVisible(true);
+                
+                
+            }
+
+        } catch (JRException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio!\nErro:" + ex);
+
+        }
+
+    }//GEN-LAST:event_BtnPDFActionPerformed
+
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA LISTAR VENDAS">
     public void preencherTabela1(String SQL) {
         DAO dao = new DAO();
@@ -270,13 +328,12 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         try {
             dao.resultSet.first();
             do {
-                
-                    String A = dao.resultSet.getString("dataVenda").substring(0, 4);
-                    String B = dao.resultSet.getString("dataVenda").substring(5, 7);
-                    String C = dao.resultSet.getString("dataVenda").substring(8, 10);
-                    String dataC = C + "/" + B + "/" + A;
-                
-                
+
+                String A = dao.resultSet.getString("dataVenda").substring(0, 4);
+                String B = dao.resultSet.getString("dataVenda").substring(5, 7);
+                String C = dao.resultSet.getString("dataVenda").substring(8, 10);
+                String dataC = C + "/" + B + "/" + A;
+
                 dados.add(new Object[]{dao.resultSet.getString("codVenda"), dataC, dao.resultSet.getString("nomeProduto"),
                     dao.resultSet.getString("qtd"), dao.resultSet.getString("valorParcial"), dao.resultSet.getString("codigoVenda")});
             } while (dao.resultSet.next());
@@ -431,22 +488,15 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         jLista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
     }
     //</editor-fold>
-    
-    
+
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA LISTAR VENDAS">
     public void LimparTabela() {
         DAO dao = new DAO();
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"cod", "dataVenda", "nomeProduto", "qtd", "valorParcial", "coVenda"};
-   
-           
-                
-                dados.add(new Object[]{"", "", "", "", "", ""});
-                dados.removeAll(dados);
-                
-            
-       
-        
+
+        dados.add(new Object[]{"", "", "", "", "", ""});
+        dados.removeAll(dados);
 
         ModeloTabela model = new ModeloTabela(dados, colunas);
         jLista.setModel(model);
@@ -469,7 +519,6 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         jLista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
     }
     //</editor-fold>
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

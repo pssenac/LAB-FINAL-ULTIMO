@@ -28,8 +28,8 @@ public class FornecedorController {
         dao.endereco.setEstado(estado);
         dao.endereco.setLogradouro(logradouro);
         dao.endereco.setNumero(numero);
-         JOptionPane.showMessageDialog(null, dao.atualizarFornecedor(DAO.INCLUSAOFORNECEDOR));
-        String msgInclusao = "";
+        String msgInclusao =  dao.atualizarFornecedor(DAO.INCLUSAOFORNECEDOR);
+        
         return msgInclusao;
     }
 

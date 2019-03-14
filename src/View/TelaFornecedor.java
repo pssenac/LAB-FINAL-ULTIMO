@@ -554,7 +554,6 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
 
         boolean cnpj = DAO.pesquisaCnpj(txtCpfCnpj.getText());
-        JOptionPane.showMessageDialog(null, cnpj);
 
         switch (vd) {
 
