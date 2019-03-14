@@ -519,14 +519,15 @@ public class DAO {
                     String FKfcn = fk2.getString("idfuncionario");
 
                     // USUARIO
-                    sql = "insert into usuario values(null,?,?,?,?,?)";
+                    sql = "insert into usuario values(null,?,?,?,?,?,?)";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
                     statement.setString(1, usuario.getLoginUsuario());
                     statement.setInt(2, usuario.getPerfilUsuario());
                     statement.setString(3, usuario.getSenhaUsuario());
                     statement.setString(4, usuario.getConfirmacaoSenhaUsuario());
-                    statement.setString(5, FKfcn);
+                    statement.setInt(5, usuario.getSituacao());
+                    statement.setString(6, FKfcn);
 
                     statement.executeUpdate();
                     statement.close();
@@ -575,15 +576,15 @@ public class DAO {
                     statement.executeUpdate();
 
                     sql = "update usuario set  login = ?,  perfil= ?,"
-                            + "  senha = ?,  confiSenha = ? where idUsuario= ?";
+                            + "  senha = ?,  confiSenha = ?  situação = ? where idUsuario= ?";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
-                    statement.setString(5, cvf);
+                    statement.setString(6, cvf);
                     statement.setString(1, usuario.getLoginUsuario());
                     statement.setInt(2, usuario.getPerfilUsuario());
                     statement.setString(3, usuario.getSenhaUsuario());
                     statement.setString(4, usuario.getConfirmacaoSenhaUsuario());
-
+                    statement.setInt(5, usuario.getSituacao());
                     statement.executeUpdate();
 
                     statement.close();
