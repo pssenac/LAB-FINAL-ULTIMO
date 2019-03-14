@@ -960,7 +960,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         }
         //</editor-fold>
          
-   //<editor-fold defaultstate="collapsed" desc=" MÉTODO CAMPOS VAZIOS ">
+    //<editor-fold defaultstate="collapsed" desc=" MÉTODO CAMPOS VAZIOS ">
     public boolean VerificarCamposVazios() {
         if (txtNomeFuncionario.getText().equals("")) {
             a = true;
@@ -971,16 +971,14 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         if (txtRgFuncionario.getText().equals("")) {
             a = true;
         }
-        if (txtCelFuncionario.getText().equals("") && txtTelFuncionario.getText().equals("")) {
+        if (txtTelFuncionario.getText().equals("")) {
             a = true;
         }
         
          if (txtDataNasc.getText().equals("")) {
             a = true;
         }
-        
-        
-    
+       
         
         if (txtCepFuncionario.getText().equals("")) {
             a = true;
