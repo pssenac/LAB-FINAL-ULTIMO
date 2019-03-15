@@ -40,7 +40,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     String text;
     ArrayList dadosVendas = new ArrayList();
     double x = 0, z, vl, vl2, icms1, icms, iss1, iss2, ipi1, ipi2;
-    
+
     /**
      * Creates new form TelaOrdemServico
      */
@@ -627,12 +627,20 @@ public class TelaVendas extends javax.swing.JInternalFrame {
 
         vendaProdutosController vd = new vendaProdutosController();
 
+        boolean vf = verificarQtd(f);
+        if(vf){
+            
+        
+
         preencherTabela2(a, txtQtdVenda.getText(), txtDescontoVenda.getText(), b, lblValorParcial.getText(), c, d, e, f);
 
         vendas.add(vd.preencherArray(a, txtQtdVenda.getText(), txtDescontoVenda.getText(), b, lblValorParcial.getText(), c, d, e, f));
         vendaProdutos.add(vd.preencherCarrinho(h, txtQtdVenda.getText(), txtDescontoVenda.getText(), lblValorParcial.getText(),
-                 lbloCodVenda.getText()));
+                lbloCodVenda.getText()));
         Limpar1();
+        }else {
+            JOptionPane.showMessageDialog(null, "a quantidade de itens é superior á do Estoque");
+        }
     }//GEN-LAST:event_btnAddProdutoActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
@@ -688,7 +696,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         vendaProdutosController vndP = new vendaProdutosController();
         DAO dao = new DAO();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Date agr = new Date();       
+        Date agr = new Date();
         String codvend = dao.buscarFuncionario(txtCodigoVendedor.getText());
         if (codvend.equals(null)) {
             JOptionPane.showMessageDialog(null, "insira um codigo valido");
@@ -774,22 +782,22 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         try {
             dadosVendas.add(new Object[]{produto, qtd, desconto, vlUnitario, vlParcial, icmsx, issx, ipix, idLote});
 
-             x = Double.parseDouble(vlParcial);
-                z += x;
-                vl2 = Double.parseDouble(desconto);
-                //z = z - (z * vl2 / 100);
-                icms = Double.parseDouble(icmsx);
-                icms1 += icms;
-                iss1 = Double.parseDouble(issx);
-                iss2 += iss1;
-                ipi1 = Double.parseDouble(ipix);
-                ipi2 += ipi1;
-                
-                lblIcms.setText(Double.toString(icms1));
-                lblIss.setText(Double.toString(iss2));
-                lblIpi.setText(Double.toString(ipi2));
-                lblValorTotal.setText(Double.toString(z));
-            
+            x = Double.parseDouble(vlParcial);
+            z += x;
+            vl2 = Double.parseDouble(desconto);
+            //z = z - (z * vl2 / 100);
+            icms = Double.parseDouble(icmsx);
+            icms1 += icms;
+            iss1 = Double.parseDouble(issx);
+            iss2 += iss1;
+            ipi1 = Double.parseDouble(ipix);
+            ipi2 += ipi1;
+
+            lblIcms.setText(Double.toString(icms1));
+            lblIss.setText(Double.toString(iss2));
+            lblIpi.setText(Double.toString(ipi2));
+            lblValorTotal.setText(Double.toString(z));
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -972,6 +980,18 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     }
 
     //</editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="PesquisaQtd1">
+    public boolean verificarQtd(String id) {
+       /* DAO dao = new DAO();
+        String aux = Integer.parseInt(dao.PesquisaEstoque(id));
+        if (aux > Integer.parseInt(txtQtdVenda.getText())) {
+            JOptionPane.showMessageDialog(null, "o numero de quantidades do Produto é superior ao numero de estoque");
+            return false;
+        }
+        return true;
+    */ return true;}
+    //</editor-fold>
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduto;
     private javax.swing.JButton btnCancelar;

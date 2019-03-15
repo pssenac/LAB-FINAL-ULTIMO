@@ -790,19 +790,21 @@ public class DAO {
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR VENDAS ">
-    public String PesquisaFuncionario(String CodVend) {
+    
+    
+    public String PesquisaEstoque(String CodVend) {
         String fk;
         men = "Operação realizada com sucesso!";
         try {
-            String sql = "select * from funcionario where codigoFuncionarios = ?";
+            String sql = "select * from lote where FKprodutos = ?";
             bd.getConnection();
             statement = bd.connection.prepareStatement(sql);
             statement.setString(1, CodVend);
             resultSet = statement.executeQuery();
-            resultSet.getString("idFuncionario");
-            JOptionPane.showMessageDialog(null, resultSet.getString("idFuncionario"));
+            resultSet.getString("qtdEstoque");
+            JOptionPane.showMessageDialog(null, resultSet.getString("qtdEstoque"));
 
-            return resultSet.getString("idFuncionario");
+            return resultSet.getString("qtdEstoque");
         } catch (SQLException erro) {
 
         }
