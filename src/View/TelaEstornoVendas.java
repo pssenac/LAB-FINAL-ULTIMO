@@ -12,7 +12,10 @@ import Models.TabelaModelo2;
 import Models.Venda;
 import Models.VendaProdutos;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -29,6 +32,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     ArrayList<Venda> vendas = new ArrayList<>();
     ArrayList dadosVendas = new ArrayList();
     ArrayList<VendaProdutos> vendaProdutos = new ArrayList<>();
+    ArrayList<VendaProdutos> vendaProdutos2 = new ArrayList<>();
 
     public TelaEstornoVendas() {
         initComponents();
@@ -45,7 +49,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         txtCodVenda = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -87,16 +91,16 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jLabel29 = new javax.swing.JLabel();
         lblValorServico2 = new javax.swing.JLabel();
         cbD1 = new javax.swing.JCheckBox();
-        jButton2 = new javax.swing.JButton();
+        btnEstorno = new javax.swing.JButton();
         jLabel41 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtObservacao = new javax.swing.JTextArea();
         lbltipoPag = new javax.swing.JLabel();
         lblestorno = new javax.swing.JLabel();
         lblFKfuncionario = new javax.swing.JLabel();
         lblCodfuncionario = new javax.swing.JLabel();
         lblCodvenda = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblCodigoFunc = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         lbl1 = new javax.swing.JLabel();
         lbl2 = new javax.swing.JLabel();
@@ -112,13 +116,13 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("Código de Venda :");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisa3.png"))); // NOI18N
-        jButton1.setMaximumSize(new java.awt.Dimension(30, 30));
-        jButton1.setMinimumSize(new java.awt.Dimension(30, 30));
-        jButton1.setPreferredSize(new java.awt.Dimension(30, 30));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisa3.png"))); // NOI18N
+        btnPesquisar.setMaximumSize(new java.awt.Dimension(30, 30));
+        btnPesquisar.setMinimumSize(new java.awt.Dimension(30, 30));
+        btnPesquisar.setPreferredSize(new java.awt.Dimension(30, 30));
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPesquisarActionPerformed(evt);
             }
         });
 
@@ -400,20 +404,20 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         cbD1.setText("Dinheiro");
         cbD1.setEnabled(false);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estornoVenda.png"))); // NOI18N
-        jButton2.setText("Gerar Estorno");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnEstorno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estornoVenda.png"))); // NOI18N
+        btnEstorno.setText("Gerar Estorno");
+        btnEstorno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnEstornoActionPerformed(evt);
             }
         });
 
         jLabel41.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel41.setText("Observação/Motivo :");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        txtObservacao.setColumns(20);
+        txtObservacao.setRows(5);
+        jScrollPane3.setViewportView(txtObservacao);
 
         lbltipoPag.setText("jLabel2");
 
@@ -425,7 +429,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
         lblCodvenda.setText("jLabel2");
 
-        jLabel2.setText("jLabel2");
+        lblCodigoFunc.setText("jLabel2");
 
         btnCancelar.setText("Remover item");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -458,7 +462,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCodVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -481,7 +485,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                                                 .addGap(18, 18, 18)
                                                 .addComponent(lblCodvenda)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jLabel2))
+                                                .addComponent(lblCodigoFunc))
                                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -506,7 +510,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(cbCD1))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton2)
+                                        .addComponent(btnEstorno)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnCancelar))
                                     .addGroup(layout.createSequentialGroup()
@@ -544,7 +548,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCodVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -581,7 +585,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                         .addGap(56, 56, 56)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
+                        .addComponent(btnEstorno)
                         .addComponent(btnCancelar))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
@@ -591,7 +595,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                     .addComponent(lblFKfuncionario)
                     .addComponent(lblCodfuncionario)
                     .addComponent(lblCodvenda)
-                    .addComponent(jLabel2))
+                    .addComponent(lblCodigoFunc))
                 .addGap(176, 176, 176)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl1)
@@ -606,7 +610,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
 
         sql = "select * from vendas inner join lotevendas on codVenda = FKvendas "
                 + "inner join lote on FKlote = idLote "
@@ -628,14 +632,32 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         }
 
         // preencherTabela2(dadosVendas);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+    private void btnEstornoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstornoActionPerformed
+        vendaProdutosController vndP = new vendaProdutosController();
+        DAO dao = new DAO();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date agr = new Date();
+       // String codvend = dao.buscarFuncionario(txtCodigoVendedor.getText());
+      //  if (codvend.equals(null)) {
+       //     JOptionPane.showMessageDialog(null, "insira um codigo valido");
 
-        JOptionPane.showMessageDialog(null, dadosVendas.get(2));
+      //  } else {
+      
+            tipoPagamento();
+            vndP.salvarVenda(lblDescontoGeral.getText(), tp, lblDataVenda.getText(), txtObservacao.getText(), txtCodVenda.getText(), lblIcms.getText(), lblIss.getText(),
+                    lblIpi.getText(), lblFKfuncionario.getText(), txtCodVenda.getText(), lblCodfuncionario.getText(), lblValorTotal.getText());
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+            for (int i = 0; i < vendaProdutos2.size(); i++) {
+                vndP.salvarLoteVenda(vendaProdutos2.get(i).getFkLoteVendas(), vendaProdutos2.get(i).getQtd(), vendaProdutos2.get(i).getDescontoItemVendProduto(),
+                        vendaProdutos2.get(i).getValorParcialVendProduto(),
+                       txtCodVenda.getText());
+         //   }
+            JOptionPane.showMessageDialog(null, "Operação realizada com sucesso");
+        }
+
+    }//GEN-LAST:event_btnEstornoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 
@@ -676,9 +698,9 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"Produto", "Descrição", "Valor Unitário", "QTD", "Desconto", "Valor",
             "DescontoVenda", "TipoPagamento", "Icms", "Iss", "Ipi", "Data", "Observacao", "FKfuncionario", "codigoVenda", "codigoFuncionario"};
-        
-        String[] colunas2 = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto","Icms","ISS","IPI", "FKfuncionario", "idLote"};
-        
+
+        String[] colunas2 = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "Icms", "ISS", "IPI", "FKfuncionario", "idLote"};
+
         dao.executaSQL(SQL);
         try {
             dao.resultSet.first();
@@ -696,6 +718,9 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                 vendaProdutos.add(vd.preencherCarrinho(dao.resultSet.getString("FKlote"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
                         dao.resultSet.getString("valorParcial"), dao.resultSet.getString("codigoVenda")));
 
+                vendaProdutos2.add(vd.preencherCarrinho(dao.resultSet.getString("FKlote"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
+                        dao.resultSet.getString("valorParcial"), dao.resultSet.getString("codigoVenda")));
+                
                 dados.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorVenda"),
                     dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial"),
                     dao.resultSet.getString("desconto"), dao.resultSet.getString("tipoPagamento"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"),
@@ -714,7 +739,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                 ipi2 += ipi1;
 
                 lblValor.setText(Double.toString(z));
-                lblValorTotal.setText(Double.toString(vl));
+                lblValorTotal.setText(Double.toString(vl*(-1)));
                 lblIcms.setText(Double.toString(icms1));
                 lblIss.setText(Double.toString(iss2));
                 lblIpi.setText(Double.toString(ipi2));
@@ -799,19 +824,17 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     }
 
     //</editor-fold>
-    
 //(String produto, String qtd, String desconto, String vlUnitario, String vlParcial, String icms, String iss, String ipi, String idLote)
-    
     // <editor-fold defaultstate="collapsed" desc="preencher tabela 2">   
     public void preencherTabela2(String produto, String qtd, String desconto, String vlUnitario, String vlParcial, String icmsx, String issx, String ipix, String idLote) {
         //Calcular valores
         //calcular impostos
-       
-        String[] colunas = new String[]{"Produto", "Quantidade", "Desconto", "Valor Unitário", "Valor", "icsm", "iss", "ipi", "idLote"};
-        try {
-            dadosVendas.add(new Object[]{produto, qtd, desconto, vlUnitario, vlParcial, icmsx, issx, ipix, idLote});
 
-            xl= Double.parseDouble(vlParcial);
+        String[] colunas = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "Valor", "icsm", "iss", "ipi", "idLote"};
+        try {
+            dadosVendas.add(new Object[]{produto, vlUnitario, qtd, desconto, vlParcial, icmsx, issx, ipix, idLote});
+
+            xl = Double.parseDouble(vlParcial);
             zl += xl;
             vl2l = Double.parseDouble(desconto);
             //z = z - (z * vl2 / 100);
@@ -859,9 +882,8 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     }
     //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="preencher tabela 2">
-    
-    //</editor-fold>
 
+    //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Tipo Pagamento">
     public void tipoPagamento() {
         if (cbD.isSelected()) {
@@ -942,21 +964,20 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="JAVA - do not modify"> 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEstorno;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JCheckBox cbCC;
     private javax.swing.JCheckBox cbCC1;
     private javax.swing.JCheckBox cbCD;
     private javax.swing.JCheckBox cbCD1;
     private javax.swing.JCheckBox cbD;
     private javax.swing.JCheckBox cbD1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -976,7 +997,6 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable29;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl2;
     private javax.swing.JLabel lbl3;
@@ -984,6 +1004,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbl5;
     private javax.swing.JLabel lbl6;
     private javax.swing.JLabel lblCodfuncionario;
+    private javax.swing.JLabel lblCodigoFunc;
     private javax.swing.JLabel lblCodvenda;
     private javax.swing.JLabel lblDataVenda;
     private javax.swing.JLabel lblDescontoGeral;
@@ -1002,6 +1023,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblestorno;
     private javax.swing.JLabel lbltipoPag;
     private javax.swing.JTextField txtCodVenda;
+    private javax.swing.JTextArea txtObservacao;
     // End of variables declaration//GEN-END:variables
 //</editor-fold>
 }
