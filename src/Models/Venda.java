@@ -119,7 +119,7 @@ public class Venda {
     }
 
     
-    private String  a,b,c,d,e,f,g,h,j;
+    private String  a,b,c,d,e,f,g,h,j,i;
 
     /**
      * @return the j
@@ -133,6 +133,20 @@ public class Venda {
      */
     public void setJ(String j) {
         this.j = j;
+    }
+
+    /**
+     * @return the i
+     */
+    public String getI() {
+        return i;
+    }
+
+    /**
+     * @param i the i to set
+     */
+    public void setI(String i) {
+        this.i = i;
     }
     
     
