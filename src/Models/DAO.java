@@ -75,7 +75,6 @@ public class DAO {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc=" EXECUTAR SQL "> 
     public void executaSQL(String sql) {
         try {
@@ -276,13 +275,13 @@ public class DAO {
         }
         return autenticado;
     }
-    
-    public String BuscarIdcli(String cpf){
+
+    public String BuscarIdcli(String cpf) {
         String aux = "";
         try {
             sql = "select * from cliente where cpf= ?";
             bd.getConnection();
-            statement = bd.connection.prepareStatement(sql);            
+            statement = bd.connection.prepareStatement(sql);
             statement.setString(1, cpf);
             ResultSet nome = statement.executeQuery();
             nome.next();
@@ -293,11 +292,10 @@ public class DAO {
             JOptionPane.showMessageDialog(null, erro);
         }
         return aux;
-              
+
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR FORNECEDOR ">
     public void carregarTabela2() {
         String sql = "select * from fornecedor";
@@ -462,7 +460,6 @@ public class DAO {
     }
 
 //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR FUNCIONARIO E USUARIO">
     public String atualizarFuncionarioUsuario(int operacao) {
 
@@ -790,11 +787,8 @@ public class DAO {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR VENDAS ">
-    
-    
-    public String PesquisaEstoque(String CodVend) {
+    public int PesquisaEstoque(String CodVend) {
         String fk;
         men = "Operação realizada com sucesso!";
         try {
@@ -803,14 +797,14 @@ public class DAO {
             statement = bd.connection.prepareStatement(sql);
             statement.setString(1, CodVend);
             resultSet = statement.executeQuery();
+            resultSet.next();
             resultSet.getString("qtdEstoque");
-            JOptionPane.showMessageDialog(null, resultSet.getString("qtdEstoque"));
-
-            return resultSet.getString("qtdEstoque");
+            JOptionPane.showMessageDialog(null, resultSet.getInt(3));
+            return resultSet.getInt(3);
         } catch (SQLException erro) {
 
         }
-        return "";
+        return 0;
     }
 
     public String Atualizarvendas(int operacao) {
@@ -842,13 +836,13 @@ public class DAO {
 
                 // Inserção VendaProduto
                 case INCLUSAOVENDAPRODUTO:
-                   
+
                     sql = "select * from vendas order by codVenda desc limit 1";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
                     ResultSet fk = statement.executeQuery();
                     fk.next();
-                    
+
                     sql = "insert into lotevendas values (?,?,?,?,?,?)";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
@@ -858,6 +852,14 @@ public class DAO {
                     statement.setString(4, vendaProdutos.getDescontoItemVendProduto());
                     statement.setString(5, vendaProdutos.getValorParcialVendProduto());
                     statement.setString(6, vendaProdutos.getCodVenda());
+                    statement.executeUpdate();
+                    statement.close();
+
+                    sql = "update lote set qtdEstoque = qtdEstoque - ? where idLote = ?";
+                    bd.getConnection();
+                    statement = bd.connection.prepareStatement(sql);
+                    statement.setString(1, vendaProdutos.getQtd());
+                    statement.setString(2, vendaProdutos.getFkLoteVendas());
                     statement.executeUpdate();
                     statement.close();
 
@@ -1054,7 +1056,6 @@ public class DAO {
         return men;
     }*/
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc=" METODO LOGAR USUARIO">
     public boolean LogarUsuario(String login, String Senha) {
         boolean autenticado = false;
@@ -1081,7 +1082,7 @@ public class DAO {
         return autenticado;
     }
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc=" METODO ORDEM DE SERVIÇO">
     public String AtualizarOrdemServico(int operacao) {
         men = "Operação realizada com sucesso!";
@@ -1089,33 +1090,32 @@ public class DAO {
             switch (operacao) {
                 // Produto
                 case INCLUSAOORDEMSERVICO:
-                           
-                   
-                        sql = "insert into ordemservico values (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                        bd.getConnection();
-                        statement = bd.connection.prepareStatement(sql);
-                        statement.setString(1, ordemservico.getTipoServico());
-                        statement.setString(2, ordemservico.getValorServico());
-                        statement.setString(3, ordemservico.getDataEntrega());
-                        statement.setString(4, ordemservico.getDataSolitacao());
-                        statement.setString(5, ordemservico.getPrioridade());
-                        statement.setString(6, ordemservico.getDescricao());
-                        statement.setString(7, ordemservico.getTipoPagamento());
-                        statement.setString(8, ordemservico.getCodigoFuncionario());
-                        statement.setString(9, ordemservico.getIcms());
-                        statement.setString(10, ordemservico.getIss());
-                        statement.setString(11, ordemservico.getIpi());
-                        statement.setString(12, ordemservico.getValorTotal());
-                        statement.setString(13, ordemservico.getCpfCliente());
-                        statement.setString(14, ordemservico.getCodigoOrdem());
-                        statement.setString(15, ordemservico.getFKcliente());
-                        statement.setString(16, ordemservico.getFKfuncionario());
-                        statement.setString(17, ordemservico.getObservacao());
-                        statement.setString(18, ordemservico.getEstorno());
-                        statement.setString(19, ordemservico.getDesconto());                      
-                        statement.executeUpdate();
-                        statement.close();
-                    
+
+                    sql = "insert into ordemservico values (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    bd.getConnection();
+                    statement = bd.connection.prepareStatement(sql);
+                    statement.setString(1, ordemservico.getTipoServico());
+                    statement.setString(2, ordemservico.getValorServico());
+                    statement.setString(3, ordemservico.getDataEntrega());
+                    statement.setString(4, ordemservico.getDataSolitacao());
+                    statement.setString(5, ordemservico.getPrioridade());
+                    statement.setString(6, ordemservico.getDescricao());
+                    statement.setString(7, ordemservico.getTipoPagamento());
+                    statement.setString(8, ordemservico.getCodigoFuncionario());
+                    statement.setString(9, ordemservico.getIcms());
+                    statement.setString(10, ordemservico.getIss());
+                    statement.setString(11, ordemservico.getIpi());
+                    statement.setString(12, ordemservico.getValorTotal());
+                    statement.setString(13, ordemservico.getCpfCliente());
+                    statement.setString(14, ordemservico.getCodigoOrdem());
+                    statement.setString(15, ordemservico.getFKcliente());
+                    statement.setString(16, ordemservico.getFKfuncionario());
+                    statement.setString(17, ordemservico.getObservacao());
+                    statement.setString(18, ordemservico.getEstorno());
+                    statement.setString(19, ordemservico.getDesconto());
+                    statement.executeUpdate();
+                    statement.close();
+
                     break;
 
                 // Inserção VendaProduto
@@ -1130,7 +1130,7 @@ public class DAO {
                     sql = "insert into ordemlote values (?,?,?,?,?,?)";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
-                    statement.setString(1, fk.getString("IdServico"));                    
+                    statement.setString(1, fk.getString("IdServico"));
                     statement.setString(2, ordemProdutos.getFKlote());
                     statement.setString(3, ordemProdutos.getQtd());
                     statement.setString(4, ordemProdutos.getDesconto());
@@ -1157,7 +1157,7 @@ public class DAO {
         try {
             sql = "select * from cliente where cpf = ?";
             bd.getConnection();
-            statement = bd.connection.prepareStatement(sql);            
+            statement = bd.connection.prepareStatement(sql);
             statement.setString(1, cpf);
             ResultSet nome = statement.executeQuery();
             nome.next();
@@ -1168,13 +1168,13 @@ public class DAO {
         }
         return aux;
     }
-    
+
     public String PesquisaCliente2(String cpf) {
         String aux = "";
         try {
             sql = "select * from cliente where cpf= ?";
             bd.getConnection();
-            statement = bd.connection.prepareStatement(sql);            
+            statement = bd.connection.prepareStatement(sql);
             statement.setString(1, cpf);
             ResultSet nome = statement.executeQuery();
             nome.next();
@@ -1185,12 +1185,13 @@ public class DAO {
         }
         return aux;
     }
+
     public String PesquisaCliente3(String cpf) {
         String aux = "";
         try {
             sql = "select * from cliente where cpf= ?";
             bd.getConnection();
-            statement = bd.connection.prepareStatement(sql);            
+            statement = bd.connection.prepareStatement(sql);
             statement.setString(1, cpf);
             ResultSet nome = statement.executeQuery();
             nome.next();
@@ -1201,9 +1202,6 @@ public class DAO {
         }
         return aux;
     }
-    
+
     //</editor-fold>
-    
 }
-
-

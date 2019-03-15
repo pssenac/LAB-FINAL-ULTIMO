@@ -747,7 +747,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                     dao.resultSet.getString("qtdEstoque"), dao.resultSet.getString("situacaoProduto"), dao.resultSet.getString("idprodutos"), dao.resultSet.getString("idLote")});
             } while (dao.resultSet.next());
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex + "A tabela não foi capaz de retornar os dados");
+            JOptionPane.showMessageDialog(null, ex + "Operação Cancelada");
         }
 
         ModeloTabela model = new ModeloTabela(dados, colunas);
@@ -982,14 +982,14 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="PesquisaQtd1">
     public boolean verificarQtd(String id) {
-       /* DAO dao = new DAO();
-        String aux = Integer.parseInt(dao.PesquisaEstoque(id));
-        if (aux > Integer.parseInt(txtQtdVenda.getText())) {
+        DAO dao = new DAO();
+        int aux = dao.PesquisaEstoque(id);
+        if (aux<Integer.parseInt(txtQtdVenda.getText())) {
             JOptionPane.showMessageDialog(null, "o numero de quantidades do Produto é superior ao numero de estoque");
             return false;
         }
         return true;
-    */ return true;}
+     }
     //</editor-fold>
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

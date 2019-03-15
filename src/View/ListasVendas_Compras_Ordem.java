@@ -14,12 +14,16 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import net.sf.jasperreports.engine.JRException;
+
+/*import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
+/*
 
+
+ */
 /**
  *
  * @author 03758479100
@@ -273,7 +277,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnPesquisListaActionPerformed
 
     private void BtnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPDFActionPerformed
-        try {
+        /*        try {
 
             String A = txtData1.getText().substring(0, 2);
             String B = txtData1.getText().substring(3, 5);
@@ -316,7 +320,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio!\nErro:" + ex);
 
         }
-
+         */
     }//GEN-LAST:event_BtnPDFActionPerformed
 
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA LISTAR VENDAS">
