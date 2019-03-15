@@ -9,6 +9,15 @@ public class Usuario {
     private int perfilUsuario;
     private String SenhaUsuario;
     private String confirmacaoSenhaUsuario;
+    private int situacao;
+
+    public int getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(int situacao) {
+        this.situacao = situacao;
+    }
 
     public String getIdUsuario() {
         return idUsuario;

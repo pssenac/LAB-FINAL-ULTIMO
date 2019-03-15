@@ -21,6 +21,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     String sqlTabela=null;
     String sqlTabela2=null;
     public logFuncionarioController fc;
+    boolean a;
     
     
     int vd = 0;
@@ -44,7 +45,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         preencherTabelaFuncionario(sqlTabela);
         preencherTabelaUsuario(sqlTabela2);
         habilitaCampos(false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false);
+                    false,false,false,false,false,false,false,false,false,false);
         
         habilitabotoes(true,true,false,false,false);
     }
@@ -428,7 +429,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(lblexisteusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(103, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -597,9 +598,9 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                     .addComponent(btnLimparFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAlterarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(216, 216, 216))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -610,11 +611,16 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -622,13 +628,14 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(156, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(260, Short.MAX_VALUE))
         );
 
         pack();
@@ -645,7 +652,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
           vd = 1;
           
            habilitaCampos(true, true, true, true, true, true, true, true, true, 
-                   true, true, true, true, true, true, true, true, true );
+                   true, true, true, true, true, true, true, true, true,true );
            
            limparCampos();
     }//GEN-LAST:event_btnNovoFuncionarioActionPerformed
@@ -654,7 +661,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     //<editor-fold defaultstate="collapsed" desc=" BOTÃO ALTERAR ">
     private void btnAlterarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarFuncionarioActionPerformed
         habilitaCampos(true, true, true, true, true, true, true, true, true, 
-                   true, true, true, true, true, true, true, true, true );
+                   true, true, true, true, true, true, true, true, true,true );
         lblexistecep.setText("");
         lblexistecpf.setText("");
         lblexisteusuario.setText("");
@@ -688,80 +695,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
        
        switch (vd){
              case 1:
-              
-                if(txtNomeFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Nome.");
-                   txtNomeFuncionario.requestFocus();
-                    return;
-                } 
                  
-                if(txtCpfFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo CPF.");
-                   txtCpfFuncionario.requestFocus();
-                    return;
-                }  
-                
-                if(txtRgFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o RG.");
-                   txtRgFuncionario.requestFocus();
-                    return;
-                }  
-                 if(txtDataNasc.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Data de Nascimento.");
-                   txtDataNasc.requestFocus();
-                    return;
-                }  
-                
-                 if(txtCepFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Cep.");
-                   txtCepFuncionario.requestFocus();
-                    return;
-                }  
-                
-                 if(txtBairroFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Bairro.");
-                   txtBairroFuncionario.requestFocus();
-                    return;
-                }   
-                 
-                 if(txtLogradouroFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Logradouro.");
-                    txtLogradouroFuncionario.requestFocus();
-                    return;
-                }   
-                 
-                 
-                 if(txtNumeroFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Numero.");
-                   txtNumeroFuncionario.requestFocus();
-                    return;
-                }   
-                 
-                if(txtCidadeFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Cidade.");
-                    txtCidadeFuncionario.requestFocus();
-                    return;
-                }   
-                 
-                if(txtEstadoFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Estado.");
-                    txtEstadoFuncionario.requestFocus();
-                    return;
-                }    
-                 
-                 if(txtUsuarioFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Usuario.");
-                    txtUsuarioFuncionario.requestFocus();
-                    return;
-                }    
-                
-                  if(txtSenhaFuncionario.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Preencha o campo Senha.");
-                    txtSenhaFuncionario.requestFocus();
-                    return;
-                  }  
-                 
-                  
                 String sh =  txtSenhaFuncionario.getText();
                 String csh =  txtConfirmacaoSenha.getText();
                 
@@ -771,17 +705,24 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                     return;
                }   
                 
+                if (VerificarCamposVazios() == true) {
+                    JOptionPane.showMessageDialog(null, "Campos obrigatórios estão vazios!");
+                    a = false;
+                }
                 
-               if (cf != true  && cuser!=true){
+                
+               if (cf != true  && cuser!=true&& VerificarCamposVazios() != true){
                     logFuncionarioController lg = new logFuncionarioController();
+                    
+                    
                     lg.salvarFuncionario(txtNomeFuncionario.getText(),txtCpfFuncionario.getText(),
                     txtRgFuncionario.getText(), txtTelFuncionario.getText(),txtCelFuncionario.getText(),
                     txtEmailFuncionario.getText(),txtDataNasc.getText(),txtCepFuncionario.getText(),txtBairroFuncionario.getText(),
                     txtLogradouroFuncionario.getText(),txtComplementoFuncionario.getText(),txtNumeroFuncionario.getText(),
                     txtCidadeFuncionario.getText(),txtEstadoFuncionario.getText(), txtUsuarioFuncionario.getText(), cbPerfilFuncionario.getSelectedIndex(),txtSenhaFuncionario.getText(),
-                    txtConfirmacaoSenha.getText());
+                    txtConfirmacaoSenha.getText(),cbSituaçãoFuncionário.getSelectedIndex());
                     habilitaCampos(false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false);
+                    false,false,false,false,false,false,false,false,false,false);
         
                     habilitabotoes(true,false,false,false,false); 
                     JOptionPane.showMessageDialog(null, "CADASTRO REALIZADO");
@@ -804,9 +745,9 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                 txtDataNasc.getText(),txtCepFuncionario.getText(),txtBairroFuncionario.getText(),
                     txtLogradouroFuncionario.getText(),txtComplementoFuncionario.getText(),txtNumeroFuncionario.getText(),
                     txtCidadeFuncionario.getText(),txtEstadoFuncionario.getText(),txtUsuarioFuncionario.getText(), 
-                    cbPerfilFuncionario.getSelectedIndex(),txtSenhaFuncionario.getText(), txtConfirmacaoSenha.getText());
+                    cbPerfilFuncionario.getSelectedIndex(),txtSenhaFuncionario.getText(), txtConfirmacaoSenha.getText(),cbSituaçãoFuncionário.getSelectedIndex());
                     habilitaCampos(false,false,false,false,false,false,false,false,false,
-                     false,false,false,false,false,false,false,false,false);
+                     false,false,false,false,false,false,false,false,false,false);
                         lblexistecep.setText("");
                         lblexistecpf.setText("");
                         lblexisteusuario.setText("");
@@ -902,7 +843,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         txtConfirmacaoSenha.setText(jFuncionario.getValueAt(linhaSelecionada, 18).toString());
         
         habilitaCampos(false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false);
+                    false,false,false,false,false,false,false,false,false,false);
          habilitabotoes(false,false,true,false,true);
          
     }//GEN-LAST:event_jFuncionarioMouseClicked
@@ -947,7 +888,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         txtEstadoFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 19).toString());
         
         habilitaCampos(false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false);
+                    false,false,false,false,false,false,false,false,false,false);
         
         habilitabotoes(false,false,true,false,true);
         
@@ -961,7 +902,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         
         habilitabotoes(true,false,false,false,false);
         habilitaCampos(false,false,false,false,false,false,false,false,false,
-                false,false,false,false,false,false,false,false,false);
+                false,false,false,false,false,false,false,false,false,false);
         
     }//GEN-LAST:event_btnCancelarFuncionarioActionPerformed
     //</editor-fold>
@@ -991,7 +932,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         public void habilitaCampos(boolean nomeFcn, boolean rgFcn, boolean cpfFcn, boolean dataNascFcn, 
                 boolean telFcn, boolean celFcn, boolean emailFcn, boolean cepFcn,boolean logradouroFcn,
                 boolean bairroFcn,boolean numeroFcn,boolean complementoFcn, boolean CidadeFcn,boolean estadoFcn,
-                boolean usuarioFcn,boolean SenhaFcn,boolean ConfirmSenhaFcn,boolean perfilFcn) {
+                boolean usuarioFcn,boolean SenhaFcn,boolean ConfirmSenhaFcn,boolean perfilFcn,boolean situacao) {
            
            // FUNCIONARIO 
            txtNomeFuncionario.setEnabled(nomeFcn);
@@ -1016,10 +957,68 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
             txtSenhaFuncionario.setEnabled(SenhaFcn);
             txtConfirmacaoSenha.setEnabled(ConfirmSenhaFcn);
             cbPerfilFuncionario.setEnabled(perfilFcn);
+            cbSituaçãoFuncionário.setEnabled(situacao);
         }
         //</editor-fold>
          
-   
+    //<editor-fold defaultstate="collapsed" desc=" MÉTODO CAMPOS VAZIOS ">
+    public boolean VerificarCamposVazios() {
+        if (txtNomeFuncionario.getText().equals("")) {
+            a = true;
+        }
+        if (txtCpfFuncionario.getText().equals("")) {
+            a = true;
+        }
+        if (txtRgFuncionario.getText().equals("")) {
+            a = true;
+        }
+        if (txtTelFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+         if (txtDataNasc.getText().equals("")) {
+            a = true;
+        }
+       
+        
+        if (txtCepFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+        if (txtLogradouroFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+        if (txtBairroFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+        if (txtEstadoFuncionario.getText().equals("")) {
+            a = true;
+        }
+        if (txtCidadeFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+     
+        if (txtNumeroFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+        if (txtUsuarioFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+        if (txtSenhaFuncionario.getText().equals("")) {
+            a = true;
+        }
+        
+        
+        
+        
+        return a;
+    }
+     //</editor-fold>
         
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR CAMPOS ">    
     public void atualizarCampos(){
@@ -1118,7 +1117,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         ArrayList dados = new ArrayList();
          String[] colunas = new String[]{"idFuncionario","nomeFuncionario","cpf","rg",
              "telefone","celular","email","dataNascimento","cep","bairro","logradouro",
-             "complemento","numero","cidade","estado","login","perfil","senha","confiSenha"};
+             "complemento","numero","cidade","estado","","","","",""};
          
         DAO.executaSQL(SQL);  
         
@@ -1126,13 +1125,13 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         try{
             DAO.resultSet.first();  
             do{    
-                dados.add(new Object[]{DAO.resultSet.getString("idfuncionario"),DAO.resultSet.getString("nomeFuncionario"),DAO.resultSet.getString("cpf"),
+                dados.add(new Object[]{DAO.resultSet.getString("idFuncionario"),DAO.resultSet.getString("nomeFuncionarios"),DAO.resultSet.getString("cpf"),
                 DAO.resultSet.getString("rg"), DAO.resultSet.getString("telefone"),DAO.resultSet.getString("celular"), 
                 DAO.resultSet.getString("email"),DAO.resultSet.getString("dataNascimento"),DAO.resultSet.getString("cep"),
                 DAO.resultSet.getString("Bairro"),DAO.resultSet.getString("logradouro"),DAO.resultSet.getString("complemento"),
                 DAO.resultSet.getString("numero"),DAO.resultSet.getString("cidade"),DAO.resultSet.getString("estado"), 
                 DAO.resultSet.getString("login"),DAO.resultSet.getString("perfil"),DAO.resultSet.getString("senha"), 
-                DAO.resultSet.getString("confiSenha")});
+                DAO.resultSet.getString("confiSenha"),DAO.resultSet.getString("situação")});
                     
             }while(DAO.resultSet.next());
         }catch(SQLException ex){}
@@ -1174,14 +1173,19 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         jFuncionario.getColumnModel().getColumn(15).setPreferredWidth(120);  
         jFuncionario.getColumnModel().getColumn(15).setResizable(false);
         jFuncionario.getColumnModel().getColumn(16).setMinWidth(0);  
-        jFuncionario.getColumnModel().getColumn(16).setMaxWidth(0); 
+        jFuncionario.getColumnModel().getColumn(16).setMaxWidth(0);
+        jFuncionario.getColumnModel().getColumn(16).setResizable(false);
         jFuncionario.getColumnModel().getColumn(17).setMinWidth(0);  
         jFuncionario.getColumnModel().getColumn(17).setMaxWidth(0);
+        jFuncionario.getColumnModel().getColumn(17).setResizable(false);
         jFuncionario.getColumnModel().getColumn(18).setMinWidth(0);  
         jFuncionario.getColumnModel().getColumn(18).setMaxWidth(0);
+        jFuncionario.getColumnModel().getColumn(18).setResizable(false);
+        jFuncionario.getColumnModel().getColumn(19).setMinWidth(0);  
+        jFuncionario.getColumnModel().getColumn(19).setMaxWidth(0);
+        jFuncionario.getColumnModel().getColumn(19).setResizable(false);
+       
         
-       
-       
         
         jFuncionario.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jFuncionario.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela

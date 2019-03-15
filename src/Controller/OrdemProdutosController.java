@@ -41,20 +41,24 @@ public class OrdemProdutosController {
         dao.ordemservico.setValorTotal(l);
         dao.ordemservico.setCpfCliente(m);
         dao.ordemservico.setCodigoOrdem(n);
+        dao.ordemservico.setFKcliente(o);
+        dao.ordemservico.setFKfuncionario(p);
+        dao.ordemservico.setObservacao(q);
+        dao.ordemservico.setEstorno(r);
         dao.ordemservico.setDesconto(s);
 
-        JOptionPane.showMessageDialog(null, dao.Atualizarvendas(DAO.INCLUSAOORDEMSERVICO));
+        dao.AtualizarOrdemServico(DAO.INCLUSAOORDEMSERVICO);
     }
 
     public void salvarLoteOrdem(String a, String b, String c, String d, String e) {
         DAO dao = new DAO();
-        dao.vendaProdutos.setFkLoteVendas(a);
-        dao.vendaProdutos.setQtd(b);
-        dao.vendaProdutos.setDescontoItemVendProduto(c);
-        dao.vendaProdutos.setValorParcialVendProduto(d);
-        dao.vendaProdutos.setCodVenda(e);
+       dao.ordemProdutos.setFKlote(a);
+        dao.ordemProdutos.setQtd(b);
+        dao.ordemProdutos.setDesconto(c);
+        dao.ordemProdutos.setValorParcial(d);
+        dao.ordemProdutos.setCodigoOrdem(e);
 
-        JOptionPane.showMessageDialog(null, dao.Atualizarvendas(DAO.INCLUSAOORDEMPRODUTO));
+        JOptionPane.showMessageDialog(null, dao.AtualizarOrdemServico(DAO.INCLUSAOORDEMPRODUTO));
     }
 
     public String pesquisarCliente(String cpf) {
@@ -80,7 +84,7 @@ public class OrdemProdutosController {
         return a;
     }
 
-    public OrdemProdutos preencherCarrinho(String id, String b, String c, String d, String e) {
+    public OrdemProdutos preencherCarrinhoOrdem(String id, String b, String c, String d, String e) {
 
         DAO dao = new DAO();
         dao.ordemProdutos.setFKlote(id);

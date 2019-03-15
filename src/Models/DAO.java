@@ -287,6 +287,7 @@ public class DAO {
             ResultSet nome = statement.executeQuery();
             nome.next();
             aux = nome.getString("idcliente");
+            return aux;
 
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, erro);
@@ -519,14 +520,15 @@ public class DAO {
                     String FKfcn = fk2.getString("idfuncionario");
 
                     // USUARIO
-                    sql = "insert into usuario values(null,?,?,?,?,?)";
+                    sql = "insert into usuario values(null,?,?,?,?,?,?)";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
                     statement.setString(1, usuario.getLoginUsuario());
                     statement.setInt(2, usuario.getPerfilUsuario());
                     statement.setString(3, usuario.getSenhaUsuario());
                     statement.setString(4, usuario.getConfirmacaoSenhaUsuario());
-                    statement.setString(5, FKfcn);
+                    statement.setInt(5, usuario.getSituacao());
+                    statement.setString(6, FKfcn);
 
                     statement.executeUpdate();
                     statement.close();
@@ -575,15 +577,15 @@ public class DAO {
                     statement.executeUpdate();
 
                     sql = "update usuario set  login = ?,  perfil= ?,"
-                            + "  senha = ?,  confiSenha = ? where idUsuario= ?";
+                            + "  senha = ?,  confiSenha = ?  situação = ? where idUsuario= ?";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
-                    statement.setString(5, cvf);
+                    statement.setString(6, cvf);
                     statement.setString(1, usuario.getLoginUsuario());
                     statement.setInt(2, usuario.getPerfilUsuario());
                     statement.setString(3, usuario.getSenhaUsuario());
                     statement.setString(4, usuario.getConfirmacaoSenhaUsuario());
-
+                    statement.setInt(5, usuario.getSituacao());
                     statement.executeUpdate();
 
                     statement.close();
@@ -1087,8 +1089,9 @@ public class DAO {
             switch (operacao) {
                 // Produto
                 case INCLUSAOORDEMSERVICO:
+                           
                    
-                        sql = "insert into ordemservico values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        sql = "insert into ordemservico values (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                         bd.getConnection();
                         statement = bd.connection.prepareStatement(sql);
                         statement.setString(1, ordemservico.getTipoServico());
@@ -1124,10 +1127,10 @@ public class DAO {
                     ResultSet fk = statement.executeQuery();
                     fk.next();
 
-                    sql = "insert into ordemlote values (?,?,?,?,?)";
+                    sql = "insert into ordemlote values (?,?,?,?,?,?)";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
-                    statement.setString(1, fk.getString("IdServico"));
+                    statement.setString(1, fk.getString("IdServico"));                    
                     statement.setString(2, ordemProdutos.getFKlote());
                     statement.setString(3, ordemProdutos.getQtd());
                     statement.setString(4, ordemProdutos.getDesconto());
@@ -1152,7 +1155,7 @@ public class DAO {
     public String PesquisaCliente(String cpf) {
         String aux = "";
         try {
-            sql = "select * from cliente where cpf= ?";
+            sql = "select * from cliente where cpf = ?";
             bd.getConnection();
             statement = bd.connection.prepareStatement(sql);            
             statement.setString(1, cpf);

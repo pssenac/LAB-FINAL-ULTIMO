@@ -10,6 +10,7 @@ import Controller.vendaProdutosController;
 import Models.DAO;
 import Models.TabelaModelo2;
 import Models.Venda;
+import Models.VendaProdutos;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -24,8 +25,10 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
     String sql = "", tp = "", sql1 = "";
     double x = 0, z, vl, vl2, icms1, icms, iss1, iss2, ipi1, ipi2;
+    double xl = 0, zl, vll, vl2l, icms1l, icmsl, iss1l, iss2l, ipi1l, ipi2l;
     ArrayList<Venda> vendas = new ArrayList<>();
     ArrayList dadosVendas = new ArrayList();
+    ArrayList<VendaProdutos> vendaProdutos = new ArrayList<>();
 
     public TelaEstornoVendas() {
         initComponents();
@@ -68,8 +71,8 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable29 = new javax.swing.JTable();
         lblValorTotal1 = new javax.swing.JLabel();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
+        cbCC1 = new javax.swing.JCheckBox();
+        cbCD1 = new javax.swing.JCheckBox();
         jLabel28 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
@@ -83,7 +86,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jLabel40 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         lblValorServico2 = new javax.swing.JLabel();
-        jCheckBox4 = new javax.swing.JCheckBox();
+        cbD1 = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
         jLabel41 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -94,6 +97,13 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         lblCodfuncionario = new javax.swing.JLabel();
         lblCodvenda = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
+        lbl1 = new javax.swing.JLabel();
+        lbl2 = new javax.swing.JLabel();
+        lbl3 = new javax.swing.JLabel();
+        lbl4 = new javax.swing.JLabel();
+        lbl5 = new javax.swing.JLabel();
+        lbl6 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("ESTORNO DE VENDAS");
@@ -298,13 +308,20 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
             }
         ));
+        jTable29.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable29MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable29);
 
         lblValorTotal1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
-        jCheckBox5.setText("Cartão de Crédito");
+        cbCC1.setText("Cartão de Crédito");
+        cbCC1.setEnabled(false);
 
-        jCheckBox6.setText("Cartão de Débito");
+        cbCD1.setText("Cartão de Débito");
+        cbCD1.setEnabled(false);
 
         jLabel28.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel28.setText("Valor  :");
@@ -380,7 +397,8 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
         lblValorServico2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
-        jCheckBox4.setText("Dinheiro");
+        cbD1.setText("Dinheiro");
+        cbD1.setEnabled(false);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estornoVenda.png"))); // NOI18N
         jButton2.setText("Gerar Estorno");
@@ -408,6 +426,25 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         lblCodvenda.setText("jLabel2");
 
         jLabel2.setText("jLabel2");
+
+        btnCancelar.setText("Remover item");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        lbl1.setText("jLabel3");
+
+        lbl2.setText("jLabel3");
+
+        lbl3.setText("jLabel3");
+
+        lbl4.setText("jLabel3");
+
+        lbl5.setText("jLabel3");
+
+        lbl6.setText("jLabel3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -446,40 +483,56 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jLabel2))
                                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel29)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblValorServico2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel28)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblValorServico3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel40))
-                                .addGap(100, 100, 100)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel29)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblValorServico2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel28)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblValorServico3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel40)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jCheckBox4)
+                                        .addComponent(cbD1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jCheckBox5)
+                                        .addComponent(cbCC1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jCheckBox6))
-                                    .addComponent(jButton2)
+                                        .addComponent(cbCD1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnCancelar))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel30)
                                         .addGap(18, 18, 18)
                                         .addComponent(lblValorTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 32, Short.MAX_VALUE)))
+                        .addGap(17, 17, 17)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lbl2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbl3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbl5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl6)
+                .addGap(256, 256, 256))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -516,9 +569,9 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel40)
                                 .addGap(11, 11, 11)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jCheckBox4)
-                                    .addComponent(jCheckBox5)
-                                    .addComponent(jCheckBox6))
+                                    .addComponent(cbD1)
+                                    .addComponent(cbCC1)
+                                    .addComponent(cbCD1))
                                 .addGap(0, 5, Short.MAX_VALUE))
                             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
@@ -527,7 +580,9 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                             .addComponent(lblValorTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(56, 56, 56)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2)
+                        .addComponent(btnCancelar))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -537,7 +592,15 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                     .addComponent(lblCodfuncionario)
                     .addComponent(lblCodvenda)
                     .addComponent(jLabel2))
-                .addGap(203, 203, 203))
+                .addGap(176, 176, 176)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl1)
+                    .addComponent(lbl2)
+                    .addComponent(lbl3)
+                    .addComponent(lbl4)
+                    .addComponent(lbl5)
+                    .addComponent(lbl6))
+                .addContainerGap())
         );
 
         pack();
@@ -553,15 +616,18 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         tp = lbltipoPag.getText();
         if (tp.equals("1")) {
             cbD.setSelected(true);
+            cbD1.setSelected(true);
         }
         if (tp.equals("2")) {
             cbCC.setSelected(true);
+            cbCC1.setSelected(true);
         }
         if (tp.equals("3")) {
             cbCD.setSelected(true);
+            cbCD1.setSelected(true);
         }
 
-       // preencherTabela2(dadosVendas);
+        // preencherTabela2(dadosVendas);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -571,23 +637,65 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+
+        if (!lbl1.getText().equals("")) {
+            //remove do arraylist pessoas os dados da linha selecionada.
+            int x = vendas.size();
+            for (int i = 0; i < vendas.size(); i++) {
+                if (vendas.get(i).getA().equals(lbl1.getText())) {
+                    vendas.remove(i);
+                    vendaProdutos.remove(i);
+                }
+            }
+
+            //esvazia o arraylist dadosPessoa e, conseguentemente, esvazia a jTable.
+            LimparTabela2();
+            //preenche a jTable com os dados restantes do arraylist pessoas.
+            for (int i = 0; i < vendas.size(); i++) {
+                preencherTabela2(vendas.get(i).getA(), vendas.get(i).getB(), vendas.get(i).getC(), vendas.get(i).getD(), vendas.get(i).getE(),
+                        vendas.get(i).getF(), vendas.get(i).getG(), vendas.get(i).getH(), vendas.get(i).getJ());
+            }
+        }
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jTable29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable29MouseClicked
+        int linhaSelecionada = jTable29.getSelectedRow();
+        lbl1.setText(jTable29.getValueAt(linhaSelecionada, 0).toString());
+        lbl2.setText(jTable29.getValueAt(linhaSelecionada, 1).toString());
+        lbl3.setText(jTable29.getValueAt(linhaSelecionada, 2).toString());
+        lbl4.setText(jTable29.getValueAt(linhaSelecionada, 3).toString());
+        lbl5.setText(jTable29.getValueAt(linhaSelecionada, 4).toString());
+        lbl6.setText(jTable29.getValueAt(linhaSelecionada, 8).toString());
+    }//GEN-LAST:event_jTable29MouseClicked
+
     // <editor-fold defaultstate="collapsed" desc="preencher tabela 1">
     public void preencherTabela(String SQL) {
         DAO dao = new DAO();
+        vendaProdutosController vd = new vendaProdutosController();
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"Produto", "Descrição", "Valor Unitário", "QTD", "Desconto", "Valor",
             "DescontoVenda", "TipoPagamento", "Icms", "Iss", "Ipi", "Data", "Observacao", "FKfuncionario", "codigoVenda", "codigoFuncionario"};
+        
+        String[] colunas2 = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto","Icms","ISS","IPI", "FKfuncionario", "idLote"};
+        
         dao.executaSQL(SQL);
         try {
             dao.resultSet.first();
-            dadosVendas.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorVenda"),
-                dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial")});
-
             do {
-                dadosVendas.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorVenda"),
-                    dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial")});
-                
-                
+
+                dadosVendas.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("valorVenda"),
+                    dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial"),
+                    dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"),
+                    dao.resultSet.getString("FKfuncionario"), dao.resultSet.getString("FKlote")});
+
+                vendas.add(vd.preencherArray(dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
+                        dao.resultSet.getString("valorVenda"), dao.resultSet.getString("valorParcial"),
+                        dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"), dao.resultSet.getString("FKlote")));
+
+                vendaProdutos.add(vd.preencherCarrinho(dao.resultSet.getString("FKlote"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
+                        dao.resultSet.getString("valorParcial"), dao.resultSet.getString("codigoVenda")));
+
                 dados.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorVenda"),
                     dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial"),
                     dao.resultSet.getString("desconto"), dao.resultSet.getString("tipoPagamento"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"),
@@ -661,18 +769,64 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jTable2.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
         jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+
+        TabelaModelo2 models = new TabelaModelo2(dadosVendas, colunas2);
+        jTable29.setModel(models);
+
+        jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
+        jTable29.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
+        jTable29.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(1).setResizable(false);
+        jTable29.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(2).setResizable(false);
+        jTable29.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(3).setResizable(false);
+        jTable29.getColumnModel().getColumn(4).setPreferredWidth(80);
+        jTable29.getColumnModel().getColumn(4).setResizable(false);
+        jTable29.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(5).setResizable(false);
+        jTable29.getColumnModel().getColumn(6).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(6).setResizable(false);
+        jTable29.getColumnModel().getColumn(7).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(7).setResizable(false);
+        jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(8).setResizable(false);
+
+        jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+        jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+        jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+
     }
+
     //</editor-fold>
+    
 //(String produto, String qtd, String desconto, String vlUnitario, String vlParcial, String icms, String iss, String ipi, String idLote)
-    // <editor-fold defaultstate="collapsed" desc="preencher tabela 2">
-    public void preencherTabela2(Object x) {
+    
+    // <editor-fold defaultstate="collapsed" desc="preencher tabela 2">   
+    public void preencherTabela2(String produto, String qtd, String desconto, String vlUnitario, String vlParcial, String icmsx, String issx, String ipix, String idLote) {
         //Calcular valores
         //calcular impostos
+       
         String[] colunas = new String[]{"Produto", "Quantidade", "Desconto", "Valor Unitário", "Valor", "icsm", "iss", "ipi", "idLote"};
         try {
-            
-            x.toString();
-            
+            dadosVendas.add(new Object[]{produto, qtd, desconto, vlUnitario, vlParcial, icmsx, issx, ipix, idLote});
+
+            xl= Double.parseDouble(vlParcial);
+            zl += xl;
+            vl2l = Double.parseDouble(desconto);
+            //z = z - (z * vl2 / 100);
+            icmsl = Double.parseDouble(icmsx);
+            icms1l += icmsl;
+            iss1l = Double.parseDouble(issx);
+            iss2l += iss1l;
+            ipi1l = Double.parseDouble(ipix);
+            ipi2l += ipi1l;
+
+            lblIcms1.setText(Double.toString(icms1l));
+            lblIss1.setText(Double.toString(iss2l));
+            lblIpi1.setText(Double.toString(ipi2l));
+            lblValorTotal1.setText(Double.toString(zl));
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -702,8 +856,10 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
         jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
-
     }
+    //</editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="preencher tabela 2">
+    
     //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Tipo Pagamento">
@@ -750,16 +906,50 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     }
     //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Limpar tabela 2">
+    public void LimparTabela2() {
+        String[] colunas = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "FKfuncionario", "idLote"};
+
+        dadosVendas.removeAll(dadosVendas);
+        //evazia a jTable, add dadosPessoa (sem dados).
+        ModeloTabela modelo = new ModeloTabela(dadosVendas, colunas);
+        jTable29.setModel(modelo); // recebe o modelo criado
+        jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);
+        jTable29.getColumnModel().getColumn(0).setResizable(false);
+        jTable29.getColumnModel().getColumn(1).setPreferredWidth(150);  // define o tamanho das colunas e se será redimensionado ou não
+        jTable29.getColumnModel().getColumn(1).setResizable(true);  // não permite alterar o tamanho da coluna 
+        jTable29.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(2).setResizable(false);
+        jTable29.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(3).setResizable(false);
+        jTable29.getColumnModel().getColumn(4).setPreferredWidth(80);
+        jTable29.getColumnModel().getColumn(4).setResizable(false);
+        jTable29.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(5).setResizable(false);
+        //  jTable29.getColumnModel().getColumn(6).setPreferredWidth(50);
+        //  jTable29.getColumnModel().getColumn(6).setResizable(false);
+        // jTable29.getColumnModel().getColumn(7).setPreferredWidth(50);
+        // jTable29.getColumnModel().getColumn(7).setResizable(false);
+        // jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
+        // jTable29.getColumnModel().getColumn(8).setResizable(false);
+
+        jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+        jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+        jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+    //</editor-fold>
+
     // <editor-fold defaultstate="collapsed" desc="JAVA - do not modify"> 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JCheckBox cbCC;
+    private javax.swing.JCheckBox cbCC1;
     private javax.swing.JCheckBox cbCD;
+    private javax.swing.JCheckBox cbCD1;
     private javax.swing.JCheckBox cbD;
+    private javax.swing.JCheckBox cbD1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -787,6 +977,12 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable29;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lbl1;
+    private javax.swing.JLabel lbl2;
+    private javax.swing.JLabel lbl3;
+    private javax.swing.JLabel lbl4;
+    private javax.swing.JLabel lbl5;
+    private javax.swing.JLabel lbl6;
     private javax.swing.JLabel lblCodfuncionario;
     private javax.swing.JLabel lblCodvenda;
     private javax.swing.JLabel lblDataVenda;
