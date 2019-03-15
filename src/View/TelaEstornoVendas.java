@@ -12,7 +12,10 @@ import Models.TabelaModelo2;
 import Models.Venda;
 import Models.VendaProdutos;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -25,10 +28,12 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
     String sql = "", tp = "", sql1 = "";
     double x = 0, z, vl, vl2, icms1, icms, iss1, iss2, ipi1, ipi2;
-    double xl = 0, zl, vll, vl2l, icms1l, icmsl, iss1l, iss2l, ipi1l, ipi2l;
+    double x22 = 0, z22, vl22, vl222, icms122, icms22, iss122, iss222, ipi122, ipi222;
     ArrayList<Venda> vendas = new ArrayList<>();
     ArrayList dadosVendas = new ArrayList();
+    ArrayList dadosVendas2 = new ArrayList();
     ArrayList<VendaProdutos> vendaProdutos = new ArrayList<>();
+    ArrayList<VendaProdutos> vendaProdutos2 = new ArrayList<>();
 
     public TelaEstornoVendas() {
         initComponents();
@@ -45,7 +50,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         txtCodVenda = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -66,11 +71,11 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         cbCD = new javax.swing.JCheckBox();
         jLabel18 = new javax.swing.JLabel();
         lblDescontoGeral = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
         lblDataVenda = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable29 = new javax.swing.JTable();
-        lblValorTotal1 = new javax.swing.JLabel();
+        lblValorTotalx = new javax.swing.JLabel();
         cbCC1 = new javax.swing.JCheckBox();
         cbCD1 = new javax.swing.JCheckBox();
         jLabel28 = new javax.swing.JLabel();
@@ -78,25 +83,25 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        lblIpi1 = new javax.swing.JLabel();
-        lblIcms1 = new javax.swing.JLabel();
-        lblIss1 = new javax.swing.JLabel();
+        lblImposto3 = new javax.swing.JLabel();
+        lblImposto1 = new javax.swing.JLabel();
+        lblImposto2 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        lblValorServico3 = new javax.swing.JLabel();
+        lblValorParcialx = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        lblValorServico2 = new javax.swing.JLabel();
+        lblDescontoGeralx = new javax.swing.JLabel();
         cbD1 = new javax.swing.JCheckBox();
-        jButton2 = new javax.swing.JButton();
+        btnEstorno = new javax.swing.JButton();
         jLabel41 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtObservacao = new javax.swing.JTextArea();
         lbltipoPag = new javax.swing.JLabel();
         lblestorno = new javax.swing.JLabel();
         lblFKfuncionario = new javax.swing.JLabel();
         lblCodfuncionario = new javax.swing.JLabel();
         lblCodvenda = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblCodigoFunc = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         lbl1 = new javax.swing.JLabel();
         lbl2 = new javax.swing.JLabel();
@@ -104,6 +109,17 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         lbl4 = new javax.swing.JLabel();
         lbl5 = new javax.swing.JLabel();
         lbl6 = new javax.swing.JLabel();
+        lblCodigoFunc1 = new javax.swing.JLabel();
+        lbltipoPag1 = new javax.swing.JLabel();
+        lblestorno1 = new javax.swing.JLabel();
+        lblFKfuncionario1 = new javax.swing.JLabel();
+        lblCodfuncionario1 = new javax.swing.JLabel();
+        lblCodvenda1 = new javax.swing.JLabel();
+        lbl7 = new javax.swing.JLabel();
+        lbl8 = new javax.swing.JLabel();
+        lbl9 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        lblDataVendax = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("ESTORNO DE VENDAS");
@@ -112,13 +128,13 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("Código de Venda :");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisa3.png"))); // NOI18N
-        jButton1.setMaximumSize(new java.awt.Dimension(30, 30));
-        jButton1.setMinimumSize(new java.awt.Dimension(30, 30));
-        jButton1.setPreferredSize(new java.awt.Dimension(30, 30));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisa3.png"))); // NOI18N
+        btnPesquisar.setMaximumSize(new java.awt.Dimension(30, 30));
+        btnPesquisar.setMinimumSize(new java.awt.Dimension(30, 30));
+        btnPesquisar.setPreferredSize(new java.awt.Dimension(30, 30));
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPesquisarActionPerformed(evt);
             }
         });
 
@@ -220,8 +236,8 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
         lblDescontoGeral.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel19.setText("Data da Venda :");
+        jLabel20.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel20.setText("Data da Venda :");
 
         lblDataVenda.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
@@ -240,8 +256,8 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(42, 42, 42)
-                                .addComponent(jLabel19)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel20)
+                                .addGap(18, 18, 18)
                                 .addComponent(lblDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -268,7 +284,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -291,12 +307,12 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
-                    .addComponent(lblValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel19)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel17)
+                        .addComponent(lblValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(lblDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -315,7 +331,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable29);
 
-        lblValorTotal1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblValorTotalx.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         cbCC1.setText("Cartão de Crédito");
         cbCC1.setEnabled(false);
@@ -337,11 +353,11 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jLabel33.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel33.setText("IPI :");
 
-        lblIpi1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblImposto3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        lblIcms1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblImposto1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        lblIss1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblImposto2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -353,17 +369,17 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel33)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblIpi1, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                        .addComponent(lblImposto3, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                         .addGap(36, 36, 36))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel31)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblIcms1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblImposto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel32)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblIss1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblImposto2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(30, 30, 30))))
         );
         jPanel5Layout.setVerticalGroup(
@@ -371,23 +387,23 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIcms1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblImposto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel32)
-                    .addComponent(lblIss1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblImposto2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel33)
-                    .addComponent(lblIpi1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblImposto3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel30.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel30.setText("Valor Total:");
 
-        lblValorServico3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblValorParcialx.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         jLabel40.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel40.setText("Tipo de Pagamento:");
@@ -395,25 +411,25 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jLabel29.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel29.setText("Desconto:");
 
-        lblValorServico2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblDescontoGeralx.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         cbD1.setText("Dinheiro");
         cbD1.setEnabled(false);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estornoVenda.png"))); // NOI18N
-        jButton2.setText("Gerar Estorno");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnEstorno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estornoVenda.png"))); // NOI18N
+        btnEstorno.setText("Gerar Estorno");
+        btnEstorno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnEstornoActionPerformed(evt);
             }
         });
 
         jLabel41.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel41.setText("Observação/Motivo :");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        txtObservacao.setColumns(20);
+        txtObservacao.setRows(5);
+        jScrollPane3.setViewportView(txtObservacao);
 
         lbltipoPag.setText("jLabel2");
 
@@ -425,7 +441,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
         lblCodvenda.setText("jLabel2");
 
-        jLabel2.setText("jLabel2");
+        lblCodigoFunc.setText("jLabel2");
 
         btnCancelar.setText("Remover item");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -446,6 +462,29 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
         lbl6.setText("jLabel3");
 
+        lblCodigoFunc1.setText("jLabel2");
+
+        lbltipoPag1.setText("jLabel2");
+
+        lblestorno1.setText("jLabel2");
+
+        lblFKfuncionario1.setText("jLabel2");
+
+        lblCodfuncionario1.setText("jLabel2");
+
+        lblCodvenda1.setText("jLabel2");
+
+        lbl7.setText("jLabel3");
+
+        lbl8.setText("jLabel3");
+
+        lbl9.setText("jLabel3");
+
+        jLabel19.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel19.setText("Data da Venda :");
+
+        lblDataVendax.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -458,7 +497,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCodVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -481,7 +520,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                                                 .addGap(18, 18, 18)
                                                 .addComponent(lblCodvenda)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jLabel2))
+                                                .addComponent(lblCodigoFunc))
                                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -490,11 +529,11 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel29)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblValorServico2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblDescontoGeralx, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel28)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblValorServico3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblValorParcialx, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel40)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -506,33 +545,58 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(cbCD1))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton2)
+                                        .addComponent(btnEstorno)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnCancelar))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel30)
                                         .addGap(18, 18, 18)
-                                        .addComponent(lblValorTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(17, 17, 17)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblValorTotalx, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel19)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDataVendax, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lbl2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl6)
-                .addGap(256, 256, 256))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbltipoPag1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblestorno1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblFKfuncionario1)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblCodfuncionario1)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblCodvenda1)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblCodigoFunc1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lbl1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl9)))
+                .addGap(148, 148, 148))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -544,7 +608,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCodVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -552,36 +616,42 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel41)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel28)
-                                    .addComponent(lblValorServico3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel29)
-                                    .addComponent(lblValorServico2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel19))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel40)
-                                .addGap(11, 11, 11)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cbD1)
-                                    .addComponent(cbCC1)
-                                    .addComponent(cbCD1))
-                                .addGap(0, 5, Short.MAX_VALUE))
-                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel30)
-                            .addComponent(lblValorTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel28)
+                                            .addComponent(lblValorParcialx, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel29)
+                                            .addComponent(lblDescontoGeralx, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel40)
+                                        .addGap(11, 11, 11)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(cbD1)
+                                            .addComponent(cbCC1)
+                                            .addComponent(cbCD1))
+                                        .addGap(0, 5, Short.MAX_VALUE))
+                                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel30)
+                                    .addComponent(lblValorTotalx, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblDataVendax, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(56, 56, 56)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
+                        .addComponent(btnEstorno)
                         .addComponent(btnCancelar))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
@@ -591,22 +661,33 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                     .addComponent(lblFKfuncionario)
                     .addComponent(lblCodfuncionario)
                     .addComponent(lblCodvenda)
-                    .addComponent(jLabel2))
-                .addGap(176, 176, 176)
+                    .addComponent(lblCodigoFunc))
+                .addGap(155, 155, 155)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbltipoPag1)
+                    .addComponent(lblestorno1)
+                    .addComponent(lblFKfuncionario1)
+                    .addComponent(lblCodfuncionario1)
+                    .addComponent(lblCodvenda1)
+                    .addComponent(lblCodigoFunc1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl1)
                     .addComponent(lbl2)
                     .addComponent(lbl3)
                     .addComponent(lbl4)
                     .addComponent(lbl5)
-                    .addComponent(lbl6))
+                    .addComponent(lbl6)
+                    .addComponent(lbl7)
+                    .addComponent(lbl9)
+                    .addComponent(lbl8))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
 
         sql = "select * from vendas inner join lotevendas on codVenda = FKvendas "
                 + "inner join lote on FKlote = idLote "
@@ -628,14 +709,41 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         }
 
         // preencherTabela2(dadosVendas);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+    private void btnEstornoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstornoActionPerformed
+        vendaProdutosController vndP = new vendaProdutosController();
+        DAO dao = new DAO();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date agr = new Date();
+        // String codvend = dao.buscarFuncionario(txtCodigoVendedor.getText());
+        //  if (codvend.equals(null)) {
+        //     JOptionPane.showMessageDialog(null, "insira um codigo valido");
 
-        JOptionPane.showMessageDialog(null, dadosVendas.get(2));
+        //  } else {
+        tipoPagamento();
+        vndP.salvarVenda(lblDescontoGeral.getText(), tp, lblDataVenda.getText(), txtObservacao.getText(), txtCodVenda.getText(), lblIcms.getText(), lblIss.getText(),
+                lblIpi.getText(), lblFKfuncionario.getText(), txtCodVenda.getText(), lblCodfuncionario.getText(), lblValorTotal.getText());
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+        for (int i = 0; i < vendaProdutos2.size(); i++) {
+            vndP.salvarLoteVenda(vendaProdutos2.get(i).getFkLoteVendas(), vendaProdutos2.get(i).getQtd(), vendaProdutos2.get(i).getDescontoItemVendProduto(),
+                    vendaProdutos2.get(i).getValorParcialVendProduto(),
+                    txtCodVenda.getText());
+            //   }
+            
+        }
+        vndP.salvarVenda(lblDescontoGeralx.getText(), tp, lblDataVendax.getText(), "", "0", lblImposto1.getText(), lblImposto2.getText(),
+                lblImposto3.getText(), lblFKfuncionario.getText(), txtCodVenda.getText(), lblCodfuncionario.getText(), lblValorTotalx.getText());
+
+        for (int i = 0; i < vendaProdutos.size(); i++) {
+            vndP.salvarLoteVenda(vendaProdutos.get(i).getFkLoteVendas(), vendaProdutos.get(i).getQtd(), vendaProdutos.get(i).getDescontoItemVendProduto(),
+                    vendaProdutos.get(i).getValorParcialVendProduto(),
+                    txtCodVenda.getText());
+            //   }
+            
+        }
+
+    }//GEN-LAST:event_btnEstornoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 
@@ -666,7 +774,10 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         lbl3.setText(jTable29.getValueAt(linhaSelecionada, 2).toString());
         lbl4.setText(jTable29.getValueAt(linhaSelecionada, 3).toString());
         lbl5.setText(jTable29.getValueAt(linhaSelecionada, 4).toString());
-        lbl6.setText(jTable29.getValueAt(linhaSelecionada, 8).toString());
+        lbl6.setText(jTable29.getValueAt(linhaSelecionada, 5).toString());
+        lbl7.setText(jTable29.getValueAt(linhaSelecionada, 6).toString());
+        lbl8.setText(jTable29.getValueAt(linhaSelecionada, 7).toString());
+        lbl9.setText(jTable29.getValueAt(linhaSelecionada, 8).toString());
     }//GEN-LAST:event_jTable29MouseClicked
 
     // <editor-fold defaultstate="collapsed" desc="preencher tabela 1">
@@ -676,28 +787,32 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"Produto", "Descrição", "Valor Unitário", "QTD", "Desconto", "Valor",
             "DescontoVenda", "TipoPagamento", "Icms", "Iss", "Ipi", "Data", "Observacao", "FKfuncionario", "codigoVenda", "codigoFuncionario"};
-        
-        String[] colunas2 = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto","Icms","ISS","IPI", "FKfuncionario", "idLote"};
-        
+
+        String[] colunas2 = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "Valor", "Icms", "ISS", "IPI", "idLote"};
+
         dao.executaSQL(SQL);
         try {
             dao.resultSet.first();
             do {
+                double qq = Double.parseDouble(dao.resultSet.getString("valorParcial"));
+                double qr = qq * (-1);
 
                 dadosVendas.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("valorVenda"),
                     dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial"),
                     dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"),
-                    dao.resultSet.getString("FKfuncionario"), dao.resultSet.getString("FKlote")});
+                    dao.resultSet.getString("FKlote")});
 
-                vendas.add(vd.preencherArray(dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
-                        dao.resultSet.getString("valorVenda"), dao.resultSet.getString("valorParcial"),
-                        dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"), dao.resultSet.getString("FKlote")));
+                vendas.add(vd.preencherArray3(dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("valorVenda"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
+                        dao.resultSet.getString("valorParcial"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"), dao.resultSet.getString("FKlote")));
 
                 vendaProdutos.add(vd.preencherCarrinho(dao.resultSet.getString("FKlote"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
                         dao.resultSet.getString("valorParcial"), dao.resultSet.getString("codigoVenda")));
 
+                vendaProdutos2.add(vd.preencherCarrinho(dao.resultSet.getString("FKlote"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
+                        Double.toString(qr), dao.resultSet.getString("codigoVenda")));
+
                 dados.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorVenda"),
-                    dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial"),
+                    dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), Double.toString(qr),
                     dao.resultSet.getString("desconto"), dao.resultSet.getString("tipoPagamento"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"),
                     dao.resultSet.getString("ipi"), dao.resultSet.getString("dataVenda"), dao.resultSet.getString("observacao"),
                     dao.resultSet.getString("FKfuncionario"), dao.resultSet.getString("codigoVenda"), dao.resultSet.getString("codigoFuncionario")});
@@ -714,7 +829,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                 ipi2 += ipi1;
 
                 lblValor.setText(Double.toString(z));
-                lblValorTotal.setText(Double.toString(vl));
+                lblValorTotal.setText(Double.toString(vl * (-1)));
                 lblIcms.setText(Double.toString(icms1));
                 lblIss.setText(Double.toString(iss2));
                 lblIpi.setText(Double.toString(ipi2));
@@ -799,39 +914,44 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     }
 
     //</editor-fold>
-    
 //(String produto, String qtd, String desconto, String vlUnitario, String vlParcial, String icms, String iss, String ipi, String idLote)
-    
+  
     // <editor-fold defaultstate="collapsed" desc="preencher tabela 2">   
-    public void preencherTabela2(String produto, String qtd, String desconto, String vlUnitario, String vlParcial, String icmsx, String issx, String ipix, String idLote) {
+    public void preencherTabela2(String produto, String vlUnitario, String qtd, String desconto, String vlParcial, String icmsx, String issx, String ipix, String idLote) {
         //Calcular valores
         //calcular impostos
-       
-        String[] colunas = new String[]{"Produto", "Quantidade", "Desconto", "Valor Unitário", "Valor", "icsm", "iss", "ipi", "idLote"};
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date agr = new Date();
+        
+        String[] colunas = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "Valor", "icsm", "iss", "ipi", "idLote"};
         try {
-            dadosVendas.add(new Object[]{produto, qtd, desconto, vlUnitario, vlParcial, icmsx, issx, ipix, idLote});
+            dadosVendas2.add(new Object[]{produto, vlUnitario, qtd, desconto, vlParcial, icmsx, issx, ipix, idLote});
 
-            xl= Double.parseDouble(vlParcial);
-            zl += xl;
-            vl2l = Double.parseDouble(desconto);
-            //z = z - (z * vl2 / 100);
-            icmsl = Double.parseDouble(icmsx);
-            icms1l += icmsl;
-            iss1l = Double.parseDouble(issx);
-            iss2l += iss1l;
-            ipi1l = Double.parseDouble(ipix);
-            ipi2l += ipi1l;
+            x22 = Double.parseDouble(vlParcial);
+            z22 += x22;
+            vl222 = Double.parseDouble(desconto);
+            z22 = z22 - (z22 * vl222 / 100);
+            icms122 = Double.parseDouble(icmsx);
+            icms22 += icms122;
+            iss122 = Double.parseDouble(issx);
+            iss222 += iss122;
+            ipi122 = Double.parseDouble(ipix);
+            ipi222 += ipi122;
 
-            lblIcms1.setText(Double.toString(icms1l));
-            lblIss1.setText(Double.toString(iss2l));
-            lblIpi1.setText(Double.toString(ipi2l));
-            lblValorTotal1.setText(Double.toString(zl));
+            lblImposto1.setText(Double.toString(icms22));
+            lblImposto2.setText(Double.toString(iss222));
+            lblImposto3.setText(Double.toString(ipi222));
+            lblValorTotalx.setText(Double.toString(z22));
+            lblDescontoGeralx.setText(Double.toString(vl222));
+            lblDataVendax.setText(df.format(agr));
+            lblCodfuncionario1.setText(lblCodfuncionario.getText());
+            lblFKfuncionario1.setText(lblFKfuncionario.getText());
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
 
-        TabelaModelo2 model = new TabelaModelo2(dadosVendas, colunas);
+        TabelaModelo2 model = new TabelaModelo2(dadosVendas2, colunas);
         jTable29.setModel(model);
 
         jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
@@ -858,10 +978,10 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
     }
     //</editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="preencher tabela 2">
     
-    //</editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="preencher tabela 2">
 
+    //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Tipo Pagamento">
     public void tipoPagamento() {
         if (cbD.isSelected()) {
@@ -908,11 +1028,11 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Limpar tabela 2">
     public void LimparTabela2() {
-        String[] colunas = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "FKfuncionario", "idLote"};
+        String[] colunas = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "Valor", "icsm", "iss", "ipi", "idLote"};
 
-        dadosVendas.removeAll(dadosVendas);
+        dadosVendas2.removeAll(dadosVendas2);
         //evazia a jTable, add dadosPessoa (sem dados).
-        ModeloTabela modelo = new ModeloTabela(dadosVendas, colunas);
+        ModeloTabela modelo = new ModeloTabela(dadosVendas2, colunas);
         jTable29.setModel(modelo); // recebe o modelo criado
         jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);
         jTable29.getColumnModel().getColumn(0).setResizable(false);
@@ -926,12 +1046,12 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jTable29.getColumnModel().getColumn(4).setResizable(false);
         jTable29.getColumnModel().getColumn(5).setPreferredWidth(50);
         jTable29.getColumnModel().getColumn(5).setResizable(false);
-        //  jTable29.getColumnModel().getColumn(6).setPreferredWidth(50);
-        //  jTable29.getColumnModel().getColumn(6).setResizable(false);
-        // jTable29.getColumnModel().getColumn(7).setPreferredWidth(50);
-        // jTable29.getColumnModel().getColumn(7).setResizable(false);
-        // jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
-        // jTable29.getColumnModel().getColumn(8).setResizable(false);
+        jTable29.getColumnModel().getColumn(6).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(6).setResizable(false);
+        jTable29.getColumnModel().getColumn(7).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(7).setResizable(false);
+        jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(8).setResizable(false);
 
         jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
@@ -942,21 +1062,21 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="JAVA - do not modify"> 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEstorno;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JCheckBox cbCC;
     private javax.swing.JCheckBox cbCC1;
     private javax.swing.JCheckBox cbCD;
     private javax.swing.JCheckBox cbCD1;
     private javax.swing.JCheckBox cbD;
     private javax.swing.JCheckBox cbD1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -976,32 +1096,43 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable29;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl2;
     private javax.swing.JLabel lbl3;
     private javax.swing.JLabel lbl4;
     private javax.swing.JLabel lbl5;
     private javax.swing.JLabel lbl6;
+    private javax.swing.JLabel lbl7;
+    private javax.swing.JLabel lbl8;
+    private javax.swing.JLabel lbl9;
     private javax.swing.JLabel lblCodfuncionario;
+    private javax.swing.JLabel lblCodfuncionario1;
+    private javax.swing.JLabel lblCodigoFunc;
+    private javax.swing.JLabel lblCodigoFunc1;
     private javax.swing.JLabel lblCodvenda;
+    private javax.swing.JLabel lblCodvenda1;
     private javax.swing.JLabel lblDataVenda;
+    private javax.swing.JLabel lblDataVendax;
     private javax.swing.JLabel lblDescontoGeral;
+    private javax.swing.JLabel lblDescontoGeralx;
     private javax.swing.JLabel lblFKfuncionario;
+    private javax.swing.JLabel lblFKfuncionario1;
     private javax.swing.JLabel lblIcms;
-    private javax.swing.JLabel lblIcms1;
+    private javax.swing.JLabel lblImposto1;
+    private javax.swing.JLabel lblImposto2;
+    private javax.swing.JLabel lblImposto3;
     private javax.swing.JLabel lblIpi;
-    private javax.swing.JLabel lblIpi1;
     private javax.swing.JLabel lblIss;
-    private javax.swing.JLabel lblIss1;
     private javax.swing.JLabel lblValor;
-    private javax.swing.JLabel lblValorServico2;
-    private javax.swing.JLabel lblValorServico3;
+    private javax.swing.JLabel lblValorParcialx;
     private javax.swing.JLabel lblValorTotal;
-    private javax.swing.JLabel lblValorTotal1;
+    private javax.swing.JLabel lblValorTotalx;
     private javax.swing.JLabel lblestorno;
+    private javax.swing.JLabel lblestorno1;
     private javax.swing.JLabel lbltipoPag;
+    private javax.swing.JLabel lbltipoPag1;
     private javax.swing.JTextField txtCodVenda;
+    private javax.swing.JTextArea txtObservacao;
     // End of variables declaration//GEN-END:variables
 //</editor-fold>
 }

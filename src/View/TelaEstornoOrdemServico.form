@@ -40,10 +40,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -59,6 +56,37 @@
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="lbl1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lbl2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="lbl3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lbl4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lbl5" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lbl6" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lbl7" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lbl8" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lbl9" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="283" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,21 +104,38 @@
                   <Component id="jButton2" alignment="0" min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jScrollPane2" min="-2" pref="534" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="527" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="405" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblTipoPag" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblFKfuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblEstorno" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane3" min="-2" pref="780" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane3" min="-2" pref="719" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace pref="653" max="32767" attributes="0"/>
+              <EmptySpace pref="459" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl9" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -190,7 +235,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="cbCC" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cbCd" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbCD" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane4" alignment="0" min="-2" pref="630" max="-2" attributes="0"/>
@@ -277,7 +322,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cbD" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cbCC" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbCd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbCD" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -454,7 +499,7 @@
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="cbCd">
+            <Component class="javax.swing.JCheckBox" name="cbCD">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cart&#xe3;o de D&#xe9;bito"/>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -831,12 +876,12 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="lblDtEntrega" min="-2" pref="111" max="-2" attributes="0"/>
+                                              <Component id="lblDtEntregax" min="-2" pref="111" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="lblDtSolicitacao" min="-2" pref="111" max="-2" attributes="0"/>
+                                              <Component id="lblDtSolicitacaox" min="-2" pref="111" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -853,33 +898,41 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblCodVendedor1" min="-2" pref="67" max="-2" attributes="0"/>
+                                      <Component id="lblCodVendedorx" min="-2" pref="67" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="lblIcms8" min="-2" pref="69" max="-2" attributes="0"/>
+                                      <Component id="lblValorServicox" min="-2" pref="69" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                                       <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblSomaParcial1" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <Component id="lblSomaParcialx" min="-2" pref="80" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel32" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel34" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jCheckBox4" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jCheckBox5" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jCheckBox6" min="-2" max="-2" attributes="0"/>
-                                          </Group>
                                           <Component id="jPanel7" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="lblValorTotal1" min="-2" pref="131" max="-2" attributes="0"/>
+                                              <Component id="lblValorTotalx" min="-2" pref="131" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="lblDescontoGeralx" min="-2" pref="69" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="cbDx" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="cbCCx" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="cbCDx" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -890,13 +943,6 @@
                           </Group>
                       </Group>
                       <EmptySpace pref="158" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
-                          <Component id="lblIcms9" min="-2" pref="69" max="-2" attributes="0"/>
-                          <EmptySpace pref="604" max="32767" attributes="0"/>
-                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -919,12 +965,12 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblDtSolicitacao" min="-2" pref="15" max="-2" attributes="0"/>
+                                  <Component id="lblDtSolicitacaox" min="-2" pref="15" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblDtEntrega" min="-2" pref="15" max="-2" attributes="0"/>
+                                  <Component id="lblDtEntregax" min="-2" pref="15" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -938,7 +984,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCodVendedor1" min="-2" pref="15" max="-2" attributes="0"/>
+                          <Component id="lblCodVendedorx" min="-2" pref="15" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel11" min="-2" pref="30" max="-2" attributes="0"/>
@@ -952,20 +998,26 @@
                               <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="lblSomaParcial1" max="32767" attributes="0"/>
-                          <Component id="lblIcms8" max="32767" attributes="0"/>
+                          <Component id="lblSomaParcialx" max="32767" attributes="0"/>
+                          <Component id="lblValorServicox" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="16" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="lblDescontoGeralx" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jCheckBox4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCheckBox5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCheckBox6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbDx" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbCCx" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbCDx" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
@@ -978,16 +1030,9 @@
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel33" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblValorTotal1" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
+                          <Component id="lblValorTotalx" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="79" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="488" max="-2" attributes="0"/>
-                          <Component id="lblIcms9" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="269" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1006,6 +1051,9 @@
                       <Table columnCount="0" rowCount="0"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable29MouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1115,6 +1163,7 @@
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1135,19 +1184,19 @@
                 <Property name="text" type="java.lang.String" value="Data de Entrega :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox4">
+            <Component class="javax.swing.JCheckBox" name="cbDx">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dinheiro"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox5">
+            <Component class="javax.swing.JCheckBox" name="cbCCx">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cart&#xe3;o de Cr&#xe9;dito"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox6">
+            <Component class="javax.swing.JCheckBox" name="cbCDx">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cart&#xe3;o de D&#xe9;bito"/>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -1161,7 +1210,7 @@
                 <Property name="text" type="java.lang.String" value="Valor parcial de produtos:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblSomaParcial1">
+            <Component class="javax.swing.JLabel" name="lblSomaParcialx">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="18" style="0"/>
@@ -1192,7 +1241,7 @@
                 <Property name="text" type="java.lang.String" value="Valor Total:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblValorTotal1">
+            <Component class="javax.swing.JLabel" name="lblValorTotalx">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="24" style="1"/>
@@ -1324,18 +1373,18 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblIpi1" pref="83" max="32767" attributes="0"/>
+                                  <Component id="lblImposto3" pref="83" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblIcms1" max="32767" attributes="0"/>
+                                  <Component id="lblImposto1" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblIss1" max="32767" attributes="0"/>
+                                  <Component id="lblImposto2" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1348,18 +1397,18 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lblIcms1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblImposto1" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel39" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblIss1" min="-2" pref="16" max="-2" attributes="0"/>
+                              <Component id="lblImposto2" min="-2" pref="16" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel40" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblIpi1" alignment="0" min="-2" pref="17" max="-2" attributes="0"/>
+                              <Component id="lblImposto3" alignment="0" min="-2" pref="17" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -1367,7 +1416,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lblIcms1">
+                <Component class="javax.swing.JLabel" name="lblImposto1">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="14" style="0"/>
@@ -1390,7 +1439,7 @@
                     <Property name="text" type="java.lang.String" value="ICMS :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblIpi1">
+                <Component class="javax.swing.JLabel" name="lblImposto3">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="14" style="0"/>
@@ -1405,7 +1454,7 @@
                     <Property name="text" type="java.lang.String" value="IPI :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblIss1">
+                <Component class="javax.swing.JLabel" name="lblImposto2">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="14" style="0"/>
@@ -1414,35 +1463,35 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="lblIcms8">
+            <Component class="javax.swing.JLabel" name="lblValorServicox">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="14" style="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblIcms9">
+            <Component class="javax.swing.JLabel" name="lblDescontoGeralx">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="14" style="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblCodVendedor1">
+            <Component class="javax.swing.JLabel" name="lblCodVendedorx">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblDtEntrega">
+            <Component class="javax.swing.JLabel" name="lblDtEntregax">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblDtSolicitacao">
+            <Component class="javax.swing.JLabel" name="lblDtSolicitacaox">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="0"/>
@@ -1482,6 +1531,59 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblEstorno">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCancelar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Remover Item"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl6">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl7">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl8">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl9">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel1"/>
       </Properties>
