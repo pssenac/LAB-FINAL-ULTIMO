@@ -6,10 +6,17 @@
 package View;
 
 import Controller.ModeloTabela;
+import Controller.OrdemProdutosController;
+import Controller.vendaProdutosController;
 import Models.DAO;
+import Models.TabelaModelo2;
 import Models.Venda;
+import Models.VendaProdutos;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -19,11 +26,15 @@ import javax.swing.ListSelectionModel;
  * @author 03758479100
  */
 public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
-
+    
     String sql = "", tp = "", sql1 = "";
     double x = 0, z, vl, vl2, icms1, icms, iss1, iss2, ipi1, ipi2;
+    double x22 = 0, z22, vl22, vl222, icms122, icms22, iss122, iss222, ipi122, ipi222;
     ArrayList<Venda> vendas = new ArrayList<>();
     ArrayList dadosVendas = new ArrayList();
+    ArrayList dadosVendas2 = new ArrayList();
+    ArrayList<VendaProdutos> vendaProdutos = new ArrayList<>();
+    ArrayList<VendaProdutos> vendaProdutos2 = new ArrayList<>();
     
     public TelaEstornoOrdemServico() {
         initComponents();
@@ -60,7 +71,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         cbD = new javax.swing.JCheckBox();
         cbCC = new javax.swing.JCheckBox();
-        cbCd = new javax.swing.JCheckBox();
+        cbCD = new javax.swing.JCheckBox();
         jLabel23 = new javax.swing.JLabel();
         lblSomaParcial = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -109,15 +120,15 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         txtDescricao1 = new javax.swing.JTextArea();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
+        cbDx = new javax.swing.JCheckBox();
+        cbCCx = new javax.swing.JCheckBox();
+        cbCDx = new javax.swing.JCheckBox();
         jLabel30 = new javax.swing.JLabel();
-        lblSomaParcial1 = new javax.swing.JLabel();
+        lblSomaParcialx = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        lblValorTotal1 = new javax.swing.JLabel();
+        lblValorTotalx = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
@@ -127,22 +138,32 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         lblIcms6 = new javax.swing.JLabel();
         lblIcms7 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        lblIcms1 = new javax.swing.JLabel();
+        lblImposto1 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        lblIpi1 = new javax.swing.JLabel();
+        lblImposto3 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
-        lblIss1 = new javax.swing.JLabel();
-        lblIcms8 = new javax.swing.JLabel();
-        lblIcms9 = new javax.swing.JLabel();
-        lblCodVendedor1 = new javax.swing.JLabel();
-        lblDtEntrega = new javax.swing.JLabel();
-        lblDtSolicitacao = new javax.swing.JLabel();
+        lblImposto2 = new javax.swing.JLabel();
+        lblValorServicox = new javax.swing.JLabel();
+        lblDescontoGeralx = new javax.swing.JLabel();
+        lblCodVendedorx = new javax.swing.JLabel();
+        lblDtEntregax = new javax.swing.JLabel();
+        lblDtSolicitacaox = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         lblTipoPag = new javax.swing.JLabel();
         lblFKfuncionario = new javax.swing.JLabel();
         lblEstorno = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
+        lbl1 = new javax.swing.JLabel();
+        lbl2 = new javax.swing.JLabel();
+        lbl3 = new javax.swing.JLabel();
+        lbl4 = new javax.swing.JLabel();
+        lbl5 = new javax.swing.JLabel();
+        lbl6 = new javax.swing.JLabel();
+        lbl7 = new javax.swing.JLabel();
+        lbl8 = new javax.swing.JLabel();
+        lbl9 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("ESTORNO DE ORDEM DE SERVIÇO");
@@ -208,8 +229,8 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         cbCC.setText("Cartão de Crédito");
         cbCC.setEnabled(false);
 
-        cbCd.setText("Cartão de Débito");
-        cbCd.setEnabled(false);
+        cbCD.setText("Cartão de Débito");
+        cbCD.setEnabled(false);
 
         jLabel23.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel23.setText("Valor parcial de produtos:");
@@ -423,7 +444,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbCC)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbCd))
+                        .addComponent(cbCD))
                     .addComponent(jLabel18)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -493,7 +514,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbD)
                     .addComponent(cbCC)
-                    .addComponent(cbCd))
+                    .addComponent(cbCD))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -521,6 +542,11 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
 
             }
         ));
+        jTable29.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable29MouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(jTable29);
 
         jLabel24.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -554,6 +580,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
 
         txtDescricao1.setColumns(20);
         txtDescricao1.setRows(5);
+        txtDescricao1.setEnabled(false);
         jScrollPane6.setViewportView(txtDescricao1);
 
         jLabel28.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -562,19 +589,19 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         jLabel29.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel29.setText("Data de Entrega :");
 
-        jCheckBox4.setText("Dinheiro");
-        jCheckBox4.setEnabled(false);
+        cbDx.setText("Dinheiro");
+        cbDx.setEnabled(false);
 
-        jCheckBox5.setText("Cartão de Crédito");
-        jCheckBox5.setEnabled(false);
+        cbCCx.setText("Cartão de Crédito");
+        cbCCx.setEnabled(false);
 
-        jCheckBox6.setText("Cartão de Débito");
-        jCheckBox6.setEnabled(false);
+        cbCDx.setText("Cartão de Débito");
+        cbCDx.setEnabled(false);
 
         jLabel30.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel30.setText("Valor parcial de produtos:");
 
-        lblSomaParcial1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblSomaParcialx.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         jLabel31.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel31.setText("Valor do Serviço :");
@@ -585,7 +612,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         jLabel33.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel33.setText("Valor Total:");
 
-        lblValorTotal1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lblValorTotalx.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
 
         jLabel34.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel34.setText("Tipo de Pagamento:");
@@ -646,7 +673,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        lblIcms1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblImposto1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jLabel38.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel38.setText("ISS :");
@@ -654,12 +681,12 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         jLabel39.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel39.setText("ICMS :");
 
-        lblIpi1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblImposto3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jLabel40.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel40.setText("IPI :");
 
-        lblIss1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblImposto2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -671,16 +698,16 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel40)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblIpi1, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                        .addComponent(lblImposto3, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                         .addGap(18, 18, 18))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel39)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblIcms1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblImposto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel38)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblIss1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblImposto2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(12, 12, 12)))
                 .addGap(57, 57, 57))
         );
@@ -689,28 +716,28 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIcms1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblImposto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel39))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel38)
-                    .addComponent(lblIss1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblImposto2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel40)
-                    .addComponent(lblIpi1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblImposto3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lblIcms8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblValorServicox.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        lblIcms9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblDescontoGeralx.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        lblCodVendedor1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblCodVendedorx.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        lblDtEntrega.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblDtEntregax.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        lblDtSolicitacao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblDtSolicitacaox.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -738,11 +765,11 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addComponent(jLabel29)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblDtEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblDtEntregax, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addComponent(jLabel28)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblDtSolicitacao, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(lblDtSolicitacaox, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jLabel11)
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel13)
@@ -755,39 +782,39 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel24)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblCodVendedor1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblCodVendedorx, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel31)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblIcms8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblValorServicox, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(31, 31, 31)
                                 .addComponent(jLabel30)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblSomaParcial1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblSomaParcialx, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel32)
                                     .addComponent(jLabel34)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(jCheckBox4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jCheckBox5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jCheckBox6))
                                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addComponent(jLabel33)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblValorTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(lblValorTotalx, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                                .addComponent(jLabel32)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(lblDescontoGeralx, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                                .addComponent(cbDx)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(cbCCx)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbCDx)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(17, 17, 17)))
                 .addContainerGap(158, Short.MAX_VALUE))
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel6Layout.createSequentialGroup()
-                    .addGap(115, 115, 115)
-                    .addComponent(lblIcms9, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(604, Short.MAX_VALUE)))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -805,11 +832,11 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel28)
-                            .addComponent(lblDtSolicitacao, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblDtSolicitacaox, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel29)
-                            .addComponent(lblDtEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblDtEntregax, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
@@ -819,7 +846,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24)
-                    .addComponent(lblCodVendedor1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCodVendedorx, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -831,19 +858,23 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel31)
                         .addComponent(jLabel30))
-                    .addComponent(lblSomaParcial1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblIcms8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblSomaParcialx, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblValorServicox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel32)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel32)
+                                .addGap(0, 4, Short.MAX_VALUE))
+                            .addComponent(lblDescontoGeralx, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel34)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox4)
-                            .addComponent(jCheckBox5)
-                            .addComponent(jCheckBox6))
+                            .addComponent(cbDx)
+                            .addComponent(cbCCx)
+                            .addComponent(cbCDx))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21))
@@ -852,13 +883,8 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel33)
-                    .addComponent(lblValorTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblValorTotalx, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(79, Short.MAX_VALUE))
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel6Layout.createSequentialGroup()
-                    .addGap(488, 488, 488)
-                    .addComponent(lblIcms9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(269, 269, 269)))
         );
 
         jScrollPane3.setViewportView(jPanel6);
@@ -879,6 +905,31 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
 
         lblEstorno.setText("jLabel1");
 
+        btnCancelar.setText("Remover Item");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        lbl1.setText("jLabel1");
+
+        lbl2.setText("jLabel1");
+
+        lbl3.setText("jLabel1");
+
+        lbl4.setText("jLabel1");
+
+        lbl5.setText("jLabel1");
+
+        lbl6.setText("jLabel1");
+
+        lbl7.setText("jLabel1");
+
+        lbl8.setText("jLabel1");
+
+        lbl9.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -896,9 +947,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1)))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(31, 31, 31)
                                 .addComponent(lblTipoPag)
@@ -909,6 +958,32 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbl1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbl3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl5))
+                    .addComponent(btnCancelar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl9)
+                .addGap(283, 283, 283))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -921,18 +996,32 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                             .addComponent(txtCodOrdem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(405, 405, 405)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTipoPag)
                             .addComponent(lblFKfuncionario)
-                            .addComponent(lblEstorno))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(653, Short.MAX_VALUE))
+                            .addComponent(lblEstorno)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(btnCancelar))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 459, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl1)
+                    .addComponent(lbl2)
+                    .addComponent(lbl3)
+                    .addComponent(lbl4)
+                    .addComponent(lbl5)
+                    .addComponent(lbl6)
+                    .addComponent(lbl7)
+                    .addComponent(lbl8)
+                    .addComponent(lbl9))
+                .addContainerGap())
         );
 
         pack();
@@ -940,54 +1029,110 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Botões"> 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        sql = "select * from ordemServico inner join ordemlote on IdServico = FKordemServico "
-                + "inner join lote on FKlote = idLote "
+        sql = "select * from cliente inner join ordemServico on idcliente = FKcliente "
+                + "inner join ordemlote on IdServico = FKordemServico inner join lote on FKlote = idLote "
                 + "inner join produtos on FKprodutos = idprodutos where codigoOrdem = " + txtCodOrdem.getText() + "";
         preencherTabela(sql);
         lblEstorno.setText(txtCodOrdem.getText());
         tp = lblTipoPag.getText();
         if (tp.equals("1")) {
             cbD.setSelected(true);
+            cbDx.setSelected(true);
         }
         if (tp.equals("2")) {
             cbCC.setSelected(true);
+            cbCCx.setSelected(true);
         }
         if (tp.equals("3")) {
-            cbCd.setSelected(true);
+            cbCD.setSelected(true);
+            cbCDx.setSelected(true);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable29MouseClicked
+        int linhaSelecionada = jTable29.getSelectedRow();
+        lbl1.setText(jTable29.getValueAt(linhaSelecionada, 0).toString());
+        lbl2.setText(jTable29.getValueAt(linhaSelecionada, 1).toString());
+        lbl3.setText(jTable29.getValueAt(linhaSelecionada, 2).toString());
+        lbl4.setText(jTable29.getValueAt(linhaSelecionada, 3).toString());
+        lbl5.setText(jTable29.getValueAt(linhaSelecionada, 4).toString());
+        lbl6.setText(jTable29.getValueAt(linhaSelecionada, 5).toString());
+        lbl7.setText(jTable29.getValueAt(linhaSelecionada, 6).toString());
+        lbl8.setText(jTable29.getValueAt(linhaSelecionada, 7).toString());
+        lbl9.setText(jTable29.getValueAt(linhaSelecionada, 8).toString());
+    }//GEN-LAST:event_jTable29MouseClicked
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        if (!lbl1.getText().equals("")) {
+            //remove do arraylist pessoas os dados da linha selecionada.
+            int x = vendas.size();
+            for (int i = 0; i < vendas.size(); i++) {
+                if (vendas.get(i).getA().equals(lbl1.getText())) {
+                    vendas.remove(i);
+                    vendaProdutos.remove(i);
+                }
+            }
+
+            //esvazia o arraylist dadosPessoa e, conseguentemente, esvazia a jTable.
+            LimparTabela2();
+            //preenche a jTable com os dados restantes do arraylist pessoas.
+            for (int i = 0; i < vendas.size(); i++) {
+                preencherTabela2(vendas.get(i).getA(), vendas.get(i).getB(), vendas.get(i).getC(), vendas.get(i).getD(), vendas.get(i).getE(),
+                        vendas.get(i).getF(), vendas.get(i).getG(), vendas.get(i).getH(), vendas.get(i).getJ());
+            }
+        }
+    }//GEN-LAST:event_btnCancelarActionPerformed
 //</editor-fold>
 
-     public void preencherTabela(String SQL) {
+    public void preencherTabela(String SQL) {
+        OrdemProdutosController op = new OrdemProdutosController();
+        vendaProdutosController vd = new vendaProdutosController();
         DAO dao = new DAO();
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"Produto", "Descrição", "Valor Unitário", "QTD", "Desconto", "Valor",
-            "DescontoOrdem", "TipoServico","Valor Serviço", "Data Solicitacao","Data Entrega", 
-            "Prioridade","Decrição","TipoPagamento", "codigoFuncionario", "Icms", "Iss", "Ipi","ValorTotal","CPFcli","CodigoOrdem",
-            "FKcliente","FKfuncionario", "Observacao","estorno"};
+            "DescontoOrdem", "TipoServico", "Valor Serviço", "Data Solicitacao", "Data Entrega",
+            "Prioridade", "Decrição", "TipoPagamento", "codigoFuncionario", "Icms", "Iss", "Ipi", "ValorTotal", "CPFcli", "CodigoOrdem",
+            "FKcliente", "FKfuncionario", "Observacao", "estorno", "Nome Cliente", "Contato"};
+        
+        String[] colunas2 = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "Valor", "Icms", "ISS", "IPI", "idLote"};
+        
         dao.executaSQL(SQL);
         try {
             dao.resultSet.first();
-           
+            
             do {
-                dadosVendas.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorVenda"),
-                    dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial")});
+                double qq = Double.parseDouble(dao.resultSet.getString("valorParcial"));
+                double qr = qq * (-1);
                 
+                dadosVendas.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("valorVenda"),
+                    dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial"),
+                    dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"),
+                    dao.resultSet.getString("FKlote")});
+                
+                vendas.add(vd.preencherArray3(dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("valorVenda"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
+                        dao.resultSet.getString("valorParcial"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"), dao.resultSet.getString("FKlote")));
+                
+                vendaProdutos.add(vd.preencherCarrinho(dao.resultSet.getString("FKlote"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
+                        dao.resultSet.getString("valorParcial"), dao.resultSet.getString("codigoOrdem")));
+                
+                vendaProdutos2.add(vd.preencherCarrinho(dao.resultSet.getString("FKlote"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
+                        Double.toString(qr), dao.resultSet.getString("codigoOrdem")));
                 
                 dados.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorVenda"),
-                    dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial"),
-                    dao.resultSet.getString("desconto"), dao.resultSet.getString("tipoServico"),dao.resultSet.getString("valorServico"), 
-                    dao.resultSet.getString("dataSolitacao"), dao.resultSet.getString("dataEntrega"), dao.resultSet.getString("prioridade"),dao.resultSet.getString("descricao"),
-                    dao.resultSet.getString("tipoPagamento"), dao.resultSet.getString("codigoFuncionario"),dao.resultSet.getString("icms"), dao.resultSet.getString("iss"),                    
-                    dao.resultSet.getString("ipi"), dao.resultSet.getString("valorTotal"), dao.resultSet.getString("cpfCliente"),dao.resultSet.getString("codigoOrdem"),
-                    dao.resultSet.getString("FKfuncionario"),dao.resultSet.getString("observacao"),dao.resultSet.getString("estorno")});
-
+                    dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), Double.toString(qr),
+                    dao.resultSet.getString("desconto"), dao.resultSet.getString("tipoServico"), dao.resultSet.getString("valorServico"),
+                    dao.resultSet.getString("dataSolitacao"), dao.resultSet.getString("dataEntrega"), dao.resultSet.getString("prioridade"), dao.resultSet.getString("descricao"),
+                    dao.resultSet.getString("tipoPagamento"), dao.resultSet.getString("codigoFuncionario"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"),
+                    dao.resultSet.getString("ipi"), dao.resultSet.getString("valorTotal"), dao.resultSet.getString("cpfCliente"), dao.resultSet.getString("codigoOrdem"),
+                    dao.resultSet.getString("FKfuncionario"), dao.resultSet.getString("observacao"), dao.resultSet.getString("estorno"), dao.resultSet.getString("nomeCliente"),
+                    dao.resultSet.getString("telefone"), dao.resultSet.getString("celular")});
+                
                 x = Double.parseDouble(dao.resultSet.getString("valorParcial"));
                 z += x;
-                if(dao.resultSet.getString("desconto").equals(null)){
+                if (dao.resultSet.getString("desconto").equals(null)) {
                     vl2 = 0;
-                }else{
-                vl2 = Double.parseDouble(dao.resultSet.getString("desconto"));
+                } else {
+                    vl2 = Double.parseDouble(dao.resultSet.getString("desconto"));
                 }
                 vl = z - (z * vl2 / 100);
                 icms = Double.parseDouble(dao.resultSet.getString("icms"));
@@ -996,9 +1141,12 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                 iss2 += iss1;
                 ipi1 = Double.parseDouble(dao.resultSet.getString("ipi"));
                 ipi2 += ipi1;
-
+                
+                String aux = dao.resultSet.getString("telefone");
+                String aux2 = dao.resultSet.getString("celular");
+                
                 lblVlparcial.setText(Double.toString(z));
-                lblValorTotal.setText(Double.toString(vl));
+                lblValorTotal.setText(Double.toString(vl * (-1)));
                 lblIcms.setText(Double.toString(icms1));
                 lblIss.setText(Double.toString(iss2));
                 lblIpi.setText(Double.toString(ipi2));
@@ -1009,15 +1157,21 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                 txtCodOrdem.setText(dao.resultSet.getString("codigoOrdem"));
                 lblFKfuncionario.setText(dao.resultSet.getString("FKfuncionario"));
                 lblTipoPag.setText(dao.resultSet.getString("tipoPagamento"));
-
+                lblNomeCli.setText(dao.resultSet.getString("nomeCliente"));
+                lblTelCli.setText(aux + " / " + aux2);
+                cbServico.setSelectedItem(dao.resultSet.getString("tipoServico"));
+                int pp = Integer.parseInt(dao.resultSet.getString("prioridade"));
+                cbPrioridade.setSelectedIndex(pp);
+                txtDescricao.setText(dao.resultSet.getString("descricao"));
+                
             } while (dao.resultSet.next());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex + "Ñ DEU");
         }
-
+        
         ModeloTabela model = new ModeloTabela(dados, colunas);
         jTable2.setModel(model);
-
+        
         jTable2.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
         jTable2.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
         jTable2.getColumnModel().getColumn(1).setPreferredWidth(50);
@@ -1068,28 +1222,204 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         jTable2.getColumnModel().getColumn(23).setResizable(false);
         jTable2.getColumnModel().getColumn(24).setPreferredWidth(50);
         jTable2.getColumnModel().getColumn(24).setResizable(false);
+        jTable2.getColumnModel().getColumn(25).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
+        jTable2.getColumnModel().getColumn(25).setResizable(true);  // não permite alterar o tamanho da coluna
+        jTable2.getColumnModel().getColumn(26).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(26).setResizable(false);
+        // jTable2.getColumnModel().getColumn(27).setPreferredWidth(50);
+        //  jTable2.getColumnModel().getColumn(27).setResizable(false);
         
-
         jTable2.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
         jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+        
+        TabelaModelo2 models = new TabelaModelo2(dadosVendas, colunas2);
+        jTable29.setModel(models);
+        
+        jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
+        jTable29.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
+        jTable29.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(1).setResizable(false);
+        jTable29.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(2).setResizable(false);
+        jTable29.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(3).setResizable(false);
+        jTable29.getColumnModel().getColumn(4).setPreferredWidth(80);
+        jTable29.getColumnModel().getColumn(4).setResizable(false);
+        jTable29.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(5).setResizable(false);
+        jTable29.getColumnModel().getColumn(6).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(6).setResizable(false);
+        jTable29.getColumnModel().getColumn(7).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(7).setResizable(false);
+        jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(8).setResizable(false);
+        
+        jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+        jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+        jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+        
     }
     //</editor-fold>
-    
+
+    // <editor-fold defaultstate="collapsed" desc="preencher tabela 2">   
+    public void preencherTabela2(String produto, String vlUnitario, String qtd, String desconto, String vlParcial, String icmsx, String issx, String ipix, String idLote) {
+        //Calcular valores
+        //calcular impostos
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date agr = new Date();
+        
+        String[] colunas = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "Valor", "icsm", "iss", "ipi", "idLote"};
+        try {
+            dadosVendas2.add(new Object[]{produto, vlUnitario, qtd, desconto, vlParcial, icmsx, issx, ipix, idLote});
+            
+            x22 = Double.parseDouble(vlParcial);
+            z22 += x22;
+            vl222 = Double.parseDouble(desconto);
+            z22 = z22 - (z22 * vl222 / 100);
+            icms122 = Double.parseDouble(icmsx);
+            icms22 += icms122;
+            iss122 = Double.parseDouble(issx);
+            iss222 += iss122;
+            ipi122 = Double.parseDouble(ipix);
+            ipi222 += ipi122;
+            
+            lblImposto1.setText(Double.toString(icms22));
+            lblImposto2.setText(Double.toString(iss222));
+            lblImposto3.setText(Double.toString(ipi222));
+            lblValorTotalx.setText(Double.toString(z22));
+            lblDescontoGeralx.setText(Double.toString(vl222));
+            lblDtEntregax.setText(lblDataEntrega.getText());
+            lblDtSolicitacaox.setText(lblDataSolicitacao.getText());
+            lblCodVendedorx.setText(lblCodVendedor.getText());
+            lblNomeCli1.setText(lblNomeCli.getText());
+            lblTelCli1.setText(lblTelCli.getText());
+            txtDescricao1.setText(txtDescricao.getText());
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        
+        TabelaModelo2 model = new TabelaModelo2(dadosVendas2, colunas);
+        jTable29.setModel(model);
+        
+        jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
+        jTable29.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
+        jTable29.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(1).setResizable(false);
+        jTable29.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(2).setResizable(false);
+        jTable29.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(3).setResizable(false);
+        jTable29.getColumnModel().getColumn(4).setPreferredWidth(80);
+        jTable29.getColumnModel().getColumn(4).setResizable(false);
+        jTable29.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(5).setResizable(false);
+        jTable29.getColumnModel().getColumn(6).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(6).setResizable(false);
+        jTable29.getColumnModel().getColumn(7).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(7).setResizable(false);
+        jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(8).setResizable(false);
+        
+        jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+        jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+        jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Tipo Pagamento">
+    public void tipoPagamento() {
+        if (cbD.isSelected()) {
+            tp = "1";
+            //  txtDinheiro.setEnabled(true);
+            //  txtTroco.setEnabled(true);
+            // txtCartao.setEnabled(false);
+        } else {
+            tp = "0";
+            // txtDinheiro.setEnabled(false);
+            // txtTroco.setEnabled(false);
+            // txtCartao.setEnabled(false);
+        }
+        if (cbCC.isSelected()) {
+            tp = "2";
+            // txtDinheiro.setEnabled(false);
+            // txtTroco.setEnabled(false);
+            // txtCartao.setEnabled(false);
+        }
+        if (cbCD.isSelected()) {
+            tp = "3";
+            // txtDinheiro.setEnabled(false);
+            //  txtTroco.setEnabled(false);
+            // txtCartao.setEnabled(false);
+        }
+        if (cbD.isSelected() && cbCC.isSelected() || cbD.isSelected() && cbCD.isSelected()) {
+            tp = "1";
+            // txtDinheiro.setEnabled(true);
+            //  txtTroco.setEnabled(true);
+            // txtCartao.setEnabled(true);
+        }
+        if (cbD.isSelected() && cbCC.isSelected() && cbCD.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Opção inválida");
+            //   cbD.setSelected(false);
+            // cbCC.setSelected(false);
+            // cbCD.setSelected(false);
+            // txtDinheiro.setEnabled(false);
+            //  txtTroco.setEnabled(false);
+            //  txtCartao.setEnabled(false);
+        }
+        
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Limpar tabela 2">
+    public void LimparTabela2() {
+        String[] colunas = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "Valor", "icsm", "iss", "ipi", "idLote"};
+        
+        dadosVendas2.removeAll(dadosVendas2);
+        //evazia a jTable, add dadosPessoa (sem dados).
+        ModeloTabela modelo = new ModeloTabela(dadosVendas2, colunas);
+        jTable29.setModel(modelo); // recebe o modelo criado
+        jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);
+        jTable29.getColumnModel().getColumn(0).setResizable(false);
+        jTable29.getColumnModel().getColumn(1).setPreferredWidth(150);  // define o tamanho das colunas e se será redimensionado ou não
+        jTable29.getColumnModel().getColumn(1).setResizable(true);  // não permite alterar o tamanho da coluna 
+        jTable29.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(2).setResizable(false);
+        jTable29.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(3).setResizable(false);
+        jTable29.getColumnModel().getColumn(4).setPreferredWidth(80);
+        jTable29.getColumnModel().getColumn(4).setResizable(false);
+        jTable29.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(5).setResizable(false);
+        jTable29.getColumnModel().getColumn(6).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(6).setResizable(false);
+        jTable29.getColumnModel().getColumn(7).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(7).setResizable(false);
+        jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
+        jTable29.getColumnModel().getColumn(8).setResizable(false);
+        
+        jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+        jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+        jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+    //</editor-fold>
+
     // <editor-fold defaultstate="collapsed" desc="JAVA - do not modify"> 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JCheckBox cbCC;
-    private javax.swing.JCheckBox cbCd;
+    private javax.swing.JCheckBox cbCCx;
+    private javax.swing.JCheckBox cbCD;
+    private javax.swing.JCheckBox cbCDx;
     private javax.swing.JCheckBox cbD;
+    private javax.swing.JCheckBox cbDx;
     private javax.swing.JComboBox<String> cbPrioridade;
     private javax.swing.JComboBox<String> cbPrioridade1;
     private javax.swing.JComboBox<String> cbServico;
     private javax.swing.JComboBox<String> cbServico1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1145,38 +1475,47 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable29;
+    private javax.swing.JLabel lbl1;
+    private javax.swing.JLabel lbl2;
+    private javax.swing.JLabel lbl3;
+    private javax.swing.JLabel lbl4;
+    private javax.swing.JLabel lbl5;
+    private javax.swing.JLabel lbl6;
+    private javax.swing.JLabel lbl7;
+    private javax.swing.JLabel lbl8;
+    private javax.swing.JLabel lbl9;
     private javax.swing.JLabel lblCodVendedor;
-    private javax.swing.JLabel lblCodVendedor1;
+    private javax.swing.JLabel lblCodVendedorx;
     private javax.swing.JLabel lblDataEntrega;
     private javax.swing.JLabel lblDataSolicitacao;
     private javax.swing.JLabel lblDescontoGeral;
-    private javax.swing.JLabel lblDtEntrega;
-    private javax.swing.JLabel lblDtSolicitacao;
+    private javax.swing.JLabel lblDescontoGeralx;
+    private javax.swing.JLabel lblDtEntregax;
+    private javax.swing.JLabel lblDtSolicitacaox;
     private javax.swing.JLabel lblEstorno;
     private javax.swing.JLabel lblFKfuncionario;
     private javax.swing.JLabel lblIcms;
-    private javax.swing.JLabel lblIcms1;
     private javax.swing.JLabel lblIcms2;
     private javax.swing.JLabel lblIcms3;
     private javax.swing.JLabel lblIcms4;
     private javax.swing.JLabel lblIcms5;
     private javax.swing.JLabel lblIcms6;
     private javax.swing.JLabel lblIcms7;
-    private javax.swing.JLabel lblIcms8;
-    private javax.swing.JLabel lblIcms9;
+    private javax.swing.JLabel lblImposto1;
+    private javax.swing.JLabel lblImposto2;
+    private javax.swing.JLabel lblImposto3;
     private javax.swing.JLabel lblIpi;
-    private javax.swing.JLabel lblIpi1;
     private javax.swing.JLabel lblIss;
-    private javax.swing.JLabel lblIss1;
     private javax.swing.JLabel lblNomeCli;
     private javax.swing.JLabel lblNomeCli1;
     private javax.swing.JLabel lblSomaParcial;
-    private javax.swing.JLabel lblSomaParcial1;
+    private javax.swing.JLabel lblSomaParcialx;
     private javax.swing.JLabel lblTelCli;
     private javax.swing.JLabel lblTelCli1;
     private javax.swing.JLabel lblTipoPag;
+    private javax.swing.JLabel lblValorServicox;
     private javax.swing.JLabel lblValorTotal;
-    private javax.swing.JLabel lblValorTotal1;
+    private javax.swing.JLabel lblValorTotalx;
     private javax.swing.JLabel lblVlServico;
     private javax.swing.JLabel lblVlparcial;
     private javax.swing.JTextField txtCodOrdem;

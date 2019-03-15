@@ -915,6 +915,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
     //</editor-fold>
 //(String produto, String qtd, String desconto, String vlUnitario, String vlParcial, String icms, String iss, String ipi, String idLote)
+  
     // <editor-fold defaultstate="collapsed" desc="preencher tabela 2">   
     public void preencherTabela2(String produto, String vlUnitario, String qtd, String desconto, String vlParcial, String icmsx, String issx, String ipix, String idLote) {
         //Calcular valores
@@ -977,6 +978,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
     }
     //</editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="preencher tabela 2">
 
     //</editor-fold>
