@@ -37,7 +37,7 @@
 		<fieldDescription><![CDATA[Campo que determina o Imposto sobre Circulação de Mercadorias e Serviços]]></fieldDescription>
 	</field>
 	<field name="iss" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[Campo que determina o Imposto Sobre Serviços ]]></fieldDescription>
+		<fieldDescription><![CDATA[Campo que determina o Imposto Sobre Serviços]]></fieldDescription>
 	</field>
 	<field name="ipi" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[Campo que determina o Imposto sobre Produtos Industrializados]]></fieldDescription>
@@ -94,12 +94,10 @@
 		<fieldDescription><![CDATA[Chave primária da tabela Funcionário]]></fieldDescription>
 	</field>
 	<field name="nomeFuncionarios" class="java.lang.String">
-		<fieldDescription><![CDATA[Nome do Funcionário
-]]></fieldDescription>
+		<fieldDescription><![CDATA[Nome do Funcionário]]></fieldDescription>
 	</field>
 	<field name="dataNascimento" class="java.sql.Date">
-		<fieldDescription><![CDATA[data de nascimento do funcionario
-]]></fieldDescription>
+		<fieldDescription><![CDATA[data de nascimento do funcionario]]></fieldDescription>
 	</field>
 	<field name="codigoFuncionarios" class="java.lang.String">
 		<fieldDescription><![CDATA[Campo que determina o Codigo do funcionário]]></fieldDescription>
@@ -123,6 +121,10 @@
 				</textElement>
 				<text><![CDATA[Manutençao e Reparo de Computadores & Notebooks]]></text>
 			</staticText>
+			<image>
+				<reportElement x="10" y="1" width="98" height="50" uuid="efaacf19-6f95-4736-9354-c3dfd29890e9"/>
+				<imageExpression><![CDATA["C:\\Users\\Marcio\\Desktop\\IMG-20190215-WA0001.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

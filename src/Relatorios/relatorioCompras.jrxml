@@ -40,7 +40,7 @@
 		<fieldDescription><![CDATA[Campo que determina o Imposto sobre Circulação de Mercadorias e Serviços]]></fieldDescription>
 	</field>
 	<field name="iss" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[Campo que determina o Imposto Sobre Serviços ]]></fieldDescription>
+		<fieldDescription><![CDATA[Campo que determina o Imposto Sobre Serviços]]></fieldDescription>
 	</field>
 	<field name="ipi" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[Campo que determina o Imposto sobre Produtos Industrializados]]></fieldDescription>
@@ -61,7 +61,7 @@
 		<fieldDescription><![CDATA[Descrição do Produto]]></fieldDescription>
 	</field>
 	<field name="armazemLocal" class="java.lang.String">
-		<fieldDescription><![CDATA[Posição do produto no estoque fisico ]]></fieldDescription>
+		<fieldDescription><![CDATA[Posição do produto no estoque fisico]]></fieldDescription>
 	</field>
 	<field name="tipoProduto" class="java.lang.String">
 		<fieldDescription><![CDATA[Determina o tipo de produto]]></fieldDescription>
@@ -70,16 +70,13 @@
 		<fieldDescription><![CDATA[Chave primária da tabela fornecedor]]></fieldDescription>
 	</field>
 	<field name="cnpjCpf" class="java.lang.String">
-		<fieldDescription><![CDATA[Cnpf do respectivo Fornecedor
-]]></fieldDescription>
+		<fieldDescription><![CDATA[Cnpf do respectivo Fornecedor]]></fieldDescription>
 	</field>
 	<field name="nomeEmpresa" class="java.lang.String">
-		<fieldDescription><![CDATA[Nome do respectivo Fornecedor ao ser registrado na Receita Federel
-]]></fieldDescription>
+		<fieldDescription><![CDATA[Nome do respectivo Fornecedor ao ser registrado na Receita Federel]]></fieldDescription>
 	</field>
 	<field name="nomeFantasia" class="java.lang.String">
-		<fieldDescription><![CDATA[Nome do respectivo fornecedor
-]]></fieldDescription>
+		<fieldDescription><![CDATA[Nome do respectivo fornecedor]]></fieldDescription>
 	</field>
 	<field name="ramo" class="java.lang.String">
 		<fieldDescription><![CDATA[ramo do do respectivo fornecedor]]></fieldDescription>
@@ -97,8 +94,7 @@
 		<fieldDescription><![CDATA[email do representante do respectivo fornecedor]]></fieldDescription>
 	</field>
 	<field name="FKendereco" class="java.lang.Integer">
-		<fieldDescription><![CDATA[Chave estrangeira que referencia o Endereço do Fornecedor
-]]></fieldDescription>
+		<fieldDescription><![CDATA[Chave estrangeira que referencia o Endereço do Fornecedor]]></fieldDescription>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -106,19 +102,23 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="175" y="0" width="194" height="39" uuid="6a539ce6-bd4f-4a09-98e9-6f763f389e5d"/>
+				<reportElement x="175" y="0" width="210" height="39" uuid="6a539ce6-bd4f-4a09-98e9-6f763f389e5d"/>
 				<textElement>
-					<font size="24"/>
+					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[LabyTechSystem]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="122" y="39" width="310" height="20" uuid="a5bd299c-bc24-4ccd-a80c-3bb99e40434a"/>
+				<reportElement x="133" y="29" width="326" height="20" uuid="a5bd299c-bc24-4ccd-a80c-3bb99e40434a"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Manutença e Reparo de Computadores & Notebooks]]></text>
+				<text><![CDATA[Manutenção e Reparo de Computadores & Notebooks]]></text>
 			</staticText>
+			<image>
+				<reportElement x="15" y="0" width="76" height="59" uuid="9e056dea-77fa-4ebc-8cfb-549c5eb297b8"/>
+				<imageExpression><![CDATA["C:\\Users\\Marcio\\Desktop\\IMG-20190215-WA0001.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -166,7 +166,7 @@
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
-			<textField>
+			<textField pattern="dd/MM/yyyy">
 				<reportElement x="0" y="0" width="79" height="20" uuid="527cb3cf-06cb-419c-84c1-83a4d1d1783d"/>
 				<textFieldExpression><![CDATA[$F{dataCompra}]]></textFieldExpression>
 			</textField>

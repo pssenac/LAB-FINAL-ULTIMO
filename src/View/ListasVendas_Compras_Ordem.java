@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -132,6 +133,11 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtData2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtData2FocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -466,7 +472,13 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_BtnPDFActionPerformed
-
+    
+    //<editor-fold defaultstate="collapsed" desc=" MÉTODO APAGAR DATA">     
+    private void txtData2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtData2FocusLost
+       txtData2.setFocusLostBehavior(JFormattedTextField.COMMIT);
+    }//GEN-LAST:event_txtData2FocusLost
+    //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA LISTAR VENDAS">
     public void preencherTabela1(String SQL) {
         DAO dao = new DAO();
@@ -521,12 +533,23 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         try {
             dao.resultSet.first();
             do {
-                dados.add(new Object[]{dao.resultSet.getString("IdServico"), dao.resultSet.getString("dataSolitacao"), 
-                    dao.resultSet.getString("dataEntrega"),dao.resultSet.getString("descricao"), dao.resultSet.getString("valorServico"),
+                 String A = dao.resultSet.getString("dataSolitacao").substring(0, 4);
+                 String B = dao.resultSet.getString("dataSolitacao").substring(5, 7);
+                 String C = dao.resultSet.getString("dataSolitacao").substring(8, 10);
+                 String dataE = C + "/" + B + "/" + A;
+                 
+                 String D = dao.resultSet.getString("dataEntrega").substring(0, 4);
+                 String E = dao.resultSet.getString("dataEntrega").substring(5, 7);
+                 String F = dao.resultSet.getString("dataEntrega").substring(8, 10);
+                 String dataF = F + "/" + E + "/" + D;
+                
+                
+                dados.add(new Object[]{dao.resultSet.getString("IdServico"), dataE, 
+                    dataF,dao.resultSet.getString("descricao"), dao.resultSet.getString("valorServico"),
                     dao.resultSet.getString("nomeCliente"), dao.resultSet.getString("celular"), dao.resultSet.getString("nomeFuncionarios")});
             } while (dao.resultSet.next());
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex + "Ñ DEU");
+           JOptionPane.showMessageDialog(null, "DATA NAO ENCONTRADA");
         }
 
         ModeloTabela model = new ModeloTabela(dados, colunas);
@@ -560,7 +583,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
     public void preencherTabela2(String SQL) {
         DAO dao = new DAO();
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"dataCompra", "nomeProduto", "descricao", "nomeEmpresa", "qtdEstoque", "valorCusto", "marca"};
+        String[] colunas = new String[]{"idLote", "dataCompra", "nomeProduto", "descricao", "fornecedor", "qtdEstoque", "valorCusto", "marca"};
         dao.executaSQL(SQL);
         try {
             dao.resultSet.first();
@@ -570,25 +593,27 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
                 String C = dao.resultSet.getString("dataCompra").substring(8, 10);
                 String dataD = C + "/" + B + "/" + A;
 
-                dados.add(new Object[]{dataD, dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"),
-                    dao.resultSet.getString("nomeEmpresa"), dao.resultSet.getString("qtdEstoque"), dao.resultSet.getString("valorCusto")});
+                dados.add(new Object[]{ dao.resultSet.getString("idLote"),dataD, dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"),
+                    dao.resultSet.getString("nomeEmpresa"), dao.resultSet.getString("qtdEstoque"), dao.resultSet.getString("valorCusto"),
+                    dao.resultSet.getString("marca")});
+            
             } while (dao.resultSet.next());
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex + "Ñ DEU");
+            JOptionPane.showMessageDialog(null, "DATA NAO ENCONTRADA");
         }
 
         ModeloTabela model = new ModeloTabela(dados, colunas);
         jLista.setModel(model);
 
-        jLista.getColumnModel().getColumn(0).setPreferredWidth(50);  // define o tamanho das colunas e se será redimensionado ou não
+        jLista.getColumnModel().getColumn(0).setPreferredWidth(100);  // define o tamanho das colunas e se será redimensionado ou não
         jLista.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
-        jLista.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jLista.getColumnModel().getColumn(1).setPreferredWidth(150);
         jLista.getColumnModel().getColumn(1).setResizable(false);
-        jLista.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jLista.getColumnModel().getColumn(2).setPreferredWidth(150);
         jLista.getColumnModel().getColumn(2).setResizable(false);
-        jLista.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jLista.getColumnModel().getColumn(3).setPreferredWidth(150);
         jLista.getColumnModel().getColumn(3).setResizable(false);
-        jLista.getColumnModel().getColumn(4).setPreferredWidth(110);
+        jLista.getColumnModel().getColumn(4).setPreferredWidth(150);
         jLista.getColumnModel().getColumn(4).setResizable(false);
         jLista.getColumnModel().getColumn(5).setPreferredWidth(150);
         jLista.getColumnModel().getColumn(5).setResizable(false);
@@ -603,7 +628,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
     }
     //</editor-fold>
 
-   //<editor-fold defaultstate="collapsed" desc=" MÉTODO LIMPAR LISTAR VENDAS">
+    //<editor-fold defaultstate="collapsed" desc=" MÉTODO LIMPAR LISTAR VENDAS">
     public void LimparTabela() {
 
         ArrayList dados = new ArrayList();
