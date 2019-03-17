@@ -263,7 +263,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
             case 2:
 
-                LimparTabela2();
+              
                 String frm1 = "  /  /    ";
 
                 if (txtData2.getText().equals(frm1)) {
@@ -272,6 +272,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
                     String B = txtData1.getText().substring(3, 5);
                     String C = txtData1.getText().substring(6, 10);
                     String data1 = C + "-" + B + "-" + A;
+                    JOptionPane.showMessageDialog(null, data1);
 
                     sql = "select * from lote inner join produtos on idprodutos = FKprodutos "
                             + "inner join fornecedor on idFornecedor = FKfornecedor "
@@ -301,7 +302,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
             case 3:
 
-                LimparTabela3();
+                
                 String frm2 = "  /  /    ";
 
                 if (txtData2.getText().equals(frm2)) {
@@ -312,10 +313,9 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
                     String data1 = C + "-" + B + "-" + A;
 
                     
-                    JOptionPane.showMessageDialog(null, data1);
                     
                     
-                    
+                  
                     sql = "select * from ordemservico inner join cliente on idcliente "
                             + "= FKcliente inner join funcionario on idFuncionario = "
                             + "FKfuncionario where dataSolitacao = '" + data1 + "'";
@@ -327,15 +327,17 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
                     String B = txtData1.getText().substring(3, 5);
                     String C = txtData1.getText().substring(6, 10);
                     String data1 = C + "-" + B + "-" + A;
+                    JOptionPane.showMessageDialog(null, data1);
 
                     String D = txtData2.getText().substring(0, 2);
                     String E = txtData2.getText().substring(3, 5);
                     String F = txtData2.getText().substring(6, 10);
                     String data2 = F + "-" + E + "-" + D;
+                    JOptionPane.showMessageDialog(null, data2);
 
-                    String sql = "sselect * from ordemservico inner join cliente on "
+                    String sql = "select * from ordemservico inner join cliente on "
                             + "idcliente = FKcliente inner join funcionario on idFuncionario "
-                            + "= FKfuncionario WHERE dataSolitacao '" + data1 + "' and '" + data2 + "'";
+                            + "= FKfuncionario WHERE dataSolitacao BETWEEN '" + data1 + "' and '" + data2 + "'";
 
                     preencherTabela3(sql);
                     break;
@@ -398,9 +400,9 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
                     String B = txtData1.getText().substring(3, 5);
                     String C = txtData1.getText().substring(6, 10);
                     String data1 = C + "-" + B + "-" + A;
-                    String frm = "  /  /    ";
+                    String frm2 = "  /  /    ";
 
-                    if (txtData2.getText().equals(frm)) {
+                    if (txtData2.getText().equals(frm2)) {
 
                         DAO.executaSQL("select * from lote inner join produtos on idprodutos = FKprodutos inner join fornecedor on idFornecedor = FKfornecedor WHERE dataCompra ='" + data1 + "'");
                         JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
@@ -409,7 +411,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
                         jv.setVisible(true);
 
-                    } else if (!txtData1.getText().equals(frm) && !frm.equals(txtData2.getText())) {
+                    } else if (!txtData1.getText().equals(frm2) && !frm2.equals(txtData2.getText())) {
 
                         String J = txtData1.getText().substring(0, 2);
                         String Q = txtData1.getText().substring(3, 5);
@@ -437,10 +439,28 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
             case 3:
 
-                int linhaSelecionada = jLista.getSelectedRow();  // pega a linha selecionada
+               int linhaSelecionada = jLista.getSelectedRow();  // pega a linha selecionada
                String os = jLista.getValueAt(linhaSelecionada, 0).toString();
-                JOptionPane.showMessageDialog(null, os);
+               
+               try {
 
+                   
+
+                        DAO.executaSQL("select * from ordemservico inner join cliente on idcliente = FKcliente inner join funcionario on idFuncionario = FKfuncionario WHERE idServico = '" + os + "'");
+                        JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
+                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/Marcio/Desktop/pssenac/LAB-FINAL-ULTIMO/src/Relatorios/RelatorioOrdemdeServico.jasper", new HashMap(), relatResul);
+                        JasperViewer jv = new JasperViewer(jpPrint, false);
+
+                        jv.setVisible(true);
+
+                   
+
+                } catch (JRException ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio!\nErro:" + ex);
+                }
+               
+               
+      
                 break;
 
         }
@@ -495,15 +515,15 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
     public void preencherTabela3(String SQL) {
         DAO dao = new DAO();
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"IdServico", "dataSolitacao", "dataEntrega", "tipoServico", "descricao", "valorTotal", "nomeCliente", "cpf",
-            "telefone"};
+        String[] colunas = new String[]{"IdServico", "dataSolitacao", "dataEntrega", "descricao", "valorServico", "nomeCliente", "celular",
+            "tecnico"};
         dao.executaSQL(SQL);
         try {
             dao.resultSet.first();
             do {
-                dados.add(new Object[]{dao.resultSet.getString("IdServico"), dao.resultSet.getString("dataSolitacao"), dao.resultSet.getString("dataEntrega"),
-                    dao.resultSet.getString("tipoServico"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorTotal"),
-                    dao.resultSet.getString("nomeCliente"), dao.resultSet.getString("cpf"), dao.resultSet.getString("telefone")});
+                dados.add(new Object[]{dao.resultSet.getString("IdServico"), dao.resultSet.getString("dataSolitacao"), 
+                    dao.resultSet.getString("dataEntrega"),dao.resultSet.getString("descricao"), dao.resultSet.getString("valorServico"),
+                    dao.resultSet.getString("nomeCliente"), dao.resultSet.getString("celular"), dao.resultSet.getString("nomeFuncionarios")});
             } while (dao.resultSet.next());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex + "Ñ DEU");
@@ -528,8 +548,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         jLista.getColumnModel().getColumn(6).setResizable(false);
         jLista.getColumnModel().getColumn(7).setPreferredWidth(150);
         jLista.getColumnModel().getColumn(7).setResizable(false);
-        jLista.getColumnModel().getColumn(8).setPreferredWidth(150);
-        jLista.getColumnModel().getColumn(8).setResizable(false);
+       
 
         jLista.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jLista.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
