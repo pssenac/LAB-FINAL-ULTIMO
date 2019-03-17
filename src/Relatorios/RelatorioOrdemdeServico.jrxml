@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioOrdemdeServico" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="57231198-3520-49de-8c00-5f53e80b9978">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from ordemservico inner join cliente on idcliente = FKcliente inner join funcionario on idFuncionario = FKfuncionario]]>
+	</queryString>
+	<field name="IdServico" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Chave primária da tabela 'Ordem Serviço']]></fieldDescription>
+	</field>
+	<field name="tipoServico" class="java.lang.String">
+		<fieldDescription><![CDATA[Campo que especifica o tipo de serviço]]></fieldDescription>
+	</field>
+	<field name="valorServico" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Valor a ser cobrado do Serviço]]></fieldDescription>
+	</field>
+	<field name="dataEntrega" class="java.sql.Date">
+		<fieldDescription><![CDATA[Data de entrega do Serviço]]></fieldDescription>
+	</field>
+	<field name="dataSolitacao" class="java.sql.Date">
+		<fieldDescription><![CDATA[Data em que a Ordem de Serviço foi agendada]]></fieldDescription>
+	</field>
+	<field name="prioridade" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Campo que determina o nivel prioridade do serviço]]></fieldDescription>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[Descrição do serviço a ser prestado]]></fieldDescription>
+	</field>
+	<field name="tipoPagamento" class="java.lang.String">
+		<fieldDescription><![CDATA[Determina o tipo de pagamento a ser realizado]]></fieldDescription>
+	</field>
+	<field name="codigoFuncionario" class="java.lang.String">
+		<fieldDescription><![CDATA[Campo que determina o responsável pelo serviço]]></fieldDescription>
+	</field>
+	<field name="icms" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Campo que determina o Imposto sobre Circulação de Mercadorias e Serviços]]></fieldDescription>
+	</field>
+	<field name="iss" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Campo que determina o Imposto Sobre Serviços ]]></fieldDescription>
+	</field>
+	<field name="ipi" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Campo que determina o Imposto sobre Produtos Industrializados]]></fieldDescription>
+	</field>
+	<field name="valorTotal" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Valor total na ordem de serviço]]></fieldDescription>
+	</field>
+	<field name="cpfCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[Campo que determina o cpf do cliente]]></fieldDescription>
+	</field>
+	<field name="codigoOrdem" class="java.lang.String">
+		<fieldDescription><![CDATA[Campo que determina o Código da ordem de serviço]]></fieldDescription>
+	</field>
+	<field name="FKcliente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Chave estrangeira que referencia a tabela 'Cliente']]></fieldDescription>
+	</field>
+	<field name="FKfuncionario" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Chave estrangeira que referencia a tabela 'Funcionario']]></fieldDescription>
+	</field>
+	<field name="observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[Campo destinado a Observações do Serviço]]></fieldDescription>
+	</field>
+	<field name="estorno" class="java.lang.String">
+		<fieldDescription><![CDATA[Campo que faz referencia ao codigo de ordem de servico, em csao de estorno da ordem de serviço]]></fieldDescription>
+	</field>
+	<field name="desconto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idcliente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Chave primária da tabela Cliente.]]></fieldDescription>
+	</field>
+	<field name="nomeCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[Nome do Cliente]]></fieldDescription>
+	</field>
+	<field name="cpf" class="java.lang.String">
+		<fieldDescription><![CDATA[Cpf do Cliente]]></fieldDescription>
+	</field>
+	<field name="rg" class="java.lang.String">
+		<fieldDescription><![CDATA[Rg do Cliente]]></fieldDescription>
+	</field>
+	<field name="telefone" class="java.lang.String">
+		<fieldDescription><![CDATA[telefone fixo do Cliente]]></fieldDescription>
+	</field>
+	<field name="celular" class="java.lang.String">
+		<fieldDescription><![CDATA[celular do Cliente]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[email do Cliente]]></fieldDescription>
+	</field>
+	<field name="FKendereco" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Chave estrangeira que referencia a tabela 'Endereco']]></fieldDescription>
+	</field>
+	<field name="idFuncionario" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Chave primária da tabela Funcionário]]></fieldDescription>
+	</field>
+	<field name="nomeFuncionarios" class="java.lang.String">
+		<fieldDescription><![CDATA[Nome do Funcionário
+]]></fieldDescription>
+	</field>
+	<field name="dataNascimento" class="java.sql.Date">
+		<fieldDescription><![CDATA[data de nascimento do funcionario
+]]></fieldDescription>
+	</field>
+	<field name="codigoFuncionarios" class="java.lang.String">
+		<fieldDescription><![CDATA[Campo que determina o Codigo do funcionário]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="183" y="0" width="202" height="31" uuid="d95f0313-2f41-465d-b503-f3d6dda92e79"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LabyTechSystem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="108" y="31" width="364" height="20" uuid="5980bc13-98bd-42e7-8af8-487370fa47a9"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Manutençao e Reparo de Computadores & Notebooks]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="164" height="20" uuid="d967bb6a-3fd1-41ba-a4a5-ad898d6c6fc2"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Ordem de Serviço:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="146" y="0" width="48" height="20" uuid="3535188d-698f-40f1-b205-92f0b4df0eb0"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IdServico}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="146" y="0" width="111" height="20" uuid="07abd768-e454-4be3-aaf4-3433183ea9fe"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="0" width="64" height="20" uuid="b72f174a-372a-4092-8419-ffe756ca9902"/>
+				<text><![CDATA[Data Entrega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="0" width="62" height="20" uuid="c3e29842-9428-4a94-8da4-95891787f7e7"/>
+				<text><![CDATA[Tecnico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="0" width="81" height="20" uuid="1611962c-e51b-4afa-8669-272e83b73d95"/>
+				<text><![CDATA[Valor Serviço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="338" y="0" width="60" height="20" uuid="471884ea-896e-453d-8fb5-d41e5205c5f5"/>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="82" height="20" uuid="9db45f87-d864-40f2-ab52-876bbe497003"/>
+				<text><![CDATA[Data Solcitação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="0" width="47" height="20" uuid="34f3d1a1-6579-4591-a768-5d511f5afe1d"/>
+				<text><![CDATA[Celular]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="398" y="20" width="47" height="20" uuid="bf1ad7f6-d71e-4169-a504-fb9c2947ec18"/>
+				<textFieldExpression><![CDATA[$F{celular}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="20" width="82" height="20" uuid="76d5f17a-c322-44e2-8141-0cba1ca11658"/>
+				<textFieldExpression><![CDATA[$F{dataSolitacao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="82" y="20" width="64" height="20" uuid="4a75ce5d-45f8-4125-8e83-34fc2b8ecd2b"/>
+				<textFieldExpression><![CDATA[$F{dataEntrega}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="20" width="61" height="20" uuid="1ea0ef5a-8344-4fc6-9b2e-a1406535f4c8"/>
+				<textFieldExpression><![CDATA[$F{nomeFuncionarios}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="257" y="20" width="81" height="20" uuid="f5d8cad2-b44b-4e88-af11-20f8e6a30c00"/>
+				<textFieldExpression><![CDATA[$F{valorServico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="146" y="20" width="111" height="20" uuid="6d9e248d-a029-47b9-a309-6cef28460605"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="338" y="20" width="61" height="20" uuid="25e8af17-dcc5-4f8c-b8da-d53018c050ed"/>
+				<textFieldExpression><![CDATA[$F{nomeCliente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

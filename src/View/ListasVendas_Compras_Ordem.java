@@ -8,30 +8,26 @@ package View;
 import Controller.ClienteController;
 import Controller.ModeloTabela;
 import Models.DAO;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-
-/*import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
-/*
 
-
- */
-/**
- *
- * @author 03758479100
- */
 public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
     int aux;
     String sql = "";
+    private PreparedStatement statement;
+    private ResultSet resultSet;
     public DAO DAO;
     public ClienteController cli;
 
@@ -202,7 +198,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         if (cbOs.isSelected()) {
             cbLv.setSelected(false);
             cbLc.setSelected(false);
-            aux = 2;
+            aux = 3;
         }
 
     }//GEN-LAST:event_cbOsActionPerformed
@@ -219,7 +215,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         if (cbLc.isSelected()) {
             cbOs.setSelected(false);
             cbLv.setSelected(false);
-            aux = 3;
+            aux = 2;
         }
     }//GEN-LAST:event_cbLcActionPerformed
 
@@ -267,60 +263,188 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
             case 2:
 
+                LimparTabela2();
+                String frm1 = "  /  /    ";
+
+                if (txtData2.getText().equals(frm1)) {
+
+                    String A = txtData1.getText().substring(0, 2);
+                    String B = txtData1.getText().substring(3, 5);
+                    String C = txtData1.getText().substring(6, 10);
+                    String data1 = C + "-" + B + "-" + A;
+
+                    sql = "select * from lote inner join produtos on idprodutos = FKprodutos "
+                            + "inner join fornecedor on idFornecedor = FKfornecedor "
+                            + "where dataCompra = '" + data1 + "'";
+                    preencherTabela2(sql);
+
+                } else if (!txtData1.getText().equals(frm1) && !frm1.equals(txtData2.getText())) {
+
+                    String A = txtData1.getText().substring(0, 2);
+                    String B = txtData1.getText().substring(3, 5);
+                    String C = txtData1.getText().substring(6, 10);
+                    String data1 = C + "-" + B + "-" + A;
+
+                    String D = txtData2.getText().substring(0, 2);
+                    String E = txtData2.getText().substring(3, 5);
+                    String F = txtData2.getText().substring(6, 10);
+                    String data2 = F + "-" + E + "-" + D;
+
+                    String sql = "select * from lote inner join produtos on idprodutos = FKprodutos "
+                            + "inner join fornecedor on idFornecedor = FKfornecedor WHERE dataCompra "
+                            + "BETWEEN '" + data1 + "' and '" + data2 + "'";
+
+                    preencherTabela2(sql);
+
+                }
                 break;
 
             case 3:
 
-                break;
+                LimparTabela3();
+                String frm2 = "  /  /    ";
+
+                if (txtData2.getText().equals(frm2)) {
+
+                    String A = txtData1.getText().substring(0, 2);
+                    String B = txtData1.getText().substring(3, 5);
+                    String C = txtData1.getText().substring(6, 10);
+                    String data1 = C + "-" + B + "-" + A;
+
+                    
+                    JOptionPane.showMessageDialog(null, data1);
+                    
+                    
+                    
+                    sql = "select * from ordemservico inner join cliente on idcliente "
+                            + "= FKcliente inner join funcionario on idFuncionario = "
+                            + "FKfuncionario where dataSolitacao = '" + data1 + "'";
+                    preencherTabela3(sql);
+
+                } else if (!txtData1.getText().equals(frm2) && !frm2.equals(txtData2.getText())) {
+
+                    String A = txtData1.getText().substring(0, 2);
+                    String B = txtData1.getText().substring(3, 5);
+                    String C = txtData1.getText().substring(6, 10);
+                    String data1 = C + "-" + B + "-" + A;
+
+                    String D = txtData2.getText().substring(0, 2);
+                    String E = txtData2.getText().substring(3, 5);
+                    String F = txtData2.getText().substring(6, 10);
+                    String data2 = F + "-" + E + "-" + D;
+
+                    String sql = "sselect * from ordemservico inner join cliente on "
+                            + "idcliente = FKcliente inner join funcionario on idFuncionario "
+                            + "= FKfuncionario WHERE dataSolitacao '" + data1 + "' and '" + data2 + "'";
+
+                    preencherTabela3(sql);
+                    break;
+                }
 
         }
     }//GEN-LAST:event_btnPesquisListaActionPerformed
 
     private void BtnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPDFActionPerformed
-        /*        try {
+        switch (aux) {
+            case 1:
+                try {
 
-            String A = txtData1.getText().substring(0, 2);
-            String B = txtData1.getText().substring(3, 5);
-            String C = txtData1.getText().substring(6, 10);
-            String data1 = C + "-" + B + "-" + A;
-            String frm = "  /  /    ";
+                    String A = txtData1.getText().substring(0, 2);
+                    String B = txtData1.getText().substring(3, 5);
+                    String C = txtData1.getText().substring(6, 10);
+                    String data1 = C + "-" + B + "-" + A;
+                    String frm = "  /  /    ";
 
-            if (txtData2.getText().equals(frm)) {
+                    if (txtData2.getText().equals(frm)) {
 
-                DAO.executaSQL("select * from vendas inner join lotevendas on FKvendas = codVenda inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos WHERE dataVenda ='" + data1 + "'");
-                JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
-                JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/04513422165/Desktop/PJSENAC/LAB-FINAL-ULTIMO/src/Relatorios/relatoriosVendas.jasper", new HashMap(), relatResul);
-                JasperViewer jv = new JasperViewer(jpPrint,false);
-           
-                jv.setVisible(true);
+                        DAO.executaSQL("select * from vendas inner join lotevendas on FKvendas = codVenda inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos WHERE dataVenda ='" + data1 + "'");
+                        JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
+                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/Marcio/Desktop/pssenac/LAB-FINAL-ULTIMO/src/Relatorios/relatoriosVendas.jasper", new HashMap(), relatResul);
+                        JasperViewer jv = new JasperViewer(jpPrint, false);
 
-            } else if (!txtData1.getText().equals(frm) && !frm.equals(txtData2.getText())) {
+                        jv.setVisible(true);
 
-                String J = txtData1.getText().substring(0, 2);
-                String Q = txtData1.getText().substring(3, 5);
-                String P = txtData1.getText().substring(6, 10);
-                String dt1 = P + "-" + Q + "-" + J;
+                    } else if (!txtData1.getText().equals(frm) && !frm.equals(txtData2.getText())) {
 
-                String D = txtData2.getText().substring(0, 2);
-                String E = txtData2.getText().substring(3, 5);
-                String F = txtData2.getText().substring(6, 10);
-                String data2 = F + "-" + E + "-" + D;
+                        String J = txtData1.getText().substring(0, 2);
+                        String Q = txtData1.getText().substring(3, 5);
+                        String P = txtData1.getText().substring(6, 10);
+                        String dt1 = P + "-" + Q + "-" + J;
 
-                DAO.executaSQL("select * from vendas inner join lotevendas on FKvendas = codVenda inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos WHERE dataVenda BETWEEN '" + dt1 + "' and '" + data2 + "'");
-                JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
-                JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/04513422165/Desktop/PJSENAC/LAB-FINAL-ULTIMO/src/Relatorios/relatoriosVendas.jasper", new HashMap(), relatResul);
-                JasperViewer jv = new JasperViewer(jpPrint,false);
-               
-                jv.setVisible(true);
-                
-                
-            }
+                        String D = txtData2.getText().substring(0, 2);
+                        String E = txtData2.getText().substring(3, 5);
+                        String F = txtData2.getText().substring(6, 10);
+                        String data2 = F + "-" + E + "-" + D;
 
-        } catch (JRException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio!\nErro:" + ex);
+                        DAO.executaSQL("select * from vendas inner join lotevendas on FKvendas = codVenda inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos WHERE dataVenda BETWEEN '" + dt1 + "' and '" + data2 + "'");
+                        JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
+                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/Marcio/Desktop/pssenac/LAB-FINAL-ULTIMO/src/Relatorios/relatoriosVendas.jasper", new HashMap(), relatResul);
+                        JasperViewer jv = new JasperViewer(jpPrint, false);
+
+                        jv.setVisible(true);
+
+                    }
+
+                } catch (JRException ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio!\nErro:" + ex);
+
+                }
+
+                break;
+            case 2:
+                try {
+
+                    String A = txtData1.getText().substring(0, 2);
+                    String B = txtData1.getText().substring(3, 5);
+                    String C = txtData1.getText().substring(6, 10);
+                    String data1 = C + "-" + B + "-" + A;
+                    String frm = "  /  /    ";
+
+                    if (txtData2.getText().equals(frm)) {
+
+                        DAO.executaSQL("select * from lote inner join produtos on idprodutos = FKprodutos inner join fornecedor on idFornecedor = FKfornecedor WHERE dataCompra ='" + data1 + "'");
+                        JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
+                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/Marcio/Desktop/pssenac/LAB-FINAL-ULTIMO/src/Relatorios/relatorioCompras.jasper", new HashMap(), relatResul);
+                        JasperViewer jv = new JasperViewer(jpPrint, false);
+
+                        jv.setVisible(true);
+
+                    } else if (!txtData1.getText().equals(frm) && !frm.equals(txtData2.getText())) {
+
+                        String J = txtData1.getText().substring(0, 2);
+                        String Q = txtData1.getText().substring(3, 5);
+                        String P = txtData1.getText().substring(6, 10);
+                        String dt1 = P + "-" + Q + "-" + J;
+
+                        String D = txtData2.getText().substring(0, 2);
+                        String E = txtData2.getText().substring(3, 5);
+                        String F = txtData2.getText().substring(6, 10);
+                        String data2 = F + "-" + E + "-" + D;
+
+                        DAO.executaSQL("select * from lote inner join produtos on idprodutos = FKprodutos inner join fornecedor on idFornecedor = FKfornecedor WHERE dataCompra BETWEEN '" + dt1 + "' and '" + data2 + "'");
+                        JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
+                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/Marcio/Desktop/pssenac/LAB-FINAL-ULTIMO/src/Relatorios/relatorioCompras.jasper", new HashMap(), relatResul);
+                        JasperViewer jv = new JasperViewer(jpPrint, false);
+
+                        jv.setVisible(true);
+
+                    }
+
+                } catch (JRException ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio!\nErro:" + ex);
+                }
+                break;
+
+            case 3:
+
+                int linhaSelecionada = jLista.getSelectedRow();  // pega a linha selecionada
+               String os = jLista.getValueAt(linhaSelecionada, 0).toString();
+                JOptionPane.showMessageDialog(null, os);
+
+                break;
 
         }
-         */
+
     }//GEN-LAST:event_BtnPDFActionPerformed
 
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA LISTAR VENDAS">
@@ -342,7 +466,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
                     dao.resultSet.getString("qtd"), dao.resultSet.getString("valorParcial"), dao.resultSet.getString("codigoVenda")});
             } while (dao.resultSet.next());
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex + "Ñ DEU");
+            JOptionPane.showMessageDialog(null, "DATA NAO ENCONTRADA");
         }
 
         ModeloTabela model = new ModeloTabela(dados, colunas);
@@ -367,85 +491,68 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA LISTAR ORDEM DE SERVIÇOS">
-    public void preencherTabela2(String SQL) {
-        DAO dao = new DAO();
-        ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Id", "nome", "Cpf", "Rg", "Telefone", "celular", "email", "fkend",
-            "idEndereço", "Cep", "bairro", "logradouro", "complemento", "numero", "cidade", "estado"};
-        dao.executaSQL(SQL);
-        try {
-            dao.resultSet.first();
-            do {
-                dados.add(new Object[]{dao.resultSet.getString("idcliente"), dao.resultSet.getString("nomeCliente"), dao.resultSet.getString("cpf"),
-                    dao.resultSet.getString("rg"), dao.resultSet.getString("telefone"), dao.resultSet.getString("celular"),
-                    dao.resultSet.getString("email"), dao.resultSet.getString("FKendereco"), dao.resultSet.getString("idendereco"),
-                    dao.resultSet.getString("cep"), dao.resultSet.getString("bairro"), dao.resultSet.getString("logradouro"),
-                    dao.resultSet.getString("complemento"), dao.resultSet.getString("numero"), dao.resultSet.getString("cidade"),
-                    dao.resultSet.getString("estado")});
-            } while (dao.resultSet.next());
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex + "Ñ DEU");
-        }
-
-        ModeloTabela model = new ModeloTabela(dados, colunas);
-        jLista.setModel(model);
-
-        jLista.getColumnModel().getColumn(0).setPreferredWidth(50);  // define o tamanho das colunas e se será redimensionado ou não
-        jLista.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
-        jLista.getColumnModel().getColumn(1).setPreferredWidth(50);
-        jLista.getColumnModel().getColumn(1).setResizable(false);
-        jLista.getColumnModel().getColumn(2).setPreferredWidth(50);
-        jLista.getColumnModel().getColumn(2).setResizable(false);
-        jLista.getColumnModel().getColumn(3).setPreferredWidth(50);
-        jLista.getColumnModel().getColumn(3).setResizable(false);
-        jLista.getColumnModel().getColumn(4).setPreferredWidth(110);
-        jLista.getColumnModel().getColumn(4).setResizable(false);
-        jLista.getColumnModel().getColumn(5).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(5).setResizable(false);
-        jLista.getColumnModel().getColumn(6).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(6).setResizable(false);
-        jLista.getColumnModel().getColumn(7).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(7).setResizable(false);
-        jLista.getColumnModel().getColumn(8).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(8).setResizable(false);
-        jLista.getColumnModel().getColumn(9).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(9).setResizable(false);
-        jLista.getColumnModel().getColumn(10).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(10).setResizable(false);
-        jLista.getColumnModel().getColumn(11).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(11).setResizable(false);
-        jLista.getColumnModel().getColumn(12).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(12).setResizable(false);
-        jLista.getColumnModel().getColumn(13).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(13).setResizable(false);
-        jLista.getColumnModel().getColumn(14).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(14).setResizable(false);
-        jLista.getColumnModel().getColumn(15).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(15).setResizable(false);
-
-        jLista.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
-        jLista.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
-        jLista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA LISTAR COMPAS">
+    //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA ORDEM DE SERVICO">
     public void preencherTabela3(String SQL) {
         DAO dao = new DAO();
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Id", "nome", "Cpf", "Rg", "Telefone", "celular", "email", "fkend",
-            "idEndereço", "Cep", "bairro", "logradouro", "complemento", "numero", "cidade", "estado"};
+        String[] colunas = new String[]{"IdServico", "dataSolitacao", "dataEntrega", "tipoServico", "descricao", "valorTotal", "nomeCliente", "cpf",
+            "telefone"};
         dao.executaSQL(SQL);
         try {
             dao.resultSet.first();
             do {
-                dados.add(new Object[]{dao.resultSet.getString("idcliente"), dao.resultSet.getString("nomeCliente"), dao.resultSet.getString("cpf"),
-                    dao.resultSet.getString("rg"), dao.resultSet.getString("telefone"), dao.resultSet.getString("celular"),
-                    dao.resultSet.getString("email"), dao.resultSet.getString("FKendereco"), dao.resultSet.getString("idendereco"),
-                    dao.resultSet.getString("cep"), dao.resultSet.getString("bairro"), dao.resultSet.getString("logradouro"),
-                    dao.resultSet.getString("complemento"), dao.resultSet.getString("numero"), dao.resultSet.getString("cidade"),
-                    dao.resultSet.getString("estado")});
+                dados.add(new Object[]{dao.resultSet.getString("IdServico"), dao.resultSet.getString("dataSolitacao"), dao.resultSet.getString("dataEntrega"),
+                    dao.resultSet.getString("tipoServico"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorTotal"),
+                    dao.resultSet.getString("nomeCliente"), dao.resultSet.getString("cpf"), dao.resultSet.getString("telefone")});
+            } while (dao.resultSet.next());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex + "Ñ DEU");
+        }
+
+        ModeloTabela model = new ModeloTabela(dados, colunas);
+        jLista.setModel(model);
+
+        jLista.getColumnModel().getColumn(0).setPreferredWidth(150);  // define o tamanho das colunas e se será redimensionado ou não
+        jLista.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
+        jLista.getColumnModel().getColumn(1).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(1).setResizable(false);
+        jLista.getColumnModel().getColumn(2).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(2).setResizable(false);
+        jLista.getColumnModel().getColumn(3).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(3).setResizable(false);
+        jLista.getColumnModel().getColumn(4).setPreferredWidth(110);
+        jLista.getColumnModel().getColumn(4).setResizable(false);
+        jLista.getColumnModel().getColumn(5).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(5).setResizable(false);
+        jLista.getColumnModel().getColumn(6).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(6).setResizable(false);
+        jLista.getColumnModel().getColumn(7).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(7).setResizable(false);
+        jLista.getColumnModel().getColumn(8).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(8).setResizable(false);
+
+        jLista.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+        jLista.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+        jLista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA LISTAR COMPRAS">
+    public void preencherTabela2(String SQL) {
+        DAO dao = new DAO();
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"dataCompra", "nomeProduto", "descricao", "nomeEmpresa", "qtdEstoque", "valorCusto", "marca"};
+        dao.executaSQL(SQL);
+        try {
+            dao.resultSet.first();
+            do {
+                String A = dao.resultSet.getString("dataCompra").substring(0, 4);
+                String B = dao.resultSet.getString("dataCompra").substring(5, 7);
+                String C = dao.resultSet.getString("dataCompra").substring(8, 10);
+                String dataD = C + "/" + B + "/" + A;
+
+                dados.add(new Object[]{dataD, dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"),
+                    dao.resultSet.getString("nomeEmpresa"), dao.resultSet.getString("qtdEstoque"), dao.resultSet.getString("valorCusto")});
             } while (dao.resultSet.next());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex + "Ñ DEU");
@@ -464,28 +571,12 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         jLista.getColumnModel().getColumn(3).setResizable(false);
         jLista.getColumnModel().getColumn(4).setPreferredWidth(110);
         jLista.getColumnModel().getColumn(4).setResizable(false);
-        jLista.getColumnModel().getColumn(5).setPreferredWidth(-1);
+        jLista.getColumnModel().getColumn(5).setPreferredWidth(150);
         jLista.getColumnModel().getColumn(5).setResizable(false);
-        jLista.getColumnModel().getColumn(6).setPreferredWidth(-1);
+        jLista.getColumnModel().getColumn(6).setPreferredWidth(150);
         jLista.getColumnModel().getColumn(6).setResizable(false);
-        jLista.getColumnModel().getColumn(7).setPreferredWidth(-1);
+        jLista.getColumnModel().getColumn(7).setPreferredWidth(150);
         jLista.getColumnModel().getColumn(7).setResizable(false);
-        jLista.getColumnModel().getColumn(8).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(8).setResizable(false);
-        jLista.getColumnModel().getColumn(9).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(9).setResizable(false);
-        jLista.getColumnModel().getColumn(10).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(10).setResizable(false);
-        jLista.getColumnModel().getColumn(11).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(11).setResizable(false);
-        jLista.getColumnModel().getColumn(12).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(12).setResizable(false);
-        jLista.getColumnModel().getColumn(13).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(13).setResizable(false);
-        jLista.getColumnModel().getColumn(14).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(14).setResizable(false);
-        jLista.getColumnModel().getColumn(15).setPreferredWidth(-1);
-        jLista.getColumnModel().getColumn(15).setResizable(false);
 
         jLista.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jLista.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
@@ -493,11 +584,11 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA LISTAR VENDAS">
+   //<editor-fold defaultstate="collapsed" desc=" MÉTODO LIMPAR LISTAR VENDAS">
     public void LimparTabela() {
-        DAO dao = new DAO();
+
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"cod", "dataVenda", "nomeProduto", "qtd", "valorParcial", "coVenda"};
+        String[] colunas = new String[]{"cod", "dataVenda", "nomeProduto", "qtd", "valorParcial", "codVenda"};
 
         dados.add(new Object[]{"", "", "", "", "", ""});
         dados.removeAll(dados);
@@ -524,6 +615,77 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc=" MÉTODO LIMPAR LISTAR COMPRAS">
+    public void LimparTabela2() {
+
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"dataCompra", "nomeProduto", "descricao", "nomeEmpresa", "qtdEstoque", "valorCusto", "marca"};
+
+        dados.add(new Object[]{"", "", "", "", "", "", "", ""});
+        dados.removeAll(dados);
+
+        ModeloTabela model = new ModeloTabela(dados, colunas);
+        jLista.setModel(model);
+
+        jLista.getColumnModel().getColumn(0).setPreferredWidth(50);  // define o tamanho das colunas e se será redimensionado ou não
+        jLista.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
+        jLista.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jLista.getColumnModel().getColumn(1).setResizable(false);
+        jLista.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jLista.getColumnModel().getColumn(2).setResizable(false);
+        jLista.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jLista.getColumnModel().getColumn(3).setResizable(false);
+        jLista.getColumnModel().getColumn(4).setPreferredWidth(110);
+        jLista.getColumnModel().getColumn(4).setResizable(false);
+        jLista.getColumnModel().getColumn(5).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(5).setResizable(false);
+        jLista.getColumnModel().getColumn(6).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(6).setResizable(false);
+        jLista.getColumnModel().getColumn(7).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(7).setResizable(false);
+
+        jLista.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+        jLista.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+        jLista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" MÉTODO LIMPAR TABELA ORDEM DE SERVICO">
+    public void LimparTabela3() {
+
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"IdServico", "dataSolitacao", "dataEntrega", "tipoServico", "descricao", "valorTotal", "nomeCliente", "cpf",
+            "telefone"};
+
+        dados.add(new Object[]{"", "", "", "", "", "", "", "", ""});
+        dados.removeAll(dados);
+        ModeloTabela model = new ModeloTabela(dados, colunas);
+        jLista.setModel(model);
+
+        jLista.getColumnModel().getColumn(0).setPreferredWidth(50);  // define o tamanho das colunas e se será redimensionado ou não
+        jLista.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
+        jLista.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jLista.getColumnModel().getColumn(1).setResizable(false);
+        jLista.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jLista.getColumnModel().getColumn(2).setResizable(false);
+        jLista.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jLista.getColumnModel().getColumn(3).setResizable(false);
+        jLista.getColumnModel().getColumn(4).setPreferredWidth(110);
+        jLista.getColumnModel().getColumn(4).setResizable(false);
+        jLista.getColumnModel().getColumn(5).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(5).setResizable(false);
+        jLista.getColumnModel().getColumn(6).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(6).setResizable(false);
+        jLista.getColumnModel().getColumn(7).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(7).setResizable(false);
+        jLista.getColumnModel().getColumn(8).setPreferredWidth(150);
+        jLista.getColumnModel().getColumn(8).setResizable(false);
+
+        jLista.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+        jLista.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+        jLista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+    }
+    //</editor-fold>
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnPDF;
