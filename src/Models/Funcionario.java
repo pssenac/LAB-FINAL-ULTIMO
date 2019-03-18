@@ -14,7 +14,8 @@ public class Funcionario {
     private String telFuncionario;
     private String celFuncionario;
     private String emailFuncionario;
-    private String dataNascFuncionario;
+    private String dataNascFuncionario, codigoFuncionario;
+    
 
     public String getIdFuncionario() {
         return idFuncionario;
@@ -78,6 +79,20 @@ public class Funcionario {
 
     public void setDataNascFuncionario(String dataNascFuncionario) {
         this.dataNascFuncionario = dataNascFuncionario;
+    }
+
+    /**
+     * @return the codigoFuncionario
+     */
+    public String getCodigoFuncionario() {
+        return codigoFuncionario;
+    }
+
+    /**
+     * @param codigoFuncionario the codigoFuncionario to set
+     */
+    public void setCodigoFuncionario(String codigoFuncionario) {
+        this.codigoFuncionario = codigoFuncionario;
     }
    
 

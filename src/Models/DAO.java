@@ -461,36 +461,53 @@ public class DAO {
 //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR FUNCIONARIO E USUARIO">
     public String atualizarFuncionarioUsuario(int operacao) {
-
+        String FK, FK2;
         try {
             switch (operacao) {
 
                 // ENDERECO
                 case INCLUSAOFUNCIONARIO:
 
-                    sql = "insert into endereco values(null,?,?,?,?,?,?,?)";
-                    bd.getConnection();
-                    statement = bd.connection.prepareStatement(sql);
-                    statement.setString(1, endereco.getCep());
-                    statement.setString(2, endereco.getBairro());
-                    statement.setString(3, endereco.getLogradouro());
-                    statement.setString(4, endereco.getComplemento());
-                    statement.setString(5, endereco.getNumero());
-                    statement.setString(6, endereco.getCidade());
-                    statement.setString(7, endereco.getEstado());
-                    statement.executeUpdate();
-
-                    sql = "select* from endereco where cep =? and logradouro =? and numero =?";
+                    sql = "select idendereco from endereco where cep = ? and logradouro = ? and numero = ?";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
                     statement.setString(1, endereco.getCep());
                     statement.setString(2, endereco.getLogradouro());
                     statement.setString(3, endereco.getNumero());
                     ResultSet fk = statement.executeQuery();
+                    if (fk.next()) {
+                        fk.getString("idendereco");
+
+                    } else {
+
+                        sql = "insert into endereco values(null,?,?,?,?,?,?,?)";
+                        bd.getConnection();
+                        statement = bd.connection.prepareStatement(sql);
+                        statement.setString(1, endereco.getCep());
+                        statement.setString(2, endereco.getBairro());
+                        statement.setString(3, endereco.getLogradouro());
+                        statement.setString(4, endereco.getComplemento());
+                        statement.setString(5, endereco.getNumero());
+                        statement.setString(6, endereco.getCidade());
+                        statement.setString(7, endereco.getEstado());
+                        statement.executeUpdate();
+
+                        sql = "select* from endereco where cep =? and logradouro =? and numero =?";
+                        bd.getConnection();
+                        statement = bd.connection.prepareStatement(sql);
+                        statement.setString(1, endereco.getCep());
+                        statement.setString(2, endereco.getLogradouro());
+                        statement.setString(3, endereco.getNumero());
+                        fk = statement.executeQuery();
+                        fk.first();
+                        /*
+                    ResultSet fk = statement.executeQuery();
                     fk.next();
+                    String FKend = fk.getString("idendereco");*/
+                    }
+                    // FUNCIONARIO
                     String FKend = fk.getString("idendereco");
 
-                    // FUNCIONARIO
                     sql = "insert into funcionario values(null,?,?,?,?,?,?,?,?,?)";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
@@ -501,9 +518,8 @@ public class DAO {
                     statement.setString(5, funcionario.getCelFuncionario());
                     statement.setString(6, funcionario.getEmailFuncionario());
                     statement.setString(7, funcionario.getDataNascFuncionario());
-                    statement.setString(8, FKend);
+                    statement.setString(8, funcionario.getCodigoFuncionario());
                     statement.setString(9, FKend);
-
                     statement.executeUpdate();
 
                     sql = "select* from funcionario where cpf =? and rg =?";
@@ -525,7 +541,6 @@ public class DAO {
                     statement.setString(4, usuario.getConfirmacaoSenhaUsuario());
                     statement.setInt(5, usuario.getSituacao());
                     statement.setString(6, FKfcn);
-
                     statement.executeUpdate();
                     statement.close();
 
@@ -533,6 +548,43 @@ public class DAO {
 
                 case ALTERACAOFUNCIONARIO:
 
+                    sql = "select idendereco from endereco where cep = ? and logradouro = ? and numero = ?";
+                    bd.getConnection();
+                    statement = bd.connection.prepareStatement(sql);
+                    statement.setString(1, endereco.getCep());
+                    statement.setString(2, endereco.getLogradouro());
+                    statement.setString(3, endereco.getNumero());
+                    fk = statement.executeQuery();
+                    if (fk.next()) {
+                        FK = fk.getString("idendereco");
+                      
+                    } else {
+
+                        sql = "insert into endereco (cep, bairro, logradouro, complemento, numero, "
+                                + "cidade, estado) values(?,?,?,?,?,?,?)";
+
+                        statement = bd.connection.prepareStatement(sql);
+                        statement.setString(1, endereco.getCep());
+                        statement.setString(2, endereco.getBairro());
+                        statement.setString(3, endereco.getLogradouro());
+                        statement.setString(4, endereco.getComplemento());
+                        statement.setString(5, endereco.getNumero());
+                        statement.setString(6, endereco.getCidade());
+                        statement.setString(7, endereco.getEstado());
+                        statement.executeUpdate();
+
+                        sql = "select idendereco from endereco where cep = ? and logradouro = ? and numero = ?";
+                        bd.getConnection();
+                        statement = bd.connection.prepareStatement(sql);
+                        statement.setString(1, endereco.getCep());
+                        statement.setString(2, endereco.getLogradouro());
+                        statement.setString(3, endereco.getNumero());
+                        fk = statement.executeQuery();
+                        fk.first();
+                        FK = fk.getString("idendereco");
+
+                    }
+                    /*
                     sql = "SELECT idfuncionario FROM funcionario INNER JOIN endereco ON "
                             + "endereco.idendereco = funcionario.FKendereco INNER JOIN usuario ON "
                             + "usuario.idUsuario = usuario.FKfuncionario WHERE cpf =? and rg =? ";
@@ -543,12 +595,12 @@ public class DAO {
                     ResultSet cv = statement.executeQuery();
                     cv.next();
                     String cvf = cv.getString("idfuncionario");
-
-                    sql = "update funcionario set  nomeFuncionario = ?,  cpf = ?, rg = ?, telefone = ?,"
-                            + "  celular = ?,  email = ?,  dataNascimento= ? where idfuncionario = ?";
+                     */
+                    
+                    sql = "update funcionario set  nomeFuncionarios = ?,  cpf = ?, rg = ?, telefone = ?,"
+                            + "  celular = ?,  email = ?,  dataNascimento = ?, FKendereco = ? where idfuncionario = ?";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
-                    statement.setString(8, cvf);
                     statement.setString(1, funcionario.getNomeFuncionario());
                     statement.setString(2, funcionario.getCpfFuncionario());
                     statement.setString(3, funcionario.getRgFuncionario());
@@ -556,9 +608,11 @@ public class DAO {
                     statement.setString(5, funcionario.getCelFuncionario());
                     statement.setString(6, funcionario.getEmailFuncionario());
                     statement.setString(7, funcionario.getDataNascFuncionario());
+                    statement.setString(8, FK);
+                    statement.setString(9, funcionario.getIdFuncionario());
                     statement.executeUpdate();
 
-                    sql = "update endereco set cep  = ?, bairro = ?, logradouro = ?, complemento = ?,"
+                    /* sql = "update endereco set cep  = ?, bairro = ?, logradouro = ?, complemento = ?,"
                             + "  numero = ?,  cidade = ?,  estado = ?  where idendereco = ?";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
@@ -570,25 +624,34 @@ public class DAO {
                     statement.setString(5, endereco.getNumero());
                     statement.setString(6, endereco.getCidade());
                     statement.setString(7, endereco.getEstado());
-                    statement.executeUpdate();
-
-                    sql = "update usuario set  login = ?,  perfil= ?,"
-                            + "  senha = ?,  confiSenha = ?  situação = ? where idUsuario= ?";
+                    statement.executeUpdate();*/
+                   
+                    sql = "select idUsuario from usuario inner join funcionario on FKfuncionario = idFuncionario where FKfuncionario = ?";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
-                    statement.setString(6, cvf);
+                  
+                    statement.setString(1, funcionario.getIdFuncionario());
+                    fk = statement.executeQuery();
+                    fk.next();
+                    FK2 = fk.getString("idUsuario");
+                    
+                    
+                    sql = "UPDATE usuario SET login = ?, perfil = ?, senha = ?, confiSenha = ?, situacao = ? WHERE idUsuario = ?";
+                    bd.getConnection();
+                    statement = bd.connection.prepareStatement(sql);
                     statement.setString(1, usuario.getLoginUsuario());
                     statement.setInt(2, usuario.getPerfilUsuario());
                     statement.setString(3, usuario.getSenhaUsuario());
                     statement.setString(4, usuario.getConfirmacaoSenhaUsuario());
                     statement.setInt(5, usuario.getSituacao());
+                    statement.setString(6, FK2);
                     statement.executeUpdate();
 
                     statement.close();
 
                     break;
 
-                case EXCLUSAOUSUARIO:
+                /* case EXCLUSAOUSUARIO:
                     sql = "delete from usuario where  = ?";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
@@ -596,7 +659,7 @@ public class DAO {
                     statement.executeUpdate();
                     statement.close();
                     break;
-
+                 */
                 default:
                     men = "Falha na operação!";
                     break;

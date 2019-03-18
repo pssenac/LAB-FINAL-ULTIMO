@@ -1,6 +1,4 @@
-
 package View;
-
 
 import Controller.logFuncionarioController;
 import Models.DAO;
@@ -9,48 +7,45 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
-
 public class TelaFuncionario extends javax.swing.JInternalFrame {
+
     private PreparedStatement statement;
     private ResultSet resultSet;
     public DAO DAO;
-    String sqlTabela=null;
-    String sqlTabela2=null;
+    String sqlTabela = null;
+    String sqlTabela2 = null;
+    String text="";
     public logFuncionarioController fc;
-    boolean a;
-    
-    
+    boolean a,txt;
+
     int vd = 0;
-    
-    
-   
+
     public TelaFuncionario() {
         initComponents();
-        DAO = new DAO ();
+        DAO = new DAO();
         fc = new logFuncionarioController();
-        if(!fc.logarBD()){
-            JOptionPane.showMessageDialog(null,"Falha ao conectar, o sistema será fechado");
-            System.exit(0);    
+        if (!fc.logarBD()) {
+            JOptionPane.showMessageDialog(null, "Falha ao conectar, o sistema será fechado");
+            System.exit(0);
         }
-        
-        
-       sqlTabela = "select * from funcionario inner join endereco on FKendereco = idendereco inner join usuario on FKfuncionario = idfuncionario";
-       sqlTabela2 = "select * from usuario inner join funcionario on FKfuncionario = idfuncionario inner join endereco on idendereco = FKendereco ";
+
+        sqlTabela = "select * from funcionario inner join endereco on FKendereco = idendereco inner join usuario on FKfuncionario = idfuncionario";
+        sqlTabela2 = "select * from usuario inner join funcionario on FKfuncionario = idfuncionario inner join endereco on idendereco = FKendereco ";
         carregarTabela();
         atualizarCampos();
         preencherTabelaFuncionario(sqlTabela);
         preencherTabelaUsuario(sqlTabela2);
-        habilitaCampos(false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false,false);
-        
-        habilitabotoes(true,true,false,false,false);
+        habilitaCampos(false, false, false, false, false, false, false, false, false,
+                false, false, false, false, false, false, false, false, false, false);
+
+        habilitabotoes(true, false, false, false, false);
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -75,6 +70,8 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         txtCelFuncionario = new javax.swing.JFormattedTextField();
         lblFuncionario = new javax.swing.JLabel();
         lblexistecpf = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        lblCodFuncionario = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -185,6 +182,10 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         lblexistecpf.setForeground(new java.awt.Color(255, 0, 0));
         lblexistecpf.setText(".");
 
+        jLabel21.setText("Código :");
+
+        lblCodFuncionario.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -192,21 +193,6 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(10, 10, 10)
-                        .addComponent(lblFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblIdFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtNomeFuncionario))
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -234,18 +220,42 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblexistecpf, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(lblexistecpf, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(10, 10, 10)
+                                .addComponent(lblFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblIdFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(156, 156, 156)
+                                .addComponent(jLabel21)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtNomeFuncionario))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblFuncionario))
-                    .addComponent(lblIdFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblIdFuncionario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCodFuncionario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -513,7 +523,6 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(jUsuario);
 
         btnNovoFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar_Cliente.png"))); // NOI18N
-        btnNovoFuncionario.setText("Novo Funcionário");
         btnNovoFuncionario.setMaximumSize(new java.awt.Dimension(50, 50));
         btnNovoFuncionario.setMinimumSize(new java.awt.Dimension(50, 50));
         btnNovoFuncionario.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -576,7 +585,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addComponent(btnNovoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(btnGravarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnLimparFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -641,175 +650,165 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     //<editor-fold defaultstate="collapsed" desc=" BOTÃO NOVO ">
     private void btnNovoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoFuncionarioActionPerformed
-          btnNovoFuncionario.setEnabled(false);
-          btnGravarFuncionario.setEnabled(true);
-          btnLimparFuncionario.setEnabled(true);
-          btnAlterarFuncionario.setEnabled(false);
-          btnCancelarFuncionario.setEnabled(true);
-          vd = 1;
-          
-           habilitaCampos(true, true, true, true, true, true, true, true, true, 
-                   true, true, true, true, true, true, true, true, true,true );
-           
-           limparCampos();
+        btnNovoFuncionario.setEnabled(false);
+        btnGravarFuncionario.setEnabled(true);
+        btnLimparFuncionario.setEnabled(true);
+        btnAlterarFuncionario.setEnabled(false);
+        btnCancelarFuncionario.setEnabled(true);
+        vd = 1;
+
+        habilitaCampos(true, true, true, true, true, true, true, true, true,
+                true, true, true, true, true, true, true, true, true, true);
+
+        limparCampos();
     }//GEN-LAST:event_btnNovoFuncionarioActionPerformed
     //</editor-fold>
-     
+
     //<editor-fold defaultstate="collapsed" desc=" BOTÃO ALTERAR ">
     private void btnAlterarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarFuncionarioActionPerformed
-        habilitaCampos(true, true, true, true, true, true, true, true, true, 
-                   true, true, true, true, true, true, true, true, true,true );
+        habilitaCampos(true, true, true, true, true, true, true, true, true,
+                true, true, true, true, true, true, true, true, true, true);
         lblexistecep.setText("");
         lblexistecpf.setText("");
         lblexisteusuario.setText("");
-        
-         vd = 2;
-        
-          
-         habilitabotoes(false,true,false,false,true);
+
+        vd = 2;
+
+        habilitabotoes(false, true, false, false, true);
     }//GEN-LAST:event_btnAlterarFuncionarioActionPerformed
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc=" BOTÃO GRAVAR ">
     private void btnGravarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarFuncionarioActionPerformed
-       
-       boolean cf = DAO.cslcpf(txtCpfFuncionario.getText());
-       boolean cuser = DAO.csluser(txtUsuarioFuncionario.getText());
-      
+
+        boolean cf = DAO.cslcpf(txtCpfFuncionario.getText());
+        boolean cuser = DAO.csluser(txtUsuarioFuncionario.getText());
+
         lblexistecep.setText("");
         lblexistecpf.setText("");
         lblexisteusuario.setText("");
         lblSenhaConfirm.setText("");
-       
-       
-                if (cf == true){
-                   pesquisaCpf(cf);
-               
-               }else if(cuser == true){     
-                    pesquisaUser(cuser);    
-               }
-       
-       
-       switch (vd){
-             case 1:
-                 
-                String sh =  txtSenhaFuncionario.getText();
-                String csh =  txtConfirmacaoSenha.getText();
-                
-                if(!sh.equals(csh)){
-                   lblSenhaConfirm.setText("Senha diferente");
+
+        if (cf == true) {
+            pesquisaCpf(cf);
+
+        } else if (cuser == true) {
+            pesquisaUser(cuser);
+        }
+
+        switch (vd) {
+            
+            case 1:
+                VerificarCodigo();
+                String sh = txtSenhaFuncionario.getText();
+                String csh = txtConfirmacaoSenha.getText();
+
+                if (!sh.equals(csh)) {
+                    lblSenhaConfirm.setText("Senha diferente");
                     txtConfirmacaoSenha.requestFocus();
                     return;
-               }   
-                
+                }
+
                 if (VerificarCamposVazios() == true) {
                     JOptionPane.showMessageDialog(null, "Campos obrigatórios estão vazios!");
                     a = false;
                 }
-                
-                
-               if (cf != true  && cuser!=true&& VerificarCamposVazios() != true){
+
+                if (cf != true && cuser != true && VerificarCamposVazios() != true) {
                     logFuncionarioController lg = new logFuncionarioController();
-                    
-                    
-                    lg.salvarFuncionario(txtNomeFuncionario.getText(),txtCpfFuncionario.getText(),
-                    txtRgFuncionario.getText(), txtTelFuncionario.getText(),txtCelFuncionario.getText(),
-                    txtEmailFuncionario.getText(),txtDataNasc.getText(),txtCepFuncionario.getText(),txtBairroFuncionario.getText(),
-                    txtLogradouroFuncionario.getText(),txtComplementoFuncionario.getText(),txtNumeroFuncionario.getText(),
-                    txtCidadeFuncionario.getText(),txtEstadoFuncionario.getText(), txtUsuarioFuncionario.getText(), cbPerfilFuncionario.getSelectedIndex(),txtSenhaFuncionario.getText(),
-                    txtConfirmacaoSenha.getText(),cbSituaçãoFuncionário.getSelectedIndex());
-                    habilitaCampos(false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false,false);
-        
-                    habilitabotoes(true,false,false,false,false); 
+
+                    lg.salvarFuncionario(txtNomeFuncionario.getText(), txtCpfFuncionario.getText(),
+                            txtRgFuncionario.getText(), txtTelFuncionario.getText(), txtCelFuncionario.getText(),
+                            txtEmailFuncionario.getText(), txtDataNasc.getText() ,lblCodFuncionario.getText() ,txtCepFuncionario.getText(), txtBairroFuncionario.getText(),
+                            txtLogradouroFuncionario.getText(), txtComplementoFuncionario.getText(), txtNumeroFuncionario.getText(),
+                            txtCidadeFuncionario.getText(), txtEstadoFuncionario.getText(), txtUsuarioFuncionario.getText(), cbPerfilFuncionario.getSelectedIndex(), txtSenhaFuncionario.getText(),
+                            txtConfirmacaoSenha.getText(), cbSituaçãoFuncionário.getSelectedIndex());
+                    habilitaCampos(false, false, false, false, false, false, false, false, false,
+                            false, false, false, false, false, false, false, false, false, false);
+
+                    habilitabotoes(true, false, false, false, false);
                     JOptionPane.showMessageDialog(null, "CADASTRO REALIZADO");
-                
+
                     lblexistecep.setText("");
                     lblexistecpf.setText("");
                     lblexisteusuario.setText("");
-                
-                   
-                
-                
+                    
+                    limparCampos();
+                    vd = 0;
                 }
-                
+
                 break;
-                  
+
             case 2:
-                  logFuncionarioController lg = new logFuncionarioController();
-                lg.alterarFuncionario(txtNomeFuncionario.getText(),txtCpfFuncionario.getText(),
-                txtRgFuncionario.getText(), txtTelFuncionario.getText(),txtCelFuncionario.getText(),txtEmailFuncionario.getText(),
-                txtDataNasc.getText(),txtCepFuncionario.getText(),txtBairroFuncionario.getText(),
-                    txtLogradouroFuncionario.getText(),txtComplementoFuncionario.getText(),txtNumeroFuncionario.getText(),
-                    txtCidadeFuncionario.getText(),txtEstadoFuncionario.getText(),txtUsuarioFuncionario.getText(), 
-                    cbPerfilFuncionario.getSelectedIndex(),txtSenhaFuncionario.getText(), txtConfirmacaoSenha.getText(),cbSituaçãoFuncionário.getSelectedIndex());
-                    habilitaCampos(false,false,false,false,false,false,false,false,false,
-                     false,false,false,false,false,false,false,false,false,false);
-                        lblexistecep.setText("");
-                        lblexistecpf.setText("");
-                        lblexisteusuario.setText("");
-                  
-                    habilitabotoes(true,false,false,false,false); 
-                    JOptionPane.showMessageDialog(null, "ALTERACAO REALIZADA");
-                 
-                 break;
-               
-           }
-            
-    
-  
-          
+                logFuncionarioController lg = new logFuncionarioController();
+                lg.alterarFuncionario(lblFuncionario.getText(), txtNomeFuncionario.getText(), txtCpfFuncionario.getText(),
+                        txtRgFuncionario.getText(), txtTelFuncionario.getText(), txtCelFuncionario.getText(), txtEmailFuncionario.getText(),
+                        txtDataNasc.getText(), lblCodFuncionario.getText(), txtCepFuncionario.getText(), txtBairroFuncionario.getText(),
+                        txtLogradouroFuncionario.getText(), txtComplementoFuncionario.getText(), txtNumeroFuncionario.getText(),
+                        txtCidadeFuncionario.getText(), txtEstadoFuncionario.getText(), txtUsuarioFuncionario.getText(),
+                        cbPerfilFuncionario.getSelectedIndex(), txtSenhaFuncionario.getText(), txtConfirmacaoSenha.getText(), cbSituaçãoFuncionário.getSelectedIndex());
+                habilitaCampos(false, false, false, false, false, false, false, false, false,
+                        false, false, false, false, false, false, false, false, false, false);
+                lblexistecep.setText("");
+                lblexistecpf.setText("");
+                lblexisteusuario.setText("");
+
+                habilitabotoes(true, false, false, false, false);
+                JOptionPane.showMessageDialog(null, "ALTERACAO REALIZADA");
+                
+                limparCampos();
+                vd = 0;
+                break;
+
+        }
+
         preencherTabelaFuncionario(sqlTabela);
         preencherTabelaUsuario(sqlTabela2);
-        
-   
-         
-       
+
+
     }//GEN-LAST:event_btnGravarFuncionarioActionPerformed
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc=" PESQUISA CPF ">
     public void pesquisaCpf(boolean cpf) {
-          if (cpf == true ) {
-             lblexistecpf.setText("CPF cadastrado");
-             
-          }else{
-               lblexistecpf.setText("");
-           }
-   }
-   //</editor-fold>    
-    
+        if (cpf == true) {
+            lblexistecpf.setText("CPF cadastrado");
+
+        } else {
+            lblexistecpf.setText("");
+        }
+    }
+    //</editor-fold>    
+
     //<editor-fold defaultstate="collapsed" desc=" PESQUISA CEP ">
     public void pesquisaCep(boolean cep) {
-       if (cep == true ) {
-             lblexistecep.setText("CEP cadastrado");
-       } else{
-               lblexistecep.setText("");
-       }    
-          
-   }
-   //</editor-fold> 
-    
+        if (cep == true) {
+            lblexistecep.setText("CEP cadastrado");
+        } else {
+            lblexistecep.setText("");
+        }
+
+    }
+    //</editor-fold> 
+
     //<editor-fold defaultstate="collapsed" desc=" PESQUISA USUARIO ">
     public void pesquisaUser(boolean user) {
-        if ( user == true ) {
-             lblexisteusuario.setText("Usuario cadastrado");
-         } else{
-               lblexisteusuario.setText("");
-        }           
-          
-   }
-   //</editor-fold> 
-    
+        if (user == true) {
+            lblexisteusuario.setText("Usuario cadastrado");
+        } else {
+            lblexisteusuario.setText("");
+        }
+
+    }
+    //</editor-fold> 
+
     //<editor-fold defaultstate="collapsed" desc=" METODO SELECAO LINHA FUNCIONARIO E BAIRRO ">
     private void jFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFuncionarioMouseClicked
-        
+
         int linhaSelecionada = jFuncionario.getSelectedRow();  // pega a linha selecionada
-        
-        
+
         lblFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 0).toString());
         txtNomeFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 1).toString());
         txtCpfFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 2).toString());
@@ -817,68 +816,64 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         txtTelFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 4).toString());
         txtCelFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 5).toString());
         txtEmailFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 6).toString());
-        
+
         String dataCompra = jFuncionario.getValueAt(linhaSelecionada, 7).toString();
-        String  data = dataCompra;
-        String data1 = data.replaceAll("-","");
-        String data2 = data1.substring(0,2);
-        String data3 = data1.substring(2,4);
-        String data4 = data1.substring(4,8);
-        String dataC = data4 +  data2  + data3;
+        String data = dataCompra;
+        String data1 = data.replaceAll("-", "");
+        String data2 = data1.substring(0, 2);
+        String data3 = data1.substring(2, 4);
+        String data4 = data1.substring(4, 8);
+        String dataC = data4 + data2 + data3;
         txtDataNasc.setText(dataC);
-        
-        
-        txtCepFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 8).toString());
-        txtBairroFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 9).toString());
-        txtLogradouroFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 10).toString());
-        txtComplementoFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 11).toString());
-        txtNumeroFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 12).toString());
-        txtCidadeFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 13).toString());
-        txtEstadoFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 14).toString());
-        
-        
-        txtUsuarioFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 15).toString());
-        cbPerfilFuncionario.setSelectedItem(jFuncionario.getValueAt(linhaSelecionada, 16).toString());
-        txtSenhaFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 17).toString());
-        txtConfirmacaoSenha.setText(jFuncionario.getValueAt(linhaSelecionada, 18).toString());
-        
-        habilitaCampos(false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false,false);
-         habilitabotoes(false,false,true,false,true);
-         
+        lblCodFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 8).toString());
+        txtCepFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 9).toString());
+        txtBairroFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 10).toString());
+        txtLogradouroFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 11).toString());
+        txtComplementoFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 12).toString());
+        txtNumeroFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 13).toString());
+        txtCidadeFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 14).toString());
+        txtEstadoFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 15).toString());
+
+        txtUsuarioFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 16).toString());
+        cbPerfilFuncionario.setSelectedIndex(Integer.parseInt(jFuncionario.getValueAt(linhaSelecionada, 17).toString()));
+        txtSenhaFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 18).toString());
+        txtConfirmacaoSenha.setText(jFuncionario.getValueAt(linhaSelecionada, 19).toString());
+        cbSituaçãoFuncionário.setSelectedIndex(Integer.parseInt(jFuncionario.getValueAt(linhaSelecionada, 20).toString()));
+
+        habilitaCampos(false, false, false, false, false, false, false, false, false,
+                false, false, false, false, false, false, false, false, false, false);
+        habilitabotoes(false, false, true, false, true);
+
     }//GEN-LAST:event_jFuncionarioMouseClicked
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc=" METODO SELECAO LINHA USUARIO ">
     private void jUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jUsuarioMouseClicked
-        
+
         int linhaSelecionada = jUsuario.getSelectedRow();  // pega a linha selecionada
-        
+
         txtUsuarioFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 1).toString());
         cbPerfilFuncionario.setSelectedItem(jUsuario.getValueAt(linhaSelecionada, 2).toString());
         txtSenhaFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 3).toString());
         txtConfirmacaoSenha.setText(jUsuario.getValueAt(linhaSelecionada, 4).toString());
-        
-        
+
         lblFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 5).toString());
         txtNomeFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 6).toString());
         txtCpfFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 7).toString());
         txtRgFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 8).toString());
-        txtTelFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 9).toString());
+        txtTelFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 9).toString());        
         txtCelFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 10).toString());
         txtEmailFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 11).toString());
-        
+
         String dataCompra = jUsuario.getValueAt(linhaSelecionada, 12).toString();
-        String  data = dataCompra;
-        String data1 = data.replaceAll("-","");
-        String data2 = data1.substring(0,2);
-        String data3 = data1.substring(2,4);
-        String data4 = data1.substring(4,8);
-        String dataC = data4 +  data2  + data3;
+        String data = dataCompra;
+        String data1 = data.replaceAll("-", "");
+        String data2 = data1.substring(0, 2);
+        String data3 = data1.substring(2, 4);
+        String data4 = data1.substring(4, 8);
+        String dataC = data4 + data2 + data3;
         txtDataNasc.setText(dataC);
-        
-        
-        
+
         txtCepFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 13).toString());
         txtBairroFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 14).toString());
         txtLogradouroFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 15).toString());
@@ -886,81 +881,79 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         txtNumeroFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 17).toString());
         txtCidadeFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 18).toString());
         txtEstadoFuncionario.setText(jUsuario.getValueAt(linhaSelecionada, 19).toString());
-        
-        habilitaCampos(false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false,false);
-        
-        habilitabotoes(false,false,true,false,true);
-        
+
+        habilitaCampos(false, false, false, false, false, false, false, false, false,
+                false, false, false, false, false, false, false, false, false, false);
+
+        habilitabotoes(false, false, true, false, true);
+
     }//GEN-LAST:event_jUsuarioMouseClicked
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc=" BOTAO CANCELAR ">
     private void btnCancelarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarFuncionarioActionPerformed
         carregarTabela();
         atualizarCampos();
-        
-        habilitabotoes(true,false,false,false,false);
-        habilitaCampos(false,false,false,false,false,false,false,false,false,
-                false,false,false,false,false,false,false,false,false,false);
-        
+
+        habilitabotoes(true, false, false, false, false);
+        habilitaCampos(false, false, false, false, false, false, false, false, false,
+                false, false, false, false, false, false, false, false, false, false);
+
     }//GEN-LAST:event_btnCancelarFuncionarioActionPerformed
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc=" BOTAO LIMPAR ">
     private void btnLimparFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparFuncionarioActionPerformed
         limparCampos();
     }//GEN-LAST:event_btnLimparFuncionarioActionPerformed
     //</editor-fold>
-       
-  
+
     //<editor-fold defaultstate="collapsed" desc=" METODO BOTAO ">
-    private void habilitabotoes (boolean addFnc,boolean gravaFnc,boolean alterarFnc,
-            boolean limparFnc,boolean cancelarFnc ) {                                                   
-        
+    private void habilitabotoes(boolean addFnc, boolean gravaFnc, boolean alterarFnc,
+            boolean limparFnc, boolean cancelarFnc) {
+
         btnNovoFuncionario.setEnabled(addFnc);
         btnGravarFuncionario.setEnabled(gravaFnc);
         btnAlterarFuncionario.setEnabled(alterarFnc);
         btnLimparFuncionario.setEnabled(limparFnc);
         btnCancelarFuncionario.setEnabled(cancelarFnc);
-          
-          
-    }                                                  
+
+    }
     //</editor-fold>
-  
+
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO CAMPO ">
-        public void habilitaCampos(boolean nomeFcn, boolean rgFcn, boolean cpfFcn, boolean dataNascFcn, 
-                boolean telFcn, boolean celFcn, boolean emailFcn, boolean cepFcn,boolean logradouroFcn,
-                boolean bairroFcn,boolean numeroFcn,boolean complementoFcn, boolean CidadeFcn,boolean estadoFcn,
-                boolean usuarioFcn,boolean SenhaFcn,boolean ConfirmSenhaFcn,boolean perfilFcn,boolean situacao) {
-           
-           // FUNCIONARIO 
-           txtNomeFuncionario.setEnabled(nomeFcn);
-           txtRgFuncionario.setEnabled(rgFcn);
-           txtCpfFuncionario.setEnabled(cpfFcn);
-           txtDataNasc.setEnabled(dataNascFcn);
-           txtTelFuncionario.setEnabled(telFcn);
-           txtCelFuncionario.setEnabled(celFcn);
-           txtEmailFuncionario.setEnabled(emailFcn);
-           
-           // ENDERECO
-           txtCepFuncionario.setEnabled(cepFcn);
-           txtLogradouroFuncionario.setEnabled(logradouroFcn);
-           txtBairroFuncionario.setEnabled(bairroFcn);
-           txtNumeroFuncionario.setEnabled(numeroFcn);
-           txtComplementoFuncionario.setEnabled(complementoFcn);
-           txtCidadeFuncionario.setEnabled( CidadeFcn);
-           txtEstadoFuncionario.setEnabled(estadoFcn);
-            
-            // USUARIO
-            txtUsuarioFuncionario.setEnabled(usuarioFcn);
-            txtSenhaFuncionario.setEnabled(SenhaFcn);
-            txtConfirmacaoSenha.setEnabled(ConfirmSenhaFcn);
-            cbPerfilFuncionario.setEnabled(perfilFcn);
-            cbSituaçãoFuncionário.setEnabled(situacao);
-        }
-        //</editor-fold>
-         
+    public void habilitaCampos(boolean nomeFcn, boolean rgFcn, boolean cpfFcn, boolean dataNascFcn,
+            boolean telFcn, boolean celFcn, boolean emailFcn, boolean cepFcn, boolean logradouroFcn,
+            boolean bairroFcn, boolean numeroFcn, boolean complementoFcn, boolean CidadeFcn, boolean estadoFcn,
+            boolean usuarioFcn, boolean SenhaFcn, boolean ConfirmSenhaFcn, boolean perfilFcn, boolean situacao) {
+
+        // FUNCIONARIO 
+        txtNomeFuncionario.setEnabled(nomeFcn);
+        txtRgFuncionario.setEnabled(rgFcn);
+        txtCpfFuncionario.setEnabled(cpfFcn);
+        txtDataNasc.setEnabled(dataNascFcn);
+        txtTelFuncionario.setEnabled(telFcn);
+        txtCelFuncionario.setEnabled(celFcn);
+        txtEmailFuncionario.setEnabled(emailFcn);
+
+        // ENDERECO
+        txtCepFuncionario.setEnabled(cepFcn);
+        txtLogradouroFuncionario.setEnabled(logradouroFcn);
+        txtBairroFuncionario.setEnabled(bairroFcn);
+        txtNumeroFuncionario.setEnabled(numeroFcn);
+        txtComplementoFuncionario.setEnabled(complementoFcn);
+        txtCidadeFuncionario.setEnabled(CidadeFcn);
+        txtEstadoFuncionario.setEnabled(estadoFcn);
+
+        // USUARIO
+        txtUsuarioFuncionario.setEnabled(usuarioFcn);
+        txtSenhaFuncionario.setEnabled(SenhaFcn);
+        txtConfirmacaoSenha.setEnabled(ConfirmSenhaFcn);
+        cbPerfilFuncionario.setEnabled(perfilFcn);
+        cbSituaçãoFuncionário.setEnabled(situacao);
+    }
+    //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO CAMPOS VAZIOS ">
     public boolean VerificarCamposVazios() {
         if (txtNomeFuncionario.getText().equals("")) {
@@ -975,61 +968,56 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         if (txtTelFuncionario.getText().equals("")) {
             a = true;
         }
-        
-         if (txtDataNasc.getText().equals("")) {
+
+        if (txtDataNasc.getText().equals("")) {
             a = true;
         }
-       
-        
+
         if (txtCepFuncionario.getText().equals("")) {
             a = true;
         }
-        
+
         if (txtLogradouroFuncionario.getText().equals("")) {
             a = true;
         }
-        
+
         if (txtBairroFuncionario.getText().equals("")) {
             a = true;
         }
-        
+
         if (txtEstadoFuncionario.getText().equals("")) {
             a = true;
         }
         if (txtCidadeFuncionario.getText().equals("")) {
             a = true;
         }
-        
-     
+
         if (txtNumeroFuncionario.getText().equals("")) {
             a = true;
         }
-        
+
         if (txtUsuarioFuncionario.getText().equals("")) {
             a = true;
         }
-        
+
         if (txtSenhaFuncionario.getText().equals("")) {
             a = true;
         }
-        
-        
-        
-        
+
         return a;
     }
-     //</editor-fold>
-        
+    //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR CAMPOS ">    
-    public void atualizarCampos(){
-        try{
-            if(resultSet.isAfterLast()){
+    public void atualizarCampos() {
+        try {
+            if (resultSet.isAfterLast()) {
                 resultSet.last();
             }
-            if(resultSet.isBeforeFirst()){
+            if (resultSet.isBeforeFirst()) {
                 resultSet.first();
             }
-            
+
             lblFuncionario.setText(resultSet.getString("idfuncionario"));
             txtNomeFuncionario.setText(resultSet.getString("nomeFuncionario"));
             txtCpfFuncionario.setText(resultSet.getString("cpf"));
@@ -1037,257 +1025,278 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
             txtTelFuncionario.setText(resultSet.getString("telefone"));
             txtCelFuncionario.setText(resultSet.getString("celular"));
             txtEmailFuncionario.setText(resultSet.getString("email"));
-            
+            lblCodFuncionario.setText(resultSet.getString("codigoFuncionarios"));
+
             String dataCompra = resultSet.getString("dataNascimento");
-            String  data = dataCompra;
-            String data1 = data.replaceAll("-","");
-            String data2 = data1.substring(0,2);
-            String data3 = data1.substring(2,4);
-            String data4 = data1.substring(4,8);
-            String dataC = data4 +  data2  + data3;
+            String data = dataCompra;
+            String data1 = data.replaceAll("-", "");
+            String data2 = data1.substring(0, 2);
+            String data3 = data1.substring(2, 4);
+            String data4 = data1.substring(4, 8);
+            String dataC = data4 + data2 + data3;
             txtDataNasc.setText(dataC);
-            
-           txtCepFuncionario.setText(resultSet.getString("cep"));
-           txtBairroFuncionario.setText(resultSet.getString("bairro"));
-           txtLogradouroFuncionario.setText(resultSet.getString("logradouro"));
-           txtComplementoFuncionario.setText(resultSet.getString("complemento"));
-           txtNumeroFuncionario.setText(resultSet.getString("numero"));  
-           txtCidadeFuncionario.setText(resultSet.getString("cidade"));
-           txtEstadoFuncionario.setText(resultSet.getString("estado"));
-           
-           txtUsuarioFuncionario.setText(resultSet.getString("login"));
-           cbPerfilFuncionario.setSelectedItem(resultSet.getString("perfil"));   
-           txtSenhaFuncionario.setText(resultSet.getString("senha"));   
-           txtConfirmacaoSenha.setText(resultSet.getString("confiSenha"));   
-              
-        }catch(SQLException erro){}
+
+            txtCepFuncionario.setText(resultSet.getString("cep"));
+            txtBairroFuncionario.setText(resultSet.getString("bairro"));
+            txtLogradouroFuncionario.setText(resultSet.getString("logradouro"));
+            txtComplementoFuncionario.setText(resultSet.getString("complemento"));
+            txtNumeroFuncionario.setText(resultSet.getString("numero"));
+            txtCidadeFuncionario.setText(resultSet.getString("cidade"));
+            txtEstadoFuncionario.setText(resultSet.getString("estado"));
+
+            txtUsuarioFuncionario.setText(resultSet.getString("login"));
+            cbPerfilFuncionario.setSelectedItem(resultSet.getString("perfil"));
+            txtSenhaFuncionario.setText(resultSet.getString("senha"));
+            txtConfirmacaoSenha.setText(resultSet.getString("confiSenha"));
+
+        } catch (SQLException erro) {
+        }
     }
     //</editor-fold>
-   
-     
+
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO LIMPAR CAMPOS ">
-    public void limparCampos(){
-      lblFuncionario.setText("");
-      txtNomeFuncionario.setText("");
-      txtRgFuncionario.setText("");
-      txtCpfFuncionario.setText("");
-      txtDataNasc.setText("");
-      txtTelFuncionario.setText("");
-      txtCelFuncionario.setText("");
-      txtEmailFuncionario.setText("");
-      txtCepFuncionario.setText("");
-      txtLogradouroFuncionario.setText("");
-      txtBairroFuncionario.setText("");
-      txtNumeroFuncionario.setText("");
-      txtComplementoFuncionario.setText("");
-      txtCidadeFuncionario.setText("");
-      txtEstadoFuncionario.setText("");
+    public void limparCampos() {
+        lblFuncionario.setText("");
+        txtNomeFuncionario.setText("");
+        txtRgFuncionario.setText("");
+        txtCpfFuncionario.setText("");
+        txtDataNasc.setText("");
+        txtTelFuncionario.setText("");
+        txtCelFuncionario.setText("");
+        txtEmailFuncionario.setText("");
+        txtCepFuncionario.setText("");
+        txtLogradouroFuncionario.setText("");
+        txtBairroFuncionario.setText("");
+        txtNumeroFuncionario.setText("");
+        txtComplementoFuncionario.setText("");
+        txtCidadeFuncionario.setText("");
+        txtEstadoFuncionario.setText("");
 
-      txtUsuarioFuncionario.setText("");
-      txtSenhaFuncionario.setText("");
-      txtConfirmacaoSenha.setText("");
-      lblexistecep.setText("");
-       lblexistecpf.setText("");
-       lblexisteusuario.setText("");
+        txtUsuarioFuncionario.setText("");
+        txtSenhaFuncionario.setText("");
+        txtConfirmacaoSenha.setText("");
+        lblexistecep.setText("");
+        lblexistecpf.setText("");
+        lblexisteusuario.setText("");
+        cbPerfilFuncionario.setSelectedIndex(-1);
+        cbSituaçãoFuncionário.setSelectedIndex(-1);
 
-    
     }
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO CARREGAR TABELA ">
-    public void carregarTabela(){
+    public void carregarTabela() {
         String sql = "select * from funcionario inner join endereco on FKendereco = idendereco inner join usuario on FKfuncionario = idfuncionario";
-        try{
+        try {
             statement = DAO.bd.connection.prepareStatement(sql);
-            resultSet  = statement.executeQuery();
-            
-            
-            
-        }catch(SQLException erro){
+            resultSet = statement.executeQuery();
+
+        } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro! " + erro.toString());
         }
     }
     //</editor-fold>
-    
-    
-    
+
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA FUNCIONARIO E BAIRRO">
-    public void preencherTabelaFuncionario(String SQL){
-       
+    public void preencherTabelaFuncionario(String SQL) {
+
         ArrayList dados = new ArrayList();
-         String[] colunas = new String[]{"idFuncionario","nomeFuncionario","cpf","rg",
-             "telefone","celular","email","dataNascimento","cep","bairro","logradouro",
-             "complemento","numero","cidade","estado","","","","",""};
-         
-        DAO.executaSQL(SQL);  
-        
-        
-        try{
-            DAO.resultSet.first();  
-            do{    
-                dados.add(new Object[]{DAO.resultSet.getString("idFuncionario"),DAO.resultSet.getString("nomeFuncionarios"),DAO.resultSet.getString("cpf"),
-                DAO.resultSet.getString("rg"), DAO.resultSet.getString("telefone"),DAO.resultSet.getString("celular"), 
-                DAO.resultSet.getString("email"),DAO.resultSet.getString("dataNascimento"),DAO.resultSet.getString("cep"),
-                DAO.resultSet.getString("Bairro"),DAO.resultSet.getString("logradouro"),DAO.resultSet.getString("complemento"),
-                DAO.resultSet.getString("numero"),DAO.resultSet.getString("cidade"),DAO.resultSet.getString("estado"), 
-                DAO.resultSet.getString("login"),DAO.resultSet.getString("perfil"),DAO.resultSet.getString("senha"), 
-                DAO.resultSet.getString("confiSenha"),DAO.resultSet.getString("situação")});
-                    
-            }while(DAO.resultSet.next());
-        }catch(SQLException ex){}
-        
-        
-        
+        String[] colunas = new String[]{"idFuncionario", "nomeFuncionario", "cpf", "rg",
+            "telefone", "celular", "email", "dataNascimento","codigoFuncionarios", "cep", "bairro", "logradouro",
+            "complemento", "numero", "cidade", "estado", "", "", "", "", ""};
+
+        DAO.executaSQL(SQL);
+
+        try {
+            DAO.resultSet.first();
+            do {
+                dados.add(new Object[]{DAO.resultSet.getString("idFuncionario"), DAO.resultSet.getString("nomeFuncionarios"), DAO.resultSet.getString("cpf"),
+                    DAO.resultSet.getString("rg"), DAO.resultSet.getString("telefone"), DAO.resultSet.getString("celular"),
+                    DAO.resultSet.getString("email"), DAO.resultSet.getString("dataNascimento"),DAO.resultSet.getString("codigoFuncionarios"), DAO.resultSet.getString("cep"),
+                    DAO.resultSet.getString("Bairro"), DAO.resultSet.getString("logradouro"), DAO.resultSet.getString("complemento"),
+                    DAO.resultSet.getString("numero"), DAO.resultSet.getString("cidade"), DAO.resultSet.getString("estado"),
+                    DAO.resultSet.getString("login"), DAO.resultSet.getString("perfil"), DAO.resultSet.getString("senha"),
+                    DAO.resultSet.getString("confiSenha"), DAO.resultSet.getString("situacao")});
+
+            } while (DAO.resultSet.next());
+        } catch (SQLException ex) {
+        }
+
         TabelaModelo modelo = new TabelaModelo(dados, colunas);
         jFuncionario.setModel(modelo); // recebe o modelo criado
-        jFuncionario.getColumnModel().getColumn(0).setPreferredWidth(50);  
-        jFuncionario.getColumnModel().getColumn(0).setResizable(false); 
+        jFuncionario.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jFuncionario.getColumnModel().getColumn(0).setResizable(false);
         jFuncionario.getColumnModel().getColumn(1).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
         jFuncionario.getColumnModel().getColumn(1).setResizable(true);  // não permite alterar o tamanho da coluna
-        jFuncionario.getColumnModel().getColumn(2).setPreferredWidth(70);  
-        jFuncionario.getColumnModel().getColumn(2).setResizable(false); 
-        jFuncionario.getColumnModel().getColumn(3).setPreferredWidth(120);  
-        jFuncionario.getColumnModel().getColumn(3).setResizable(false); 
-        jFuncionario.getColumnModel().getColumn(4).setPreferredWidth(120);  
+        jFuncionario.getColumnModel().getColumn(2).setPreferredWidth(70);
+        jFuncionario.getColumnModel().getColumn(2).setResizable(false);
+        jFuncionario.getColumnModel().getColumn(3).setPreferredWidth(120);
+        jFuncionario.getColumnModel().getColumn(3).setResizable(false);
+        jFuncionario.getColumnModel().getColumn(4).setPreferredWidth(120);
         jFuncionario.getColumnModel().getColumn(4).setResizable(false);
-        jFuncionario.getColumnModel().getColumn(5).setPreferredWidth(120);  
+        jFuncionario.getColumnModel().getColumn(5).setPreferredWidth(120);
         jFuncionario.getColumnModel().getColumn(5).setResizable(false);
-        jFuncionario.getColumnModel().getColumn(6).setPreferredWidth(120);  
-        jFuncionario.getColumnModel().getColumn(6).setResizable(false); 
-        jFuncionario.getColumnModel().getColumn(7).setPreferredWidth(120);  
+        jFuncionario.getColumnModel().getColumn(6).setPreferredWidth(120);
+        jFuncionario.getColumnModel().getColumn(6).setResizable(false);
+        jFuncionario.getColumnModel().getColumn(7).setPreferredWidth(120);
         jFuncionario.getColumnModel().getColumn(7).setResizable(false);
-        jFuncionario.getColumnModel().getColumn(8).setPreferredWidth(120);  
+        jFuncionario.getColumnModel().getColumn(8).setPreferredWidth(120);
         jFuncionario.getColumnModel().getColumn(8).setResizable(false);
-        jFuncionario.getColumnModel().getColumn(9).setPreferredWidth(120);  
-        jFuncionario.getColumnModel().getColumn(9).setResizable(false); 
-        jFuncionario.getColumnModel().getColumn(10).setPreferredWidth(120);  
-        jFuncionario.getColumnModel().getColumn(10).setResizable(false); 
-        jFuncionario.getColumnModel().getColumn(11).setPreferredWidth(120);  
-        jFuncionario.getColumnModel().getColumn(11).setResizable(false); 
-        jFuncionario.getColumnModel().getColumn(12).setPreferredWidth(120);  
+        jFuncionario.getColumnModel().getColumn(9).setPreferredWidth(120);
+        jFuncionario.getColumnModel().getColumn(9).setResizable(false);
+        jFuncionario.getColumnModel().getColumn(10).setPreferredWidth(120);
+        jFuncionario.getColumnModel().getColumn(10).setResizable(false);
+        
+        jFuncionario.getColumnModel().getColumn(11).setPreferredWidth(120);
+        jFuncionario.getColumnModel().getColumn(11).setResizable(false);
+        jFuncionario.getColumnModel().getColumn(12).setPreferredWidth(120);
         jFuncionario.getColumnModel().getColumn(12).setResizable(false);
-        jFuncionario.getColumnModel().getColumn(13).setPreferredWidth(120);  
+        jFuncionario.getColumnModel().getColumn(13).setPreferredWidth(120);
         jFuncionario.getColumnModel().getColumn(13).setResizable(false);
-        jFuncionario.getColumnModel().getColumn(14).setPreferredWidth(120);  
+        jFuncionario.getColumnModel().getColumn(14).setPreferredWidth(120);
         jFuncionario.getColumnModel().getColumn(14).setResizable(false);
-        jFuncionario.getColumnModel().getColumn(15).setPreferredWidth(120);  
+        jFuncionario.getColumnModel().getColumn(15).setPreferredWidth(120);
         jFuncionario.getColumnModel().getColumn(15).setResizable(false);
-        jFuncionario.getColumnModel().getColumn(16).setMinWidth(0);  
-        jFuncionario.getColumnModel().getColumn(16).setMaxWidth(0);
+        jFuncionario.getColumnModel().getColumn(16).setPreferredWidth(120);
         jFuncionario.getColumnModel().getColumn(16).setResizable(false);
-        jFuncionario.getColumnModel().getColumn(17).setMinWidth(0);  
+        jFuncionario.getColumnModel().getColumn(17).setMinWidth(0);
         jFuncionario.getColumnModel().getColumn(17).setMaxWidth(0);
         jFuncionario.getColumnModel().getColumn(17).setResizable(false);
-        jFuncionario.getColumnModel().getColumn(18).setMinWidth(0);  
+        jFuncionario.getColumnModel().getColumn(18).setMinWidth(0);
         jFuncionario.getColumnModel().getColumn(18).setMaxWidth(0);
         jFuncionario.getColumnModel().getColumn(18).setResizable(false);
-        jFuncionario.getColumnModel().getColumn(19).setMinWidth(0);  
+        jFuncionario.getColumnModel().getColumn(19).setMinWidth(0);
         jFuncionario.getColumnModel().getColumn(19).setMaxWidth(0);
         jFuncionario.getColumnModel().getColumn(19).setResizable(false);
-       
-        
-        
+        jFuncionario.getColumnModel().getColumn(20).setMinWidth(0);
+        jFuncionario.getColumnModel().getColumn(20).setMaxWidth(0);
+        jFuncionario.getColumnModel().getColumn(20).setResizable(false);
+
         jFuncionario.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jFuncionario.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
         jFuncionario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
     }
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA USUARIO">
-     public void preencherTabelaUsuario(String SQL){
-          ArrayList dados = new ArrayList();
-         String[] colunas = new String[]{"idUsuário","Login","Perfil","Senha",
-             "CofirmaçaoSenha","idfuncionario","nomeFuncionario","cpf","rg",
-             "telefone","celular","email","dataNascimento","cep","bairro",
-             "logradouro","complemento","numero","cidade","estado"};
-         
-        DAO.executaSQL(SQL);  
-        
-       
-        try{
-            DAO.resultSet.first();  
-            do{    
-                dados.add(new Object[]{DAO.resultSet.getString("idUsuario"),DAO.resultSet.getString("login"),DAO.resultSet.getString("perfil"),DAO.resultSet.getString("senha"), 
-                    DAO.resultSet.getString("confiSenha"),DAO.resultSet.getString("idfuncionario"),DAO.resultSet.getString("nomeFuncionario"),
-                    DAO.resultSet.getString("cpf"),DAO.resultSet.getString("rg"), DAO.resultSet.getString("telefone"),DAO.resultSet.getString("celular"), 
-                    DAO.resultSet.getString("email"),DAO.resultSet.getString("dataNascimento"),DAO.resultSet.getString("cep"),
-                    DAO.resultSet.getString("bairro"),DAO.resultSet.getString("logradouro"),DAO.resultSet.getString("complemento"),
-                    DAO.resultSet.getString("numero"),DAO.resultSet.getString("cidade"),DAO.resultSet.getString("estado")} );
-            }while(DAO.resultSet.next());
-        }catch(SQLException ex){}
-        
-        
+    public void preencherTabelaUsuario(String SQL) {
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"idUsuário", "Login", "Perfil", "Senha",
+            "CofirmaçaoSenha", "idfuncionario", "nomeFuncionario", "cpf", "rg",
+            "telefone", "celular", "email", "dataNascimento", "cep", "bairro",
+            "logradouro", "complemento", "numero", "cidade", "estado"};
+
+        DAO.executaSQL(SQL);
+
+        try {
+            DAO.resultSet.first();
+            do {
+                dados.add(new Object[]{DAO.resultSet.getString("idUsuario"), DAO.resultSet.getString("login"), DAO.resultSet.getString("perfil"), DAO.resultSet.getString("senha"),
+                    DAO.resultSet.getString("confiSenha"), DAO.resultSet.getString("idfuncionario"), DAO.resultSet.getString("nomeFuncionario"),
+                    DAO.resultSet.getString("cpf"), DAO.resultSet.getString("rg"), DAO.resultSet.getString("telefone"), DAO.resultSet.getString("celular"),
+                    DAO.resultSet.getString("email"), DAO.resultSet.getString("dataNascimento"), DAO.resultSet.getString("cep"),
+                    DAO.resultSet.getString("bairro"), DAO.resultSet.getString("logradouro"), DAO.resultSet.getString("complemento"),
+                    DAO.resultSet.getString("numero"), DAO.resultSet.getString("cidade"), DAO.resultSet.getString("estado")});
+            } while (DAO.resultSet.next());
+        } catch (SQLException ex) {
+        }
+
         TabelaModelo modelo = new TabelaModelo(dados, colunas);
         jUsuario.setModel(modelo); // recebe o modelo criado
-        jUsuario.getColumnModel().getColumn(0).setPreferredWidth(50); 
-        jUsuario.getColumnModel().getColumn(0).setResizable(false); 
+        jUsuario.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jUsuario.getColumnModel().getColumn(0).setResizable(false);
         jUsuario.getColumnModel().getColumn(1).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
         jUsuario.getColumnModel().getColumn(1).setResizable(true);  // não permite alterar o tamanho da coluna
-        jUsuario.getColumnModel().getColumn(2).setPreferredWidth(70);  
-        jUsuario.getColumnModel().getColumn(2).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(3).setPreferredWidth(120);  
-        jUsuario.getColumnModel().getColumn(3).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(4).setPreferredWidth(250);  
-        jUsuario.getColumnModel().getColumn(4).setResizable(false); 
+        jUsuario.getColumnModel().getColumn(2).setPreferredWidth(70);
+        jUsuario.getColumnModel().getColumn(2).setResizable(false);
+        jUsuario.getColumnModel().getColumn(3).setPreferredWidth(120);
+        jUsuario.getColumnModel().getColumn(3).setResizable(false);
+        jUsuario.getColumnModel().getColumn(4).setPreferredWidth(250);
+        jUsuario.getColumnModel().getColumn(4).setResizable(false);
         jUsuario.getColumnModel().getColumn(5).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(5).setMinWidth(0);  
-        jUsuario.getColumnModel().getColumn(5).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(6).setMinWidth(0);  
+        jUsuario.getColumnModel().getColumn(5).setMinWidth(0);
+        jUsuario.getColumnModel().getColumn(5).setResizable(false);
+        jUsuario.getColumnModel().getColumn(6).setMinWidth(0);
         jUsuario.getColumnModel().getColumn(6).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(6).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(7).setMinWidth(0);  
+        jUsuario.getColumnModel().getColumn(6).setResizable(false);
+        jUsuario.getColumnModel().getColumn(7).setMinWidth(0);
         jUsuario.getColumnModel().getColumn(7).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(7).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(8).setMinWidth(0);  
+        jUsuario.getColumnModel().getColumn(7).setResizable(false);
+        jUsuario.getColumnModel().getColumn(8).setMinWidth(0);
         jUsuario.getColumnModel().getColumn(8).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(8).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(9).setMinWidth(0);  
+        jUsuario.getColumnModel().getColumn(8).setResizable(false);
+        jUsuario.getColumnModel().getColumn(9).setMinWidth(0);
         jUsuario.getColumnModel().getColumn(9).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(9).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(10).setMinWidth(0);  
+        jUsuario.getColumnModel().getColumn(9).setResizable(false);
+        jUsuario.getColumnModel().getColumn(10).setMinWidth(0);
         jUsuario.getColumnModel().getColumn(10).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(10).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(11).setMinWidth(0);  
+        jUsuario.getColumnModel().getColumn(10).setResizable(false);
+        jUsuario.getColumnModel().getColumn(11).setMinWidth(0);
         jUsuario.getColumnModel().getColumn(11).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(11).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(12).setMinWidth(0);  
+        jUsuario.getColumnModel().getColumn(11).setResizable(false);
+        jUsuario.getColumnModel().getColumn(12).setMinWidth(0);
         jUsuario.getColumnModel().getColumn(12).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(12).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(13).setMinWidth(0);  
+        jUsuario.getColumnModel().getColumn(12).setResizable(false);
+        jUsuario.getColumnModel().getColumn(13).setMinWidth(0);
         jUsuario.getColumnModel().getColumn(13).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(13).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(14).setMinWidth(0);  
+        jUsuario.getColumnModel().getColumn(13).setResizable(false);
+        jUsuario.getColumnModel().getColumn(14).setMinWidth(0);
         jUsuario.getColumnModel().getColumn(14).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(14).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(15).setMinWidth(0);  
+        jUsuario.getColumnModel().getColumn(14).setResizable(false);
+        jUsuario.getColumnModel().getColumn(15).setMinWidth(0);
         jUsuario.getColumnModel().getColumn(15).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(15).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(16).setMinWidth(0);  
+        jUsuario.getColumnModel().getColumn(15).setResizable(false);
+        jUsuario.getColumnModel().getColumn(16).setMinWidth(0);
         jUsuario.getColumnModel().getColumn(16).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(16).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(17).setMinWidth(0);  
+        jUsuario.getColumnModel().getColumn(16).setResizable(false);
+        jUsuario.getColumnModel().getColumn(17).setMinWidth(0);
         jUsuario.getColumnModel().getColumn(17).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(17).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(18).setMinWidth(0);  
+        jUsuario.getColumnModel().getColumn(17).setResizable(false);
+        jUsuario.getColumnModel().getColumn(18).setMinWidth(0);
         jUsuario.getColumnModel().getColumn(18).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(18).setResizable(false); 
-        jUsuario.getColumnModel().getColumn(19).setMinWidth(0);  
+        jUsuario.getColumnModel().getColumn(18).setResizable(false);
+        jUsuario.getColumnModel().getColumn(19).setMinWidth(0);
         jUsuario.getColumnModel().getColumn(19).setMaxWidth(0);
-        jUsuario.getColumnModel().getColumn(19).setResizable(false); 
-        
-        
-        
+        jUsuario.getColumnModel().getColumn(19).setResizable(false);
+
         jUsuario.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jUsuario.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
         jUsuario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
-         
-     } 
-      //</editor-fold>
+
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" CODIGO FUNCIONÁRIO">
+    public String GerarCodigo() {
+        Random cod = new Random();
+        int num = 0;
+        do {
+            num = cod.nextInt(9999);
+        } while (num < 1000);
+        return Integer.toString(num);
+    }
     
-     
+    public String VerificarCodigo() {
+        DAO dao = new DAO();
+        text = GerarCodigo();
+
+        try {
+            while (txt = false) {
+                dao.executaSQL("select * from vendas where codigoVenda = " + text);
+                txt = dao.resultSet.first();
+            }
+            lblCodFuncionario.setText(text);
+            txt = false;
+            return text;
+        } catch (SQLException erro) {
+
+            return "";
+        }
+    }
     
-        
-     
+    //</editor-fold>
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarFuncionario;
     private javax.swing.JButton btnCancelarFuncionario;
@@ -1310,6 +1319,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1325,6 +1335,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTable jUsuario;
+    private javax.swing.JLabel lblCodFuncionario;
     private javax.swing.JLabel lblFuncionario;
     private javax.swing.JLabel lblIdFuncionario;
     private javax.swing.JLabel lblSenhaConfirm;
