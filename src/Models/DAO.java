@@ -75,6 +75,7 @@ public class DAO {
     }
 
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc=" EXECUTAR SQL "> 
     public void executaSQL(String sql) {
         try {
@@ -295,6 +296,7 @@ public class DAO {
     }
 
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR FORNECEDOR ">
     public void carregarTabela2() {
         String sql = "select * from fornecedor";
@@ -459,6 +461,7 @@ public class DAO {
     }
 
 //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR FUNCIONARIO E USUARIO">
     public String atualizarFuncionarioUsuario(int operacao) {
         String FK, FK2;
@@ -849,6 +852,7 @@ public class DAO {
     }
 
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR VENDAS ">
     public int PesquisaEstoque(String CodVend) {
         String fk;
@@ -1117,6 +1121,7 @@ public class DAO {
         return men;
     }*/
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc=" METODO LOGAR USUARIO">
     public boolean LogarUsuario(String login, String Senha) {
         boolean autenticado = false;
