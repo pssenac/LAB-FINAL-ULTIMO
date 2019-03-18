@@ -87,9 +87,9 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel1.setText("Período :");
+        jLabel1.setText("Inicio");
 
-        jLabel2.setText("até");
+        jLabel2.setText("Fim");
 
         btnPesquisLista.setText("pesquisa");
         btnPesquisLista.addActionListener(new java.awt.event.ActionListener() {

@@ -106,7 +106,7 @@
                           <Component id="btnOrdem" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnCliente" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnEstornoVenda1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnOrdem1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnAdmin" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <Component id="btnVenda" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -127,7 +127,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnEstornoVenda" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="138" max="32767" attributes="0"/>
-                  <Component id="btnOrdem1" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAdmin" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -234,7 +234,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOrdemActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnOrdem1">
+        <Component class="javax.swing.JButton" name="btnAdmin">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/imagens/admin_tela.png"/>
@@ -251,7 +251,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOrdem1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdminActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

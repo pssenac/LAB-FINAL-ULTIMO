@@ -22,13 +22,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-        this.setUndecorated(true);     
-        
-        
-        
-        
-        
-        
+        this.setUndecorated(true);
+
     }
 
     /**
@@ -56,7 +51,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnEstornoVenda1 = new javax.swing.JButton();
         btnEstornoVenda = new javax.swing.JButton();
         btnOrdem = new javax.swing.JButton();
-        btnOrdem1 = new javax.swing.JButton();
+        btnAdmin = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         JM_cadastro = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -128,14 +123,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnOrdem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/admin_tela.png"))); // NOI18N
-        btnOrdem1.setToolTipText("Ordem de Serviço");
-        btnOrdem1.setMaximumSize(new java.awt.Dimension(115, 115));
-        btnOrdem1.setMinimumSize(new java.awt.Dimension(115, 115));
-        btnOrdem1.setPreferredSize(new java.awt.Dimension(115, 115));
-        btnOrdem1.addActionListener(new java.awt.event.ActionListener() {
+        btnAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/admin_tela.png"))); // NOI18N
+        btnAdmin.setToolTipText("Ordem de Serviço");
+        btnAdmin.setMaximumSize(new java.awt.Dimension(115, 115));
+        btnAdmin.setMinimumSize(new java.awt.Dimension(115, 115));
+        btnAdmin.setPreferredSize(new java.awt.Dimension(115, 115));
+        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOrdem1ActionPerformed(evt);
+                btnAdminActionPerformed(evt);
             }
         });
 
@@ -150,7 +145,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(btnOrdem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEstornoVenda1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnOrdem1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnAdmin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(btnVenda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 11, Short.MAX_VALUE))
         );
@@ -167,7 +162,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEstornoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                .addComponent(btnOrdem1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         JM_cadastro.setText("Cadastros");
@@ -227,11 +222,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnEstornoVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstornoVendaActionPerformed
         TelaEstornoOrdemServico obj = new TelaEstornoOrdemServico();
-        if (jpPrincipal.getAllFrames().length == 0){
+        if (jpPrincipal.getAllFrames().length == 0) {
             jpPrincipal.add(obj);
             obj.setVisible(true);
-        }
-        else{
+        } else {
             jpPrincipal.removeAll();
             jpPrincipal.add(obj);
             obj.setVisible(true);
@@ -240,11 +234,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         TelaCliente obj = new TelaCliente();
-        if (jpPrincipal.getAllFrames().length == 0){
+        if (jpPrincipal.getAllFrames().length == 0) {
             jpPrincipal.add(obj);
             obj.setVisible(true);
-        }
-        else{
+        } else {
             jpPrincipal.removeAll();
             jpPrincipal.add(obj);
             obj.setVisible(true);
@@ -253,11 +246,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnOrdemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdemActionPerformed
         TelaOrdemServico obj = new TelaOrdemServico();
-        if (jpPrincipal.getAllFrames().length == 0){
+        if (jpPrincipal.getAllFrames().length == 0) {
             jpPrincipal.add(obj);
             obj.setVisible(true);
-        }
-        else{
+        } else {
             jpPrincipal.removeAll();
             jpPrincipal.add(obj);
             obj.setVisible(true);
@@ -265,39 +257,36 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOrdemActionPerformed
 
     private void btnEstornoVenda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstornoVenda1ActionPerformed
-      TelaEstornoVendas obj = new TelaEstornoVendas();
-        if (jpPrincipal.getAllFrames().length == 0){
+        TelaEstornoVendas obj = new TelaEstornoVendas();
+        if (jpPrincipal.getAllFrames().length == 0) {
             jpPrincipal.add(obj);
             obj.setVisible(true);
-        }
-        else{
+        } else {
             jpPrincipal.removeAll();
             jpPrincipal.add(obj);
             obj.setVisible(true);
         }
     }//GEN-LAST:event_btnEstornoVenda1ActionPerformed
 
-    private void btnOrdem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdem1ActionPerformed
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
         TelaAdmin adm = new TelaAdmin();
         adm.setVisible(true);
         dispose();
-        
-    }//GEN-LAST:event_btnOrdem1ActionPerformed
+
+    }//GEN-LAST:event_btnAdminActionPerformed
 
     private void btnVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendaActionPerformed
-       TelaVendas obj = new TelaVendas();
-        if (jpPrincipal.getAllFrames().length == 0){
+        TelaVendas obj = new TelaVendas();
+        if (jpPrincipal.getAllFrames().length == 0) {
             jpPrincipal.add(obj);
             obj.setVisible(true);
-        }
-        else{
+        } else {
             jpPrincipal.removeAll();
             jpPrincipal.add(obj);
             obj.setVisible(true);
         }
     }//GEN-LAST:event_btnVendaActionPerformed
-            
-    
+
     /**
      * @param args the command line arguments
      */
@@ -334,13 +323,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
     }
 
+    public void AtivarBtnAdm(boolean res) {
+        if (res) {
+            btnAdmin.setEnabled(true);
+        } else {
+            btnAdmin.setEnabled(false);
+        }
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu JM_cadastro;
+    private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnEstornoVenda;
     private javax.swing.JButton btnEstornoVenda1;
     private javax.swing.JButton btnOrdem;
-    private javax.swing.JButton btnOrdem1;
     private javax.swing.JButton btnVenda;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

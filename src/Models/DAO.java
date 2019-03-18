@@ -31,6 +31,7 @@ public class DAO {
     private String men, sql;
     public String Acesso;
     public String Perfil;
+    public String Situacao;
 
     public static final byte INCLUSAOCLIENTE = 1;
     public static final byte ALTERACAOCLIENTE = 2;
@@ -1140,6 +1141,7 @@ public class DAO {
             if (rs.next()) {
 
                 Perfil = rs.getString("perfil");
+                Situacao = rs.getString("situacao");
                 autenticado = true;
             } else {
                 rs.close();

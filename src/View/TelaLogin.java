@@ -1,30 +1,25 @@
-
 package View;
 
 import Controller.logFuncionarioController;
 import Models.DAO;
 import javax.swing.JOptionPane;
 
-
-
 public class TelaLogin extends javax.swing.JFrame {
-     public DAO DAO;
+
+    public DAO DAO;
     public logFuncionarioController fc;
-    
-    
-   
+
     public TelaLogin() {
         initComponents();
-        DAO = new DAO ();
+        DAO = new DAO();
         fc = new logFuncionarioController();
-        if(!fc.logarBD()){
-            JOptionPane.showMessageDialog(null,"Falha ao conectar, o sistema será fechado");
-            System.exit(0);    
+        if (!fc.logarBD()) {
+            JOptionPane.showMessageDialog(null, "Falha ao conectar, o sistema será fechado");
+            System.exit(0);
         }
-        
+
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -95,62 +90,65 @@ public class TelaLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
     // <editor-fold defaultstate="collapsed" desc="BOTÃO ACESSAR"> 
     private void bt_acessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_acessarActionPerformed
+
         
-         TelaPrincipal tela = new TelaPrincipal();
-            tela.setVisible(true);
-            dispose();// Fecha a tela login /**/
-        
-        /* if(txtUsuarioLogin.getText().equals("")){
+        TelaPrincipal tela = new TelaPrincipal();
+        tela.setVisible(true);
+        dispose();
+        /*
+        if (txtUsuarioLogin.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo Login.");
             txtUsuarioLogin.requestFocus();
             return;
-        } 
-         
-        if(txtSenhaLogin.getText().equals("")){
+        }
+
+        if (txtSenhaLogin.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo Senha.");
             txtUsuarioLogin.requestFocus();
             return;
-        } 
-         
-        boolean rs =  DAO.LogarUsuario(txtUsuarioLogin.getText(), txtSenhaLogin.getText());
+        }
+
+        boolean rs = DAO.LogarUsuario(txtUsuarioLogin.getText(), txtSenhaLogin.getText());
         String pf = DAO.Perfil;
-        String pfg ="Funcionário";
-        String pfh ="Gerente";
-      
-        if (rs == true && pf.equals(pfg) ){
-            TelaAdmin telaADM = new TelaAdmin();
-            telaADM.setVisible(true);
-           dispose(); //Fecha a tela login
-           
-        }else if (rs == true && pf.equals(pfh) ) {
-            TelaPrincipal tela = new TelaPrincipal();
-            tela.setVisible(true);
+        String st = DAO.Situacao;
+        String pf1 = "0";
+        String pf2 = "1";
+
+        JOptionPane.showMessageDialog(null, pf);
+
+        if (rs == true && pf.equals(pf1) && st != "1") {
+            boolean rt = false;
+            TelaPrincipal tp = new TelaPrincipal();
+            tp.AtivarBtnAdm(rt);
+            tp.setVisible(true);
+            
+
+            dispose(); //Fecha a tela login
+
+        } else if (rs == true && pf.equals(pf2)) {
+            TelaPrincipal tela2 = new TelaPrincipal();
+            tela2.setVisible(true);
+
             dispose();// Fecha a tela login
-        
-        
-        }else{
-             lblIncorreto.setText("Usuário ou Senha Incorretos!");
-             txtUsuarioLogin.setText("");
-             txtSenhaLogin.setText("");
-             
-        }*/
-         
-         
-         
+
+        } else {
+            lblIncorreto.setText("Usuário ou Senha Incorretos!");
+            txtUsuarioLogin.setText("");
+            txtSenhaLogin.setText("");
+
+        }
+        */
+
+
     }//GEN-LAST:event_bt_acessarActionPerformed
 
     private void bt_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_sairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_bt_sairActionPerformed
     // </editor-fold> 
-    
-    
-    
-    
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
