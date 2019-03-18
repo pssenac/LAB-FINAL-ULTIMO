@@ -367,7 +367,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
                         DAO.executaSQL("select * from vendas inner join lotevendas on FKvendas = codVenda inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos WHERE dataVenda ='" + data1 + "'");
                         JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
-                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/06729598107/Desktop/LAB-FINAL-ULTIMO/src/Relatorios/relatoriosVendas.jasper", new HashMap(), relatResul);
+                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/Marcio/Desktop/pssenac/LAB-FINAL-ULTIMO/src/Relatorios/relatoriosVendas.jasper", new HashMap(), relatResul);
                         JasperViewer jv = new JasperViewer(jpPrint, false);
 
                         jv.setVisible(true);
@@ -386,7 +386,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
                         DAO.executaSQL("select * from vendas inner join lotevendas on FKvendas = codVenda inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos WHERE dataVenda BETWEEN '" + dt1 + "' and '" + data2 + "'");
                         JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
-                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/06729598107/Desktop/LAB-FINAL-ULTIMO/src/Relatorios/relatoriosVendas.jasper", new HashMap(), relatResul);
+                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/Marcio/Desktop/pssenac/LAB-FINAL-ULTIMO/src/Relatorios/relatoriosVendas.jasper", new HashMap(), relatResul);
                         JasperViewer jv = new JasperViewer(jpPrint, false);
 
                         jv.setVisible(true);
@@ -412,7 +412,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
                         DAO.executaSQL("select * from lote inner join produtos on idprodutos = FKprodutos inner join fornecedor on idFornecedor = FKfornecedor WHERE dataCompra ='" + data1 + "'");
                         JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
-                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/06729598107/Desktop/LAB-FINAL-ULTIMO-master/src/Relatorios/relatorioCompras.jasper", new HashMap(), relatResul);
+                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/Marcio/Desktop/pssenac/LAB-FINAL-ULTIMO/src/Relatorios/relatorioCompras.jasper", new HashMap(), relatResul);
                         JasperViewer jv = new JasperViewer(jpPrint, false);
 
                         jv.setVisible(true);
@@ -431,7 +431,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
                         DAO.executaSQL("select * from lote inner join produtos on idprodutos = FKprodutos inner join fornecedor on idFornecedor = FKfornecedor WHERE dataCompra BETWEEN '" + dt1 + "' and '" + data2 + "'");
                         JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
-                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/06729598107/Desktop/LAB-FINAL-ULTIMO-master/src/Relatorios/relatorioCompras.jasper", new HashMap(), relatResul);
+                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/Marcio/Desktop/pssenac/LAB-FINAL-ULTIMO/src/Relatorios/relatorioCompras.jasper", new HashMap(), relatResul);
                         JasperViewer jv = new JasperViewer(jpPrint, false);
 
                         jv.setVisible(true);
@@ -454,7 +454,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
                         DAO.executaSQL("select * from ordemservico inner join cliente on idcliente = FKcliente inner join funcionario on idFuncionario = FKfuncionario WHERE idServico = '" + os + "'");
                         JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
-                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/06729598107/Desktop/LAB-FINAL-ULTIMO-master/src/Relatorios/RelatorioOrdemdeServico.jasper", new HashMap(), relatResul);
+                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/Marcio/Desktop/pssenac/LAB-FINAL-ULTIMO/src/Relatorios/RelatorioOrdemdeServico.jasper", new HashMap(), relatResul);
                         JasperViewer jv = new JasperViewer(jpPrint, false);
 
                         jv.setVisible(true);
