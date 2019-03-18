@@ -26,7 +26,7 @@ import javax.swing.ListSelectionModel;
  * @author 03758479100
  */
 public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
-    
+
     String sql = "", tp = "", sql1 = "";
     double x = 0, z, vl, vl2, icms1, icms, iss1, iss2, ipi1, ipi2;
     double x22 = 0, z22, vl22, vl222, icms122, icms22, iss122, iss222, ipi122, ipi222;
@@ -35,7 +35,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
     ArrayList dadosVendas2 = new ArrayList();
     ArrayList<VendaProdutos> vendaProdutos = new ArrayList<>();
     ArrayList<VendaProdutos> vendaProdutos2 = new ArrayList<>();
-    
+
     public TelaEstornoOrdemServico() {
         initComponents();
     }
@@ -164,6 +164,8 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         lbl7 = new javax.swing.JLabel();
         lbl8 = new javax.swing.JLabel();
         lbl9 = new javax.swing.JLabel();
+        lblCpfCli = new javax.swing.JLabel();
+        lblFKcli = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("ESTORNO DE ORDEM DE SERVIÇO");
@@ -891,6 +893,11 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estornoConfirma.png"))); // NOI18N
         jButton1.setText("Estorno");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisa3.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -930,6 +937,10 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
 
         lbl9.setText("jLabel1");
 
+        lblCpfCli.setText("jLabel1");
+
+        lblFKcli.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -951,7 +962,11 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(lblFKfuncionario)
                                 .addGap(18, 18, 18)
-                                .addComponent(lblEstorno))
+                                .addComponent(lblEstorno)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblCpfCli)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblFKcli))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1006,7 +1021,9 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTipoPag)
                     .addComponent(lblFKfuncionario)
-                    .addComponent(lblEstorno))
+                    .addComponent(lblEstorno)
+                    .addComponent(lblCpfCli)
+                    .addComponent(lblFKcli))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl1)
@@ -1079,6 +1096,48 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        OrdemProdutosController opc = new OrdemProdutosController();
+        DAO dao = new DAO();
+       // String codvend = dao.buscarFuncionario(txtCodVendedor.getText());
+        //String idCli = dao.BuscarIdcli(txtCpfCliente.getText());
+
+        String A = lblDataEntrega.getText().substring(0, 2);
+        String B = lblDataEntrega.getText().substring(3, 5);
+        String C = lblDataEntrega.getText().substring(6, 10);
+        String Entrega = C + "-" + B + "-" + A;
+
+        String D = lblDataSolicitacao.getText().substring(0, 2);
+        String E = lblDataSolicitacao.getText().substring(3, 5);
+        String F = lblDataSolicitacao.getText().substring(6, 10);
+        String Solicitacao = F + "-" + E + "-" + D; 
+
+        tipoPagamento();
+
+       
+            opc.salvarOrdemServico(cbServico.getSelectedItem().toString(), lblVlServico.getText(), lblDataEntrega.getText(), lblDataSolicitacao.getText(), Integer.toString(cbPrioridade.getSelectedIndex()),
+                    txtDescricao.getText(), tp, lblCodVendedor.getText(), lblIcms.getText(), lblIss.getText(), lblIpi.getText(),
+                    lblValorTotal.getText(), lblCpfCli.getText(), txtCodOrdem.getText(), lblFKcli.getText(), lblFKfuncionario.getText(), 
+                    txtObservacao.getText(), txtCodOrdem.getText(), lblDescontoGeral.getText());
+
+            for (int i = 0; i < vendaProdutos2.size(); i++) {
+                opc.salvarLoteOrdem(vendaProdutos2.get(i).getFkLoteVendas(), vendaProdutos.get(i).getQtd(), vendaProdutos.get(i).getDescontoItemVendProduto(),
+                        vendaProdutos.get(i).getValorParcialVendProduto(), txtCodOrdem.getText());
+            }
+        
+            opc.salvarOrdemServico(cbServico.getSelectedItem().toString(), lblVlServico.getText(), lblDataEntrega.getText(), lblDataSolicitacao.getText(), Integer.toString(cbPrioridade.getSelectedIndex()),
+                    txtDescricao.getText(), tp, lblCodVendedor.getText(), lblIcms.getText(), lblIss.getText(), lblIpi.getText(),
+                    lblValorTotal.getText(), lblCpfCli.getText(), txtCodOrdem.getText(), lblFKcli.getText(), lblFKfuncionario.getText(), 
+                    txtObservacao.getText(), txtCodOrdem.getText(), lblDescontoGeral.getText());
+
+            for (int i = 0; i < vendaProdutos.size(); i++) {
+                opc.salvarLoteOrdem(vendaProdutos.get(i).getFkLoteVendas(), vendaProdutos.get(i).getQtd(), vendaProdutos.get(i).getDescontoItemVendProduto(),
+                        vendaProdutos.get(i).getValorParcialVendProduto(), txtCodOrdem.getText());
+            }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 //</editor-fold>
 
     public void preencherTabela(String SQL) {
@@ -1090,31 +1149,31 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
             "DescontoOrdem", "TipoServico", "Valor Serviço", "Data Solicitacao", "Data Entrega",
             "Prioridade", "Decrição", "TipoPagamento", "codigoFuncionario", "Icms", "Iss", "Ipi", "ValorTotal", "CPFcli", "CodigoOrdem",
             "FKcliente", "FKfuncionario", "Observacao", "estorno", "Nome Cliente", "Contato"};
-        
+
         String[] colunas2 = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "Valor", "Icms", "ISS", "IPI", "idLote"};
-        
+
         dao.executaSQL(SQL);
         try {
             dao.resultSet.first();
-            
+
             do {
                 double qq = Double.parseDouble(dao.resultSet.getString("valorParcial"));
                 double qr = qq * (-1);
-                
+
                 dadosVendas.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("valorVenda"),
                     dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial"),
                     dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"),
                     dao.resultSet.getString("FKlote")});
-                
+
                 vendas.add(vd.preencherArray3(dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("valorVenda"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
                         dao.resultSet.getString("valorParcial"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"), dao.resultSet.getString("FKlote")));
-                
+
                 vendaProdutos.add(vd.preencherCarrinho(dao.resultSet.getString("FKlote"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
                         dao.resultSet.getString("valorParcial"), dao.resultSet.getString("codigoOrdem")));
-                
+
                 vendaProdutos2.add(vd.preencherCarrinho(dao.resultSet.getString("FKlote"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
                         Double.toString(qr), dao.resultSet.getString("codigoOrdem")));
-                
+
                 dados.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("valorVenda"),
                     dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), Double.toString(qr),
                     dao.resultSet.getString("desconto"), dao.resultSet.getString("tipoServico"), dao.resultSet.getString("valorServico"),
@@ -1123,7 +1182,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                     dao.resultSet.getString("ipi"), dao.resultSet.getString("valorTotal"), dao.resultSet.getString("cpfCliente"), dao.resultSet.getString("codigoOrdem"),
                     dao.resultSet.getString("FKfuncionario"), dao.resultSet.getString("observacao"), dao.resultSet.getString("estorno"), dao.resultSet.getString("nomeCliente"),
                     dao.resultSet.getString("telefone"), dao.resultSet.getString("celular")});
-                
+
                 x = Double.parseDouble(dao.resultSet.getString("valorParcial"));
                 z += x;
                 if (dao.resultSet.getString("desconto").equals(null)) {
@@ -1138,10 +1197,10 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                 iss2 += iss1;
                 ipi1 = Double.parseDouble(dao.resultSet.getString("ipi"));
                 ipi2 += ipi1;
-                
+
                 String aux = dao.resultSet.getString("telefone");
                 String aux2 = dao.resultSet.getString("celular");
-                
+
                 lblVlparcial.setText(Double.toString(z));
                 lblValorTotal.setText(Double.toString(vl * (-1)));
                 lblIcms.setText(Double.toString(icms1));
@@ -1160,15 +1219,18 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
                 int pp = Integer.parseInt(dao.resultSet.getString("prioridade"));
                 cbPrioridade.setSelectedIndex(pp);
                 txtDescricao.setText(dao.resultSet.getString("descricao"));
+                lblCpfCli.setText(dao.resultSet.getString("cpfCliente"));
+                lblFKcli.setText(dao.resultSet.getString("FKcliente"));
+                lblVlServico.setText(dao.resultSet.getString("valorServico"));
                 
             } while (dao.resultSet.next());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex + "Ñ DEU");
         }
-        
+
         ModeloTabela model = new ModeloTabela(dados, colunas);
         jTable2.setModel(model);
-        
+
         jTable2.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
         jTable2.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
         jTable2.getColumnModel().getColumn(1).setPreferredWidth(50);
@@ -1225,14 +1287,14 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         jTable2.getColumnModel().getColumn(26).setResizable(false);
         // jTable2.getColumnModel().getColumn(27).setPreferredWidth(50);
         //  jTable2.getColumnModel().getColumn(27).setResizable(false);
-        
+
         jTable2.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
         jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
-        
+
         TabelaModelo2 models = new TabelaModelo2(dadosVendas, colunas2);
         jTable29.setModel(models);
-        
+
         jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
         jTable29.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
         jTable29.getColumnModel().getColumn(1).setPreferredWidth(50);
@@ -1251,11 +1313,11 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         jTable29.getColumnModel().getColumn(7).setResizable(false);
         jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
         jTable29.getColumnModel().getColumn(8).setResizable(false);
-        
+
         jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
         jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
-        
+
     }
     //</editor-fold>
 
@@ -1265,11 +1327,11 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         //calcular impostos
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date agr = new Date();
-        
+
         String[] colunas = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "Valor", "icsm", "iss", "ipi", "idLote"};
         try {
             dadosVendas2.add(new Object[]{produto, vlUnitario, qtd, desconto, vlParcial, icmsx, issx, ipix, idLote});
-            
+
             x22 = Double.parseDouble(vlParcial);
             z22 += x22;
             vl222 = Double.parseDouble(desconto);
@@ -1280,7 +1342,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
             iss222 += iss122;
             ipi122 = Double.parseDouble(ipix);
             ipi222 += ipi122;
-            
+
             lblImposto1.setText(Double.toString(icms22));
             lblImposto2.setText(Double.toString(iss222));
             lblImposto3.setText(Double.toString(ipi222));
@@ -1292,14 +1354,14 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
             lblNomeCli1.setText(lblNomeCli.getText());
             lblTelCli1.setText(lblTelCli.getText());
             txtDescricao1.setText(txtDescricao.getText());
-            
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
-        
+
         TabelaModelo2 model = new TabelaModelo2(dadosVendas2, colunas);
         jTable29.setModel(model);
-        
+
         jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
         jTable29.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
         jTable29.getColumnModel().getColumn(1).setPreferredWidth(50);
@@ -1318,7 +1380,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         jTable29.getColumnModel().getColumn(7).setResizable(false);
         jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
         jTable29.getColumnModel().getColumn(8).setResizable(false);
-        
+
         jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
         jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
@@ -1365,14 +1427,14 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
             //  txtTroco.setEnabled(false);
             //  txtCartao.setEnabled(false);
         }
-        
+
     }
     //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Limpar tabela 2">
     public void LimparTabela2() {
         String[] colunas = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "Valor", "icsm", "iss", "ipi", "idLote"};
-        
+
         dadosVendas2.removeAll(dadosVendas2);
         //evazia a jTable, add dadosPessoa (sem dados).
         ModeloTabela modelo = new ModeloTabela(dadosVendas2, colunas);
@@ -1395,7 +1457,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
         jTable29.getColumnModel().getColumn(7).setResizable(false);
         jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
         jTable29.getColumnModel().getColumn(8).setResizable(false);
-        
+
         jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
         jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -1483,6 +1545,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbl9;
     private javax.swing.JLabel lblCodVendedor;
     private javax.swing.JLabel lblCodVendedorx;
+    private javax.swing.JLabel lblCpfCli;
     private javax.swing.JLabel lblDataEntrega;
     private javax.swing.JLabel lblDataSolicitacao;
     private javax.swing.JLabel lblDescontoGeral;
@@ -1490,6 +1553,7 @@ public class TelaEstornoOrdemServico extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblDtEntregax;
     private javax.swing.JLabel lblDtSolicitacaox;
     private javax.swing.JLabel lblEstorno;
+    private javax.swing.JLabel lblFKcli;
     private javax.swing.JLabel lblFKfuncionario;
     private javax.swing.JLabel lblIcms;
     private javax.swing.JLabel lblIcms2;

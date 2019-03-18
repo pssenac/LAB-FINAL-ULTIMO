@@ -639,7 +639,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                 lbloCodVenda.getText()));
         Limpar1();
         }else {
-            JOptionPane.showMessageDialog(null, "a quantidade de itens é superior á do Estoque");
+            
         }
     }//GEN-LAST:event_btnAddProdutoActionPerformed
 
@@ -985,7 +985,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         DAO dao = new DAO();
         int aux = dao.PesquisaEstoque(id);
         if (aux<Integer.parseInt(txtQtdVenda.getText())) {
-            JOptionPane.showMessageDialog(null, "o numero de quantidades do Produto é superior ao numero de estoque");
+            JOptionPane.showMessageDialog(null, "Estoque insuficiente");
             return false;
         }
         return true;

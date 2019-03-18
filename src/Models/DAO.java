@@ -220,7 +220,6 @@ public class DAO {
                         statement.setString(1, endereco.getCep());
                         statement.setString(2, endereco.getLogradouro());
                         statement.setString(3, endereco.getNumero());
-                        JOptionPane.showMessageDialog(null, endereco.getCep());
                         fk = statement.executeQuery();
                         fk.first();
                         FK = fk.getString("idendereco");
@@ -799,7 +798,6 @@ public class DAO {
             resultSet = statement.executeQuery();
             resultSet.next();
             resultSet.getString("qtdEstoque");
-            JOptionPane.showMessageDialog(null, resultSet.getInt(3));
             return resultSet.getInt(3);
         } catch (SQLException erro) {
 

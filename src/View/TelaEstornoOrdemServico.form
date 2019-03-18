@@ -45,6 +45,10 @@
                               <Component id="lblFKfuncionario" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="lblEstorno" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lblCpfCli" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lblFKcli" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -115,6 +119,8 @@
                   <Component id="lblTipoPag" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblFKfuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblEstorno" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCpfCli" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblFKcli" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="231" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -1503,6 +1509,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Estorno"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
@@ -1578,6 +1587,16 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl9">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCpfCli">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblFKcli">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel1"/>
       </Properties>

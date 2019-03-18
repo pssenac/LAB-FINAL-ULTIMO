@@ -15,6 +15,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 
     String sqlTabela = "select * from produtos inner join lote on idprodutos = FKprodutos inner join fornecedor on idFornecedor = FKfornecedor";
 
+    
     public ConexaoBD bd;
 
     /**
@@ -29,9 +30,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             cbFornecedor.addItem(m);
         }
         LimparCampos();
-        Dao.carregarTabela();
-        preencherTabela(sqlTabela);
-        AtivarCampos(false, false, false, false, false, false, false, false, false, false, false, false);
+        AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false,false);
         AtivarBotao(true, true, false, true, false);
         bd.close();
     }
@@ -93,6 +92,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         lblIdlote = new javax.swing.JLabel();
         lblQtdInicial = new javax.swing.JLabel();
         txtQtdInicial = new javax.swing.JTextField();
+        btnPesquisa1 = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("CADASTRO DE PRODUTOS");
@@ -316,6 +316,16 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         lblQtdInicial.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblQtdInicial.setText("Quantidade Inicial:");
 
+        btnPesquisa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisa3.png"))); // NOI18N
+        btnPesquisa1.setMaximumSize(new java.awt.Dimension(30, 30));
+        btnPesquisa1.setMinimumSize(new java.awt.Dimension(30, 30));
+        btnPesquisa1.setPreferredSize(new java.awt.Dimension(30, 30));
+        btnPesquisa1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisa1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -389,11 +399,13 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbTipoProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(cbTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnPesquisa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
@@ -449,12 +461,14 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel2)
                                 .addComponent(cbTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13)
-                            .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel13)
+                                .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnPesquisa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -497,12 +511,12 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 // <editor-fold defaultstate="collapsed" desc="Botões">
 
     private void btnNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoProdutoActionPerformed
-        AtivarCampos(true, true, true, true, true, true, true, true, true, true, true, true);
+        AtivarCampos(true, true, true, true, true, true, true, true, true, true, true, true,true);
         AtivarBotao(false, false, true, false, true);
     }//GEN-LAST:event_btnNovoProdutoActionPerformed
 
     private void btnNovoLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoLoteActionPerformed
-        AtivarCampos(true, true, true, false, false, false, true, true, true, true, true, false);
+        AtivarCampos(true, true, true, false, false, false, true, true, true, true, true, false,true);
         AtivarBotao(false, false, true, false, true);
 
     }//GEN-LAST:event_btnNovoLoteActionPerformed
@@ -519,13 +533,13 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                 txtTotalmposto.getText(), txtIcms.getText(), txtIss.getText(), txtIpi.getText(), f.getIdFornecedor(),
                 txtDataCompra.getText(), txtQtd.getText(), txtQtdInicial.getText(), txtCusto.getText(), txtVenda.getText(), cbSituacao.getSelectedIndex(),
                 txtMarca.getText(), txtLote.getText());
-        AtivarCampos(false, false, false, true, true, true, false, false, false, false, false, true);
+        AtivarCampos(false, false, false, true, true, true, false, false, false, false, false, true,false);
         AtivarBotao(false, false, false, false, true);
         preencherTabela(sqlTabela);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        AtivarCampos(false, false, false, false, false, false, false, false, false, false, false, false);
+        AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false,false);
         AtivarBotao(true, true, false, false, false);
         LimparCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -539,7 +553,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                 txtDataCompra.getText(), txtQtd.getText(), txtQtdInicial.getText(), txtCusto.getText(), txtVenda.getText(), cbSituacao.getSelectedIndex(),
                 txtMarca.getText(), txtLote.getText()
         );
-        AtivarCampos(false, false, false, false, false, false, false, false, false, false, false, false);
+        AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false, false);
         AtivarBotao(true, true, false, false, false);
         preencherTabela(sqlTabela);
     }//GEN-LAST:event_btnGravarActionPerformed
@@ -567,11 +581,18 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         txtLote.setText(jTable1.getValueAt(linhaSelecionada, 17).toString());
         AtivarBotao(true, true, true, true, true);
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btnPesquisa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisa1ActionPerformed
+       String sql = "select * from produtos inner join Lote on idprodutos = FKprodutos where nomeProduto like '%" + txtNomeProduto.getText() + "%' and qtdEstoque>0";
+       //String sql = "select * from produtos inner join lote on idprodutos = FKprodutos inner join fornecedor on idFornecedor = FKfornecedor where qtdEstoque>0";
+       preencherTabela(sql);
+
+    }//GEN-LAST:event_btnPesquisa1ActionPerformed
 //</editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Ativar Campos"> 
     public void AtivarCampos(boolean a, boolean b, boolean c, boolean d, boolean e,
-            boolean f, boolean g, boolean h, boolean i, boolean j, boolean k, boolean l) {
+            boolean f, boolean g, boolean h, boolean i, boolean j, boolean k, boolean l, boolean m) {
         txtLote.setEnabled(a);
         cbFornecedor.setEnabled(b);
         cbTipoProduto.setEnabled(c);
@@ -584,6 +605,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         txtVenda.setEnabled(j);
         txtQtd.setEnabled(k);
         txtLocal.setEnabled(l);
+        txtQtdInicial.setEnabled(m);
     }
     //</editor-fold>
 
@@ -691,6 +713,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGravar;
     private javax.swing.JButton btnNovoLote;
     private javax.swing.JButton btnNovoProduto;
+    private javax.swing.JButton btnPesquisa1;
     private javax.swing.JComboBox<Object> cbFornecedor;
     private javax.swing.JComboBox<String> cbSituacao;
     private javax.swing.JComboBox<String> cbTipoProduto;
