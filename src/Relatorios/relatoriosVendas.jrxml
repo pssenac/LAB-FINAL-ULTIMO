@@ -4,7 +4,7 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[SELECT * FROM vendas inner join lotevendas on FKvendas = codVenda inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos ]]>
+		<![CDATA[SELECT * FROM vendas inner join lotevendas on FKvendas = codVenda inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos]]>
 	</queryString>
 	<field name="codVenda" class="java.lang.Integer">
 		<fieldDescription><![CDATA[Chave primária da tabela 'Vendas']]></fieldDescription>
@@ -22,13 +22,13 @@
 		<fieldDescription><![CDATA[Campo destinado ao possível estorno de venda.]]></fieldDescription>
 	</field>
 	<field name="estorno" class="java.lang.Integer">
-		<fieldDescription><![CDATA[Campo com referencia ao codigo de venda ]]></fieldDescription>
+		<fieldDescription><![CDATA[Campo com referencia ao codigo de venda]]></fieldDescription>
 	</field>
 	<field name="icms" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[Campo que determina o Imposto sobre Circulação de Mercadorias e Serviços]]></fieldDescription>
 	</field>
 	<field name="iss" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[Campo que determina o Imposto Sobre Serviços ]]></fieldDescription>
+		<fieldDescription><![CDATA[Campo que determina o Imposto Sobre Serviços]]></fieldDescription>
 	</field>
 	<field name="ipi" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[Campo que determina o Imposto sobre Produtos Industrializados]]></fieldDescription>
@@ -106,7 +106,7 @@
 		<fieldDescription><![CDATA[Descrição do Produto]]></fieldDescription>
 	</field>
 	<field name="armazemLocal" class="java.lang.String">
-		<fieldDescription><![CDATA[Posição do produto no estoque fisico ]]></fieldDescription>
+		<fieldDescription><![CDATA[Posição do produto no estoque fisico]]></fieldDescription>
 	</field>
 	<field name="tipoProduto" class="java.lang.String">
 		<fieldDescription><![CDATA[Determina o tipo de produto]]></fieldDescription>
@@ -117,9 +117,9 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="176" y="10" width="194" height="35" uuid="72ff694a-2088-476c-9848-b3c00bfb89bb"/>
+				<reportElement x="176" y="10" width="211" height="35" uuid="72ff694a-2088-476c-9848-b3c00bfb89bb"/>
 				<textElement>
-					<font size="24"/>
+					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[LabyTechSystem]]></text>
 			</staticText>
@@ -130,6 +130,10 @@
 				</textElement>
 				<text><![CDATA[Manutençao e Reparo de Computadores & Notebooks]]></text>
 			</staticText>
+			<image>
+				<reportElement x="22" y="10" width="73" height="50" uuid="7a561cfe-6463-4e29-a6d1-fa2927f5c54b"/>
+				<imageExpression><![CDATA["C:\\Users\\Marcio\\Desktop\\IMG-20190215-WA0001.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -173,7 +177,7 @@
 				<reportElement x="0" y="0" width="111" height="20" uuid="6dfd0fbf-121f-4a13-a893-44060b1512a3"/>
 				<textFieldExpression><![CDATA[$F{nomeProduto}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="dd/MM/yyyy">
 				<reportElement x="111" y="0" width="111" height="20" uuid="1abc8f64-e8db-4a34-b811-e9cfee447eee"/>
 				<textFieldExpression><![CDATA[$F{dataVenda}]]></textFieldExpression>
 			</textField>
