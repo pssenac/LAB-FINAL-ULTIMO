@@ -87,7 +87,7 @@
                       <Component id="jpEndereco" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="82" max="32767" attributes="0"/>
+              <EmptySpace pref="50" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -615,13 +615,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblTipoCod" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rbCpf" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rbCnpj" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblTipoCod" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCpfCnpj" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -632,11 +626,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lblFantasia" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtFantasia" max="32767" attributes="0"/>
+                          <Component id="txtFantasia" pref="351" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lblRamo" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                           <Component id="txtRamo" min="-2" pref="271" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -649,7 +643,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnPesquisar" min="-2" pref="29" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="64" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -659,17 +653,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblTipoCod" alignment="3" max="32767" attributes="0"/>
-                      <Component id="rbCpf" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="rbCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="lblTipoCod" pref="20" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtCpfCnpj" min="-2" pref="21" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblRazao" alignment="3" max="32767" attributes="0"/>
-                      <Component id="txtNomeEmpresa" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
+                  <Component id="txtCpfCnpj" min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblRazao" max="32767" attributes="0"/>
+                      <Component id="txtNomeEmpresa" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
@@ -683,7 +673,7 @@
                               <Component id="btnPesquisar" pref="0" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblFantasia" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="txtFantasia" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
+                                  <Component id="txtFantasia" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -691,9 +681,9 @@
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblRamo" alignment="3" max="32767" attributes="0"/>
-                      <Component id="txtRamo" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
+                      <Component id="txtRamo" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -704,24 +694,8 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="12" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Tipo de C&#xf3;digo: "/>
+            <Property name="text" type="java.lang.String" value="Cnpj:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="rbCpf">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="CPF"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rbCpfMouseClicked"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="rbCnpj">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="CNPJ"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rbCnpjMouseClicked"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCpfCnpj">
           <Properties>

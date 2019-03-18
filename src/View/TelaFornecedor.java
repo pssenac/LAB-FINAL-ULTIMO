@@ -77,8 +77,6 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
         btnCancelar = new javax.swing.JButton();
         jpEmpresa = new javax.swing.JPanel();
         lblTipoCod = new javax.swing.JLabel();
-        rbCpf = new javax.swing.JRadioButton();
-        rbCnpj = new javax.swing.JRadioButton();
         txtCpfCnpj = new javax.swing.JTextField();
         lblRazao = new javax.swing.JLabel();
         txtNomeEmpresa = new javax.swing.JTextField();
@@ -369,21 +367,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
         jpEmpresa.setBorder(javax.swing.BorderFactory.createTitledBorder("Empresa"));
 
         lblTipoCod.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblTipoCod.setText("Tipo de Código: ");
-
-        rbCpf.setText("CPF");
-        rbCpf.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rbCpfMouseClicked(evt);
-            }
-        });
-
-        rbCnpj.setText("CNPJ");
-        rbCnpj.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rbCnpjMouseClicked(evt);
-            }
-        });
+        lblTipoCod.setText("Cnpj:");
 
         txtCpfCnpj.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
@@ -421,12 +405,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jpEmpresaLayout.createSequentialGroup()
-                            .addComponent(lblTipoCod)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(rbCpf)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(rbCnpj))
+                        .addComponent(lblTipoCod)
                         .addComponent(txtCpfCnpj, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpEmpresaLayout.createSequentialGroup()
                         .addComponent(lblRazao)
@@ -435,10 +414,10 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                     .addGroup(jpEmpresaLayout.createSequentialGroup()
                         .addComponent(lblFantasia)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFantasia))
+                        .addComponent(txtFantasia, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE))
                     .addGroup(jpEmpresaLayout.createSequentialGroup()
                         .addComponent(lblRamo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(3, 3, 3)
                         .addComponent(txtRamo, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpEmpresaLayout.createSequentialGroup()
@@ -448,22 +427,19 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                     .addGroup(jpEmpresaLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(64, Short.MAX_VALUE))))
         );
         jpEmpresaLayout.setVerticalGroup(
             jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEmpresaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTipoCod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rbCpf)
-                    .addComponent(rbCnpj))
+                .addComponent(lblTipoCod, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCpfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(txtCpfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblRazao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNomeEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNomeEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEmpresaLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -475,12 +451,12 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                             .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblFantasia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRamo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtRamo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
+                    .addComponent(txtRamo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -536,7 +512,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jpEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -573,7 +549,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, jj);
                     preencherTabela(sql);
                     Limpar();
-                    AtivarCampos(/*true, true,*/true, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+                    AtivarCampos(/*true, true,*/false, false, true, false, false, false, false, false, false, false, false, false, false, false, false);
                     AtivarBotao(true, false, false, false, true, true);
                 }
 
@@ -591,7 +567,9 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, jj);
 
                 preencherTabela(sql);
-
+                Limpar();
+                AtivarCampos(/*true, true,*/false, false, true, false, false, false, false, false, false, false, false, false, false, false, false);
+                AtivarBotao(true, false, false, false, true, true);
                 break;
 
         }
@@ -619,24 +597,16 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="BOTAO CANCELAR">
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         Limpar();
-        AtivarCampos(/*true, true,*/true, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
-        AtivarBotao(true, false, false, false, false, false);
+        AtivarCampos(/*true, true,*/false, false, true, false, false, false, false, false, false, false, false, false, false, false, false);
+        AtivarBotao(true, false, false, false, true, false);
     }//GEN-LAST:event_btnCancelarActionPerformed
     //</editor-fold> 
 
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        sql = "select * from fornecedor inner join endereco on FKendereco = idendereco where nomeFantasia like '%" + txtFantasia.getText()+"%'";
+        sql = "select * from fornecedor inner join endereco on FKendereco = idendereco where nomeFantasia like '%" + txtFantasia.getText() + "%'";
         preencherTabela(sql);
     }//GEN-LAST:event_btnPesquisarActionPerformed
-
-    private void rbCpfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbCpfMouseClicked
-        //Cpfcnpj = true;
-    }//GEN-LAST:event_rbCpfMouseClicked
-
-    private void rbCnpjMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbCnpjMouseClicked
-        //Cpfcnpj = false;
-    }//GEN-LAST:event_rbCnpjMouseClicked
 
     // <editor-fold defaultstate="collapsed" desc="METODO LINHA SELECIONADA ">
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -709,8 +679,8 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="METODA LIMPAR CAMPOS">
     public void Limpar() {
 
-        rbCpf.setSelected(false);
-        rbCnpj.setSelected(false);
+//        rbCpf.setSelected(false);
+        //      rbCnpj.setSelected(false);
         txtCpfCnpj.setText("");
         txtNomeEmpresa.setText("");
         txtFantasia.setText("");
@@ -889,8 +859,6 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblTipoCod;
     private javax.swing.JLabel lblUf;
     private javax.swing.JLabel lblemail;
-    private javax.swing.JRadioButton rbCnpj;
-    private javax.swing.JRadioButton rbCpf;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCep;
     private javax.swing.JTextField txtCidade;

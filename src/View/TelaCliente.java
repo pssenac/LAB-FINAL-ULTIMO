@@ -600,8 +600,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         AtivarBotoes(true, false, false, false, false);
         
-        AtivarCampos(false, false, false, false, false, false, false, false, false, false, false,
+        AtivarCampos(true, false, false, false, false, false, false, false, false, false, false,
                 false, false);
+        LimpaCampo();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnPesquisa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisa1ActionPerformed
