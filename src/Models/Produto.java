@@ -5,6 +5,20 @@ import java.util.Date;
 public class Produto {
 
     /**
+     * @return the Lpp
+     */
+    public String getLpp() {
+        return Lpp;
+    }
+
+    /**
+     * @param Lpp the Lpp to set
+     */
+    public void setLpp(String Lpp) {
+        this.Lpp = Lpp;
+    }
+
+    /**
      * @return the idProduto
      */
     public String getIdProduto() {
@@ -79,6 +93,7 @@ public class Produto {
     private String descricao;
     private String armazemLocal;
     private String tipoProduto;
+    private String Lpp;
 
 
 }

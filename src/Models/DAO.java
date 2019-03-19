@@ -751,21 +751,22 @@ public class DAO {
                 // Produto
                 case INCLUSAOPRODUTO:
 
-                    
-                    sql = "insert into produtos values(null,?,?,?,?)";
-                    bd.getConnection();
-                    statement = bd.connection.prepareStatement(sql);
-                    statement.setString(1, produto.getNomeProduto());
-                    statement.setString(2, produto.getDescricao());
-                    statement.setString(3, produto.getArmazemLocal());
-                    statement.setString(4, produto.getTipoProduto());
-                    statement.executeUpdate();
-                    sql = "SELECT idprodutos FROM produtos ORDER BY idprodutos DESC LIMIT 1";
-                    statement = bd.connection.prepareStatement(sql);
+                    if (produto.getLpp().equals("")) {
+                        sql = "insert into produtos values(null,?,?,?,?)";
+                        bd.getConnection();
+                        statement = bd.connection.prepareStatement(sql);
+                        statement.setString(1, produto.getNomeProduto());
+                        statement.setString(2, produto.getDescricao());
+                        statement.setString(3, produto.getArmazemLocal());
+                        statement.setString(4, produto.getTipoProduto());
+                        statement.executeUpdate();
 
-                    ResultSet fk = statement.executeQuery();
-                    while (fk.next()) {
-                        FK = fk.getInt("idprodutos");
+                        sql = "SELECT idprodutos FROM produtos ORDER BY idprodutos LIMIT 1";
+                        statement = bd.connection.prepareStatement(sql);
+                        ResultSet fk = statement.executeQuery();
+                        fk.next();
+                        
+                        
                         sql = "insert into lote values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                         statement = bd.connection.prepareStatement(sql);
                         statement.setString(1, lote.getDataCompra());
@@ -783,13 +784,37 @@ public class DAO {
                         statement.setString(13, lote.getTotalImposto());
                         statement.setString(14, lote.getFkFornecedor());
                         statement.executeUpdate();
-                    }
 
+                    } else {
+                        sql = "SELECT idprodutos FROM produtos inner join lote on idprodutos = ?";
+                        statement = bd.connection.prepareStatement(sql);
+                        statement.setString(1, lote.getIdLote());
+                        ResultSet fk = statement.executeQuery();
+                        while (fk.next()) {
+
+                            sql = "insert into lote values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                            statement = bd.connection.prepareStatement(sql);
+                            statement.setString(1, lote.getDataCompra());
+                            statement.setString(2, lote.getQuantidade());
+                            statement.setString(3, lote.getQuantidadeInicial());
+                            statement.setString(4, lote.getValorCusto());
+                            statement.setString(5, lote.getValorVenda());
+                            statement.setInt(6, lote.getSituacaoProduto());
+                            statement.setString(7, lote.getMarca());
+                            statement.setString(8, lote.getLote());
+                            statement.setInt(9, fk.getInt("idprodutos"));
+                            statement.setString(10, lote.getIcms());
+                            statement.setString(11, lote.getIss());
+                            statement.setString(12, lote.getIpi());
+                            statement.setString(13, lote.getTotalImposto());
+                            statement.setString(14, lote.getFkFornecedor());
+                            statement.executeUpdate();
+                        }
+                    }
                     statement.close();
                     break;
                 case ALTERACAOPRODUTO:
 
-          
                     sql = "update produtos set nomeProduto = ?, descricao = ?, armazemLocal = ?, tipoProduto = ? where idprodutos = ?";
                     statement = bd.connection.prepareStatement(sql);
                     statement.setString(1, produto.getNomeProduto());
@@ -909,17 +934,17 @@ public class DAO {
                         statement.executeUpdate();
                         statement.close();
 
-                    }else{
+                    } else {
 
-                    sql = "update lote set qtdEstoque = qtdEstoque - ? where idLote = ?";
-                    bd.getConnection();
-                    statement = bd.connection.prepareStatement(sql);
-                    statement.setString(1, vendaProdutos.getQtd());
-                    statement.setString(2, vendaProdutos.getFkLoteVendas());
-                    statement.executeUpdate();
-                    statement.close();
+                        sql = "update lote set qtdEstoque = qtdEstoque - ? where idLote = ?";
+                        bd.getConnection();
+                        statement = bd.connection.prepareStatement(sql);
+                        statement.setString(1, vendaProdutos.getQtd());
+                        statement.setString(2, vendaProdutos.getFkLoteVendas());
+                        statement.executeUpdate();
+                        statement.close();
                     }
-                    
+
                     break;
 
                 case ALTERACAOVENDA:

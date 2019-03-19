@@ -14,7 +14,7 @@ import javax.swing.ListSelectionModel;
 public class TelaProduto extends javax.swing.JInternalFrame {
 
     String sqlTabela = "select * from produtos inner join lote on idprodutos = FKprodutos inner join fornecedor on idFornecedor = FKfornecedor";
-
+    String lp ="";
     public ConexaoBD bd;
     int vd;
 
@@ -93,6 +93,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         lblQtdInicial = new javax.swing.JLabel();
         txtQtdInicial = new javax.swing.JTextField();
         btnPesquisa1 = new javax.swing.JButton();
+        lblIdl = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("CADASTRO DE PRODUTOS");
@@ -426,6 +427,10 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblIdl)
+                .addGap(529, 529, 529))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -434,7 +439,8 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblIdl, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNovoLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -502,7 +508,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                                         .addGap(41, 41, 41)
                                         .addComponent(lblIdlote, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jpImposto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 113, Short.MAX_VALUE))))
+                        .addGap(67, 117, Short.MAX_VALUE))))
         );
 
         pack();
@@ -520,6 +526,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
     private void btnNovoLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoLoteActionPerformed
         AtivarCampos(true, true, true, false, false, false, true, true, true, true, true, false, true, true, true, true, true);
         AtivarBotao(false, false, false, false, true, false);
+        String lp = "LOTE";
        
 
     }//GEN-LAST:event_btnNovoLoteActionPerformed
@@ -536,9 +543,6 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
 
-        
-        
-  
         switch (vd) {
 
             case 1:
@@ -548,11 +552,12 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                 prodcontrol.salvarProduto(txtNomeProduto.getText(), txtaDescricao.getText(), txtLocal.getText(), cbTipoProduto.getSelectedItem().toString(),
                         txtTotalmposto.getText(), txtIcms.getText(), txtIss.getText(), txtIpi.getText(), f.getIdFornecedor(),
                         txtDataCompra.getText(), txtQtd.getText(), txtQtdInicial.getText(), txtCusto.getText(), txtVenda.getText(), cbSituacao.getSelectedIndex(),
-                        txtMarca.getText(), txtLote.getText());
+                        txtMarca.getText(), txtLote.getText(),lp,lblIdl.getText());
                 AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
                 AtivarBotao(true, false, false, false, false, true);
                 LimparCampos();
                 preencherTabela(sqlTabela);
+                lp = "";
                 
                 
 
@@ -586,6 +591,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         txtIcms.setText(jTable1.getValueAt(linhaSelecionada, 6).toString());
         txtIss.setText(jTable1.getValueAt(linhaSelecionada, 7).toString());
         txtIpi.setText(jTable1.getValueAt(linhaSelecionada, 8).toString());
+        lblIdl.setText(jTable1.getValueAt(linhaSelecionada, 18).toString());
         cbFornecedor.setSelectedItem(jTable1.getValueAt(linhaSelecionada, 11).toString());
 
         txtDataCompra.setText(jTable1.getValueAt(linhaSelecionada, 10).toString());
@@ -687,7 +693,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                     dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"), dao.resultSet.getString("idLote"),
                     dao.resultSet.getString("dataCompra"), dao.resultSet.getString("qtdEstoque"), dao.resultSet.getShort("qtdInicial"), dao.resultSet.getString("valorCusto"),
                     dao.resultSet.getString("valorVenda"), dao.resultSet.getString("situacaoProduto"), dao.resultSet.getString("marca"),
-                    dao.resultSet.getString("lote"), dao.resultSet.getString("FKfornecedor")});
+                    dao.resultSet.getString("lote"), dao.resultSet.getString("FKfornecedor"),dao.resultSet.getString("FKprodutos")});
             } while (dao.resultSet.next());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex + "A tabela Não foi capaz de retornar os dados");
@@ -775,6 +781,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JPanel jpImposto;
     private javax.swing.JLabel lblIdProduto;
+    private javax.swing.JLabel lblIdl;
     private javax.swing.JLabel lblIdlote;
     private javax.swing.JLabel lblQtdInicial;
     private javax.swing.JTextField txtCusto;
