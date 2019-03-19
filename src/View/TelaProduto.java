@@ -15,7 +15,6 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 
     String sqlTabela = "select * from produtos inner join lote on idprodutos = FKprodutos inner join fornecedor on idFornecedor = FKfornecedor";
 
-    
     public ConexaoBD bd;
 
     /**
@@ -30,8 +29,8 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             cbFornecedor.addItem(m);
         }
         LimparCampos();
-        AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false,false);
-        AtivarBotao(true, true, false, true, false);
+        AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
+        AtivarBotao(true, false, false, false, false, true);
         bd.close();
     }
 
@@ -511,13 +510,14 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 // <editor-fold defaultstate="collapsed" desc="Botões">
 
     private void btnNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoProdutoActionPerformed
-        AtivarCampos(true, true, true, true, true, true, true, true, true, true, true, true,true);
-        AtivarBotao(false, false, true, false, true);
+        LimparCampos();
+        AtivarCampos(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
+        AtivarBotao(false, false, true, false, true, false);
     }//GEN-LAST:event_btnNovoProdutoActionPerformed
 
     private void btnNovoLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoLoteActionPerformed
-        AtivarCampos(true, true, true, false, false, false, true, true, true, true, true, false,true);
-        AtivarBotao(false, false, true, false, true);
+        AtivarCampos(true, true, true, false, false, false, true, true, true, true, true, false, true, true, true, true, true);
+        AtivarBotao(false, false, false, false, true, false);
 
     }//GEN-LAST:event_btnNovoLoteActionPerformed
 
@@ -526,21 +526,24 @@ public class TelaProduto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnApagarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-
+        AtivarCampos(false, false, false, true, true, true, false, false, false, false, false, true, false, false, false, false, false);
+        AtivarBotao(false, false, false, false, true, true);
         ProdutoController prodcontrol = new ProdutoController();
         Fornecedor f = (Fornecedor) cbFornecedor.getSelectedItem();
         prodcontrol.alterarProduto(lblIdProduto.getText(), txtNomeProduto.getText(), txtaDescricao.getText(), txtLocal.getText(), cbTipoProduto.getSelectedItem().toString(),
                 txtTotalmposto.getText(), txtIcms.getText(), txtIss.getText(), txtIpi.getText(), f.getIdFornecedor(),
                 txtDataCompra.getText(), txtQtd.getText(), txtQtdInicial.getText(), txtCusto.getText(), txtVenda.getText(), cbSituacao.getSelectedIndex(),
                 txtMarca.getText(), txtLote.getText());
-        AtivarCampos(false, false, false, true, true, true, false, false, false, false, false, true,false);
-        AtivarBotao(false, false, false, false, true);
+        
+        AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
+        AtivarBotao(true, false, false, false, false, true);
+        LimparCampos();
         preencherTabela(sqlTabela);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false,false);
-        AtivarBotao(true, true, false, false, false);
+        AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
+        AtivarBotao(true, false, false, false, false, true);
         LimparCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -553,8 +556,9 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                 txtDataCompra.getText(), txtQtd.getText(), txtQtdInicial.getText(), txtCusto.getText(), txtVenda.getText(), cbSituacao.getSelectedIndex(),
                 txtMarca.getText(), txtLote.getText()
         );
-        AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false, false);
-        AtivarBotao(true, true, false, false, false);
+        AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
+        AtivarBotao(true, false, false, false, false, true);
+        LimparCampos();
         preencherTabela(sqlTabela);
     }//GEN-LAST:event_btnGravarActionPerformed
 
@@ -579,20 +583,21 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         cbSituacao.setSelectedItem(jTable1.getValueAt(linhaSelecionada, 15).toString());
         txtMarca.setText(jTable1.getValueAt(linhaSelecionada, 16).toString());
         txtLote.setText(jTable1.getValueAt(linhaSelecionada, 17).toString());
-        AtivarBotao(true, true, true, true, true);
+        AtivarBotao(false, true, false, true, false, true);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnPesquisa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisa1ActionPerformed
-       String sql = "select * from produtos inner join Lote on idprodutos = FKprodutos where nomeProduto like '%" + txtNomeProduto.getText() + "%' and qtdEstoque>0";
-       //String sql = "select * from produtos inner join lote on idprodutos = FKprodutos inner join fornecedor on idFornecedor = FKfornecedor where qtdEstoque>0";
-       preencherTabela(sql);
+        String sql = "select * from produtos inner join Lote on idprodutos = FKprodutos where nomeProduto like '%" + txtNomeProduto.getText() + "%' and qtdEstoque>0";
+        //String sql = "select * from produtos inner join lote on idprodutos = FKprodutos inner join fornecedor on idFornecedor = FKfornecedor where qtdEstoque>0";
+        preencherTabela(sql);
 
     }//GEN-LAST:event_btnPesquisa1ActionPerformed
 //</editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Ativar Campos"> 
     public void AtivarCampos(boolean a, boolean b, boolean c, boolean d, boolean e,
-            boolean f, boolean g, boolean h, boolean i, boolean j, boolean k, boolean l, boolean m) {
+            boolean f, boolean g, boolean h, boolean i, boolean j, boolean k, boolean l, boolean m,
+            boolean n, boolean o, boolean p, boolean q) {
         txtLote.setEnabled(a);
         cbFornecedor.setEnabled(b);
         cbTipoProduto.setEnabled(c);
@@ -606,17 +611,23 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         txtQtd.setEnabled(k);
         txtLocal.setEnabled(l);
         txtQtdInicial.setEnabled(m);
+        txtTotalmposto.setEnabled(n);
+        txtIcms.setEnabled(o);
+        txtIss.setEnabled(p);;
+        txtIpi.setEnabled(q);
+
     }
     //</editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Ativar Botao"> 
-    public void AtivarBotao(boolean a, boolean b, boolean c, boolean d, boolean e) {
+    public void AtivarBotao(boolean a, boolean b, boolean c, boolean d, boolean e, boolean f) {
 
         btnNovoProduto.setEnabled(a);
         btnNovoLote.setEnabled(b);
         btnApagar.setEnabled(c);
         btnAlterar.setEnabled(d);
         btnGravar.setEnabled(e);
+        btnPesquisa1.setEnabled(f);
     }
     //</editor-fold>
 
@@ -634,6 +645,10 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         txtVenda.setText("");
         txtQtd.setText("");
         txtLocal.setText("");
+        txtTotalmposto.setText("");
+        txtIcms.setText("");
+        txtIss.setText("");
+        txtIpi.setText("");
     }
 //</editor-fold>
 
@@ -698,7 +713,6 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         jTable1.getColumnModel().getColumn(17).setResizable(false);
         jTable1.getColumnModel().getColumn(18).setPreferredWidth(50);
         jTable1.getColumnModel().getColumn(18).setResizable(false);
-        
 
         jTable1.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
