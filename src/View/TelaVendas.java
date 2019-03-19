@@ -706,7 +706,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
             for (int i = 0; i < vendaProdutos.size(); i++) {
                 vndP.salvarLoteVenda(vendaProdutos.get(i).getFkLoteVendas(), vendaProdutos.get(i).getQtd(), vendaProdutos.get(i).getDescontoItemVendProduto(),
                         vendaProdutos.get(i).getValorParcialVendProduto(),
-                        lbloCodVenda.getText());
+                        lbloCodVenda.getText(),"venda");
             }
            
         }

@@ -32,13 +32,14 @@ public class vendaProdutosController {
         dao.Atualizarvendas(DAO.INCLUSAOVENDA);
     }
 
-    public void salvarLoteVenda(String a2, String b, String c, String d, String e) {
+    public void salvarLoteVenda(String a2, String b, String c, String d, String e, String f) {
         DAO dao = new DAO();
         dao.vendaProdutos.setFkLoteVendas(a2);
         dao.vendaProdutos.setQtd(b);
         dao.vendaProdutos.setDescontoItemVendProduto(c);
         dao.vendaProdutos.setValorParcialVendProduto(d);
         dao.vendaProdutos.setCodVenda(e);
+        dao.vendaProdutos.setEstorno(f);
 
         JOptionPane.showMessageDialog(null, dao.Atualizarvendas(DAO.INCLUSAOVENDAPRODUTO));
     }

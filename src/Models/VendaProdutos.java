@@ -6,6 +6,22 @@ package Models;
 public class VendaProdutos {
 
     /**
+     * @return the estorno
+     */
+    public String getEstorno() {
+        return estorno;
+    }
+
+    /**
+     * @param estorno the estorno to set
+     */
+    public void setEstorno(String estorno) {
+        this.estorno = estorno;
+    }
+
+  
+
+    /**
      * @return the fkLoteVendas
      */
     public String getFkLoteVendas() {
@@ -98,6 +114,7 @@ public class VendaProdutos {
    private String descontoItemVendProduto;
    private String  valorParcialVendProduto;
    private String codVenda;
+   private String estorno;
 
     
    

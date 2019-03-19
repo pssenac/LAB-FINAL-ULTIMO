@@ -24,7 +24,7 @@ import javax.swing.ListSelectionModel;
  *
  * @author 03758479100
  */
-public class TelaEstornoVendas extends javax.swing.JInternalFrame {
+public class TelaEstornoVendas1 extends javax.swing.JInternalFrame {
 
     String sql = "", tp = "", sql1 = "";
     double x = 0, z, vl, vl2, icms1, icms, iss1, iss2, ipi1, ipi2;
@@ -35,7 +35,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     ArrayList<VendaProdutos> vendaProdutos = new ArrayList<>();
     ArrayList<VendaProdutos> vendaProdutos2 = new ArrayList<>();
 
-    public TelaEstornoVendas() {
+    public TelaEstornoVendas1() {
         initComponents();
     }
 
@@ -48,6 +48,12 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel19 = new javax.swing.JLabel();
+        txtDinheiro = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        txtTroco = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        txtCartao = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         txtCodVenda = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
@@ -73,25 +79,12 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         lblDescontoGeral = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         lblDataVenda = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable29 = new javax.swing.JTable();
-        lblValorTotalx = new javax.swing.JLabel();
-        cbCC1 = new javax.swing.JCheckBox();
-        cbCD1 = new javax.swing.JCheckBox();
+        jLabel26 = new javax.swing.JLabel();
+        txtDinheiro1 = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        txtTroco1 = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        lblImposto3 = new javax.swing.JLabel();
-        lblImposto1 = new javax.swing.JLabel();
-        lblImposto2 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        lblValorParcialx = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        lblDescontoGeralx = new javax.swing.JLabel();
-        cbD1 = new javax.swing.JCheckBox();
+        txtCartao1 = new javax.swing.JTextField();
         btnEstorno = new javax.swing.JButton();
         jLabel41 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -102,7 +95,6 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         lblCodfuncionario = new javax.swing.JLabel();
         lblCodvenda = new javax.swing.JLabel();
         lblCodigoFunc = new javax.swing.JLabel();
-        btnCancelar = new javax.swing.JButton();
         lbl1 = new javax.swing.JLabel();
         lbl2 = new javax.swing.JLabel();
         lbl3 = new javax.swing.JLabel();
@@ -118,14 +110,15 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         lbl7 = new javax.swing.JLabel();
         lbl8 = new javax.swing.JLabel();
         lbl9 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        lblDataVendax = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        txtDinheiro = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
-        txtTroco = new javax.swing.JTextField();
-        jLabel26 = new javax.swing.JLabel();
-        txtCartao = new javax.swing.JTextField();
+
+        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel19.setText("Dinheiro:");
+
+        jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel21.setText("Troco :");
+
+        jLabel25.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel25.setText("Cartão :");
 
         setClosable(true);
         setTitle("ESTORNO DE VENDAS");
@@ -247,6 +240,15 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
         lblDataVenda.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
+        jLabel26.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel26.setText("Dinheiro:");
+
+        jLabel27.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel27.setText("Troco :");
+
+        jLabel28.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel28.setText("Cartão :");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -283,7 +285,19 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cbCC)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbCD)))
+                                .addComponent(cbCD))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDinheiro1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel28)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCartao1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel27)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtTroco1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71))))
@@ -296,6 +310,9 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel15)
                             .addComponent(lblValor, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -303,16 +320,26 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16)
                             .addComponent(lblDescontoGeral, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel18)
                         .addGap(11, 11, 11)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbD)
                             .addComponent(cbCC)
                             .addComponent(cbCD))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel26)
+                            .addComponent(txtDinheiro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel28)
+                            .addComponent(txtCartao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel27)
+                            .addComponent(txtTroco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel17)
@@ -321,106 +348,6 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                     .addComponent(lblDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-
-        jTable29.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jTable29.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable29MouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTable29);
-
-        lblValorTotalx.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-
-        cbCC1.setText("Cartão de Crédito");
-        cbCC1.setEnabled(false);
-
-        cbCD1.setText("Cartão de Débito");
-        cbCD1.setEnabled(false);
-
-        jLabel28.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel28.setText("Valor  :");
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Impostos"));
-
-        jLabel31.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel31.setText("ICMS :");
-
-        jLabel32.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel32.setText("ISS :");
-
-        jLabel33.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel33.setText("IPI :");
-
-        lblImposto3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-
-        lblImposto1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-
-        lblImposto2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel33)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblImposto3, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                        .addGap(36, 36, 36))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel31)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblImposto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel32)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblImposto2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(30, 30, 30))))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblImposto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel32)
-                    .addComponent(lblImposto2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel33)
-                    .addComponent(lblImposto3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel30.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel30.setText("Valor Total:");
-
-        lblValorParcialx.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-
-        jLabel40.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel40.setText("Tipo de Pagamento:");
-
-        jLabel29.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel29.setText("Desconto:");
-
-        lblDescontoGeralx.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-
-        cbD1.setText("Dinheiro");
-        cbD1.setEnabled(false);
 
         btnEstorno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estornoVenda.png"))); // NOI18N
         btnEstorno.setText("Gerar Estorno");
@@ -448,13 +375,6 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         lblCodvenda.setText("jLabel2");
 
         lblCodigoFunc.setText("jLabel2");
-
-        btnCancelar.setText("Remover item");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
 
         lbl1.setText("jLabel3");
 
@@ -486,20 +406,6 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
 
         lbl9.setText("jLabel3");
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel19.setText("Data da Venda :");
-
-        lblDataVendax.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-
-        jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel21.setText("Dinheiro:");
-
-        jLabel25.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel25.setText("Troco :");
-
-        jLabel26.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel26.setText("Cartão :");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -521,120 +427,66 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                                 .addGap(12, 12, 12)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel41)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lbltipoPag)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(lblestorno)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(lblFKfuncionario)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(lblCodfuncionario)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(lblCodvenda)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(lblCodigoFunc))
-                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(12, 12, 12)
+                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(181, 181, 181)
+                                            .addComponent(btnEstorno))))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel29)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblDescontoGeralx, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel28)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblValorParcialx, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel40)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(cbD1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cbCC1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cbCD1))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel21)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(txtDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel26)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(txtCartao))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel25)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(txtTroco, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGap(49, 49, 49)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnEstorno)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnCancelar))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel30)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblValorTotalx, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel19)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblDataVendax, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblCodigoFunc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbltipoPag)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblestorno)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblFKfuncionario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblCodfuncionario)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1)))
+                        .addComponent(lblCodvenda)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbltipoPag1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblestorno1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblFKfuncionario1)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblCodfuncionario1)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblCodvenda1)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblCodigoFunc1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lbl1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl9)))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbltipoPag1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblestorno1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblFKfuncionario1)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCodfuncionario1)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCodvenda1)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCodigoFunc1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lbl1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl9)))
-                .addGap(148, 148, 148))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
@@ -642,95 +494,45 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                             .addComponent(txtCodVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEstorno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel41))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel28)
-                                            .addComponent(lblValorParcialx, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel29)
-                                            .addComponent(lblDescontoGeralx, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel40)
-                                        .addGap(11, 11, 11)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(cbD1)
-                                            .addComponent(cbCC1)
-                                            .addComponent(cbCD1))
-                                        .addGap(0, 3, Short.MAX_VALUE))
-                                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel21)
-                                    .addComponent(txtDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel26)
-                                    .addComponent(txtCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel25)
-                                    .addComponent(txtTroco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lbltipoPag)
-                                    .addComponent(lblestorno)
-                                    .addComponent(lblFKfuncionario)
-                                    .addComponent(lblCodfuncionario)
-                                    .addComponent(lblCodvenda)
-                                    .addComponent(lblCodigoFunc)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(lblDataVendax, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel19))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel30)
-                                .addComponent(lblValorTotalx, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(56, 56, 56)
+                        .addGap(135, 135, 135)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnEstorno)
-                            .addComponent(btnCancelar))))
-                .addGap(155, 155, 155)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbltipoPag1)
-                    .addComponent(lblestorno1)
-                    .addComponent(lblFKfuncionario1)
-                    .addComponent(lblCodfuncionario1)
-                    .addComponent(lblCodvenda1)
-                    .addComponent(lblCodigoFunc1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl1)
-                    .addComponent(lbl2)
-                    .addComponent(lbl3)
-                    .addComponent(lbl4)
-                    .addComponent(lbl5)
-                    .addComponent(lbl6)
-                    .addComponent(lbl7)
-                    .addComponent(lbl9)
-                    .addComponent(lbl8))
+                            .addComponent(lbltipoPag1)
+                            .addComponent(lblestorno1)
+                            .addComponent(lblFKfuncionario1)
+                            .addComponent(lblCodfuncionario1)
+                            .addComponent(lblCodvenda1)
+                            .addComponent(lblCodigoFunc1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl1)
+                            .addComponent(lbl2)
+                            .addComponent(lbl3)
+                            .addComponent(lbl4)
+                            .addComponent(lbl5)
+                            .addComponent(lbl6)
+                            .addComponent(lbl7)
+                            .addComponent(lbl9)
+                            .addComponent(lbl8)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCodigoFunc)
+                            .addComponent(lbltipoPag)
+                            .addComponent(lblestorno)
+                            .addComponent(lblFKfuncionario)
+                            .addComponent(lblCodfuncionario)
+                            .addComponent(lblCodvenda))))
                 .addContainerGap())
         );
 
@@ -747,15 +549,15 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         tp = lbltipoPag.getText();
         if (tp.equals("1")) {
             cbD.setSelected(true);
-            cbD1.setSelected(true);
+//            cbD1.setSelected(true);
         }
         if (tp.equals("2")) {
             cbCC.setSelected(true);
-            cbCC1.setSelected(true);
+        //    cbCC1.setSelected(true);
         }
         if (tp.equals("3")) {
             cbCD.setSelected(true);
-            cbCD1.setSelected(true);
+        //    cbCD1.setSelected(true);
         }
 
         // preencherTabela2(dadosVendas);
@@ -779,58 +581,23 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         for (int i = 0; i < vendaProdutos2.size(); i++) {
             vndP.salvarLoteVenda(vendaProdutos2.get(i).getFkLoteVendas(), vendaProdutos2.get(i).getQtd(), vendaProdutos2.get(i).getDescontoItemVendProduto(),
                     vendaProdutos2.get(i).getValorParcialVendProduto(),
-                    txtCodVenda.getText(),"0");
+                    txtCodVenda.getText(),"estorno");
             //   }
             
         }
-        vndP.salvarVenda(lblDescontoGeralx.getText(), tp, lblDataVendax.getText(), "", "0", lblImposto1.getText(), lblImposto2.getText(),
-                lblImposto3.getText(), lblFKfuncionario.getText(), txtCodVenda.getText(), lblCodfuncionario.getText(), lblValorTotalx.getText(),txtDinheiro.getText(),
-                    txtCartao.getText(), txtTroco.getText());
+      //  vndP.salvarVenda(lblDescontoGeralx.getText(), tp, lblDataVendax.getText(), "", "0", lblImposto1.getText(), lblImposto2.getText(),
+       //         lblImposto3.getText(), lblFKfuncionario.getText(), txtCodVenda.getText(), lblCodfuncionario.getText(), lblValorTotalx.getText(),txtDinheiro.getText(),
+        //            txtCartao.getText(), txtTroco.getText());
 
-        for (int i = 0; i < vendaProdutos.size(); i++) {
-            vndP.salvarLoteVenda(vendaProdutos.get(i).getFkLoteVendas(), vendaProdutos.get(i).getQtd(), vendaProdutos.get(i).getDescontoItemVendProduto(),
-                    vendaProdutos.get(i).getValorParcialVendProduto(),
-                    txtCodVenda.getText(),"0");
+       // for (int i = 0; i < vendaProdutos.size(); i++) {
+           // vndP.salvarLoteVenda(vendaProdutos.get(i).getFkLoteVendas(), vendaProdutos.get(i).getQtd(), vendaProdutos.get(i).getDescontoItemVendProduto(),
+                  //  vendaProdutos.get(i).getValorParcialVendProduto(),
+                    //txtCodVenda.getText(),"0");
             //   }
             
-        }
+       // }
 
     }//GEN-LAST:event_btnEstornoActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
-        if (!lbl1.getText().equals("")) {
-            //remove do arraylist pessoas os dados da linha selecionada.
-            int x = vendas.size();
-            for (int i = 0; i < vendas.size(); i++) {
-                if (vendas.get(i).getA().equals(lbl1.getText())) {
-                    vendas.remove(i);
-                    vendaProdutos.remove(i);
-                }
-            }
-
-            //esvazia o arraylist dadosPessoa e, conseguentemente, esvazia a jTable.
-            LimparTabela2();
-            //preenche a jTable com os dados restantes do arraylist pessoas.
-            for (int i = 0; i < vendas.size(); i++) {
-                preencherTabela2(vendas.get(i).getA(), vendas.get(i).getB(), vendas.get(i).getC(), vendas.get(i).getD(), vendas.get(i).getE(),
-                        vendas.get(i).getF(), vendas.get(i).getG(), vendas.get(i).getH(), vendas.get(i).getJ());
-            }
-        }
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void jTable29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable29MouseClicked
-        int linhaSelecionada = jTable29.getSelectedRow();
-        lbl1.setText(jTable29.getValueAt(linhaSelecionada, 0).toString());
-        lbl2.setText(jTable29.getValueAt(linhaSelecionada, 1).toString());
-        lbl3.setText(jTable29.getValueAt(linhaSelecionada, 2).toString());
-        lbl4.setText(jTable29.getValueAt(linhaSelecionada, 3).toString());
-        lbl5.setText(jTable29.getValueAt(linhaSelecionada, 4).toString());
-        lbl6.setText(jTable29.getValueAt(linhaSelecionada, 5).toString());
-        lbl7.setText(jTable29.getValueAt(linhaSelecionada, 6).toString());
-        lbl8.setText(jTable29.getValueAt(linhaSelecionada, 7).toString());
-        lbl9.setText(jTable29.getValueAt(linhaSelecionada, 8).toString());
-    }//GEN-LAST:event_jTable29MouseClicked
 
     // <editor-fold defaultstate="collapsed" desc="preencher tabela 1">
     public void preencherTabela(String SQL) {
@@ -838,7 +605,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         vendaProdutosController vd = new vendaProdutosController();
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"Produto", "Descrição", "Valor Unitário", "QTD", "Desconto", "Valor",
-            "DescontoVenda", "TipoPagamento", "Icms", "Iss", "Ipi", "Data", "Observacao", "FKfuncionario", "codigoVenda", "codigoFuncionario"};
+            "DescontoVenda", "TipoPagamento", "Icms", "Iss", "Ipi", "Data", "Observacao", "FKfuncionario", "codigoVenda", "codigoFuncionario", "dinheiro", "cartao", "troco"};
 
         String[] colunas2 = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "Valor", "Icms", "ISS", "IPI", "idLote"};
 
@@ -852,7 +619,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                 dadosVendas.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("valorVenda"),
                     dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"), dao.resultSet.getString("valorParcial"),
                     dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"),
-                    dao.resultSet.getString("FKlote")});
+                    dao.resultSet.getString("FKlote"),dao.resultSet.getString("dinheiro"), dao.resultSet.getString("cartao"), dao.resultSet.getString("troco")});
 
                 vendas.add(vd.preencherArray3(dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("valorVenda"), dao.resultSet.getString("qtd"), dao.resultSet.getString("descontos"),
                         dao.resultSet.getString("valorParcial"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"), dao.resultSet.getString("FKlote")));
@@ -880,7 +647,7 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                 ipi1 = Double.parseDouble(dao.resultSet.getString("ipi"));
                 ipi2 += ipi1;
 
-                lblValor.setText(Double.toString(z));
+                lblValor.setText(Double.toString(z * (-1)));
                 lblValorTotal.setText(Double.toString(vl * (-1)));
                 lblIcms.setText(Double.toString(icms1));
                 lblIss.setText(Double.toString(iss2));
@@ -891,6 +658,10 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
                 lblCodvenda.setText(dao.resultSet.getString("codigoVenda"));
                 lblFKfuncionario.setText(dao.resultSet.getString("FKfuncionario"));
                 lbltipoPag.setText(dao.resultSet.getString("tipoPagamento"));
+                txtDinheiro.setText(dao.resultSet.getString("dinheiro"));
+                txtCartao.setText(dao.resultSet.getString("cartao"));
+                txtTroco.setText(dao.resultSet.getString("troco"));
+                
 
             } while (dao.resultSet.next());
         } catch (SQLException ex) {
@@ -938,30 +709,30 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
 
         TabelaModelo2 models = new TabelaModelo2(dadosVendas, colunas2);
-        jTable29.setModel(models);
+//        jTable29.setModel(models);
 
-        jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
-        jTable29.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
-        jTable29.getColumnModel().getColumn(1).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(1).setResizable(false);
-        jTable29.getColumnModel().getColumn(2).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(2).setResizable(false);
-        jTable29.getColumnModel().getColumn(3).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(3).setResizable(false);
-        jTable29.getColumnModel().getColumn(4).setPreferredWidth(80);
-        jTable29.getColumnModel().getColumn(4).setResizable(false);
-        jTable29.getColumnModel().getColumn(5).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(5).setResizable(false);
-        jTable29.getColumnModel().getColumn(6).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(6).setResizable(false);
-        jTable29.getColumnModel().getColumn(7).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(7).setResizable(false);
-        jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(8).setResizable(false);
-
-        jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
-        jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
-        jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+      //  jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
+      //  jTable29.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
+      //  jTable29.getColumnModel().getColumn(1).setPreferredWidth(50);
+     //   jTable29.getColumnModel().getColumn(1).setResizable(false);
+     //   jTable29.getColumnModel().getColumn(2).setPreferredWidth(50);
+    //    jTable29.getColumnModel().getColumn(2).setResizable(false);
+    //    jTable29.getColumnModel().getColumn(3).setPreferredWidth(50);
+    //    jTable29.getColumnModel().getColumn(3).setResizable(false);
+    //    jTable29.getColumnModel().getColumn(4).setPreferredWidth(80);
+    //    jTable29.getColumnModel().getColumn(4).setResizable(false);
+     //   jTable29.getColumnModel().getColumn(5).setPreferredWidth(50);
+    //    jTable29.getColumnModel().getColumn(5).setResizable(false);
+    //    jTable29.getColumnModel().getColumn(6).setPreferredWidth(50);
+    //    jTable29.getColumnModel().getColumn(6).setResizable(false);
+    //    jTable29.getColumnModel().getColumn(7).setPreferredWidth(50);
+     //   jTable29.getColumnModel().getColumn(7).setResizable(false);
+    //    jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
+    //    jTable29.getColumnModel().getColumn(8).setResizable(false);
+//
+     ///   jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+      //  jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+     //   jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
 
     }
 
@@ -990,12 +761,12 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
             ipi122 = Double.parseDouble(ipix);
             ipi222 += ipi122;
 
-            lblImposto1.setText(Double.toString(icms22));
-            lblImposto2.setText(Double.toString(iss222));
-            lblImposto3.setText(Double.toString(ipi222));
-            lblValorTotalx.setText(Double.toString(z22));
-            lblDescontoGeralx.setText(Double.toString(vl222));
-            lblDataVendax.setText(df.format(agr));
+      // //     lblImposto1.setText(Double.toString(icms22));
+        //    lblImposto2.setText(Double.toString(iss222));
+        //    lblImposto3.setText(Double.toString(ipi222));
+        //    lblValorTotalx.setText(Double.toString(z22));
+        //    lblDescontoGeralx.setText(Double.toString(vl222));
+        //    lblDataVendax.setText(df.format(agr));
             lblCodfuncionario1.setText(lblCodfuncionario.getText());
             lblFKfuncionario1.setText(lblFKfuncionario.getText());
 
@@ -1003,31 +774,31 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
 
-        TabelaModelo2 model = new TabelaModelo2(dadosVendas2, colunas);
-        jTable29.setModel(model);
+     //   TabelaModelo2 model = new TabelaModelo2(dadosVendas2, colunas);
+      //  jTable29.setModel(model);
 
-        jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
-        jTable29.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
-        jTable29.getColumnModel().getColumn(1).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(1).setResizable(false);
-        jTable29.getColumnModel().getColumn(2).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(2).setResizable(false);
-        jTable29.getColumnModel().getColumn(3).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(3).setResizable(false);
-        jTable29.getColumnModel().getColumn(4).setPreferredWidth(80);
-        jTable29.getColumnModel().getColumn(4).setResizable(false);
-        jTable29.getColumnModel().getColumn(5).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(5).setResizable(false);
-        jTable29.getColumnModel().getColumn(6).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(6).setResizable(false);
-        jTable29.getColumnModel().getColumn(7).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(7).setResizable(false);
-        jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
-        jTable29.getColumnModel().getColumn(8).setResizable(false);
+     //   jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
+     ///   jTable29.getColumnModel().getColumn(0).setResizable(true);  // não permite alterar o tamanho da coluna
+     //   jTable29.getColumnModel().getColumn(1).setPreferredWidth(50);
+     ////   jTable29.getColumnModel().getColumn(1).setResizable(false);
+       // jTable29.getColumnModel().getColumn(2).setPreferredWidth(50);
+      ///  jTable29.getColumnModel().getColumn(2).setResizable(false);
+       // jTable29.getColumnModel().getColumn(3).setPreferredWidth(50);
+      //  jTable29.getColumnModel().getColumn(3).setResizable(false);
+       /// jTable29.getColumnModel().getColumn(4).setPreferredWidth(80);
+       // jTable29.getColumnModel().getColumn(4).setResizable(false);
+        //jTable29.getColumnModel().getColumn(5).setPreferredWidth(50);
+        //jTable29.getColumnModel().getColumn(5).setResizable(false);
+       // jTable29.getColumnModel().getColumn(6).setPreferredWidth(50);
+       // jTable29.getColumnModel().getColumn(6).setResizable(false);
+       // jTable29.getColumnModel().getColumn(7).setPreferredWidth(50);
+       // jTable29.getColumnModel().getColumn(7).setResizable(false);
+        //jTable29.getColumnModel().getColumn(8).setPreferredWidth(50);
+       // jTable29.getColumnModel().getColumn(8).setResizable(false);
 
-        jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
-        jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
-        jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+       // jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
+      //  jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
+       // jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
     }
     //</editor-fold>
     
@@ -1078,6 +849,8 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     }
     //</editor-fold>
 
+    
+    /*
     // <editor-fold defaultstate="collapsed" desc="Limpar tabela 2">
     public void LimparTabela2() {
         String[] colunas = new String[]{"Produto", "Valor Unitário", "Quantidade", "Desconto", "Valor", "icsm", "iss", "ipi", "idLote"};
@@ -1110,18 +883,16 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
         jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     //</editor-fold>
-
+*/
+    
+    
     // <editor-fold defaultstate="collapsed" desc="JAVA - do not modify"> 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEstorno;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JCheckBox cbCC;
-    private javax.swing.JCheckBox cbCC1;
     private javax.swing.JCheckBox cbCD;
-    private javax.swing.JCheckBox cbCD1;
     private javax.swing.JCheckBox cbD;
-    private javax.swing.JCheckBox cbD1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1135,22 +906,14 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable29;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl2;
     private javax.swing.JLabel lbl3;
@@ -1167,30 +930,26 @@ public class TelaEstornoVendas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblCodvenda;
     private javax.swing.JLabel lblCodvenda1;
     private javax.swing.JLabel lblDataVenda;
-    private javax.swing.JLabel lblDataVendax;
     private javax.swing.JLabel lblDescontoGeral;
-    private javax.swing.JLabel lblDescontoGeralx;
     private javax.swing.JLabel lblFKfuncionario;
     private javax.swing.JLabel lblFKfuncionario1;
     private javax.swing.JLabel lblIcms;
-    private javax.swing.JLabel lblImposto1;
-    private javax.swing.JLabel lblImposto2;
-    private javax.swing.JLabel lblImposto3;
     private javax.swing.JLabel lblIpi;
     private javax.swing.JLabel lblIss;
     private javax.swing.JLabel lblValor;
-    private javax.swing.JLabel lblValorParcialx;
     private javax.swing.JLabel lblValorTotal;
-    private javax.swing.JLabel lblValorTotalx;
     private javax.swing.JLabel lblestorno;
     private javax.swing.JLabel lblestorno1;
     private javax.swing.JLabel lbltipoPag;
     private javax.swing.JLabel lbltipoPag1;
     private javax.swing.JTextField txtCartao;
+    private javax.swing.JTextField txtCartao1;
     private javax.swing.JTextField txtCodVenda;
     private javax.swing.JTextField txtDinheiro;
+    private javax.swing.JTextField txtDinheiro1;
     private javax.swing.JTextArea txtObservacao;
     private javax.swing.JTextField txtTroco;
+    private javax.swing.JTextField txtTroco1;
     // End of variables declaration//GEN-END:variables
 //</editor-fold>
 }

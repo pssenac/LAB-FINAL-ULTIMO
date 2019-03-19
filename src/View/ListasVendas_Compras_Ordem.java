@@ -367,7 +367,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
                         DAO.executaSQL("select * from vendas inner join lotevendas on FKvendas = codVenda inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos WHERE dataVenda ='" + data1 + "'");
                         JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
-                        JasperPrint jpPrint = JasperFillManager.fillReport("CAMINHO RELATÓRIO", new HashMap(), relatResul);
+                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/06729598107/Desktop/LAB-FINAL-ULTIMO-master/src/relatorios/RelatoriosVendas.jasper", new HashMap(), relatResul);
                         JasperViewer jv = new JasperViewer(jpPrint, false);
 
                         jv.setVisible(true);
@@ -386,7 +386,7 @@ public class ListasVendas_Compras_Ordem extends javax.swing.JInternalFrame {
 
                         DAO.executaSQL("select * from vendas inner join lotevendas on FKvendas = codVenda inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos WHERE dataVenda BETWEEN '" + dt1 + "' and '" + data2 + "'");
                         JRResultSetDataSource relatResul = new JRResultSetDataSource(DAO.resultSet);
-                        JasperPrint jpPrint = JasperFillManager.fillReport("CAMINHO RELATÓRIO", new HashMap(), relatResul);
+                        JasperPrint jpPrint = JasperFillManager.fillReport("C:/Users/06729598107/Desktop/LAB-FINAL-ULTIMO-master/src/relatorios/RelatoriosVendas.jasper", new HashMap(), relatResul);
                         JasperViewer jv = new JasperViewer(jpPrint, false);
 
                         jv.setVisible(true);
