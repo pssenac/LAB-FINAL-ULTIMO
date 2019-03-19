@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioCompras" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2900d76f-894c-4129-a9e3-23e11ac5915e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from lote inner join produtos on idprodutos = FKprodutos inner join fornecedor on idFornecedor = FKfornecedor]]>
+	</queryString>
+	<field name="idLote" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Chave primaria da tabela 'Lote'.]]></fieldDescription>
+	</field>
+	<field name="dataCompra" class="java.sql.Date">
+		<fieldDescription><![CDATA[Data de quando foi realizada a compra do produto]]></fieldDescription>
+	</field>
+	<field name="qtdEstoque" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Quantidade de produtos atual do estoque]]></fieldDescription>
+	</field>
+	<field name="qtdInicial" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Quantidade inicial de produtos do estoque]]></fieldDescription>
+	</field>
+	<field name="valorCusto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Valor pago pelos produtos comprados]]></fieldDescription>
+	</field>
+	<field name="valorVenda" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Valor a ser repassado aos clientes da loja]]></fieldDescription>
+	</field>
+	<field name="situacaoProduto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Descreve se o produto é novo ou seminovo]]></fieldDescription>
+	</field>
+	<field name="marca" class="java.lang.String">
+		<fieldDescription><![CDATA[Marca do produto]]></fieldDescription>
+	</field>
+	<field name="lote" class="java.lang.String">
+		<fieldDescription><![CDATA[Campo para inserir o número do lote comprado.]]></fieldDescription>
+	</field>
+	<field name="FKprodutos" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Chave estrangeira que referencia a tabela 'Produtos']]></fieldDescription>
+	</field>
+	<field name="icms" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Campo que determina o Imposto sobre Circulação de Mercadorias e Serviços]]></fieldDescription>
+	</field>
+	<field name="iss" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Campo que determina o Imposto Sobre Serviços]]></fieldDescription>
+	</field>
+	<field name="ipi" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Campo que determina o Imposto sobre Produtos Industrializados]]></fieldDescription>
+	</field>
+	<field name="totalImposto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Campo para inserir o total de imposto cobrado pelos produtos comprados]]></fieldDescription>
+	</field>
+	<field name="FKfornecedor" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idprodutos" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Chave Primária da tabela 'Produtos']]></fieldDescription>
+	</field>
+	<field name="nomeProduto" class="java.lang.String">
+		<fieldDescription><![CDATA[Nome do Produto]]></fieldDescription>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[Descrição do Produto]]></fieldDescription>
+	</field>
+	<field name="armazemLocal" class="java.lang.String">
+		<fieldDescription><![CDATA[Posição do produto no estoque fisico]]></fieldDescription>
+	</field>
+	<field name="tipoProduto" class="java.lang.String">
+		<fieldDescription><![CDATA[Determina o tipo de produto]]></fieldDescription>
+	</field>
+	<field name="idfornecedor" class="java.lang.Long">
+		<fieldDescription><![CDATA[Chave primária da tabela fornecedor]]></fieldDescription>
+	</field>
+	<field name="cnpjCpf" class="java.lang.String">
+		<fieldDescription><![CDATA[Cnpf do respectivo Fornecedor]]></fieldDescription>
+	</field>
+	<field name="nomeEmpresa" class="java.lang.String">
+		<fieldDescription><![CDATA[Nome do respectivo Fornecedor ao ser registrado na Receita Federel]]></fieldDescription>
+	</field>
+	<field name="nomeFantasia" class="java.lang.String">
+		<fieldDescription><![CDATA[Nome do respectivo fornecedor]]></fieldDescription>
+	</field>
+	<field name="ramo" class="java.lang.String">
+		<fieldDescription><![CDATA[ramo do do respectivo fornecedor]]></fieldDescription>
+	</field>
+	<field name="representante" class="java.lang.String">
+		<fieldDescription><![CDATA[nome do representante do respectivo fornecedor]]></fieldDescription>
+	</field>
+	<field name="contatoFixo" class="java.lang.String">
+		<fieldDescription><![CDATA[Contato de telefone fixo do respectivo fornecedor]]></fieldDescription>
+	</field>
+	<field name="contatoCel" class="java.lang.String">
+		<fieldDescription><![CDATA[contato do celular do respectivo fornecedor]]></fieldDescription>
+	</field>
+	<field name="emailRep" class="java.lang.String">
+		<fieldDescription><![CDATA[email do representante do respectivo fornecedor]]></fieldDescription>
+	</field>
+	<field name="FKendereco" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Chave estrangeira que referencia o Endereço do Fornecedor]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="175" y="0" width="210" height="39" uuid="6a539ce6-bd4f-4a09-98e9-6f763f389e5d"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LabyTechSystem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="133" y="29" width="326" height="20" uuid="a5bd299c-bc24-4ccd-a80c-3bb99e40434a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Manutenção e Reparo de Computadores & Notebooks]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="175" y="0" width="181" height="20" uuid="b0e5e439-c1e8-4b06-87b6-2ba666f5a58b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatorios de Compras]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="79" height="20" uuid="ad894989-d76f-4acc-ae85-259cff24c9dc"/>
+				<text><![CDATA[Data Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="79" y="0" width="79" height="20" uuid="a986e704-4177-443e-984c-833fce9e1600"/>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="0" width="79" height="20" uuid="deac0cd3-eae2-437d-a31a-ebd4156076d8"/>
+				<text><![CDATA[Descricao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="237" y="0" width="79" height="20" uuid="7bc57107-ed20-4210-9b49-d1ce5a7e73ce"/>
+				<text><![CDATA[QtdEstoque]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="0" width="79" height="20" uuid="11d1b735-4b57-4872-bfac-e541313e73ee"/>
+				<text><![CDATA[Fornecedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="0" width="79" height="20" uuid="9a273928-0016-498e-b8d5-146df51f3b6d"/>
+				<text><![CDATA[ValorCusto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="474" y="0" width="79" height="20" uuid="b6d7b845-f7e9-4358-9c60-9a5b010e2b65"/>
+				<text><![CDATA[Marca]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="79" height="20" uuid="527cb3cf-06cb-419c-84c1-83a4d1d1783d"/>
+				<textFieldExpression><![CDATA[$F{dataCompra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="0" width="79" height="20" uuid="1b53894f-886b-4c2c-bdf5-dc2f8e32181c"/>
+				<textFieldExpression><![CDATA[$F{nomeProduto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="158" y="0" width="79" height="20" uuid="c578786a-5aa9-4376-8522-a6a740d2e18e"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="237" y="0" width="79" height="20" uuid="09cb3218-6afa-4bd7-9f2c-a788ae2d64da"/>
+				<textFieldExpression><![CDATA[$F{qtdEstoque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="316" y="0" width="79" height="20" uuid="91f7648a-c9c4-481a-a594-b34838ec6a6a"/>
+				<textFieldExpression><![CDATA[$F{nomeEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="79" height="20" uuid="0a027568-2dfa-4a5e-b6f1-d1da785306a0"/>
+				<textFieldExpression><![CDATA[$F{valorCusto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="474" y="0" width="79" height="20" uuid="458a9d59-d615-47d4-9216-ab8535e86d1d"/>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
