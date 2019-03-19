@@ -1149,7 +1149,7 @@ public class DAO {
                 // Produto
                 case INCLUSAOORDEMSERVICO:
 
-                    sql = "insert into ordemservico values (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    sql = "insert into ordemservico values (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
                     statement.setString(1, ordemservico.getTipoServico());
