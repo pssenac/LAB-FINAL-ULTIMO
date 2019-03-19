@@ -16,6 +16,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
     String sqlTabela = "select * from produtos inner join lote on idprodutos = FKprodutos inner join fornecedor on idFornecedor = FKfornecedor";
 
     public ConexaoBD bd;
+    int vd;
 
     /**
      * Creates new form TelaProduto
@@ -29,7 +30,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             cbFornecedor.addItem(m);
         }
         LimparCampos();
-        AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
+        AtivarCampos(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
         AtivarBotao(true, false, false, false, false, true);
         bd.close();
     }
@@ -513,33 +514,19 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         LimparCampos();
         AtivarCampos(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
         AtivarBotao(false, false, true, false, true, false);
+         vd = 1;
     }//GEN-LAST:event_btnNovoProdutoActionPerformed
 
     private void btnNovoLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoLoteActionPerformed
         AtivarCampos(true, true, true, false, false, false, true, true, true, true, true, false, true, true, true, true, true);
         AtivarBotao(false, false, false, false, true, false);
+       
 
     }//GEN-LAST:event_btnNovoLoteActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
         LimparCampos();
     }//GEN-LAST:event_btnApagarActionPerformed
-
-    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        AtivarCampos(false, false, false, true, true, true, false, false, false, false, false, true, false, false, false, false, false);
-        AtivarBotao(false, false, false, false, true, true);
-        ProdutoController prodcontrol = new ProdutoController();
-        Fornecedor f = (Fornecedor) cbFornecedor.getSelectedItem();
-        prodcontrol.alterarProduto(lblIdProduto.getText(), txtNomeProduto.getText(), txtaDescricao.getText(), txtLocal.getText(), cbTipoProduto.getSelectedItem().toString(),
-                txtTotalmposto.getText(), txtIcms.getText(), txtIss.getText(), txtIpi.getText(), f.getIdFornecedor(),
-                txtDataCompra.getText(), txtQtd.getText(), txtQtdInicial.getText(), txtCusto.getText(), txtVenda.getText(), cbSituacao.getSelectedIndex(),
-                txtMarca.getText(), txtLote.getText());
-        
-        AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
-        AtivarBotao(true, false, false, false, false, true);
-        LimparCampos();
-        preencherTabela(sqlTabela);
-    }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
@@ -549,17 +536,43 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
 
-        ProdutoController prodcontrol = new ProdutoController();
-        Fornecedor f = (Fornecedor) cbFornecedor.getSelectedItem();
-        prodcontrol.salvarProduto(txtNomeProduto.getText(), txtaDescricao.getText(), txtLocal.getText(), cbTipoProduto.getSelectedItem().toString(),
-                txtTotalmposto.getText(), txtIcms.getText(), txtIss.getText(), txtIpi.getText(), f.getIdFornecedor(),
-                txtDataCompra.getText(), txtQtd.getText(), txtQtdInicial.getText(), txtCusto.getText(), txtVenda.getText(), cbSituacao.getSelectedIndex(),
-                txtMarca.getText(), txtLote.getText()
-        );
-        AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
-        AtivarBotao(true, false, false, false, false, true);
-        LimparCampos();
-        preencherTabela(sqlTabela);
+        
+        
+  
+        switch (vd) {
+
+            case 1:
+                
+                ProdutoController prodcontrol = new ProdutoController();
+                Fornecedor f = (Fornecedor) cbFornecedor.getSelectedItem();
+                prodcontrol.salvarProduto(txtNomeProduto.getText(), txtaDescricao.getText(), txtLocal.getText(), cbTipoProduto.getSelectedItem().toString(),
+                        txtTotalmposto.getText(), txtIcms.getText(), txtIss.getText(), txtIpi.getText(), f.getIdFornecedor(),
+                        txtDataCompra.getText(), txtQtd.getText(), txtQtdInicial.getText(), txtCusto.getText(), txtVenda.getText(), cbSituacao.getSelectedIndex(),
+                        txtMarca.getText(), txtLote.getText());
+                AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
+                AtivarBotao(true, false, false, false, false, true);
+                LimparCampos();
+                preencherTabela(sqlTabela);
+                
+                
+
+                break;
+
+            case 2:
+
+                ProdutoController prodcontro2 = new ProdutoController();
+
+                prodcontro2.alterarProduto(lblIdProduto.getText(), txtNomeProduto.getText(), txtaDescricao.getText(), txtLocal.getText(), cbTipoProduto.getSelectedItem().toString());
+
+                AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
+                AtivarBotao(true, false, false, false, false, true);
+                LimparCampos();
+                preencherTabela(sqlTabela);
+                break;
+
+        }
+
+
     }//GEN-LAST:event_btnGravarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -583,6 +596,8 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         cbSituacao.setSelectedItem(jTable1.getValueAt(linhaSelecionada, 15).toString());
         txtMarca.setText(jTable1.getValueAt(linhaSelecionada, 16).toString());
         txtLote.setText(jTable1.getValueAt(linhaSelecionada, 17).toString());
+        
+        AtivarCampos(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
         AtivarBotao(false, true, false, true, false, true);
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -592,6 +607,12 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         preencherTabela(sql);
 
     }//GEN-LAST:event_btnPesquisa1ActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        AtivarCampos(false, false, true, true, false, true, false, false, false, false, false, true, false, false, false, false, false);
+        AtivarBotao(false, false, false, false, true, true);
+        vd = 2;
+    }//GEN-LAST:event_btnAlterarActionPerformed
 //</editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Ativar Campos"> 
