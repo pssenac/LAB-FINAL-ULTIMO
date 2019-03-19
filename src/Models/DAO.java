@@ -793,26 +793,7 @@ public class DAO {
                     break;
                 case ALTERACAOPRODUTO:
 
-                    bd.getConnection();
-                    sql = "update lote set dataCompra = ?, qtdEstoque = ?, qtdInicial = ?, valorCusto = ?, valorVenda = ?, situacaoProduto = ?,"
-                            + "marca = ?, lote = ?, icms = ?, iss = ?, ipi = ?, totalImpoasto = ? where FKprodutos = ?";
-                    statement = bd.connection.prepareStatement(sql);
-                    statement.setString(1, lote.getDataCompra());
-                    statement.setString(2, lote.getQuantidade());
-                    statement.setString(3, lote.getQtdInicial());
-                    statement.setString(4, lote.getValorCusto());
-                    statement.setString(5, lote.getValorVenda());
-                    statement.setInt(6, lote.getSituacaoProduto());
-                    statement.setString(7, lote.getMarca());
-                    statement.setString(8, lote.getLote());
-                    statement.setString(9, lote.getIcms());
-                    statement.setString(10, lote.getIss());
-                    statement.setString(11, lote.getIpi());
-                    statement.setString(12, lote.getTotalImposto());
-                    statement.setString(13, lote.getFkFornecedor());
-                    statement.setString(14, produto.getIdProduto());
-                    statement.executeUpdate();
-
+          
                     sql = "update produtos set nomeProduto = ?, descricao = ?, armazemLocal = ?, tipoProduto = ? where idprodutos = ?";
                     statement = bd.connection.prepareStatement(sql);
                     statement.setString(1, produto.getNomeProduto());
