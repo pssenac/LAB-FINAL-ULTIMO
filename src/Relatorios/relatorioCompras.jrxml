@@ -115,10 +115,6 @@
 				</textElement>
 				<text><![CDATA[Manutenção e Reparo de Computadores & Notebooks]]></text>
 			</staticText>
-			<image>
-				<reportElement x="15" y="0" width="76" height="59" uuid="9e056dea-77fa-4ebc-8cfb-549c5eb297b8"/>
-				<imageExpression><![CDATA["C:\\Users\\Marcio\\Desktop\\IMG-20190215-WA0001.jpg"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>

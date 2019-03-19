@@ -44,9 +44,9 @@ public class logFuncionarioController {
         dao.usuario.setConfirmacaoSenhaUsuario(confirmacaoSenhaUsuario);
         dao.usuario.setSituacao(situacao);
 
-        JOptionPane.showMessageDialog(null, dao.atualizarFuncionarioUsuario(DAO.INCLUSAOFUNCIONARIO));
+       String msgInclusao = dao.atualizarFuncionarioUsuario(DAO.INCLUSAOFUNCIONARIO);
         // String msgInclusao = dao.atualizarFuncionarioUsuario(DAO.INCLUSAOFUNCIONARIO);
-        String msgInclusao = "";
+       
         return msgInclusao;
     }
 

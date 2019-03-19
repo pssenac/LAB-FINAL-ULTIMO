@@ -19,9 +19,9 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     public DAO DAO;
     String sqlTabela = null;
     String sqlTabela2 = null;
-    String text="";
+    String text = "";
     public logFuncionarioController fc;
-    boolean a,txt;
+    boolean a, txt;
 
     int vd = 0;
 
@@ -670,31 +670,31 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         } else if (cuser == true) {
             pesquisaUser(cuser);
         }
+        String sh = txtSenhaFuncionario.getText();
+        String csh = txtConfirmacaoSenha.getText();
+
+        if (!sh.equals(csh)) {
+            lblSenhaConfirm.setText("Senha diferente");
+            txtConfirmacaoSenha.requestFocus();
+            return;
+        }
 
         switch (vd) {
-            
+
             case 1:
                 VerificarCodigo();
-                String sh = txtSenhaFuncionario.getText();
-                String csh = txtConfirmacaoSenha.getText();
 
-                if (!sh.equals(csh)) {
-                    lblSenhaConfirm.setText("Senha diferente");
-                    txtConfirmacaoSenha.requestFocus();
-                    return;
-                }
-
+                logFuncionarioController lg = new logFuncionarioController();
                 if (VerificarCamposVazios() == true) {
                     JOptionPane.showMessageDialog(null, "Campos obrigatórios estão vazios!");
                     a = false;
                 }
 
                 if (cf != true && cuser != true && VerificarCamposVazios() != true) {
-                    logFuncionarioController lg = new logFuncionarioController();
 
                     lg.salvarFuncionario(txtNomeFuncionario.getText(), txtCpfFuncionario.getText(),
                             txtRgFuncionario.getText(), txtTelFuncionario.getText(), txtCelFuncionario.getText(),
-                            txtEmailFuncionario.getText(), txtDataNasc.getText() ,lblCodFuncionario.getText() ,txtCepFuncionario.getText(), txtBairroFuncionario.getText(),
+                            txtEmailFuncionario.getText(), txtDataNasc.getText(), lblCodFuncionario.getText(), txtCepFuncionario.getText(), txtBairroFuncionario.getText(),
                             txtLogradouroFuncionario.getText(), txtComplementoFuncionario.getText(), txtNumeroFuncionario.getText(),
                             txtCidadeFuncionario.getText(), txtEstadoFuncionario.getText(), txtUsuarioFuncionario.getText(), cbPerfilFuncionario.getSelectedIndex(), txtSenhaFuncionario.getText(),
                             txtConfirmacaoSenha.getText(), cbSituaçãoFuncionário.getSelectedIndex());
@@ -702,12 +702,12 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                             false, false, false, false, false, false, false, false, false, false);
 
                     habilitabotoes(true, false, false, false, false);
-                    JOptionPane.showMessageDialog(null, "CADASTRO REALIZADO");
+                    JOptionPane.showMessageDialog(null, "Operação Realizada Com Sucesso!");
 
                     lblexistecep.setText("");
                     lblexistecpf.setText("");
                     lblexisteusuario.setText("");
-                    
+
                     limparCampos();
                     vd = 0;
                 }
@@ -715,8 +715,9 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                 break;
 
             case 2:
-                logFuncionarioController lg = new logFuncionarioController();
-                lg.alterarFuncionario(lblFuncionario.getText(), txtNomeFuncionario.getText(), txtCpfFuncionario.getText(),
+                logFuncionarioController lg2 = new logFuncionarioController();
+                
+                lg2.alterarFuncionario(lblFuncionario.getText(), txtNomeFuncionario.getText(), txtCpfFuncionario.getText(),
                         txtRgFuncionario.getText(), txtTelFuncionario.getText(), txtCelFuncionario.getText(), txtEmailFuncionario.getText(),
                         txtDataNasc.getText(), lblCodFuncionario.getText(), txtCepFuncionario.getText(), txtBairroFuncionario.getText(),
                         txtLogradouroFuncionario.getText(), txtComplementoFuncionario.getText(), txtNumeroFuncionario.getText(),
@@ -729,8 +730,8 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                 lblexisteusuario.setText("");
 
                 habilitabotoes(true, false, false, false, false);
-                JOptionPane.showMessageDialog(null, "ALTERACAO REALIZADA");
-                
+                JOptionPane.showMessageDialog(null, "Operação Realizada Com Sucesso!");
+
                 limparCampos();
                 vd = 0;
                 break;
@@ -819,8 +820,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jFuncionarioMouseClicked
     //</editor-fold>
 
-   //</editor-fold>
-
+    //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc=" BOTAO CANCELAR ">
     private void btnCancelarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarFuncionarioActionPerformed
         carregarTabela();
@@ -1011,6 +1011,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         lblexisteusuario.setText("");
         cbPerfilFuncionario.setSelectedIndex(-1);
         cbSituaçãoFuncionário.setSelectedIndex(-1);
+        lblCodFuncionario.setText("");
 
     }
     //</editor-fold>
@@ -1033,7 +1034,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
 
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"idFuncionario", "nomeFuncionario", "cpf", "rg",
-            "telefone", "celular", "email", "dataNascimento","codigoFuncionarios", "cep", "bairro", "logradouro",
+            "telefone", "celular", "email", "dataNascimento", "codigoFuncionarios", "cep", "bairro", "logradouro",
             "complemento", "numero", "cidade", "estado", "", "", "", "", ""};
 
         DAO.executaSQL(SQL);
@@ -1043,7 +1044,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
             do {
                 dados.add(new Object[]{DAO.resultSet.getString("idFuncionario"), DAO.resultSet.getString("nomeFuncionarios"), DAO.resultSet.getString("cpf"),
                     DAO.resultSet.getString("rg"), DAO.resultSet.getString("telefone"), DAO.resultSet.getString("celular"),
-                    DAO.resultSet.getString("email"), DAO.resultSet.getString("dataNascimento"),DAO.resultSet.getString("codigoFuncionarios"), DAO.resultSet.getString("cep"),
+                    DAO.resultSet.getString("email"), DAO.resultSet.getString("dataNascimento"), DAO.resultSet.getString("codigoFuncionarios"), DAO.resultSet.getString("cep"),
                     DAO.resultSet.getString("Bairro"), DAO.resultSet.getString("logradouro"), DAO.resultSet.getString("complemento"),
                     DAO.resultSet.getString("numero"), DAO.resultSet.getString("cidade"), DAO.resultSet.getString("estado"),
                     DAO.resultSet.getString("login"), DAO.resultSet.getString("perfil"), DAO.resultSet.getString("senha"),
@@ -1077,7 +1078,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         jFuncionario.getColumnModel().getColumn(9).setResizable(false);
         jFuncionario.getColumnModel().getColumn(10).setPreferredWidth(120);
         jFuncionario.getColumnModel().getColumn(10).setResizable(false);
-        
+
         jFuncionario.getColumnModel().getColumn(11).setPreferredWidth(120);
         jFuncionario.getColumnModel().getColumn(11).setResizable(false);
         jFuncionario.getColumnModel().getColumn(12).setPreferredWidth(120);
@@ -1110,7 +1111,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA USUARIO">
-   /* public void preencherTabelaUsuario(String SQL) {
+    /* public void preencherTabelaUsuario(String SQL) {
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"idUsuário", "Login", "Perfil", "Senha",
             "CofirmaçaoSenha", "idfuncionario", "nomeFuncionario", "cpf", "rg",
@@ -1196,9 +1197,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
 
     }
     //</editor-fold>
-*/
-
-
+     */
     //<editor-fold defaultstate="collapsed" desc=" CODIGO FUNCIONÁRIO">
     public String GerarCodigo() {
         Random cod = new Random();
@@ -1208,7 +1207,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         } while (num < 1000);
         return Integer.toString(num);
     }
-    
+
     public String VerificarCodigo() {
         DAO dao = new DAO();
         text = GerarCodigo();
@@ -1226,10 +1225,9 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
             return "";
         }
     }
-    
+
     //</editor-fold>
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarFuncionario;
     private javax.swing.JButton btnCancelarFuncionario;

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatoriosVendas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bea0734c-7156-4cf6-a8fd-d55b3d9e6804">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="1"/>
 	<queryString>
 		<![CDATA[SELECT * FROM vendas inner join lotevendas on FKvendas = codVenda inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos]]>
 	</queryString>
@@ -130,10 +130,6 @@
 				</textElement>
 				<text><![CDATA[Manutençao e Reparo de Computadores & Notebooks]]></text>
 			</staticText>
-			<image>
-				<reportElement x="22" y="10" width="73" height="50" uuid="7a561cfe-6463-4e29-a6d1-fa2927f5c54b"/>
-				<imageExpression><![CDATA["C:\\Users\\Marcio\\Desktop\\IMG-20190215-WA0001.jpg"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
