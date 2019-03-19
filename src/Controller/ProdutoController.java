@@ -10,7 +10,7 @@ public class ProdutoController {
             String tipoProduto, String totalImposto, String icms, String iss,
             String ipi, String fkFornecedorProduto,
             String dataCompra, String qtdEstoque, String qtdInicial, String valorCusto, String valorVenda,
-            int situacaoProduto, String marca, String lote) {
+            int situacaoProduto, String marca, String lote, String lp, String idl) {
 
         DAO dao = new DAO();
 
@@ -34,6 +34,8 @@ public class ProdutoController {
         dao.lote.setIss(iss);
         dao.lote.setTotalImposto(totalImposto);
         dao.lote.setFkFornecedor(fkFornecedorProduto);
+        dao.produto.setLpp(lp);
+        dao.lote.setIdLote(idl);
         
 
         JOptionPane.showMessageDialog(null, dao.atualizarProduto(DAO.INCLUSAOPRODUTO));
