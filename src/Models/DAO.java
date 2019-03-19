@@ -76,7 +76,6 @@ public class DAO {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc=" EXECUTAR SQL "> 
     public void executaSQL(String sql) {
         try {
@@ -297,7 +296,6 @@ public class DAO {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR FORNECEDOR ">
     public void carregarTabela2() {
         String sql = "select * from fornecedor";
@@ -462,7 +460,6 @@ public class DAO {
     }
 
 //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR FUNCIONARIO E USUARIO">
     public String atualizarFuncionarioUsuario(int operacao) {
         String FK, FK2;
@@ -561,7 +558,7 @@ public class DAO {
                     fk = statement.executeQuery();
                     if (fk.next()) {
                         FK = fk.getString("idendereco");
-                      
+
                     } else {
 
                         sql = "insert into endereco (cep, bairro, logradouro, complemento, numero, "
@@ -600,7 +597,7 @@ public class DAO {
                     cv.next();
                     String cvf = cv.getString("idfuncionario");
                      */
-                    
+
                     sql = "update funcionario set  nomeFuncionarios = ?,  cpf = ?, rg = ?, telefone = ?,"
                             + "  celular = ?,  email = ?,  dataNascimento = ?, FKendereco = ? where idfuncionario = ?";
                     bd.getConnection();
@@ -629,17 +626,15 @@ public class DAO {
                     statement.setString(6, endereco.getCidade());
                     statement.setString(7, endereco.getEstado());
                     statement.executeUpdate();*/
-                   
                     sql = "select idUsuario from usuario inner join funcionario on FKfuncionario = idFuncionario where FKfuncionario = ?";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
-                  
+
                     statement.setString(1, funcionario.getIdFuncionario());
                     fk = statement.executeQuery();
                     fk.next();
                     FK2 = fk.getString("idUsuario");
-                    
-                    
+
                     sql = "UPDATE usuario SET login = ?, perfil = ?, senha = ?, confiSenha = ?, situacao = ? WHERE idUsuario = ?";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
@@ -853,7 +848,6 @@ public class DAO {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR VENDAS ">
     public int PesquisaEstoque(String CodVend) {
         String fk;
@@ -924,6 +918,17 @@ public class DAO {
                     statement.executeUpdate();
                     statement.close();
 
+                    if (vendaProdutos.getEstorno().equals("estorno")) {
+                        sql = "update lote set qtdEstoque = qtdEstoque + ? where idLote = ?";
+                        bd.getConnection();
+                        statement = bd.connection.prepareStatement(sql);
+                        statement.setString(1, vendaProdutos.getQtd());
+                        statement.setString(2, vendaProdutos.getFkLoteVendas());
+                        statement.executeUpdate();
+                        statement.close();
+
+                    }else{
+
                     sql = "update lote set qtdEstoque = qtdEstoque - ? where idLote = ?";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
@@ -931,7 +936,8 @@ public class DAO {
                     statement.setString(2, vendaProdutos.getFkLoteVendas());
                     statement.executeUpdate();
                     statement.close();
-
+                    }
+                    
                     break;
 
                 case ALTERACAOVENDA:
@@ -1125,7 +1131,6 @@ public class DAO {
         return men;
     }*/
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc=" METODO LOGAR USUARIO">
     public boolean LogarUsuario(String login, String Senha) {
         boolean autenticado = false;
@@ -1187,7 +1192,7 @@ public class DAO {
                     statement.setString(20, ordemservico.getDinheiro());
                     statement.setString(21, ordemservico.getCartao());
                     statement.setString(22, ordemservico.getTroco());
-                    
+
                     statement.executeUpdate();
                     statement.close();
 
@@ -1235,9 +1240,9 @@ public class DAO {
             statement = bd.connection.prepareStatement(sql);
             statement.setString(1, cpf);
             ResultSet nome = statement.executeQuery();
-            if(nome.next()){
-            
-            return nome.getString("nomeCliente");
+            if (nome.next()) {
+
+                return nome.getString("nomeCliente");
             }
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, erro);
