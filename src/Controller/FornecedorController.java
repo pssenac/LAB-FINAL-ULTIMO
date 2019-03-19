@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 public class FornecedorController {
 
     public String salvarFornecedor(String cnpjFornecedor, String nomeEmpresa, String nomeFantasia,
-            String ramoRepresentante, String telRepresentante, String nomeRepresentante,
+            String ramoRepresentante,  String nomeRepresentante, String telRepresentante,
             String celRepresentante, String emailRepresenante,
             String cep, String bairro, String logradouro, String complemento,
             String numero, String cidade, String estado) {
@@ -34,7 +34,7 @@ public class FornecedorController {
     }
 
     public String alterarFornecedor(String idfornecedor, String idendereco, String cnpjFornecedor, String nomeEmpresa, String nomeFantasia,
-            String ramoRepresentante, String telRepresentante, String nomeRepresentante,
+            String ramoRepresentante,  String nomeRepresentante,String telRepresentante,
             String celRepresentante, String emailRepresenante,
             String cep, String bairro, String logradouro, String complemento,
             String numero, String cidade, String estado) {
