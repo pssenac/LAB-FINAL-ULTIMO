@@ -94,10 +94,10 @@ public class TelaLogin extends javax.swing.JFrame {
     private void bt_acessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_acessarActionPerformed
 
         
-        TelaPrincipal tela = new TelaPrincipal();
+       /* TelaPrincipal tela = new TelaPrincipal();
         tela.setVisible(true);
-        dispose();
-        /*
+        dispose();*/
+        
         if (txtUsuarioLogin.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo Login.");
             txtUsuarioLogin.requestFocus();
@@ -139,7 +139,7 @@ public class TelaLogin extends javax.swing.JFrame {
             txtSenhaLogin.setText("");
 
         }
-        */
+        
 
 
     }//GEN-LAST:event_bt_acessarActionPerformed

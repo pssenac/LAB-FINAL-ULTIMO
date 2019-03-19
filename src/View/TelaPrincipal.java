@@ -221,7 +221,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu5MouseClicked
 
     private void btnEstornoVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstornoVendaActionPerformed
-        TelaEstornoOrdemServico obj = new TelaEstornoOrdemServico();
+        TelaEstornoOrdemServico1 obj = new TelaEstornoOrdemServico1();
         if (jpPrincipal.getAllFrames().length == 0) {
             jpPrincipal.add(obj);
             obj.setVisible(true);
