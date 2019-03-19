@@ -751,6 +751,7 @@ public class DAO {
                 // Produto
                 case INCLUSAOPRODUTO:
 
+                    
                     sql = "insert into produtos values(null,?,?,?,?)";
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
