@@ -41,7 +41,8 @@ public class vendaProdutosController {
         dao.vendaProdutos.setCodVenda(e);
         dao.vendaProdutos.setEstorno(f);
 
-        JOptionPane.showMessageDialog(null, dao.Atualizarvendas(DAO.INCLUSAOVENDAPRODUTO));
+        dao.Atualizarvendas(DAO.INCLUSAOVENDAPRODUTO);
+       // JOptionPane.showMessageDialog(null, dao.Atualizarvendas(DAO.INCLUSAOVENDAPRODUTO));
     }
 
     public VendaProdutos preencherCarrinho(String id, String b, String c, String d, String e) {

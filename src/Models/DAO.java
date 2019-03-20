@@ -856,14 +856,15 @@ public class DAO {
 
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO ATUALIZAR VENDAS ">
-    public int PesquisaEstoque(String CodVend) {
+    public int PesquisaEstoque(String CodVend, String CodLote) {
         String fk;
         men = "Operação realizada com sucesso!";
         try {
-            String sql = "select * from lote where FKprodutos = ?";
+            String sql = "select * from lote where FKprodutos = ? and idLote = ?";
             bd.getConnection();
             statement = bd.connection.prepareStatement(sql);
             statement.setString(1, CodVend);
+            statement.setString(2, CodLote);
             resultSet = statement.executeQuery();
             resultSet.next();
             resultSet.getString("qtdEstoque");

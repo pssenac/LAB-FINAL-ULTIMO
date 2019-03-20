@@ -13,6 +13,7 @@ import Models.DAO;
 import Models.Venda;
 import Models.VendaCarrinho;
 import Models.VendaProdutos;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -32,10 +34,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaVendas extends javax.swing.JInternalFrame {
 
-    String a = "", b = "", c = "", d = "", e = "", f = "", tp = "", g = "", h = "";
+    String a = "", b = "", c = "", d = "", e = "", f = "", tp = "0", g = "", h = "";
     String sql = "select * from produtos inner join Lote on idprodutos = FKprodutos";
     ArrayList<Venda> vendas = new ArrayList<>();
     ArrayList<VendaProdutos> vendaProdutos = new ArrayList<>();
+    ArrayList vendas2 = new ArrayList();
     boolean txt;
     String text;
     ArrayList dadosVendas = new ArrayList();
@@ -49,6 +52,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
 
         VerificarCodigo();
         DAO dao = new DAO();
+        tipoPagamento();
 
         // preencherTabela(sql);
     }
@@ -64,7 +68,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         lbloCodVenda = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel29 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable29 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -79,7 +83,6 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         txtQtdVenda = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        txtDescontoVenda = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         lblValorParcial = new javax.swing.JLabel();
         btnAddProduto = new javax.swing.JButton();
@@ -87,8 +90,8 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         lbl9 = new javax.swing.JLabel();
         lblIdproduto = new javax.swing.JLabel();
         lblIdlote = new javax.swing.JLabel();
+        txtDescontoVenda = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
-        txtDescontoVendaServico = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
@@ -121,6 +124,13 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         lbl6 = new javax.swing.JLabel();
         lbl7 = new javax.swing.JLabel();
         lbl8 = new javax.swing.JLabel();
+        txtDescontoVendaServico = new javax.swing.JComboBox<>();
+        cA = new javax.swing.JLabel();
+        cB = new javax.swing.JLabel();
+        cC = new javax.swing.JLabel();
+        cD = new javax.swing.JLabel();
+        cE = new javax.swing.JLabel();
+        cF = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("VENDAS");
@@ -131,7 +141,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
 
         lbloCodVenda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Produtos"));
+        jPanel29.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Produtos"));
 
         jTable29.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -148,18 +158,18 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jTable29);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
+        jPanel29.setLayout(jPanel29Layout);
+        jPanel29Layout.setHorizontalGroup(
+            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel29Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        jPanel29Layout.setVerticalGroup(
+            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(78, 78, 78))
@@ -231,6 +241,8 @@ public class TelaVendas extends javax.swing.JInternalFrame {
             }
         });
 
+        txtDescontoVenda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0%", "5%", "10%", "15%", "20%", "25%" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -263,8 +275,8 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                                         .addComponent(txtQtdVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(26, 26, 26)
                                         .addComponent(jLabel13)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtDescontoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(11, 11, 11)
+                                        .addComponent(txtDescontoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel14)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
@@ -317,8 +329,8 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel12)
                                 .addComponent(txtQtdVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel13)
-                                .addComponent(txtDescontoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel14))
+                                .addComponent(jLabel14)
+                                .addComponent(txtDescontoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblValorParcial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -337,12 +349,11 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         jLabel16.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel16.setText("Desconto:");
 
-        txtDescontoVendaServico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jLabel17.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel17.setText("Valor Total:");
 
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estornoVenda.png"))); // NOI18N
+        btnCancelar.setText("Remover Item");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -357,11 +368,22 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel19.setText("Dinheiro:");
 
+        txtDinheiro.setEnabled(false);
+        txtDinheiro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDinheiroKeyPressed(evt);
+            }
+        });
+
         jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel20.setText("Troco :");
 
+        txtTroco.setEnabled(false);
+
         jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel21.setText("Cartão :");
+
+        txtCartao.setEnabled(false);
 
         javax.swing.GroupLayout panelTipoPagLayout = new javax.swing.GroupLayout(panelTipoPag);
         panelTipoPag.setLayout(panelTipoPagLayout);
@@ -403,10 +425,25 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         );
 
         cbD.setText("Dinheiro");
+        cbD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbDMouseClicked(evt);
+            }
+        });
 
         cbCC.setText("Cartão de Crédito");
+        cbCC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbCCMouseClicked(evt);
+            }
+        });
 
         cbCD.setText("Cartão de Débito");
+        cbCD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbCDMouseClicked(evt);
+            }
+        });
 
         lblValorTotal.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
@@ -479,6 +516,13 @@ public class TelaVendas extends javax.swing.JInternalFrame {
             }
         });
 
+        txtDescontoVendaServico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0%", "5%", "10%", "15%", "20%", "25%" }));
+        txtDescontoVendaServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescontoVendaServicoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -501,38 +545,41 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(6, 6, 6))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel16)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtDescontoVendaServico, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jLabel18))
-                                        .addGap(222, 222, 222)
-                                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(panelTipoPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(cbD)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(cbCC)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(cbCD))
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(12, 12, 12)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(btnFinalizarVenda)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(btnCancelar))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(jLabel17)
+                                                    .addComponent(cbD)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(lblValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                    .addComponent(cbCC)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(cbCD))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addComponent(btnFinalizarVenda)
+                                                            .addGap(140, 140, 140))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addComponent(jLabel17)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                            .addComponent(lblValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(btnCancelar))))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel16)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(txtDescontoVendaServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jLabel18))
+                                            .addGap(222, 222, 222)
+                                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl1)
@@ -551,6 +598,20 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl8)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addComponent(cA, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cB, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cC, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cD, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cE, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cF, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -558,7 +619,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -597,16 +658,26 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                         .addGap(12, 12, 12)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl1)
-                            .addComponent(lbl2)
-                            .addComponent(lbl3)
-                            .addComponent(lbl4)
-                            .addComponent(lbl5)
-                            .addComponent(lbl6)
-                            .addComponent(lbl7)
-                            .addComponent(lbl8))
-                        .addGap(14, 14, 14))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbl1)
+                                    .addComponent(lbl2)
+                                    .addComponent(lbl3)
+                                    .addComponent(lbl4)
+                                    .addComponent(lbl5)
+                                    .addComponent(lbl6)
+                                    .addComponent(lbl7)
+                                    .addComponent(lbl8))
+                                .addGap(2, 2, 2)
+                                .addComponent(cB, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cA, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cC, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cD, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cE, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(cF, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
@@ -620,40 +691,77 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnPesquisa1ActionPerformed
 
     private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
-
         vendaProdutosController vd = new vendaProdutosController();
+        String aux = "";
 
-        boolean vf = verificarQtd(f);
-        if(vf){
-            
-        
+        if (txtDescontoVenda.getSelectedItem() == "0%") {
+            aux = "0";
+        }
+        if (txtDescontoVenda.getSelectedItem() == "5%") {
+            aux = "5";
+        }
+        if (txtDescontoVenda.getSelectedItem() == "10%") {
+            aux = "10";
+        }
+        if (txtDescontoVenda.getSelectedItem() == "15%") {
+            aux = "15";
+        }
+        if (txtDescontoVenda.getSelectedItem() == "20%") {
+            aux = "20";
+        }
+        if (txtDescontoVenda.getSelectedItem() == "25%") {
+            aux = "25";
+        }
 
-        preencherTabela2(a, txtQtdVenda.getText(), txtDescontoVenda.getText(), b, lblValorParcial.getText(), c, d, e, f);
+        boolean vf = verificarQtd(cF.getText(),h);
+        if (vf) {
 
-        vendas.add(vd.preencherArray(a, txtQtdVenda.getText(), txtDescontoVenda.getText(), b, lblValorParcial.getText(), c, d, e, f));
-        vendaProdutos.add(vd.preencherCarrinho(h, txtQtdVenda.getText(), txtDescontoVenda.getText(), lblValorParcial.getText(),
-                lbloCodVenda.getText()));
-        Limpar1();
-        }else {
-            
+            PT2(cA.getText(), txtQtdVenda.getText(), aux, cB.getText(), lblValorParcial.getText(), cC.getText(), cD.getText(), cE.getText(), h);
+            vendas.add(vd.preencherArray3(cA.getText(), txtQtdVenda.getText(), aux, cB.getText(), lblValorParcial.getText(), cC.getText(), cD.getText(), cE.getText(), h));
+            vendaProdutos.add(vd.preencherCarrinho(h, txtQtdVenda.getText(), aux, lblValorParcial.getText(), lbloCodVenda.getText()));
+            Limpar1();
+        } else {
+
         }
     }//GEN-LAST:event_btnAddProdutoActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         int linhaSelecionada = jTable2.getSelectedRow();
-        a = (jTable2.getValueAt(linhaSelecionada, 0).toString());
-        b = (jTable2.getValueAt(linhaSelecionada, 4).toString());
-        c = (jTable2.getValueAt(linhaSelecionada, 5).toString());
-        d = (jTable2.getValueAt(linhaSelecionada, 6).toString());
-        e = (jTable2.getValueAt(linhaSelecionada, 7).toString());
-        f = (jTable2.getValueAt(linhaSelecionada, 10).toString());
+        cA.setText(jTable2.getValueAt(linhaSelecionada, 0).toString());
+        cB.setText(jTable2.getValueAt(linhaSelecionada, 4).toString());
+        cC.setText(jTable2.getValueAt(linhaSelecionada, 5).toString());
+        cD.setText(jTable2.getValueAt(linhaSelecionada, 6).toString());
+        cE.setText(jTable2.getValueAt(linhaSelecionada, 7).toString());
+        cF.setText(jTable2.getValueAt(linhaSelecionada, 10).toString());
         h = (jTable2.getValueAt(linhaSelecionada, 11).toString());
 
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed
+        String aux = "";
 
-        lblValorParcial.setText(calcular(b, txtQtdVenda.getText(), txtDescontoVenda.getText()));
+        if (txtDescontoVenda.getSelectedItem() == "0%") {
+            aux = "0";
+        }
+        if (txtDescontoVenda.getSelectedItem() == "5%") {
+            aux = "5";
+        }
+        if (txtDescontoVenda.getSelectedItem() == "10%") {
+            aux = "10";
+        }
+        if (txtDescontoVenda.getSelectedItem() == "15%") {
+            aux = "15";
+        }
+        if (txtDescontoVenda.getSelectedItem() == "20%") {
+            aux = "20";
+        }
+        if (txtDescontoVenda.getSelectedItem() == "25%") {
+            aux = "25";
+        }
+
+        lblValorParcial.setText(calcular(cB.getText(), txtQtdVenda.getText(), aux));
+
+        btnAddProduto.grabFocus();
 
     }//GEN-LAST:event_calcularActionPerformed
 
@@ -665,53 +773,360 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         lbl4.setText(jTable29.getValueAt(linhaSelecionada, 3).toString());
         lbl5.setText(jTable29.getValueAt(linhaSelecionada, 4).toString());
         lbl9.setText(jTable29.getValueAt(linhaSelecionada, 8).toString());
+
+
     }//GEN-LAST:event_jTable29MouseClicked
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+
+        x = 0;
+        z = x;
+        vl2 = 0;
+        //z = z - (z * vl2 / 100);
+        icms = 0;
+        icms1 = icms;
+        iss1 = 0;
+        iss2 = iss1;
+        ipi1 = 0;
+        ipi2 = ipi1;
+        lblValorTotal.setText("");
+        lblIcms.setText("");
+        lblIss.setText("");
+        lblIpi.setText("");
+        cbD.setSelected(false);
+        cbCC.setSelected(false);
+        cbCD.setSelected(false);
+        txtDinheiro.setText("");
+        txtCartao.setText("");
+        txtTroco.setText("");
+
         if (!lbl1.getText().equals("")) {
             //remove do arraylist pessoas os dados da linha selecionada.
+
             int x = vendas.size();
             for (int i = 0; i < vendas.size(); i++) {
                 if (vendas.get(i).getA().equals(lbl1.getText())) {
                     vendas.remove(i);
                     vendaProdutos.remove(i);
+                    lbl1.setText("");
                 }
             }
 
             //esvazia o arraylist dadosPessoa e, conseguentemente, esvazia a jTable.
-            limparTabela2();
+            LTB2();
             //preenche a jTable com os dados restantes do arraylist pessoas.
+
             for (int i = 0; i < vendas.size(); i++) {
-                preencherTabela2(vendas.get(i).getA(), vendas.get(i).getB(), vendas.get(i).getC(), vendas.get(i).getD(), vendas.get(i).getE(),
+                PT2(vendas.get(i).getA(), vendas.get(i).getB(), vendas.get(i).getC(), vendas.get(i).getD(), vendas.get(i).getE(),
                         vendas.get(i).getF(), vendas.get(i).getG(), vendas.get(i).getH(), vendas.get(i).getJ());
             }
+
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnFinalizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarVendaActionPerformed
+        String aux = "", dinheiro = "", cartao = "", troco = "";
+
+        if (txtDescontoVendaServico.getSelectedItem() == "0%") {
+            aux = "0";
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "5%") {
+            aux = "5";
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "10%") {
+            aux = "10";
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "15%") {
+            aux = "15";
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "20%") {
+            aux = "20";
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "25%") {
+            aux = "25";
+        }
         vendaProdutosController vndP = new vendaProdutosController();
         DAO dao = new DAO();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date agr = new Date();
         String codvend = dao.buscarFuncionario(txtCodigoVendedor.getText());
+
+        int ic = lblIcms.getText().length();
+        int is = lblIss.getText().length();
+        int ip = lblIpi.getText().length();
+        int vlt = lblValorTotal.getText().length();
+        int din = txtDinheiro.getText().length();
+        int car = txtCartao.getText().length();
+        int tro = txtTroco.getText().length();
+
+        if (din > 0) {
+            dinheiro = txtDinheiro.getText().substring(2, din).replace(",", ".");
+        } else {
+            dinheiro = "0";
+        }
+        if (car > 0) {
+            cartao = txtCartao.getText().substring(2, car).replace(",", ".");
+        } else {
+            cartao = "0";
+        }
+        if (din > 0) {
+            troco = txtTroco.getText().substring(2, tro).replace(",", ".");
+        } else {
+            troco = "0";
+        }
+
+        String icms = lblIcms.getText().substring(2, ic).replace(",", ".");
+        String iss = lblIss.getText().substring(2, is).replace(",", ".");
+        String ipi = lblIpi.getText().substring(2, ip).replace(",", ".");
+        String valorT = lblValorTotal.getText().substring(2, vlt).replace(",", ".");
+
         if (codvend.equals(null)) {
             JOptionPane.showMessageDialog(null, "insira um codigo valido");
 
-        } else {               
+        } else {
             tipoPagamento();
-            vndP.salvarVenda(txtDescontoVendaServico.getText(), tp, df.format(agr), "", "0", lblIcms.getText(), lblIss.getText(),
-                    lblIpi.getText(), codvend, lbloCodVenda.getText(), txtCodigoVendedor.getText(), lblValorTotal.getText(), txtDinheiro.getText(),
-                    txtCartao.getText(), txtTroco.getText());
+
+            vndP.salvarVenda(aux, tp, df.format(agr), "", "0", icms, iss,
+                    ipi, codvend, lbloCodVenda.getText(), txtCodigoVendedor.getText(), valorT, dinheiro,
+                    cartao, troco);
 
             for (int i = 0; i < vendaProdutos.size(); i++) {
                 vndP.salvarLoteVenda(vendaProdutos.get(i).getFkLoteVendas(), vendaProdutos.get(i).getQtd(), vendaProdutos.get(i).getDescontoItemVendProduto(),
                         vendaProdutos.get(i).getValorParcialVendProduto(),
-                        lbloCodVenda.getText(),"venda");
+                        lbloCodVenda.getText(), "venda");
             }
-           
+
         }
-         JOptionPane.showMessageDialog(null, "Operação realizada com sucesso");
+        vendas.removeAll(vendas);
+        vendaProdutos.removeAll(vendaProdutos);
+        dadosVendas.removeAll(dadosVendas);
+        jTable29.removeAll();
+        lblIcms.setText("");
+        lblIss.setText("");
+        lblIpi.setText("");
+        lblValorTotal.setText("");
+        txtDescontoVendaServico.setSelectedIndex(0);
+        txtDinheiro.setText("");
+        txtCartao.setText("");
+        txtTroco.setText("");
+        txtDinheiro.setEnabled(false);
+        txtCartao.setEnabled(false);
+        txtTroco.setEnabled(false);
+        cbD.setSelected(false);
+        cbCC.setSelected(false);
+        cbCD.setSelected(false);
+        cA.setText("");
+        cB.setText("");
+        cC.setText("");
+        cD.setText("");
+        cE.setText("");
+        cF.setText("");
+        VerificarCodigo();
+        JOptionPane.showMessageDialog(null, "Operação realizada com sucesso");
+
     }//GEN-LAST:event_btnFinalizarVendaActionPerformed
+
+    private void cbDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbDMouseClicked
+        tipoPagamento();
+        if (cbD.isSelected()) {
+            tp = "1";
+            txtDinheiro.setEnabled(true);
+            //    txtTroco.setEnabled(true);
+            txtCartao.setEnabled(false);
+        } else {
+            tp = "0";
+            txtDinheiro.setEnabled(false);
+            //    txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+        if (cbCC.isSelected()) {
+            tp = "2";
+            txtDinheiro.setEnabled(false);
+            //    txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+        if (cbCD.isSelected()) {
+            tp = "3";
+            txtDinheiro.setEnabled(false);
+            //    txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+        if (cbD.isSelected() && cbCC.isSelected() || cbD.isSelected() && cbCD.isSelected()) {
+            tp = "1";
+            txtDinheiro.setEnabled(true);
+            //     txtTroco.setEnabled(true);
+            txtCartao.setEnabled(true);
+        }
+        if (cbD.isSelected() && cbCC.isSelected() && cbCD.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Opção inválida");
+            cbD.setSelected(false);
+            cbCC.setSelected(false);
+            cbCD.setSelected(false);
+            txtDinheiro.setEnabled(false);
+            //   txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+
+    }//GEN-LAST:event_cbDMouseClicked
+
+    private void cbCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbCCMouseClicked
+        tipoPagamento();
+        if (cbD.isSelected()) {
+            tp = "1";
+            txtDinheiro.setEnabled(true);
+            //   txtTroco.setEnabled(true);
+            txtCartao.setEnabled(false);
+        } else {
+            tp = "0";
+            txtDinheiro.setEnabled(false);
+            //   txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+        if (cbCC.isSelected()) {
+            tp = "2";
+            txtDinheiro.setEnabled(false);
+            txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+        if (cbCD.isSelected()) {
+            tp = "3";
+            txtDinheiro.setEnabled(false);
+            //  txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+        if (cbD.isSelected() && cbCC.isSelected() || cbD.isSelected() && cbCD.isSelected()) {
+            tp = "1";
+            txtDinheiro.setEnabled(true);
+            //   txtTroco.setEnabled(true);
+            txtCartao.setEnabled(true);
+        }
+        if (cbD.isSelected() && cbCC.isSelected() && cbCD.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Opção inválida");
+            cbD.setSelected(false);
+            cbCC.setSelected(false);
+            cbCD.setSelected(false);
+            txtDinheiro.setEnabled(false);
+            //   txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+    }//GEN-LAST:event_cbCCMouseClicked
+
+    private void cbCDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbCDMouseClicked
+        tipoPagamento();
+        if (cbD.isSelected()) {
+            tp = "1";
+            txtDinheiro.setEnabled(true);
+            //  txtTroco.setEnabled(true);
+            txtCartao.setEnabled(false);
+        } else {
+            tp = "0";
+            txtDinheiro.setEnabled(false);
+            //  txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+        if (cbCC.isSelected()) {
+            tp = "2";
+            txtDinheiro.setEnabled(false);
+            //  txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+        if (cbCD.isSelected()) {
+            tp = "3";
+            txtDinheiro.setEnabled(false);
+            // txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+        if (cbD.isSelected() && cbCC.isSelected() || cbD.isSelected() && cbCD.isSelected()) {
+            tp = "1";
+            txtDinheiro.setEnabled(true);
+            // txtTroco.setEnabled(true);
+            txtCartao.setEnabled(true);
+        }
+        if (cbD.isSelected() && cbCC.isSelected() && cbCD.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Opção inválida");
+            cbD.setSelected(false);
+            cbCC.setSelected(false);
+            cbCD.setSelected(false);
+            txtDinheiro.setEnabled(false);
+            //txtTroco.setEnabled(false);
+            txtCartao.setEnabled(false);
+        }
+    }//GEN-LAST:event_cbCDMouseClicked
+
+    private void txtDescontoVendaServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescontoVendaServicoActionPerformed
+        DecimalFormat df = new DecimalFormat("0.##");
+        x = 0;
+        z = x;
+        vl2 = 0;
+        //z = z - (z * vl2 / 100);
+        icms = 0;
+        icms1 = icms;
+        iss1 = 0;
+        iss2 = iss1;
+        ipi1 = 0;
+        ipi2 = ipi1;
+        String A = ""; //esvazia o arraylist dadosPessoa e, conseguentemente, esvazia a jTable.
+        LTB2();
+        //preenche a jTable com os dados restantes do arraylist pessoas.
+
+        for (int i = 0; i < vendas.size(); i++) {
+            PT2(vendas.get(i).getA(), vendas.get(i).getB(), vendas.get(i).getC(), vendas.get(i).getD(), vendas.get(i).getE(),
+                    vendas.get(i).getF(), vendas.get(i).getG(), vendas.get(i).getH(), vendas.get(i).getJ());
+        }
+        int O = lblValorTotal.getText().length();
+        if (O > 0) {
+            A = lblValorTotal.getText().substring(2, O).replace(",", ".");
+        } else {
+            A = "0";
+        }
+        double aux = 0, aux2 = Double.parseDouble(A), aux3 = 0;
+
+        if (txtDescontoVendaServico.getSelectedItem() == "0%") {
+            aux = 0;
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "5%") {
+            aux = 5;
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "10%") {
+            aux = 10;
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "15%") {
+            aux = 15;
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "20%") {
+            aux = 20;
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "25%") {
+            aux = 25;
+        }
+
+        txtDescontoVendaServico.updateUI();
+
+        aux3 = aux2 - (aux2 * aux / 100);
+
+        lblValorTotal.setText("R$ " + df.format(aux3));
+    }//GEN-LAST:event_txtDescontoVendaServicoActionPerformed
+
+    private void txtDinheiroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDinheiroKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            DecimalFormat df = new DecimalFormat("0.##");
+            double aux = 0, aux2 = 0, aux3 = 0;
+            int tt = lblValorTotal.getText().length();
+
+            aux = Double.parseDouble(txtDinheiro.getText().replace(",", "."));
+            aux2 = Double.parseDouble(lblValorTotal.getText().substring(2, tt).replace(",", "."));
+
+            if (aux > aux2) {
+                aux3 = aux - aux2;
+
+                btnFinalizarVenda.grabFocus();
+            } else {
+                JOptionPane.showMessageDialog(null, "Dinheiro insuficiente!");
+            }
+
+            txtTroco.setText("R$ " + df.format(aux3));
+        }
+    }//GEN-LAST:event_txtDinheiroKeyPressed
 
     //</editor-fold>
     public String VerificarCodigo() {
@@ -740,6 +1155,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         try {
             dao.resultSet.first();
             do {
+                if(Integer.parseInt(dao.resultSet.getString("qtdEstoque")) > 0)
                 dados.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("tipoProduto"), dao.resultSet.getString("dataCompra"),
                     dao.resultSet.getString("valorVenda"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"),
                     dao.resultSet.getString("qtdEstoque"), dao.resultSet.getString("situacaoProduto"), dao.resultSet.getString("idprodutos"), dao.resultSet.getString("idLote")});
@@ -771,12 +1187,16 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         jTable2.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
         jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+
     }
 
-    public void preencherTabela2(String produto, String qtd, String desconto, String vlUnitario, String vlParcial, String icmsx, String issx, String ipix, String idLote) {
+    public void PT2(String produto, String qtd, String desconto, String vlUnitario, String vlParcial, String icmsx, String issx, String ipix, String idLote) {
         //Calcular valores
         //calcular impostos
-        String[] colunas = new String[]{"Produto", "Quantidade", "Desconto", "Valor Unitário", "Valor", "icsm", "iss", "ipi", "idLote"};
+
+        DecimalFormat df = new DecimalFormat("0.##");
+
+        String[] col = new String[]{"Produto", "Quantidade", "Desconto", "Valor Unitário", "Valor", "icsm", "iss", "ipi", "idLote"};
         try {
             dadosVendas.add(new Object[]{produto, qtd, desconto, vlUnitario, vlParcial, icmsx, issx, ipix, idLote});
 
@@ -785,22 +1205,26 @@ public class TelaVendas extends javax.swing.JInternalFrame {
             vl2 = Double.parseDouble(desconto);
             //z = z - (z * vl2 / 100);
             icms = Double.parseDouble(icmsx);
-            icms1 += icms;
-            iss1 = Double.parseDouble(issx);
-            iss2 += iss1;
-            ipi1 = Double.parseDouble(ipix);
-            ipi2 += ipi1;
 
-            lblIcms.setText(Double.toString(icms1));
-            lblIss.setText(Double.toString(iss2));
-            lblIpi.setText(Double.toString(ipi2));
-            lblValorTotal.setText(Double.toString(z));
+            icms1 += x * (icms / 100);
+            iss1 = Double.parseDouble(issx);
+            iss2 += x * (iss1 / 100);
+            ipi1 = Double.parseDouble(ipix);
+            ipi2 += x * (ipi1 / 100);
+
+            double qq = Desconto();
+            z = z - (z * qq / 100);
+
+            lblIcms.setText("R$ " + df.format(icms1));
+            lblIss.setText("R$ " + df.format(iss2));
+            lblIpi.setText("R$ " + df.format(ipi2));
+            lblValorTotal.setText("R$ " + df.format(z));
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
 
-        TabelaModelo2 model = new TabelaModelo2(dadosVendas, colunas);
+        TabelaModelo2 model = new TabelaModelo2(dadosVendas, col);
         jTable29.setModel(model);
 
         jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);  // define o tamanho das colunas e se será redimensionado ou não
@@ -825,6 +1249,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         jTable29.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable29.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
         jTable29.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="calculo">
@@ -852,45 +1277,52 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     }
 
     //</editor-fold>
+    public double Desconto() {
+        double aux = 0;
+        if (txtDescontoVendaServico.getSelectedItem() == "0%") {
+            aux = 0;
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "5%") {
+            aux = 5;
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "10%") {
+            aux = 10;
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "15%") {
+            aux = 15;
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "20%") {
+            aux = 20;
+        }
+        if (txtDescontoVendaServico.getSelectedItem() == "25%") {
+            aux = 25;
+        }
+        return aux;
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Tipo Pagamento">
     public void tipoPagamento() {
         if (cbD.isSelected()) {
             tp = "1";
-            txtDinheiro.setEnabled(true);
-            txtTroco.setEnabled(true);
-            txtCartao.setEnabled(false);
+
         } else {
             tp = "0";
-            txtDinheiro.setEnabled(false);
-            txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+
         }
         if (cbCC.isSelected()) {
             tp = "2";
-            txtDinheiro.setEnabled(false);
-            txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+
         }
         if (cbCD.isSelected()) {
             tp = "3";
-            txtDinheiro.setEnabled(false);
-            txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+
         }
         if (cbD.isSelected() && cbCC.isSelected() || cbD.isSelected() && cbCD.isSelected()) {
-            tp = "1";
-            txtDinheiro.setEnabled(true);
-            txtTroco.setEnabled(true);
-            txtCartao.setEnabled(true);
+            tp = "4";
+
         }
         if (cbD.isSelected() && cbCC.isSelected() && cbCD.isSelected()) {
-            JOptionPane.showMessageDialog(null, "Opção inválida");
-            cbD.setSelected(false);
-            cbCC.setSelected(false);
-            cbCD.setSelected(false);
-            txtDinheiro.setEnabled(false);
-            txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            tp = "0";
         }
     }
 
@@ -903,7 +1335,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
 
         try {
 
-            dados.add(new Object[]{"", "", "", "", "", "", "", ""});
+            dados.add(new Object[]{"", "", "", "", "", "", "", "", "", "", "", ""});
             dados.removeAll(dados);
 
         } catch (Exception ex) {
@@ -929,18 +1361,26 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         jTable2.getColumnModel().getColumn(6).setResizable(false);
         jTable2.getColumnModel().getColumn(7).setPreferredWidth(50);
         jTable2.getColumnModel().getColumn(7).setResizable(false);
+        jTable2.getColumnModel().getColumn(8).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(8).setResizable(false);
+        jTable2.getColumnModel().getColumn(9).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(9).setResizable(false);
+        jTable2.getColumnModel().getColumn(10).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(10).setResizable(false);
+        jTable2.getColumnModel().getColumn(11).setPreferredWidth(80);
+        jTable2.getColumnModel().getColumn(11).setResizable(false);
 
         jTable2.getTableHeader().setReorderingAllowed(false);  // Não permite reordenar as colunas
         jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Não permite redimensionar a tabela
         jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
     }
 
-    public void limparTabela2() {
-        String[] colunas = new String[]{"Produto", "Descição", "Tipo", "Data da Compra", "Valor de Venda", "icsm", "iss", "ipi", "Estoque", "situação", "idLote"};
+    public void LTB2() {
+        String[] col = new String[]{"Produto", "Quantidade", "Desconto", "Valor Unitário", "Valor", "icsm", "iss", "ipi", "idLote"};
         //esvazia o arraylist dadosPessoa.
         dadosVendas.removeAll(dadosVendas);
         //evazia a jTable, add dadosPessoa (sem dados).
-        ModeloTabela modelo = new ModeloTabela(dadosVendas, colunas);
+        TabelaModelo2 modelo = new TabelaModelo2(dadosVendas, col);
         jTable29.setModel(modelo); // recebe o modelo criado
         jTable29.getColumnModel().getColumn(0).setPreferredWidth(250);
         jTable29.getColumnModel().getColumn(0).setResizable(false);
@@ -970,7 +1410,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Limpar campo 1">
     public void Limpar1() {
         txtQtdVenda.setText("");
-        txtDescontoVenda.setText("");
+        txtDescontoVenda.setSelectedIndex(0);
         lblValorParcial.setText("");
 
         LimparTabela();
@@ -979,15 +1419,15 @@ public class TelaVendas extends javax.swing.JInternalFrame {
 
     //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="PesquisaQtd1">
-    public boolean verificarQtd(String id) {
+    public boolean verificarQtd(String id,String Lote) {
         DAO dao = new DAO();
-        int aux = dao.PesquisaEstoque(id);
-        if (aux<Integer.parseInt(txtQtdVenda.getText())) {
+        int aux = dao.PesquisaEstoque(id, Lote);
+        if (aux < Integer.parseInt(txtQtdVenda.getText())) {
             JOptionPane.showMessageDialog(null, "Estoque insuficiente");
             return false;
         }
         return true;
-     }
+    }
     //</editor-fold>
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -996,6 +1436,12 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnFinalizarVenda;
     private javax.swing.JButton btnPesquisa1;
     private javax.swing.JButton btnPesquisa2;
+    private javax.swing.JLabel cA;
+    private javax.swing.JLabel cB;
+    private javax.swing.JLabel cC;
+    private javax.swing.JLabel cD;
+    private javax.swing.JLabel cE;
+    private javax.swing.JLabel cF;
     private javax.swing.JButton calcular;
     private javax.swing.JCheckBox cbCC;
     private javax.swing.JCheckBox cbCD;
@@ -1016,8 +1462,8 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1043,8 +1489,8 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panelTipoPag;
     private javax.swing.JTextField txtCartao;
     private javax.swing.JTextField txtCodigoVendedor;
-    private javax.swing.JTextField txtDescontoVenda;
-    private javax.swing.JTextField txtDescontoVendaServico;
+    private javax.swing.JComboBox<String> txtDescontoVenda;
+    private javax.swing.JComboBox<String> txtDescontoVendaServico;
     private javax.swing.JTextField txtDinheiro;
     private javax.swing.JTextField txtPesquisaProdutoVenda;
     private javax.swing.JTextField txtPesqusiaTipoVenda;
