@@ -912,7 +912,7 @@ public class DAO {
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
                     ResultSet fk = statement.executeQuery();
-                    fk.next();
+                    fk.last();                   
 
                     sql = "insert into lotevendas values (?,?,?,?,?,?)";
                     bd.getConnection();

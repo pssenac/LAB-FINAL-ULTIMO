@@ -1109,8 +1109,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDescontoVendaServicoActionPerformed
 
     private void txtDinheiroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDinheiroKeyPressed
-        if (c1 == false) {
-            c1 = true;
+        if (c1 == false) {           
             if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                 DecimalFormat df = new DecimalFormat("0.##");
                 double aux = 0, aux2 = 0, aux3 = 0;
@@ -1128,6 +1127,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                 }
 
                 txtTroco.setText("R$ " + df.format(aux3));
+                c1 = true;
             }
         }
     }//GEN-LAST:event_txtDinheiroKeyPressed
