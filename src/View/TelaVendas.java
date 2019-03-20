@@ -39,7 +39,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     ArrayList<Venda> vendas = new ArrayList<>();
     ArrayList<VendaProdutos> vendaProdutos = new ArrayList<>();
     ArrayList vendas2 = new ArrayList();
-    boolean txt;
+    boolean txt, c1 = false;
     String text;
     ArrayList dadosVendas = new ArrayList();
     double x = 0, z, vl, vl2, icms1, icms, iss1, iss2, ipi1, ipi2;
@@ -713,7 +713,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
             aux = "25";
         }
 
-        boolean vf = verificarQtd(cF.getText(),h);
+        boolean vf = verificarQtd(cF.getText(), h);
         if (vf) {
 
             PT2(cA.getText(), txtQtdVenda.getText(), aux, cB.getText(), lblValorParcial.getText(), cC.getText(), cD.getText(), cE.getText(), h);
@@ -860,12 +860,12 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         int tro = txtTroco.getText().length();
 
         if (din > 0) {
-            dinheiro = txtDinheiro.getText().substring(2, din).replace(",", ".");
+            dinheiro = txtDinheiro.getText().replace(",", ".");
         } else {
             dinheiro = "0";
         }
         if (car > 0) {
-            cartao = txtCartao.getText().substring(2, car).replace(",", ".");
+            cartao = txtCartao.getText().replace(",", ".");
         } else {
             cartao = "0";
         }
@@ -921,6 +921,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         cD.setText("");
         cE.setText("");
         cF.setText("");
+        c1 = false;
         VerificarCodigo();
         JOptionPane.showMessageDialog(null, "Operação realizada com sucesso");
 
@@ -1108,23 +1109,26 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDescontoVendaServicoActionPerformed
 
     private void txtDinheiroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDinheiroKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            DecimalFormat df = new DecimalFormat("0.##");
-            double aux = 0, aux2 = 0, aux3 = 0;
-            int tt = lblValorTotal.getText().length();
+        if (c1 == false) {
+            c1 = true;
+            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                DecimalFormat df = new DecimalFormat("0.##");
+                double aux = 0, aux2 = 0, aux3 = 0;
+                int tt = lblValorTotal.getText().length();
 
-            aux = Double.parseDouble(txtDinheiro.getText().replace(",", "."));
-            aux2 = Double.parseDouble(lblValorTotal.getText().substring(2, tt).replace(",", "."));
+                aux = Double.parseDouble(txtDinheiro.getText().replace(",", "."));
+                aux2 = Double.parseDouble(lblValorTotal.getText().substring(2, tt).replace(",", "."));
 
-            if (aux > aux2) {
-                aux3 = aux - aux2;
+                if (aux > aux2) {
+                    aux3 = aux - aux2;
 
-                btnFinalizarVenda.grabFocus();
-            } else {
-                JOptionPane.showMessageDialog(null, "Dinheiro insuficiente!");
+                    btnFinalizarVenda.grabFocus();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Dinheiro insuficiente!");
+                }
+
+                txtTroco.setText("R$ " + df.format(aux3));
             }
-
-            txtTroco.setText("R$ " + df.format(aux3));
         }
     }//GEN-LAST:event_txtDinheiroKeyPressed
 
@@ -1155,10 +1159,11 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         try {
             dao.resultSet.first();
             do {
-                if(Integer.parseInt(dao.resultSet.getString("qtdEstoque")) > 0)
-                dados.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("tipoProduto"), dao.resultSet.getString("dataCompra"),
-                    dao.resultSet.getString("valorVenda"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"),
-                    dao.resultSet.getString("qtdEstoque"), dao.resultSet.getString("situacaoProduto"), dao.resultSet.getString("idprodutos"), dao.resultSet.getString("idLote")});
+                if (Integer.parseInt(dao.resultSet.getString("qtdEstoque")) > 0) {
+                    dados.add(new Object[]{dao.resultSet.getString("nomeProduto"), dao.resultSet.getString("descricao"), dao.resultSet.getString("tipoProduto"), dao.resultSet.getString("dataCompra"),
+                        dao.resultSet.getString("valorVenda"), dao.resultSet.getString("icms"), dao.resultSet.getString("iss"), dao.resultSet.getString("ipi"),
+                        dao.resultSet.getString("qtdEstoque"), dao.resultSet.getString("situacaoProduto"), dao.resultSet.getString("idprodutos"), dao.resultSet.getString("idLote")});
+                }
             } while (dao.resultSet.next());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex + "Operação Cancelada");
@@ -1419,7 +1424,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
 
     //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="PesquisaQtd1">
-    public boolean verificarQtd(String id,String Lote) {
+    public boolean verificarQtd(String id, String Lote) {
         DAO dao = new DAO();
         int aux = dao.PesquisaEstoque(id, Lote);
         if (aux < Integer.parseInt(txtQtdVenda.getText())) {

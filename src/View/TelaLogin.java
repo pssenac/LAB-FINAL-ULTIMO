@@ -116,7 +116,7 @@ public class TelaLogin extends javax.swing.JFrame {
         String pf1 = "0";
         String pf2 = "1";
 
-        JOptionPane.showMessageDialog(null, pf);
+       // JOptionPane.showMessageDialog(null, pf);
 
         if (rs == true && pf.equals(pf1) && st != "1") {
             boolean rt = false;
