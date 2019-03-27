@@ -42,7 +42,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     boolean txt, c1 = false;
     String text;
     ArrayList dadosVendas = new ArrayList();
-    double x = 0, z, vl, vl2, icms1, icms, iss1, iss2, ipi1, ipi2;
+    double x = 0, z, vl, vl2, icms1, icms, iss1, iss2, ipi1, ipi2, vlt;
 
     /**
      * Creates new form TelaOrdemServico
@@ -98,8 +98,6 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         panelTipoPag = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         txtDinheiro = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
-        txtTroco = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         txtCartao = new javax.swing.JTextField();
         cbD = new javax.swing.JCheckBox();
@@ -131,6 +129,8 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         cD = new javax.swing.JLabel();
         cE = new javax.swing.JLabel();
         cF = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        txtTroco = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("VENDAS");
@@ -369,16 +369,6 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         jLabel19.setText("Dinheiro:");
 
         txtDinheiro.setEnabled(false);
-        txtDinheiro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtDinheiroKeyPressed(evt);
-            }
-        });
-
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel20.setText("Troco :");
-
-        txtTroco.setEnabled(false);
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel21.setText("Cartão :");
@@ -399,11 +389,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                     .addGroup(panelTipoPagLayout.createSequentialGroup()
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCartao))
-                    .addGroup(panelTipoPagLayout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtTroco)))
+                        .addComponent(txtCartao)))
                 .addContainerGap(141, Short.MAX_VALUE))
         );
         panelTipoPagLayout.setVerticalGroup(
@@ -417,10 +403,6 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                 .addGroup(panelTipoPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(txtCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelTipoPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(txtTroco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -523,6 +505,11 @@ public class TelaVendas extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel20.setText("Troco :");
+
+        txtTroco.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -561,14 +548,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                     .addComponent(cbCD))
                                                 .addGroup(layout.createSequentialGroup()
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                            .addComponent(btnFinalizarVenda)
-                                                            .addGap(140, 140, 140))
-                                                        .addGroup(layout.createSequentialGroup()
-                                                            .addComponent(jLabel17)
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                            .addComponent(lblValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(btnFinalizarVenda)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                     .addComponent(btnCancelar))))
                                         .addGroup(layout.createSequentialGroup()
@@ -580,7 +560,19 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                                                 .addComponent(jLabel18))
                                             .addGap(222, 222, 222)
                                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel20)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtTroco, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel17)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -638,11 +630,15 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                             .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(panelTipoPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel17))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel17)
+                            .addComponent(lblValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel20)
+                            .addComponent(txtTroco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCancelar)
                             .addComponent(btnFinalizarVenda))
@@ -825,105 +821,130 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnFinalizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarVendaActionPerformed
-        String aux = "", dinheiro = "", cartao = "", troco = "";
 
-        if (txtDescontoVendaServico.getSelectedItem() == "0%") {
-            aux = "0";
-        }
-        if (txtDescontoVendaServico.getSelectedItem() == "5%") {
-            aux = "5";
-        }
-        if (txtDescontoVendaServico.getSelectedItem() == "10%") {
-            aux = "10";
-        }
-        if (txtDescontoVendaServico.getSelectedItem() == "15%") {
-            aux = "15";
-        }
-        if (txtDescontoVendaServico.getSelectedItem() == "20%") {
-            aux = "20";
-        }
-        if (txtDescontoVendaServico.getSelectedItem() == "25%") {
-            aux = "25";
-        }
-        vendaProdutosController vndP = new vendaProdutosController();
         DAO dao = new DAO();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Date agr = new Date();
         String codvend = dao.buscarFuncionario(txtCodigoVendedor.getText());
+        vendaProdutosController vndP = new vendaProdutosController();
 
-        int ic = lblIcms.getText().length();
-        int is = lblIss.getText().length();
-        int ip = lblIpi.getText().length();
-        int vlt = lblValorTotal.getText().length();
-        int din = txtDinheiro.getText().length();
-        int car = txtCartao.getText().length();
-        int tro = txtTroco.getText().length();
+        if (codvend != ";") {
 
-        if (din > 0) {
-            dinheiro = txtDinheiro.getText().replace(",", ".");
-        } else {
-            dinheiro = "0";
-        }
-        if (car > 0) {
-            cartao = txtCartao.getText().replace(",", ".");
-        } else {
-            cartao = "0";
-        }
-        if (din > 0) {
-            troco = txtTroco.getText().substring(2, tro).replace(",", ".");
-        } else {
-            troco = "0";
-        }
+            if (txtDinheiro.getText() != "" || txtDinheiro.getText() != null) {
+                
+                String aux = "", dinheiro = "", cartao = "", troco = "";
+                double aux2 = 0;
 
-        String icms = lblIcms.getText().substring(2, ic).replace(",", ".");
-        String iss = lblIss.getText().substring(2, is).replace(",", ".");
-        String ipi = lblIpi.getText().substring(2, ip).replace(",", ".");
-        String valorT = lblValorTotal.getText().substring(2, vlt).replace(",", ".");
+                if (txtDescontoVendaServico.getSelectedItem() == "0%") {
+                    aux = "0";
+                }
+                if (txtDescontoVendaServico.getSelectedItem() == "5%") {
+                    aux = "5";
+                }
+                if (txtDescontoVendaServico.getSelectedItem() == "10%") {
+                    aux = "10";
+                }
+                if (txtDescontoVendaServico.getSelectedItem() == "15%") {
+                    aux = "15";
+                }
+                if (txtDescontoVendaServico.getSelectedItem() == "20%") {
+                    aux = "20";
+                }
+                if (txtDescontoVendaServico.getSelectedItem() == "25%") {
+                    aux = "25";
+                }
+                DecimalFormat dc = new DecimalFormat("##.##");
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                Date agr = new Date();
 
-        if (codvend.equals(null)) {
-            JOptionPane.showMessageDialog(null, "insira um codigo valido");
+                int ic = lblIcms.getText().length();
+                int is = lblIss.getText().length();
+                int ip = lblIpi.getText().length();
+                int vlt = lblValorTotal.getText().length();
+                int din = txtDinheiro.getText().length();
+                int car = txtCartao.getText().length();
+                int tro = txtTroco.getText().length();
 
-        } else {
-            tipoPagamento();
+                if (din > 0) {
+                    dinheiro = txtDinheiro.getText().replace(",", ".");
+                } else {
+                    dinheiro = "0";
+                }
+                if (car > 0) {
+                    cartao = txtCartao.getText().replace(",", ".");
+                } else {
+                    cartao = "0";
+                }
+                if (tro > 0) {
+                    troco = txtTroco.getText().substring(2, tro).replace(",", ".");
+                } else {
+                    troco = "0";
+                }
 
-            vndP.salvarVenda(aux, tp, df.format(agr), "", "0", icms, iss,
-                    ipi, codvend, lbloCodVenda.getText(), txtCodigoVendedor.getText(), valorT, dinheiro,
-                    cartao, troco);
+                String icms = lblIcms.getText().substring(2, ic).replace(",", ".");
+                String iss = lblIss.getText().substring(2, is).replace(",", ".");
+                String ipi = lblIpi.getText().substring(2, ip).replace(",", ".");
+                String valorT = lblValorTotal.getText().substring(2, vlt).replace(",", ".");
 
-            for (int i = 0; i < vendaProdutos.size(); i++) {
-                vndP.salvarLoteVenda(vendaProdutos.get(i).getFkLoteVendas(), vendaProdutos.get(i).getQtd(), vendaProdutos.get(i).getDescontoItemVendProduto(),
-                        vendaProdutos.get(i).getValorParcialVendProduto(),
-                        lbloCodVenda.getText(), "venda");
+                aux2 = (Double.parseDouble(dinheiro)) - (Double.parseDouble(valorT));
+                txtTroco.setText("R$ " + dc.format(aux2));
+
+                if (tro > 0) {
+                    troco = txtTroco.getText().substring(2, tro).replace(",", ".");
+                } else {
+                    troco = "0";
+                }
+
+                tipoPagamento();
+
+                vndP.salvarVenda(aux, tp, df.format(agr), "", "0", icms, iss,
+                        ipi, codvend, lbloCodVenda.getText(), txtCodigoVendedor.getText(), valorT, dinheiro,
+                        cartao, txtTroco.getText());
+
+                for (int i = 0; i < vendaProdutos.size(); i++) {
+                    vndP.salvarLoteVenda(vendaProdutos.get(i).getFkLoteVendas(), vendaProdutos.get(i).getQtd(), vendaProdutos.get(i).getDescontoItemVendProduto(),
+                            vendaProdutos.get(i).getValorParcialVendProduto(),
+                            lbloCodVenda.getText(), "venda");
+                }
+                JOptionPane.showMessageDialog(null, "Operação realizada com sucesso");
+
+                int n = JOptionPane.showConfirmDialog(
+                        null, "Deseja realizar uma nova compra?",
+                        "Nova Compra",
+                        JOptionPane.YES_NO_OPTION);
+
+                if (n == 0) {
+                    vendas.removeAll(vendas);
+                    vendaProdutos.removeAll(vendaProdutos);
+                    dadosVendas.removeAll(dadosVendas);
+                    jTable29.removeAll();
+                    lblIcms.setText("");
+                    lblIss.setText("");
+                    lblIpi.setText("");
+                    lblValorTotal.setText("");
+                    txtDescontoVendaServico.setSelectedIndex(0);
+                    txtDinheiro.setText("");
+                    txtCartao.setText("");
+                    txtTroco.setText("");
+                    txtDinheiro.setEnabled(false);
+                    txtCartao.setEnabled(false);
+                    txtTroco.setEnabled(false);
+                    cbD.setSelected(false);
+                    cbCC.setSelected(false);
+                    cbCD.setSelected(false);
+                    cA.setText("");
+                    cB.setText("");
+                    cC.setText("");
+                    cD.setText("");
+                    cE.setText("");
+                    cF.setText("");
+                    c1 = false;
+                    VerificarCodigo();
+                } else {
+                    Fechar();
+                }
+
             }
+        } 
 
-        }
-        vendas.removeAll(vendas);
-        vendaProdutos.removeAll(vendaProdutos);
-        dadosVendas.removeAll(dadosVendas);
-        jTable29.removeAll();
-        lblIcms.setText("");
-        lblIss.setText("");
-        lblIpi.setText("");
-        lblValorTotal.setText("");
-        txtDescontoVendaServico.setSelectedIndex(0);
-        txtDinheiro.setText("");
-        txtCartao.setText("");
-        txtTroco.setText("");
-        txtDinheiro.setEnabled(false);
-        txtCartao.setEnabled(false);
-        txtTroco.setEnabled(false);
-        cbD.setSelected(false);
-        cbCC.setSelected(false);
-        cbCD.setSelected(false);
-        cA.setText("");
-        cB.setText("");
-        cC.setText("");
-        cD.setText("");
-        cE.setText("");
-        cF.setText("");
-        c1 = false;
-        VerificarCodigo();
-        JOptionPane.showMessageDialog(null, "Operação realizada com sucesso");
 
     }//GEN-LAST:event_btnFinalizarVendaActionPerformed
 
@@ -1055,7 +1076,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbCDMouseClicked
 
     private void txtDescontoVendaServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescontoVendaServicoActionPerformed
-        DecimalFormat df = new DecimalFormat("0.##");
+        DecimalFormat df = new DecimalFormat("##.##");
         x = 0;
         z = x;
         vl2 = 0;
@@ -1066,14 +1087,14 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         iss2 = iss1;
         ipi1 = 0;
         ipi2 = ipi1;
-        String A = ""; //esvazia o arraylist dadosPessoa e, conseguentemente, esvazia a jTable.
+        String A = "";
         LTB2();
-        //preenche a jTable com os dados restantes do arraylist pessoas.
 
         for (int i = 0; i < vendas.size(); i++) {
             PT2(vendas.get(i).getA(), vendas.get(i).getB(), vendas.get(i).getC(), vendas.get(i).getD(), vendas.get(i).getE(),
                     vendas.get(i).getF(), vendas.get(i).getG(), vendas.get(i).getH(), vendas.get(i).getJ());
         }
+
         int O = lblValorTotal.getText().length();
         if (O > 0) {
             A = lblValorTotal.getText().substring(2, O).replace(",", ".");
@@ -1083,54 +1104,31 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         double aux = 0, aux2 = Double.parseDouble(A), aux3 = 0;
 
         if (txtDescontoVendaServico.getSelectedItem() == "0%") {
-            aux = 0;
+            aux = aux2 * 0;
         }
         if (txtDescontoVendaServico.getSelectedItem() == "5%") {
-            aux = 5;
+            aux = aux2 * 0.05;
+
         }
         if (txtDescontoVendaServico.getSelectedItem() == "10%") {
-            aux = 10;
+            aux = aux2 * 0.10;
         }
         if (txtDescontoVendaServico.getSelectedItem() == "15%") {
-            aux = 15;
+            aux = aux2 * 0.15;
         }
         if (txtDescontoVendaServico.getSelectedItem() == "20%") {
-            aux = 20;
+            aux = aux2 * 0.20;
         }
         if (txtDescontoVendaServico.getSelectedItem() == "25%") {
-            aux = 25;
+            aux = aux2 * 0.25;
         }
 
         txtDescontoVendaServico.updateUI();
 
-        aux3 = aux2 - (aux2 * aux / 100);
+        aux3 = aux2 - aux;
 
-        lblValorTotal.setText("R$ " + df.format(aux3));
+        lblValorTotal.setText("R$ " + df.format(aux2));
     }//GEN-LAST:event_txtDescontoVendaServicoActionPerformed
-
-    private void txtDinheiroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDinheiroKeyPressed
-        if (c1 == false) {           
-            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                DecimalFormat df = new DecimalFormat("0.##");
-                double aux = 0, aux2 = 0, aux3 = 0;
-                int tt = lblValorTotal.getText().length();
-
-                aux = Double.parseDouble(txtDinheiro.getText().replace(",", "."));
-                aux2 = Double.parseDouble(lblValorTotal.getText().substring(2, tt).replace(",", "."));
-
-                if (aux > aux2) {
-                    aux3 = aux - aux2;
-
-                    btnFinalizarVenda.grabFocus();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Dinheiro insuficiente!");
-                }
-
-                txtTroco.setText("R$ " + df.format(aux3));
-                c1 = true;
-            }
-        }
-    }//GEN-LAST:event_txtDinheiroKeyPressed
 
     //</editor-fold>
     public String VerificarCodigo() {
@@ -1434,6 +1432,10 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         return true;
     }
     //</editor-fold>
+
+    public void Fechar() {
+        this.dispose();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduto;
