@@ -3,6 +3,8 @@ package View;
 import Controller.logFuncionarioController;
 import Models.DAO;
 import Models.TabelaModelo;
+import Models.ValidarCPF;
+import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -63,7 +65,6 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         txtNomeFuncionario = new javax.swing.JTextField();
         txtEmailFuncionario = new javax.swing.JTextField();
         txtRgFuncionario = new javax.swing.JFormattedTextField();
-        txtCpfFuncionario = new javax.swing.JFormattedTextField();
         txtDataNasc = new javax.swing.JFormattedTextField();
         txtTelFuncionario = new javax.swing.JFormattedTextField();
         txtCelFuncionario = new javax.swing.JFormattedTextField();
@@ -71,6 +72,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         lblexistecpf = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         lblCodFuncionario = new javax.swing.JLabel();
+        txtCpfFuncionario = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -150,12 +152,6 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         }
 
         try {
-            txtCpfFuncionario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
             txtDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
@@ -182,6 +178,12 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         jLabel21.setText("Código :");
 
         lblCodFuncionario.setForeground(new java.awt.Color(255, 0, 0));
+
+        txtCpfFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCpfFuncionarioKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -210,36 +212,32 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
                                 .addComponent(lblexistecpf, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(10, 10, 10)
-                                .addComponent(lblFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblIdFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(156, 156, 156)
-                                .addComponent(jLabel21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtNomeFuncionario))
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel1)
+                        .addGap(10, 10, 10)
+                        .addComponent(lblFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblIdFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(156, 156, 156)
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtNomeFuncionario))
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addComponent(jLabel7)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -263,7 +261,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtRgFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblexistecpf))
+                    .addComponent(lblexistecpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -276,7 +274,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 14))); // NOI18N
@@ -557,7 +555,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
@@ -656,6 +654,28 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     //<editor-fold defaultstate="collapsed" desc=" BOTÃO GRAVAR ">
     private void btnGravarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarFuncionarioActionPerformed
 
+        ValidarCPF valCpf = new ValidarCPF() {
+        };
+        if (valCpf.validaCPF(txtCpfFuncionario.getText()) == true) {
+            // jLabelValCpf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/102.png")));
+            DAO dao = new DAO();
+            dao.bd.getConnection();
+            String buscaCpf = txtCpfFuncionario.getText();
+            PreparedStatement sta;
+            try {
+                sta = dao.bd.connection.prepareStatement("select * from cliente where cpf = ? limit 1");
+                sta.setString(1, buscaCpf);
+                ResultSet rs = sta.executeQuery();
+                while (rs.next()) {
+                    JOptionPane.showMessageDialog(null, "CPF já cadastrado anteriormente!");
+                    txtCpfFuncionario.setText("");
+                    txtCpfFuncionario.grabFocus();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+        
+        
         boolean cf = DAO.cslcpf(txtCpfFuncionario.getText());
         boolean cuser = DAO.csluser(txtUsuarioFuncionario.getText());
 
@@ -837,6 +857,18 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     private void btnLimparFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparFuncionarioActionPerformed
         limparCampos();
     }//GEN-LAST:event_btnLimparFuncionarioActionPerformed
+
+    private void txtCpfFuncionarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfFuncionarioKeyTyped
+        if (txtCpfFuncionario.getText().length() > 10 && !(evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        } else {
+            char input = evt.getKeyChar();
+            if ((input < '0' || input > '9') && input != '\b') {
+                evt.consume();
+                JOptionPane.showMessageDialog(null, "Caractere inválido");
+            }
+        }
+    }//GEN-LAST:event_txtCpfFuncionarioKeyTyped
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" METODO BOTAO ">
@@ -1277,7 +1309,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCidadeFuncionario;
     private javax.swing.JTextField txtComplementoFuncionario;
     private javax.swing.JPasswordField txtConfirmacaoSenha;
-    private javax.swing.JFormattedTextField txtCpfFuncionario;
+    private javax.swing.JTextField txtCpfFuncionario;
     private javax.swing.JFormattedTextField txtDataNasc;
     private javax.swing.JTextField txtEmailFuncionario;
     private javax.swing.JTextField txtEstadoFuncionario;

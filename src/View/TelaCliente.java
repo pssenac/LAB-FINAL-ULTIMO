@@ -9,13 +9,15 @@ import Controller.ClienteController;
 import Controller.ModeloTabela;
 import Models.ConexaoBD;
 import Models.DAO;
+import Models.ValidarCPF;
+import java.awt.event.KeyEvent;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-
-
 
 public class TelaCliente extends javax.swing.JInternalFrame {
 
@@ -26,29 +28,26 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     public DAO DAO;
     public ClienteController cli;
 
-    
     public TelaCliente() {
         initComponents();
         cli = new ClienteController();
-        if(!cli.logarBD()){
-            JOptionPane.showMessageDialog(null,"Falha ao conectar, o sistema será fechado");
-            System.exit(0);    
+        if (!cli.logarBD()) {
+            JOptionPane.showMessageDialog(null, "Falha ao conectar, o sistema será fechado");
+            System.exit(0);
         }
-        
+
         DAO = new DAO();
-        
-        
+
         DAO.carregarTabela();
-          AtivarCampos(true, false, false, false, false, false,false, false, false, false, false,
+        AtivarCampos(true, false, false, false, false, false, false, false, false, false, false,
                 false, false);
-        
+
         AtivarBotoes(true, false, false, false, false);
-        
+
         LimpaCampo();
 
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -309,6 +308,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         txtCpf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtCpf.setEnabled(false);
+        txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCpfKeyTyped(evt);
+            }
+        });
 
         lblIdend.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblIdend.setEnabled(false);
@@ -399,7 +403,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                                 .addComponent(lblIdend, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(178, 178, 178)))
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -463,99 +467,112 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         setBounds(0, 0, 1205, 674);
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
     //<editor-fold defaultstate="collapsed" desc=" BOTAO ADICIONAR "> 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         AtivarCampos(true, true, true, true, true, true, true, true, true, true, true,
                 true, true);
-        
-        AtivarBotoes(false, true,false, true, true);
-        
+
+        AtivarBotoes(false, true, false, true, true);
+
         LimpaCampo();
         vd = 1;
         t = false;
-        
-        
+
+
     }//GEN-LAST:event_btnAdicionarActionPerformed
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc=" BOTAO LIMPAR ">
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         LimpaCampo();
     }//GEN-LAST:event_btnLimparActionPerformed
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc=" BOTAO SALVAR ">
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
-          boolean cpf = DAO.clicpf(txtCpf.getText());
-           lblExisteCpf.setText("");
-          
-          if (cpf == true && !"".equals(txtCpf.getText())){
-           pesquisaCpf(cpf);     
-         }
-        
-      
-          
-        switch (vd){
-            case 1:
-        
-                ClienteController clicontrol = new ClienteController();
-                if (VerificarCamposVazios() == true) {
-                    JOptionPane.showMessageDialog(null, "Campos obrigatórios estão vazios!");
-                    a = false;
+        boolean cpf = DAO.clicpf(txtCpf.getText());
+        lblExisteCpf.setText("");
+
+        ValidarCPF valCpf = new ValidarCPF() {
+        };
+        if (valCpf.validaCPF(txtCpf.getText()) == true) {
+            // jLabelValCpf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/102.png")));
+            DAO dao = new DAO();
+            dao.bd.getConnection();
+            String buscaCpf = txtCpf.getText();
+            PreparedStatement sta;
+            try {
+                sta = dao.bd.connection.prepareStatement("select * from cliente where cpf = ? limit 1");
+                sta.setString(1, buscaCpf);
+                ResultSet rs = sta.executeQuery();
+                while (rs.next()) {
+                    JOptionPane.showMessageDialog(null, "CPF já cadastrado anteriormente!");
+                    txtCpf.setText("");
+                    txtCpf.grabFocus();
                 }
-                    
-               if (cpf != true && VerificarCamposVazios() != true){     
-                    
-                   
-                    clicontrol.salvarCliente(txtNome.getText(), txtCpf.getText(), txtRg.getText(), txtNumero.getText(),
-                    txtCel.getText(), txtEmail.getText(), txtCep.getText(), txtBairro.getText(),
-                    txtLogradouro.getText(), txtComplemento.getText(), txtNumero.getText(),
-                    txtCidade.getText(), txtUf.getText());
-                    
-                     AtivarCampos(false, false, false, false, false, false,false, false, false, false, false,
-                    false, false);
-        
-                    AtivarBotoes(true, false, false, false, false);
-                     preencherTabela(sqlTabela);
+            } catch (SQLException ex) {
+            }
+        }
+            if (cpf == true && !"".equals(txtCpf.getText())) {
+                pesquisaCpf(cpf);
+            }
+
+            switch (vd) {
+                case 1:
+
+                    ClienteController clicontrol = new ClienteController();
+                    if (VerificarCamposVazios() == true) {
+                        JOptionPane.showMessageDialog(null, "Campos obrigatórios estão vazios!");
+                        a = false;
+                    }
+
+                    if (cpf != true && VerificarCamposVazios() != true) {
+
+                        clicontrol.salvarCliente(txtNome.getText(), txtCpf.getText(), txtRg.getText(), txtNumero.getText(),
+                                txtCel.getText(), txtEmail.getText(), txtCep.getText(), txtBairro.getText(),
+                                txtLogradouro.getText(), txtComplemento.getText(), txtNumero.getText(),
+                                txtCidade.getText(), txtUf.getText());
+
+                        AtivarCampos(false, false, false, false, false, false, false, false, false, false, false,
+                                false, false);
+
+                        AtivarBotoes(true, false, false, false, false);
+                        preencherTabela(sqlTabela);
+                        LimpaCampo();
+
+                    }
+                    break;
+
+                case 2:
+
+                    ClienteController clicontro2 = new ClienteController();
+
+                    clicontro2.editarCliente(lbIdCliente.getText(), lblIdend.getText(), txtNome.getText(), txtCpf.getText(), txtCpf.getText(), txtNumero.getText(),
+                            txtCel.getText(), txtEmail.getText(), txtCep.getText(), txtBairro.getText(),
+                            txtLogradouro.getText(), txtComplemento.getText(), txtNumero.getText(),
+                            txtCidade.getText(), txtUf.getText());
+                    AtivarCampos(false, false, false, false, false, false, false, false, false, false, false,
+                            false, false);
+                    preencherTabela(sqlTabela);
                     LimpaCampo();
-                    
-                }
-                break;
-                
-            case 2:    
-                
-                ClienteController clicontro2 = new ClienteController();
-                
-                clicontro2.editarCliente(lbIdCliente.getText(), lblIdend.getText(), txtNome.getText(), txtCpf.getText(), txtCpf.getText(), txtNumero.getText(),
-                txtCel.getText(), txtEmail.getText(), txtCep.getText(), txtBairro.getText(),
-                txtLogradouro.getText(), txtComplemento.getText(), txtNumero.getText(),
-                txtCidade.getText(), txtUf.getText());
-                 AtivarCampos(false, false, false, false, false, false,false, false, false, false, false,
-                false, false);
-                preencherTabela(sqlTabela);
-                LimpaCampo();
-        
-                 break;
-         }
+
+                    break;
+            }
     }//GEN-LAST:event_btnSalvarActionPerformed
     //</editor-fold>
-   
-    
-    //<editor-fold defaultstate="collapsed" desc=" PESQUISA CPF CLIENTE">
+
+        //<editor-fold defaultstate="collapsed" desc=" PESQUISA CPF CLIENTE">
     public void pesquisaCpf(boolean cpf) {
-          if (cpf == true && t != true ) {
-             lblExisteCpf.setText("CPF cadastrado");
-             
-          }else{
-              lblExisteCpf.setText("");
-           }
-   }
-   //</editor-fold>    
-    
-    
+        if (cpf == true && t != true) {
+            lblExisteCpf.setText("CPF cadastrado");
+
+        } else {
+            lblExisteCpf.setText("");
+        }
+    }
+    //</editor-fold>    
+
     //<editor-fold defaultstate="collapsed" desc=" METODO SELECAO LINHA CLIENTE ">
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int linhaSelecionada = jTable1.getSelectedRow();
@@ -574,47 +591,59 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         txtCidade.setText(jTable1.getValueAt(linhaSelecionada, 14).toString());
         txtUf.setText(jTable1.getValueAt(linhaSelecionada, 15).toString());
         lblIdend.setText(jTable1.getValueAt(linhaSelecionada, 8).toString());
-        
-         AtivarCampos(false, false, false, false, false, false,false, false, false, false, false,
+
+        AtivarCampos(false, false, false, false, false, false, false, false, false, false, false,
                 false, false);
-         
-         AtivarBotoes(false, false,true, false, true);
+
+        AtivarBotoes(false, false, true, false, true);
 
 
     }//GEN-LAST:event_jTable1MouseClicked
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc=" BOTÃO ALTERAR ">
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        
+
         AtivarCampos(true, true, true, true, true, true, true, true, true, true, true,
                 true, true);
 
-        AtivarBotoes(false, true,false, false, true);
+        AtivarBotoes(false, true, false, false, true);
         vd = 2;
-        t= true;
+        t = true;
     }//GEN-LAST:event_btnAlterarActionPerformed
     //</editor-fold>
-   
+
     //<editor-fold defaultstate="collapsed" desc="  BOTAO CANCELAR ">
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         AtivarBotoes(true, false, false, false, false);
-        
+
         AtivarCampos(true, false, false, false, false, false, false, false, false, false, false,
                 false, false);
         LimpaCampo();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnPesquisa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisa1ActionPerformed
-        String sql = "select * from cliente inner join endereco on FKendereco = idendereco where nomeCliente like '%"+txtNome.getText()+"%' ";
+        String sql = "select * from cliente inner join endereco on FKendereco = idendereco where nomeCliente like '%" + txtNome.getText() + "%' ";
         preencherTabela(sql);
 
     }//GEN-LAST:event_btnPesquisa1ActionPerformed
-     //</editor-fold>
-    
+
+    private void txtCpfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyTyped
+        if (txtCpf.getText().length() > 10 && !(evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        } else {
+            char input = evt.getKeyChar();
+            if ((input < '0' || input > '9') && input != '\b') {
+                evt.consume();
+                JOptionPane.showMessageDialog(null, "Caractere inválido");
+            }
+        }
+    }//GEN-LAST:event_txtCpfKeyTyped
+    //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO LIMPAR CAMPOS ">
     public void LimpaCampo() {
-        
+
         lbIdCliente.setText("");
         txtNome.setText("");
         txtCpf.setText("");
@@ -622,29 +651,29 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         txtTel.setText("");
         txtCel.setText("");
         txtEmail.setText("");
-        
+
         txtCep.setText("");
         txtLogradouro.setText("");
         txtBairro.setText("");
         txtNumero.setText("");
         txtComplemento.setText("");
         txtCidade.setText("");
-        txtUf.setText(""); 
-           
+        txtUf.setText("");
+
     }
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO CAMPO ">
     public void AtivarCampos(boolean c1, boolean c2, boolean c3, boolean c4, boolean c5, boolean c6, boolean c7, boolean c8, boolean c9,
             boolean c10, boolean c11, boolean c12, boolean c13) {
-   
+
         txtNome.setEnabled(c1);
         txtCpf.setEnabled(c2);
         txtRg.setEnabled(c3);
         txtTel.setEnabled(c4);
         txtCel.setEnabled(c5);
         txtEmail.setEnabled(c6);
-        
+
         txtCep.setEnabled(c7);
         txtLogradouro.setEnabled(c8);
         txtBairro.setEnabled(c9);
@@ -652,22 +681,21 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         txtComplemento.setEnabled(c11);
         txtCidade.setEnabled(c12);
         txtUf.setEnabled(c13);
-     
+
     }
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc=" METODO BOTAO ">
-    private void AtivarBotoes (boolean addFnc,boolean gravaFnc,boolean alterarFnc,
-            boolean limparFnc,boolean cancelarFnc ) {                                                   
-        
+    private void AtivarBotoes(boolean addFnc, boolean gravaFnc, boolean alterarFnc,
+            boolean limparFnc, boolean cancelarFnc) {
+
         btnAdicionar.setEnabled(addFnc);
         btnSalvar.setEnabled(gravaFnc);
         btnAlterar.setEnabled(alterarFnc);
         btnLimpar.setEnabled(limparFnc);
         btnCancelar.setEnabled(cancelarFnc);
-          
-          
-    }                                                  
+
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO CAMPOS VAZIOS ">
@@ -704,7 +732,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         }
         return a;
     }
-     //</editor-fold>
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" MÉTODO PREENCHER TABELA CLIENTE">
     public void preencherTabela(String SQL) {
@@ -768,11 +796,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite selecionar apenas 1 elemento da tabela
     }
     //</editor-fold>
-    
-    
-    
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAlterar;
