@@ -24,7 +24,7 @@ public class OrdemProdutosController {
 
     public void salvarOrdemServico(String a, String b, String c, String d, String e,
             String f, String g, String h, String i, String j, String k, String l,
-            String m, String n, String o, String p, String q, String r,String s, String t, String u ,String v) {
+            String m, String n, String o, String p, String q, String r, String s, String t, String u, String v) {
         DAO dao = new DAO();
 
         dao.ordemservico.setTipoServico(a);
@@ -55,13 +55,13 @@ public class OrdemProdutosController {
 
     public void salvarLoteOrdem(String a, String b, String c, String d, String e) {
         DAO dao = new DAO();
-       dao.ordemProdutos.setFKlote(a);
+        dao.ordemProdutos.setFKlote(a);
         dao.ordemProdutos.setQtd(b);
         dao.ordemProdutos.setDesconto(c);
         dao.ordemProdutos.setValorParcial(d);
         dao.ordemProdutos.setCodigoOrdem(e);
 
-        JOptionPane.showMessageDialog(null, dao.AtualizarOrdemServico(DAO.INCLUSAOORDEMPRODUTO));
+        dao.AtualizarOrdemServico(DAO.INCLUSAOORDEMPRODUTO);
     }
 
     public String pesquisarCliente(String cpf) {
