@@ -761,7 +761,7 @@ public class DAO {
                         statement.setString(4, produto.getTipoProduto());
                         statement.executeUpdate();
 
-                        sql = "SELECT idprodutos FROM produtos ORDER BY idprodutos LIMIT 1";
+                        sql = "SELECT idprodutos FROM produtos ORDER BY idprodutos DESC LIMIT 1";
                         statement = bd.connection.prepareStatement(sql);
                         ResultSet fk = statement.executeQuery();
                         fk.next();

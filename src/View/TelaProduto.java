@@ -594,6 +594,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         lblIdl.setText(jTable1.getValueAt(linhaSelecionada, 18).toString());
         cbFornecedor.setSelectedItem(jTable1.getValueAt(linhaSelecionada, 11).toString());
 
+        
         txtDataCompra.setText(jTable1.getValueAt(linhaSelecionada, 10).toString());
         txtQtd.setText(jTable1.getValueAt(linhaSelecionada, 11).toString());
         txtQtdInicial.setText(jTable1.getValueAt(linhaSelecionada, 12).toString());

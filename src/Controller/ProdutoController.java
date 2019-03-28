@@ -16,7 +16,6 @@ public class ProdutoController {
 
         dao.produto.setNomeProduto(nomeProduto);
         
-        JOptionPane.showMessageDialog(null, nomeProduto);
         dao.produto.setDescricao(descricao);
         dao.produto.setArmazemLocal(armazemLocal);
         dao.produto.setTipoProduto(tipoProduto);
