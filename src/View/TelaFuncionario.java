@@ -41,7 +41,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         carregarTabela();
         atualizarCampos();
         preencherTabelaFuncionario(sqlTabela);
-        habilitaCampos(false, false, false, false, false, false, false, false, false,
+        habilitaCampos(true, false, false, false, false, false, false, false, false,
                 false, false, false, false, false, false, false, false, false, false);
 
         habilitabotoes(true, false, false, false, false);
@@ -73,6 +73,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         jLabel21 = new javax.swing.JLabel();
         lblCodFuncionario = new javax.swing.JLabel();
         txtCpfFuncionario = new javax.swing.JTextField();
+        btnPesquisarFuncionario = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -185,6 +186,13 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
             }
         });
 
+        btnPesquisarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisa3.png"))); // NOI18N
+        btnPesquisarFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarFuncionarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -229,15 +237,18 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtNomeFuncionario))
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtNomeFuncionario))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnPesquisarFuncionario)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -254,14 +265,16 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisarFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(txtRgFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblexistecpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblexistecpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4)
+                        .addComponent(txtRgFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -628,6 +641,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         btnLimparFuncionario.setEnabled(true);
         btnAlterarFuncionario.setEnabled(false);
         btnCancelarFuncionario.setEnabled(true);
+        btnPesquisarFuncionario.setEnabled(false);
         vd = 1;
 
         habilitaCampos(true, true, true, true, true, true, true, true, true,
@@ -828,10 +842,10 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         txtEstadoFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 15).toString());
 
         txtUsuarioFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 16).toString());
-        cbPerfilFuncionario.setSelectedIndex(Integer.parseInt(jFuncionario.getValueAt(linhaSelecionada, 17).toString()));
+        cbPerfilFuncionario.setSelectedItem(jFuncionario.getValueAt(linhaSelecionada, 17).toString());
         txtSenhaFuncionario.setText(jFuncionario.getValueAt(linhaSelecionada, 18).toString());
         txtConfirmacaoSenha.setText(jFuncionario.getValueAt(linhaSelecionada, 19).toString());
-        cbSituaçãoFuncionário.setSelectedIndex(Integer.parseInt(jFuncionario.getValueAt(linhaSelecionada, 20).toString()));
+        cbSituaçãoFuncionário.setSelectedItem(jFuncionario.getValueAt(linhaSelecionada, 20).toString());
 
         habilitaCampos(false, false, false, false, false, false, false, false, false,
                 false, false, false, false, false, false, false, false, false, false);
@@ -840,7 +854,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jFuncionarioMouseClicked
     //</editor-fold>
 
-    //</editor-fold>
+   
     //<editor-fold defaultstate="collapsed" desc=" BOTAO CANCELAR ">
     private void btnCancelarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarFuncionarioActionPerformed
         carregarTabela();
@@ -869,6 +883,14 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_txtCpfFuncionarioKeyTyped
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc=" BOTAO PESQUISAR FUNCIONARIO ">
+    private void btnPesquisarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarFuncionarioActionPerformed
+       String sql = "select * from funcionario inner join endereco on FKendereco = idendereco inner join usuario on "
+               + "FKfuncionario = idfuncionario where nomeFuncionarios like '%" + txtNomeFuncionario.getText() + "%'";
+       preencherTabelaFuncionario(sql);
+    }//GEN-LAST:event_btnPesquisarFuncionarioActionPerformed
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" METODO BOTAO ">
@@ -1266,6 +1288,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGravarFuncionario;
     private javax.swing.JButton btnLimparFuncionario;
     private javax.swing.JButton btnNovoFuncionario;
+    private javax.swing.JButton btnPesquisarFuncionario;
     private javax.swing.JComboBox<String> cbPerfilFuncionario;
     private javax.swing.JComboBox<String> cbSituaçãoFuncionário;
     private javax.swing.JTable jFuncionario;
