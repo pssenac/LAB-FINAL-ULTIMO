@@ -80,10 +80,7 @@
                               <EmptySpace min="-2" pref="181" max="-2" attributes="0"/>
                               <Component id="btnEstorno" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="181" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -137,7 +134,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="147" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -597,6 +594,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDindin">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel27">
           <Properties>
@@ -607,6 +607,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTrocos">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel28">
           <Properties>
@@ -617,6 +620,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCartDB">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

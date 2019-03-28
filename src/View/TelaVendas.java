@@ -829,7 +829,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         if (codvend != ";") {
 
             if (txtDinheiro.getText() != "" || txtDinheiro.getText() != null) {
-                
+
                 String aux = "", dinheiro = "", cartao = "", troco = "";
                 double aux2 = 0;
 
@@ -861,7 +861,6 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                 int vlt = lblValorTotal.getText().length();
                 int din = txtDinheiro.getText().length();
                 int car = txtCartao.getText().length();
-                int tro = txtTroco.getText().length();
 
                 if (din > 0) {
                     dinheiro = txtDinheiro.getText().replace(",", ".");
@@ -873,11 +872,6 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                 } else {
                     cartao = "0";
                 }
-                if (tro > 0) {
-                    troco = txtTroco.getText().substring(2, tro).replace(",", ".");
-                } else {
-                    troco = "0";
-                }
 
                 String icms = lblIcms.getText().substring(2, ic).replace(",", ".");
                 String iss = lblIss.getText().substring(2, is).replace(",", ".");
@@ -886,7 +880,8 @@ public class TelaVendas extends javax.swing.JInternalFrame {
 
                 aux2 = (Double.parseDouble(dinheiro)) - (Double.parseDouble(valorT));
                 txtTroco.setText("R$ " + dc.format(aux2));
-
+                
+                int tro = txtTroco.getText().length();
                 if (tro > 0) {
                     troco = txtTroco.getText().substring(2, tro).replace(",", ".");
                 } else {
@@ -943,7 +938,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                 }
 
             }
-        } 
+        }
 
 
     }//GEN-LAST:event_btnFinalizarVendaActionPerformed
