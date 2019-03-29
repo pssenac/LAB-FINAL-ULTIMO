@@ -3,6 +3,7 @@ package Models;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class DAO {
     private PreparedStatement statement;
     public Statement stm;
     public ResultSet resultSet;
+    public ResultSetMetaData rsm;
     private String men, sql;
     public String Acesso;
     public String Perfil;
@@ -115,6 +117,28 @@ public class DAO {
 
         }
         return resultado;
+    }
+
+    public String MetodoCb(String id) {
+        String nome = "";
+        try {
+            sql = "select * from fornecedor where idfornecedor = ?";
+            bd.getConnection();
+            statement = bd.connection.prepareStatement(sql);
+            statement.setString(1, id);
+            ResultSet fk = statement.executeQuery();
+            if (fk.next()) {
+                nome = fk.getString("nomeEmpresa");
+                return nome;
+
+            } else {
+                return nome;
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, erro);
+            return nome;
+        }
+
     }
     //</editor-fold>
 
@@ -765,8 +789,7 @@ public class DAO {
                         statement = bd.connection.prepareStatement(sql);
                         ResultSet fk = statement.executeQuery();
                         fk.next();
-                        
-                        
+
                         sql = "insert into lote values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                         statement = bd.connection.prepareStatement(sql);
                         statement.setString(1, lote.getDataCompra());
@@ -834,24 +857,27 @@ public class DAO {
     public List<Fornecedor> read() {
         men = "operação realizada com sucesso";
         String sql = "SELECT * FROM fornecedor";
-        List<Fornecedor> nomeFor = new ArrayList<>();
+        ArrayList<Fornecedor> nomeFor = new ArrayList<>();
         try {
             bd.getConnection();
             statement = bd.connection.prepareStatement(sql);
             resultSet = statement.executeQuery();
+            rsm = resultSet.getMetaData();
             while (resultSet.next()) {
+
                 Fornecedor nomeFornecedor = new Fornecedor();
                 nomeFornecedor.setIdFornecedor(resultSet.getString("idfornecedor"));
                 nomeFornecedor.setNomeEmpresa(resultSet.getString("nomeEmpresa"));
                 nomeFor.add(nomeFornecedor);
-                statement.close();
             }
+            return nomeFor;
 
         } catch (SQLException erro) {
             men = "Falha na operação: \n" + erro.toString();
+            return nomeFor;
 
         }
-        return nomeFor;
+
     }
 
     //</editor-fold>
@@ -912,7 +938,7 @@ public class DAO {
                     bd.getConnection();
                     statement = bd.connection.prepareStatement(sql);
                     ResultSet fk = statement.executeQuery();
-                    fk.last();                   
+                    fk.last();
 
                     sql = "insert into lotevendas values (?,?,?,?,?,?)";
                     bd.getConnection();

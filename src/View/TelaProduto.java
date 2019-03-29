@@ -26,13 +26,13 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         bd = new ConexaoBD();
         bd.getConnection();
         DAO Dao = new DAO();
-        for (Fornecedor m : Dao.read()) {
+        for(Fornecedor m : Dao.read()) {
             cbFornecedor.addItem(m);
         }
         LimparCampos();
         AtivarCampos(false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
         AtivarBotao(true, false, false, false, false, true);
-        bd.close();
+         bd.close();
     }
 
     /**
@@ -140,6 +140,8 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel12.setText("Fornecedor :");
+
+        cbFornecedor.setMaximumRowCount(0);
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel13.setText("Marca :");
@@ -523,10 +525,12 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 // <editor-fold defaultstate="collapsed" desc="Botões">
 
     private void btnNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoProdutoActionPerformed
+        
         LimparCampos();
         AtivarCampos(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
         AtivarBotao(false, false, true, false, true, false);
         vd = 1;
+       
     }//GEN-LAST:event_btnNovoProdutoActionPerformed
 
     private void btnNovoLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoLoteActionPerformed
@@ -597,7 +601,9 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         txtIss.setText(jTable1.getValueAt(linhaSelecionada, 7).toString());
         txtIpi.setText(jTable1.getValueAt(linhaSelecionada, 8).toString());
         lblIdl.setText(jTable1.getValueAt(linhaSelecionada, 18).toString());
-        cbFornecedor.setSelectedItem(jTable1.getValueAt(linhaSelecionada, 11).toString());
+        DAO dao = new DAO();
+        String vl = dao.MetodoCb(jTable1.getValueAt(linhaSelecionada, 18).toString());
+        cbFornecedor.getModel().setSelectedItem(vl);
 
         String dataCompra = jTable1.getValueAt(linhaSelecionada, 10).toString();
         String data = dataCompra;
