@@ -811,17 +811,22 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
                 sta.setString(1, buscaCpf);
                 ResultSet rs = sta.executeQuery();
                 while (rs.next()) {
-                    JOptionPane.showMessageDialog(null, "CPF já cadastrado anteriormente!");
+                    /*JOptionPane.showMessageDialog(null, "CPF já cadastrado anteriormente!");
                     txtCpfCliente.setText("");
-                    txtCpfCliente.grabFocus();
+                    txtCpfCliente.grabFocus();*/
+                     OrdemProdutosController OP = new OrdemProdutosController();
+                    lblNomeCli.setText(OP.pesquisarCliente(txtCpfCliente.getText()));
+                    lblTelCli.setText(OP.pesquisarCliente2(txtCpfCliente.getText()));
                 }
             } catch (SQLException ex) {
             }
         } else {
-
-            OrdemProdutosController OP = new OrdemProdutosController();
+             JOptionPane.showMessageDialog(null, "CPF incorreto ou não cadastrado!");
+                    txtCpfCliente.setText("");
+                    txtCpfCliente.grabFocus();
+            /*OrdemProdutosController OP = new OrdemProdutosController();
             lblNomeCli.setText(OP.pesquisarCliente(txtCpfCliente.getText()));
-            lblTelCli.setText(OP.pesquisarCliente2(txtCpfCliente.getText()));
+            lblTelCli.setText(OP.pesquisarCliente2(txtCpfCliente.getText()));*/
         }
     }//GEN-LAST:event_btnPesquisaCpfActionPerformed
     //</editor-fold>
