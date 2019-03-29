@@ -108,6 +108,7 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         txtDinheiro = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         txtCartao = new javax.swing.JTextField();
+        btnVlCartao = new javax.swing.JButton();
         cbD = new javax.swing.JCheckBox();
         cbCC = new javax.swing.JCheckBox();
         cbCD = new javax.swing.JCheckBox();
@@ -409,35 +410,49 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
 
         txtCartao.setEnabled(false);
 
+        btnVlCartao.setText("Valor do cartão");
+        btnVlCartao.setEnabled(false);
+        btnVlCartao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVlCartaoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCartao)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                        .addComponent(txtCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnVlCartao)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(txtDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(txtCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel19)
+                            .addComponent(txtDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel21)
+                            .addComponent(txtCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 2, Short.MAX_VALUE))
+                    .addComponent(btnVlCartao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         cbD.setText("Dinheiro");
@@ -814,16 +829,16 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
                     /*JOptionPane.showMessageDialog(null, "CPF já cadastrado anteriormente!");
                     txtCpfCliente.setText("");
                     txtCpfCliente.grabFocus();*/
-                     OrdemProdutosController OP = new OrdemProdutosController();
+                    OrdemProdutosController OP = new OrdemProdutosController();
                     lblNomeCli.setText(OP.pesquisarCliente(txtCpfCliente.getText()));
                     lblTelCli.setText(OP.pesquisarCliente2(txtCpfCliente.getText()));
                 }
             } catch (SQLException ex) {
             }
         } else {
-             JOptionPane.showMessageDialog(null, "CPF incorreto ou não cadastrado!");
-                    txtCpfCliente.setText("");
-                    txtCpfCliente.grabFocus();
+            JOptionPane.showMessageDialog(null, "CPF incorreto ou não cadastrado!");
+            txtCpfCliente.setText("");
+            txtCpfCliente.grabFocus();
             /*OrdemProdutosController OP = new OrdemProdutosController();
             lblNomeCli.setText(OP.pesquisarCliente(txtCpfCliente.getText()));
             lblTelCli.setText(OP.pesquisarCliente2(txtCpfCliente.getText()));*/
@@ -950,6 +965,7 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
         String codvend = dao.buscarFuncionario(txtCodVendedor.getText());
 
         if (codvend != ";") {
+
             if (txtDinheiro.getText() != "" || txtDinheiro.getText() != null) {
 
                 String idCli = dao.BuscarIdcli(txtCpfCliente.getText());
@@ -1020,16 +1036,20 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
 
                 DecimalFormat dc = new DecimalFormat("##.##");
                 aux2 = (Double.parseDouble(dinheiro)) - (Double.parseDouble(valorT));
-                txtTroco.setText("R$ " + dc.format(aux2));
-
-                int tro = txtTroco.getText().length();
-                if (tro > 0) {
-                    troco = txtTroco.getText().substring(2, tro).replace(",", ".");
-                } else {
-                    troco = "0";
-                }
-
+                
                 tipoPagamento();
+                
+                if (tp.equals("4")) {
+                    troco = "0";
+                } else {
+                    txtTroco.setText("R$ " + dc.format(aux2));
+                    int tro = txtTroco.getText().length();
+                    if (tro > 0) {
+                        troco = txtTroco.getText().substring(2, tro).replace(",", ".");
+                    } else {
+                        troco = "0";
+                    }
+                }
 
                 opc.salvarOrdemServico(cbServico.getSelectedItem().toString(), servico, Entrega, Solicitacao, Integer.toString(cbPrioridade.getSelectedIndex()),
                         txtDescricao.getText(), tp, txtCodVendedor.getText(), icms, iss, ipi,
@@ -1131,30 +1151,35 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
             tp = "1";
             txtDinheiro.setEnabled(true);
             // txtTroco.setEnabled(true);
-            txtCartao.setEnabled(false);
+            //    txtCartao.setEnabled(false);
+            btnVlCartao.setEnabled(false);
         } else {
             tp = "0";
             txtDinheiro.setEnabled(false);
             //  txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            //   txtCartao.setEnabled(false);
+            btnVlCartao.setEnabled(false);
         }
         if (cbCC.isSelected()) {
             tp = "2";
             txtDinheiro.setEnabled(false);
             //  txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            //    txtCartao.setEnabled(false);
+            btnVlCartao.setEnabled(false);
         }
         if (cbCD.isSelected()) {
             tp = "3";
             txtDinheiro.setEnabled(false);
             //   txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            //   txtCartao.setEnabled(false);
+            btnVlCartao.setEnabled(false);
         }
         if (cbD.isSelected() && cbCC.isSelected() || cbD.isSelected() && cbCD.isSelected()) {
-            tp = "1";
+            tp = "4";
             txtDinheiro.setEnabled(true);
             //   txtTroco.setEnabled(true);
-            txtCartao.setEnabled(true);
+            //  txtCartao.setEnabled(true);
+            btnVlCartao.setEnabled(true);
         }
         if (cbD.isSelected() && cbCC.isSelected() && cbCD.isSelected()) {
             JOptionPane.showMessageDialog(null, "Opção inválida");
@@ -1172,30 +1197,35 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
             tp = "1";
             txtDinheiro.setEnabled(true);
             //  txtTroco.setEnabled(true);
-            txtCartao.setEnabled(false);
+            //   txtCartao.setEnabled(false);
+            btnVlCartao.setEnabled(false);
         } else {
             tp = "0";
             txtDinheiro.setEnabled(false);
             //   txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            //  txtCartao.setEnabled(false);
+            btnVlCartao.setEnabled(false);
         }
         if (cbCC.isSelected()) {
             tp = "2";
             txtDinheiro.setEnabled(false);
             //    txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            //  txtCartao.setEnabled(false);
+            btnVlCartao.setEnabled(false);
         }
         if (cbCD.isSelected()) {
             tp = "3";
             txtDinheiro.setEnabled(false);
             //   txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            //  txtCartao.setEnabled(false);
+            btnVlCartao.setEnabled(false);
         }
         if (cbD.isSelected() && cbCC.isSelected() || cbD.isSelected() && cbCD.isSelected()) {
-            tp = "1";
+            tp = "4";
             txtDinheiro.setEnabled(true);
             //   txtTroco.setEnabled(true);
-            txtCartao.setEnabled(true);
+            //   txtCartao.setEnabled(true);
+            btnVlCartao.setEnabled(true);
         }
         if (cbD.isSelected() && cbCC.isSelected() && cbCD.isSelected()) {
             JOptionPane.showMessageDialog(null, "Opção inválida");
@@ -1213,30 +1243,35 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
             tp = "1";
             txtDinheiro.setEnabled(true);
             //   txtTroco.setEnabled(true);
-            txtCartao.setEnabled(false);
+            //txtCartao.setEnabled(false);
+            btnVlCartao.setEnabled(false);
         } else {
             tp = "0";
             txtDinheiro.setEnabled(false);
             //  txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            // txtCartao.setEnabled(false);
+            btnVlCartao.setEnabled(false);
         }
         if (cbCC.isSelected()) {
             tp = "2";
             txtDinheiro.setEnabled(false);
             //   txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            // txtCartao.setEnabled(false);
+            btnVlCartao.setEnabled(false);
         }
         if (cbCD.isSelected()) {
             tp = "3";
             txtDinheiro.setEnabled(false);
             //    txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            // txtCartao.setEnabled(false);
+            btnVlCartao.setEnabled(false);
         }
         if (cbD.isSelected() && cbCC.isSelected() || cbD.isSelected() && cbCD.isSelected()) {
-            tp = "1";
+            tp = "4";
             txtDinheiro.setEnabled(true);
             //    txtTroco.setEnabled(true);
-            txtCartao.setEnabled(true);
+            // txtCartao.setEnabled(true);
+            btnVlCartao.setEnabled(true);
         }
         if (cbD.isSelected() && cbCC.isSelected() && cbCD.isSelected()) {
             JOptionPane.showMessageDialog(null, "Opção inválida");
@@ -1246,6 +1281,9 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
             txtDinheiro.setEnabled(false);
             txtTroco.setEnabled(false);
             txtCartao.setEnabled(false);
+            txtDinheiro.setText("");
+            txtTroco.setText("");
+            txtCartao.setText("");
         }
     }//GEN-LAST:event_cbCDMouseClicked
 
@@ -1312,11 +1350,11 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
 
             lblValorTotal.setText("R$ " + df.format(aux2));
         } else {
-            
+
             txtDescontoGeral.setSelectedIndex(0);
             lblValorTotal.setText("");
             JOptionPane.showMessageDialog(null, "Insira o valor do serviço"
-            +"\n apenas números inteiros");
+                    + "\n apenas números inteiros");
         }
 
     }//GEN-LAST:event_txtDescontoGeralActionPerformed
@@ -1338,6 +1376,27 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_txtCpfClienteKeyTyped
+
+    private void btnVlCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVlCartaoActionPerformed
+        String A = "", B = "";
+        int O = lblValorTotal.getText().length();
+        if (O > 0) {
+            A = lblValorTotal.getText().substring(2, O).replace(",", ".");
+        } else {
+            A = "0";
+        }
+        double Num1 = Double.parseDouble(A);
+        int P = txtDinheiro.getText().length();
+        if (P > 0) {
+            B = txtDinheiro.getText().replace(",", ".");
+        } else {
+            B = "0";
+        }
+        double Num2 = Double.parseDouble(B);
+        double Num3 = Num1 - Num2;
+
+        txtCartao.setText("R$ " + Double.toString(Num3));
+    }//GEN-LAST:event_btnVlCartaoActionPerformed
 //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Tabela 1">
@@ -1687,6 +1746,7 @@ public class TelaOrdemServico extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPesquisaCpf;
     private javax.swing.JButton btnPesquisaProduto;
     private javax.swing.JButton btnPesquisaTipo;
+    private javax.swing.JButton btnVlCartao;
     private javax.swing.JCheckBox cbCC;
     private javax.swing.JCheckBox cbCD;
     private javax.swing.JCheckBox cbD;

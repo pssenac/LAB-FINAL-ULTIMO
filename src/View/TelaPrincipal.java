@@ -53,10 +53,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnOrdem = new javax.swing.JButton();
         btnAdmin = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        JM_cadastro = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -164,18 +160,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                 .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        JM_cadastro.setText("Cadastros");
-        jMenuBar1.add(JM_cadastro);
-
-        jMenu2.setText("Relatórios");
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Vendas");
-        jMenuBar1.add(jMenu3);
-
-        jMenu4.setText("Ordem de Serviço");
-        jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Sair");
         jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -333,16 +317,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu JM_cadastro;
     private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnEstornoVenda;
     private javax.swing.JButton btnEstornoVenda1;
     private javax.swing.JButton btnOrdem;
     private javax.swing.JButton btnVenda;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;

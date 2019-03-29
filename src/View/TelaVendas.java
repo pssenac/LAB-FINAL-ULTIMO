@@ -100,6 +100,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         txtDinheiro = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         txtCartao = new javax.swing.JTextField();
+        btnCartao = new javax.swing.JButton();
         cbD = new javax.swing.JCheckBox();
         cbCC = new javax.swing.JCheckBox();
         cbCD = new javax.swing.JCheckBox();
@@ -375,35 +376,48 @@ public class TelaVendas extends javax.swing.JInternalFrame {
 
         txtCartao.setEnabled(false);
 
+        btnCartao.setText("Valor do Cartão");
+        btnCartao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCartaoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelTipoPagLayout = new javax.swing.GroupLayout(panelTipoPag);
         panelTipoPag.setLayout(panelTipoPagLayout);
         panelTipoPagLayout.setHorizontalGroup(
             panelTipoPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTipoPagLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelTipoPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelTipoPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelTipoPagLayout.createSequentialGroup()
                         .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelTipoPagLayout.createSequentialGroup()
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCartao)))
-                .addContainerGap(141, Short.MAX_VALUE))
+                        .addComponent(txtCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCartao)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         panelTipoPagLayout.setVerticalGroup(
             panelTipoPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTipoPagLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelTipoPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(txtDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelTipoPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(txtCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panelTipoPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelTipoPagLayout.createSequentialGroup()
+                        .addGroup(panelTipoPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel19)
+                            .addComponent(txtDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelTipoPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel21)
+                            .addComponent(txtCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 6, Short.MAX_VALUE))
+                    .addComponent(btnCartao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         cbD.setText("Dinheiro");
@@ -879,16 +893,22 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                 String valorT = lblValorTotal.getText().substring(2, vlt).replace(",", ".");
 
                 aux2 = (Double.parseDouble(dinheiro)) - (Double.parseDouble(valorT));
-                txtTroco.setText("R$ " + dc.format(aux2));
                 
-                int tro = txtTroco.getText().length();
-                if (tro > 0) {
-                    troco = txtTroco.getText().substring(2, tro).replace(",", ".");
-                } else {
+                
+                tipoPagamento();
+                if (tp.equals("4")) {
                     troco = "0";
+                } else {
+                    txtTroco.setText("R$ " + dc.format(aux2));
+                    int tro = txtTroco.getText().length();
+                    if (tro > 0) {
+                        troco = txtTroco.getText().substring(2, tro).replace(",", ".");
+                    } else {
+                        troco = "0";
+                    }
                 }
 
-                tipoPagamento();
+                
 
                 vndP.salvarVenda(aux, tp, df.format(agr), "", "0", icms, iss,
                         ipi, codvend, lbloCodVenda.getText(), txtCodigoVendedor.getText(), valorT, dinheiro,
@@ -949,30 +969,35 @@ public class TelaVendas extends javax.swing.JInternalFrame {
             tp = "1";
             txtDinheiro.setEnabled(true);
             //    txtTroco.setEnabled(true);
-            txtCartao.setEnabled(false);
+            //txtCartao.setEnabled(false);
+            btnCartao.setEnabled(false);
         } else {
             tp = "0";
             txtDinheiro.setEnabled(false);
             //    txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            //txtCartao.setEnabled(false);
+            btnCartao.setEnabled(false);
         }
         if (cbCC.isSelected()) {
             tp = "2";
             txtDinheiro.setEnabled(false);
             //    txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            ///txtCartao.setEnabled(false);
+            btnCartao.setEnabled(false);
         }
         if (cbCD.isSelected()) {
             tp = "3";
             txtDinheiro.setEnabled(false);
             //    txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            //txtCartao.setEnabled(false);
+            btnCartao.setEnabled(false);
         }
         if (cbD.isSelected() && cbCC.isSelected() || cbD.isSelected() && cbCD.isSelected()) {
-            tp = "1";
+            tp = "4";
             txtDinheiro.setEnabled(true);
             //     txtTroco.setEnabled(true);
-            txtCartao.setEnabled(true);
+           // txtCartao.setEnabled(true);
+           btnCartao.setEnabled(true);
         }
         if (cbD.isSelected() && cbCC.isSelected() && cbCD.isSelected()) {
             JOptionPane.showMessageDialog(null, "Opção inválida");
@@ -992,30 +1017,35 @@ public class TelaVendas extends javax.swing.JInternalFrame {
             tp = "1";
             txtDinheiro.setEnabled(true);
             //   txtTroco.setEnabled(true);
-            txtCartao.setEnabled(false);
+            //txtCartao.setEnabled(false);
+            btnCartao.setEnabled(false);
         } else {
             tp = "0";
             txtDinheiro.setEnabled(false);
             //   txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+           // txtCartao.setEnabled(false);
+           btnCartao.setEnabled(false);
         }
         if (cbCC.isSelected()) {
             tp = "2";
             txtDinheiro.setEnabled(false);
-            txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+           // txtTroco.setEnabled(false);
+           // txtCartao.setEnabled(false);
+           btnCartao.setEnabled(false);
         }
         if (cbCD.isSelected()) {
             tp = "3";
             txtDinheiro.setEnabled(false);
             //  txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            //txtCartao.setEnabled(false);
+            btnCartao.setEnabled(false);
         }
         if (cbD.isSelected() && cbCC.isSelected() || cbD.isSelected() && cbCD.isSelected()) {
-            tp = "1";
+            tp = "4";
             txtDinheiro.setEnabled(true);
             //   txtTroco.setEnabled(true);
-            txtCartao.setEnabled(true);
+            //txtCartao.setEnabled(true);
+            btnCartao.setEnabled(true);
         }
         if (cbD.isSelected() && cbCC.isSelected() && cbCD.isSelected()) {
             JOptionPane.showMessageDialog(null, "Opção inválida");
@@ -1034,30 +1064,35 @@ public class TelaVendas extends javax.swing.JInternalFrame {
             tp = "1";
             txtDinheiro.setEnabled(true);
             //  txtTroco.setEnabled(true);
-            txtCartao.setEnabled(false);
+           // txtCartao.setEnabled(false);
+           btnCartao.setEnabled(false);
         } else {
             tp = "0";
             txtDinheiro.setEnabled(false);
             //  txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+            //txtCartao.setEnabled(false);
+            btnCartao.setEnabled(false);
         }
         if (cbCC.isSelected()) {
             tp = "2";
             txtDinheiro.setEnabled(false);
             //  txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+           // txtCartao.setEnabled(false);
+           btnCartao.setEnabled(false);
         }
         if (cbCD.isSelected()) {
             tp = "3";
             txtDinheiro.setEnabled(false);
             // txtTroco.setEnabled(false);
-            txtCartao.setEnabled(false);
+           // txtCartao.setEnabled(false);
+           btnCartao.setEnabled(false);
         }
         if (cbD.isSelected() && cbCC.isSelected() || cbD.isSelected() && cbCD.isSelected()) {
-            tp = "1";
+            tp = "4";
             txtDinheiro.setEnabled(true);
             // txtTroco.setEnabled(true);
-            txtCartao.setEnabled(true);
+            //txtCartao.setEnabled(true);
+            btnCartao.setEnabled(true);
         }
         if (cbD.isSelected() && cbCC.isSelected() && cbCD.isSelected()) {
             JOptionPane.showMessageDialog(null, "Opção inválida");
@@ -1124,6 +1159,29 @@ public class TelaVendas extends javax.swing.JInternalFrame {
 
         lblValorTotal.setText("R$ " + df.format(aux2));
     }//GEN-LAST:event_txtDescontoVendaServicoActionPerformed
+
+    private void btnCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCartaoActionPerformed
+        
+        String A = "", B = "";
+        int O = lblValorTotal.getText().length();
+        if (O > 0) {
+            A = lblValorTotal.getText().substring(2, O).replace(",", ".");
+        } else {
+            A = "0";
+        }
+        double Num1 = Double.parseDouble(A);
+        int P = txtDinheiro.getText().length();
+        if (P > 0) {
+            B = txtDinheiro.getText().replace(",", ".");
+        } else {
+            B = "0";
+        }
+        double Num2 = Double.parseDouble(B);
+        double Num3 = Num1 - Num2;
+
+        txtCartao.setText("R$ " + Double.toString(Num3));
+        
+    }//GEN-LAST:event_btnCartaoActionPerformed
 
     //</editor-fold>
     public String VerificarCodigo() {
@@ -1435,6 +1493,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduto;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCartao;
     private javax.swing.JButton btnFinalizarVenda;
     private javax.swing.JButton btnPesquisa1;
     private javax.swing.JButton btnPesquisa2;
