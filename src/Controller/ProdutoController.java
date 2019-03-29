@@ -19,8 +19,18 @@ public class ProdutoController {
         dao.produto.setDescricao(descricao);
         dao.produto.setArmazemLocal(armazemLocal);
         dao.produto.setTipoProduto(tipoProduto);
+        
+        
+        String data10 = dataCompra;
+        String data1 = data10.replaceAll("/", "");
+        String data2 = data1.substring(0, 2);
+        String data3 = data1.substring(2, 4);
+        String data4 = data1.substring(4, 8);
+        String dataC = data4 + "-" + data3 + "-" + data2;
 
-        dao.lote.setDataCompra(dataCompra);
+      
+
+        dao.lote.setDataCompra(dataC);
         dao.lote.setQuantidade(qtdEstoque);
         dao.lote.setQuantidadeInicial(qtdInicial);
         dao.lote.setValorCusto(valorCusto);

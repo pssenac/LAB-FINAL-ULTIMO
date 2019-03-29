@@ -116,9 +116,9 @@ public class TelaLogin extends javax.swing.JFrame {
         String pf1 = "0";
         String pf2 = "1";
 
-       // JOptionPane.showMessageDialog(null, pf);
+       
 
-        if (rs == true && pf.equals(pf1) && st != "1") {
+        if (rs == true && pf.equals(pf1) && st.equals(pf1) ) {
             boolean rt = false;
             TelaPrincipal tp = new TelaPrincipal();
             tp.AtivarBtnAdm(rt);
@@ -127,12 +127,12 @@ public class TelaLogin extends javax.swing.JFrame {
 
             dispose(); //Fecha a tela login
 
-        } else if (rs == true && pf.equals(pf2)) {
+        } else if (rs == true && pf.equals(pf2)  && st.equals(pf1)) {
             TelaPrincipal tela2 = new TelaPrincipal();
             tela2.setVisible(true);
 
-            dispose();// Fecha a tela login
-
+            dispose();// Fecha a tela login*/
+            
         } else {
             lblIncorreto.setText("Usuário ou Senha Incorretos!");
             txtUsuarioLogin.setText("");
