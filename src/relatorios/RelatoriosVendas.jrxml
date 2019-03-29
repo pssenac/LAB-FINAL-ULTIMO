@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatoriosVendas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bea0734c-7156-4cf6-a8fd-d55b3d9e6804">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1"/>
+	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT * FROM vendas inner join lotevendas on FKvendas = codVenda inner join lote on FKlote = idLote inner join produtos on FKprodutos = idprodutos]]>
 	</queryString>
@@ -146,16 +146,8 @@
 	<columnHeader>
 		<band height="21" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="111" height="20" uuid="a6d19c3d-3aaa-4a25-8d2c-7709f55e1bed"/>
-				<text><![CDATA[Nome do Produto]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="111" y="0" width="111" height="20" uuid="ad6fea02-7756-4446-ba07-d8b824932627"/>
 				<text><![CDATA[Data Venda]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="222" y="0" width="111" height="20" uuid="bf2a6e0b-1f5b-402d-a170-63760ebc8339"/>
-				<text><![CDATA[Codigo Venda]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="333" y="0" width="111" height="20" uuid="118e5432-ac62-4325-919b-3b6110622617"/>
@@ -165,21 +157,21 @@
 				<reportElement x="444" y="0" width="111" height="20" uuid="57552ddb-ab39-4917-b425-11e76c6792fd"/>
 				<text><![CDATA[Valor Parcial]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="6" y="1" width="105" height="20" uuid="8d8dddac-908a-4c34-b400-d255519ad5ca"/>
+				<text><![CDATA[Codigo Venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="111" height="20" uuid="a6d19c3d-3aaa-4a25-8d2c-7709f55e1bed"/>
+				<text><![CDATA[Nome do Produto]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="111" height="20" uuid="6dfd0fbf-121f-4a13-a893-44060b1512a3"/>
-				<textFieldExpression><![CDATA[$F{nomeProduto}]]></textFieldExpression>
-			</textField>
+		<band height="20" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="111" y="0" width="111" height="20" uuid="1abc8f64-e8db-4a34-b811-e9cfee447eee"/>
 				<textFieldExpression><![CDATA[$F{dataVenda}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="222" y="0" width="111" height="20" uuid="24c902d1-4ec8-40b4-a9a3-144d3c5a6d18"/>
-				<textFieldExpression><![CDATA[$F{codVenda}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="333" y="0" width="111" height="20" uuid="50167c90-a570-41fc-a06b-566f4426ee93"/>
@@ -188,6 +180,14 @@
 			<textField>
 				<reportElement x="444" y="0" width="111" height="20" uuid="28b08f64-242e-48a3-8686-eadfe7946f28"/>
 				<textFieldExpression><![CDATA[$F{valorParcial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6" y="0" width="105" height="20" uuid="9775a909-b1b0-4fb3-a5ce-bcca2f297a16"/>
+				<textFieldExpression><![CDATA[$F{codigoVenda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="0" width="111" height="20" uuid="6dfd0fbf-121f-4a13-a893-44060b1512a3"/>
+				<textFieldExpression><![CDATA[$F{nomeProduto}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
